@@ -1,0 +1,35 @@
+# System / OS junk
+System Volume Information/
+.DS_Store
+Thumbs.db
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+ENV/
+env/
+*.egg-info/
+
+# ISOs and large binaries
+*.iso
+Iso/
+
+# Sensitive / keys
+api-keys
+*.key
+*.pem
+secrets/
+
+# Logs and temp
+*.log
+*.tmp
+kali-update*.txt
+
+# IDE / editor
+.idea/
+.vscode/
+*.swp
