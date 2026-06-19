@@ -27,7 +27,6 @@ secrets/
 # Logs and temp
 *.log
 *.tmp
-kali-update*.txt
 
 # IDE / editor
 .idea/
