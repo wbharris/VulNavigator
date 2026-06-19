@@ -1,6 +1,6 @@
 # Grok
 
-Personal workspace and tools for Grok.
+Personal workspace and tools.
 
 ## Local Environment
 
@@ -10,7 +10,6 @@ This repository is attached to the mounted volume at:
 
 ## Projects / Scripts
 
-- Kali Linux update and maintenance scripts are located at the root (Kali_update.sh, update_*.sh, kali-update*.sh, etc.)
 - **mosint/** — OSINT tool (https://github.com/alpkeskin/mosint)
 
 ## Initial Setup
@@ -24,4 +23,3 @@ This repository is attached to the mounted volume at:
 git clone https://github.com/wbharris/Grok.git
 cd Grok
 ```
-
