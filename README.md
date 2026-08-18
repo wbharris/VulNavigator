@@ -1,4 +1,4 @@
-# VulNavigator
+# VulNavigator™
 
 Turn a **Mythos** or **Daybreak** finding — or a mainstream scanner export — into a case a defender can act on.
 
@@ -100,6 +100,11 @@ vuln-nav analyze examples/trivy-report.json
 ## Status
 
 v0.1 on GitHub `main`. Next slice: pinned ATT&CK / D3FEND / ATLAS snapshots and a reasoning model.
+
+## Trademark
+
+**VulNavigator™** is a trademark of wbharris. See [`TRADEMARK.md`](TRADEMARK.md).
+The GPL covers the code, not the name. Do not use `®` until a registration issues.
 
 ## License
 

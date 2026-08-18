@@ -78,7 +78,7 @@ def to_markdown(case: Case) -> str:
     lines = [
         f"# {case.title}",
         "",
-        f"*Source:* {case.source_kind}"
+        f"*VulNavigator™* · *Source:* {case.source_kind}"
         + (f" `{case.finding_id}`" if case.finding_id else "")
         + f" · *Validation:* {case.validation_status}"
         + f" · *Confidence:* {case.confidence or 'medium'}",
