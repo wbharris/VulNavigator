@@ -111,3 +111,5 @@ def test_report_does_not_overclaim_rce_from_attack_ids_alone():
     md = to_markdown(case)
     assert "not proof of RCE" in md
     assert "indicates possible remote code execution" not in md
+    assert "Remote code execution against the exposed application component" not in md
+    assert "Data access or tampering via injection" in md

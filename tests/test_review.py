@@ -78,6 +78,21 @@ def test_reprocess_does_not_duplicate_assumptions_or_controls():
     assert len(case.remediation) == n_rem
 
 
+def test_scanner_without_cve_is_not_called_a_zeroday():
+    case = Case(
+        source_kind="sarif",
+        title="Possible SQL injection",
+        description="A SQL injection was found in a query sink.",
+        cwes=["CWE-89"],
+        rule_id="js/sql-injection",
+    )
+    validate(case)
+    record_assumptions(case)
+    assert not any("treating as a 0-day" in n for n in case.validation_notes)
+    assert not any("AI 0-days are judged" in i.why_it_matters for i in case.improve)
+    assert not any("CVE been assigned" in i.question for i in case.improve)
+
+
 def test_finding_id_validation():
     assert _finding_id_arg("") == ""
     assert _finding_id_arg("db-heap-h2-headers") == "db-heap-h2-headers"

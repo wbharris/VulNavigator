@@ -17,6 +17,7 @@ sys.path.insert(0, str(ROOT / "src"))
 
 from vulnavigator.pipeline import analyze_path  # noqa: E402
 from vulnavigator.report import to_markdown  # noqa: E402
+from vulnavigator.scanners import SCANNER_KINDS  # noqa: E402
 
 SECTIONS = [
     "## 1. Vulnerability Summary",
@@ -49,7 +50,7 @@ class Spec:
 
 SPECS: list[Spec] = [
     Spec("examples/daybreak-findings.json", "daybreak", "Daybreak official findings.json", expect_id="db-heap-h2-headers", expect_cwe="CWE-787"),
-    Spec("examples/daybreak-finding.json", "daybreak", "Daybreak single finding", expect_cve="CVE-2026-00001", source_flag="daybreak"),
+    Spec("examples/daybreak-finding.json", "daybreak", "Daybreak single finding", expect_cve="CVE-2026-00001", expect_id="CVE-2026-00001", source_flag="daybreak"),
     Spec("examples/mythos-finding.json", "mythos", "Mythos write-up", expect_id="MYTHOS-2026-0042", expect_cwe="CWE-119"),
     Spec("examples/mythos-zeroday.json", "mythos", "Mythos 0-day (PoC, no CVE)", expect_id="MYTHOS-0DAY-001", expect_poc=True, expect_no_cve_nag=True),
     Spec("examples/narrative-rce.txt", "narrative", "Narrative ticket (possible RCE)", expect_priority="P1", expect_no_cve_nag=True),
@@ -118,6 +119,19 @@ def check(spec: Spec) -> tuple[bool, list[str], dict]:
         fails.append(f"bad validation {case.validation_status}")
     if case.priority not in {"P1", "P2", "P3", "P4"}:
         fails.append(f"bad priority {case.priority}")
+    if spec.kind in SCANNER_KINDS:
+        if any("treating as a 0-day" in n for n in case.validation_notes):
+            fails.append("scanner finding must not be labeled a 0-day")
+        if any("AI 0-days are judged" in i.why_it_matters for i in case.improve):
+            fails.append("scanner finding must not nag for an AI 0-day PoC")
+        if not case.attack:
+            fails.append("scanner finding should map at least one ATT&CK technique")
+        if not case.d3fend or not case.csf:
+            fails.append("scanner finding should map D3FEND and CSF")
+        if "Remote code execution against the exposed application component" in md:
+            fails.append("report over-claims RCE as a generic likely behavior")
+        if spec.kind in {"sarif", "burp", "zap"} and any("CVE been assigned" in i.question for i in case.improve):
+            fails.append("SAST/DAST with CWE/rule should not nag for a CVE")
     for heading in SECTIONS:
         if heading not in md:
             fails.append(f"report missing {heading}")

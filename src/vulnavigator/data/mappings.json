@@ -31,7 +31,13 @@
     "CWE-611": [["T1190", "Exploit Public-Facing Application"]],
     "CWE-787": [["T1203", "Exploitation for Client Execution"], ["T1068", "Exploitation for Privilege Escalation"]],
     "CWE-798": [["T1078", "Valid Accounts"], ["T1552", "Unsecured Credentials"]],
-    "CWE-918": [["T1090", "Proxy"], ["T1190", "Exploit Public-Facing Application"]]
+    "CWE-918": [["T1090", "Proxy"], ["T1190", "Exploit Public-Facing Application"]],
+    "CWE-1321": [["T1190", "Exploit Public-Facing Application"], ["T1059", "Command and Scripting Interpreter"]]
+  },
+  "cve_cwe": {
+    "CVE-2014-0160": ["CWE-119"],
+    "CVE-2020-8203": ["CWE-1321"],
+    "CVE-2021-44228": ["CWE-502"]
   },
   "attack_d3fend": {
     "T1005": [["D3-DENCR", "Disk Encryption"], ["D3-NTA", "Network Traffic Analysis"]],

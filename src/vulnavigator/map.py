@@ -49,6 +49,11 @@ def map_case(case: Case) -> Case:
         return case
 
     conf_cwe = _conf("cwe")
+    for cve in case.cves:
+        for cwe in _tables().get("cve_cwe", {}).get(cve.upper(), []) or []:
+            if cwe not in case.cwes:
+                case.cwes.append(cwe)
+
     for cwe in case.cwes:
         for tid, name in _pairs("cwe_attack", cwe):
             _add_unique(
@@ -86,6 +91,20 @@ def map_case(case: Case) -> Case:
                 provenance="narrative-heuristic",
                 confidence=_conf("narrative_followon"),
                 rationale="RCE typically implies code or command execution after exploit",
+            ),
+        )
+
+    if not case.attack and case.cves:
+        log.info("CVE-only ATT&CK placeholder for %s", case.title)
+        _add_unique(
+            case.attack,
+            Mapping(
+                id="T1190",
+                name="Exploit Public-Facing Application",
+                framework="ATT&CK",
+                provenance="cve-heuristic",
+                confidence=_conf("location"),
+                rationale="CVE present without a mapped CWE; public-app exploit is a placeholder",
             ),
         )
 

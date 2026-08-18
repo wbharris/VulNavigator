@@ -6,6 +6,7 @@ import json
 
 from vulnavigator.heuristics import mentions_rce
 from vulnavigator.models import Case, is_ai_zeroday
+from vulnavigator.scanners import SCANNER_KINDS
 
 
 def _bullets(items: list[str]) -> list[str]:
@@ -50,6 +51,28 @@ def _facts(case: Case) -> list[str]:
     elif is_ai_zeroday(case):
         facts.append("No CVE — expected for a Mythos/Daybreak 0-day")
     return facts or ["Writer provided a narrative with limited structured fields"]
+
+
+def _likely_behaviors(case: Case) -> list[str]:
+    blob = f"{case.title} {case.description}"
+    exec_ids = {m.id.split(".")[0] for m in case.attack} & {"T1059", "T1203", "T1068"}
+    rce = mentions_rce(blob) or bool(exec_ids)
+    items: list[str] = []
+    if rce and (case.evidence.poc or case.evidence.reproduced or is_ai_zeroday(case)):
+        items.append("Possible remote code execution if the write-up or PoC is accurate (not confirmed)")
+    elif rce:
+        items.append(
+            "Mapped techniques include exploit or execution — heuristic only, not proof of RCE"
+        )
+    if case.asset_internet_facing is True or any(m.id.split(".")[0] == "T1190" for m in case.attack):
+        items.append("Initial access through an exposed application or service, if reachable")
+    if any(c.startswith("CWE-89") for c in case.cwes) or any(m.id.startswith("T1505") for m in case.attack):
+        items.append("Data access or tampering via injection if the sink is reachable")
+    if not items:
+        items.append(
+            "Follow-on actions such as credential theft, lateral movement, or data access if exploitable"
+        )
+    return items
 
 
 def to_markdown(case: Case) -> str:
@@ -124,7 +147,14 @@ def to_markdown(case: Case) -> str:
     lines += [
         "",
         "Validation should confirm:",
-        "- Replay the finder PoC on our deployed build (same file/commit/image)",
+    ]
+    if is_ai_zeroday(case) or case.evidence.poc.strip() or case.evidence.reproduced:
+        lines.append("- Replay the finder PoC on our deployed build (same file/commit/image)")
+    elif case.source_kind in SCANNER_KINDS:
+        lines.append("- Confirm the scanner hit on our inventory (same host, package, or file)")
+    else:
+        lines.append("- Confirm the affected component and whether we actually run it")
+    lines += [
         "- The exact software/component and version the write-up names",
         "- Whether the vulnerable code path is reachable in our deployment",
         "- Whether mitigations exist (WAF, config restrictions, network controls)",
@@ -136,9 +166,9 @@ def to_markdown(case: Case) -> str:
         "## 4. Likely Attacker Behaviors / Technique Mapping",
         "",
         "Likely behaviors if exploitable:",
-        "- Remote code execution against the exposed application component",
-        "- Initial access through the internet-facing service",
-        "- Follow-on actions such as credential theft, lateral movement, or data access",
+    ]
+    lines.extend(_bullets(_likely_behaviors(case)))
+    lines += [
         "",
         "**Tentative technique mapping (ATT&CK):**",
     ]

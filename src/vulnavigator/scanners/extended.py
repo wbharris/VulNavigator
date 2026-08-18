@@ -386,11 +386,15 @@ def parse_orca(data: Any) -> list[Case]:
     cases: list[Case] = []
     for row in rows:
         cves = row.get("cve_list") or row.get("cves") or []
+        raw_title = str(row.get("title") or row.get("alert_type") or "")
+        if raw_title.lower() in {"", "vulnerability", "alert", "issue", "finding"}:
+            first_cve = cves[0] if isinstance(cves, list) and cves else ""
+            raw_title = str(row.get("details") or first_cve or "Orca alert")
         cases.append(
             make_case(
                 kind="orca",
                 finding_id=str(row.get("alert_id") or row.get("id") or ""),
-                title=str(row.get("alert_type") or row.get("title") or "Orca alert"),
+                title=raw_title,
                 description=str(row.get("details") or row.get("description") or ""),
                 cves=cves_of(*cves, row),
                 product=str(row.get("asset_name") or row.get("asset_unique_id") or ""),
