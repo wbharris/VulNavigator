@@ -1,10 +1,12 @@
-# VulNavigator product contract
+# VulNavigator™ product contract
 
 End goal: a defender drops in a **Mythos** write-up, a **Daybreak** `findings.json`, a **narrative** ticket, or a scanner export and gets one 11-section case they can act on.
 
 VulNavigator does **not** replace Mythos or Daybreak. It sits after them.
 
 Repo: https://github.com/wbharris/VulNavigator
+
+**VulNavigator™** is a trademark of wbharris (common-law ™, not a registered ®). See [`TRADEMARK.md`](../TRADEMARK.md).
 
 ## User journey
 

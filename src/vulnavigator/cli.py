@@ -42,9 +42,17 @@ def _render(cases, as_json: bool) -> str:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="vuln-nav",
-        description="Analyze a Mythos, Daybreak, or scanner/SARIF finding.",
+        description="VulNavigator™ — analyze a Mythos, Daybreak, or scanner/SARIF finding.",
     )
-    parser.add_argument("-V", "--version", action="version", version=f"vuln-nav {__version__}")
+    parser.add_argument(
+        "-V",
+        "--version",
+        action="version",
+        version=(
+            f"VulNavigator™ {__version__} (vuln-nav)\n"
+            "VulNavigator is a trademark of wbharris."
+        ),
+    )
     sub = parser.add_subparsers(dest="cmd", required=True)
 
     an = sub.add_parser(

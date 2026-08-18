@@ -1,12 +1,18 @@
 [project]
 name = "vulnavigator"
 version = "0.1.0"
-description = "Normalize, validate, and map Mythos/Daybreak 0-days and scanner findings into an 11-section case."
+description = "VulNavigator™ — normalize, validate, and map Mythos/Daybreak 0-days and scanner findings into an 11-section case."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "GPL-3.0-or-later" }
 authors = [{ name = "wbharris" }]
+keywords = ["VulNavigator", "vulnerability", "Mythos", "Daybreak", "ATT&CK"]
 dependencies = []
+
+[project.urls]
+Homepage = "https://github.com/wbharris/VulNavigator"
+Repository = "https://github.com/wbharris/VulNavigator"
+Trademark = "https://github.com/wbharris/VulNavigator/blob/main/TRADEMARK.md"
 
 [project.optional-dependencies]
 dev = ["pytest>=8.0"]
