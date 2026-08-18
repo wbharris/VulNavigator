@@ -1,0 +1,25 @@
+[project]
+name = "vulnavigator"
+version = "0.1.0"
+description = "Normalize, validate, and map Mythos/Daybreak vulnerability findings into an actionable case."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "GPL-3.0-or-later" }
+authors = [{ name = "wbharris" }]
+dependencies = []
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0"]
+
+[project.scripts]
+vuln-nav = "vulnavigator.cli:main"
+
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
