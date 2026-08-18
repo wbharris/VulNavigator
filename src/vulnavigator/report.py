@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import json
 
+from vulnavigator.heuristics import mentions_rce
 from vulnavigator.models import Case, is_ai_zeroday
 
 
@@ -17,8 +18,15 @@ def _facts(case: Case) -> list[str]:
         facts.append("Component is described as outdated")
     if case.asset_internet_facing is True:
         facts.append("Component is internet-facing / client-facing")
-    if any(m.id.split(".")[0] in {"T1190", "T1059", "T1203"} for m in case.attack):
-        facts.append("Scanner or write-up indicates possible remote code execution")
+    rce_ids = any(m.id.split(".")[0] in {"T1190", "T1059", "T1203"} for m in case.attack)
+    if mentions_rce(f"{case.title} {case.description}") or (
+        rce_ids and (case.evidence.poc or case.evidence.reproduced)
+    ):
+        facts.append("Write-up or PoC discusses possible remote code execution (not confirmed)")
+    elif rce_ids:
+        facts.append(
+            "ATT&CK mapping includes exploit or execution techniques — heuristic only, not proof of RCE"
+        )
     if case.data_class:
         facts.append(f"Application processes {case.data_class.replace('-', ' ')} data")
     if case.evidence.reproduced is False or (
@@ -32,7 +40,9 @@ def _facts(case: Case) -> list[str]:
     if case.source_severity:
         facts.append(f"Finder/scanner rated the finding {case.source_severity}")
     if case.evidence.poc.strip():
-        facts.append("PoC / exploit steps were provided (primary evidence for an AI 0-day)")
+        facts.append(
+            "Finder included a PoC or exploit write-up (one form of evidence; not required for every 0-day)"
+        )
     if case.evidence.discovery.strip():
         facts.append("Finder described how the vulnerability was discovered")
     if case.cves:
