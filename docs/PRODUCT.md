@@ -1,15 +1,15 @@
 # VulNavigator product contract
 
-End goal: a defender drops in a **Mythos** (Anthropic) write-up or a **Daybreak** (OpenAI Codex Security) `findings.json` / scan directory and gets one case they can act on.
+End goal: a defender drops in a **Mythos** write-up, a **Daybreak** `findings.json`, a **narrative** ticket, or a scanner export and gets one 11-section case they can act on.
 
-**Mythos** and **Daybreak** are the AI-finder path. **Qualys**, **OpenVAS**, and **Nessus** are the scanner path. CVE-only is a fallback.
+VulNavigator does **not** replace Mythos or Daybreak. It sits after them.
 
-VulNavigator does **not** replace Mythos or Daybreak. It sits after them. Findings without triage, mapping, and an honest “what we assumed” section are noise.
+Repo: https://github.com/wbharris/VulNavigator
 
 ## User journey
 
 ```
-Mythos | Daybreak | scanners (Qualys, Nessus, Rapid7, Wiz, Trivy, SARIF, …)
+Mythos | Daybreak | narrative | scanners / SARIF
                  │
                  ▼
            1. Normalize
@@ -21,26 +21,26 @@ Mythos | Daybreak | scanners (Qualys, Nessus, Rapid7, Wiz, Trivy, SARIF, …)
            3. Map
                  │
                  ▼
-           4. Report
-      priority · urgency · remediation
+           4. 11-section report
+      summary · evidence · validation · ATT&CK
+      D3FEND · CSF · priority · remediation
       compensating controls · next actions
                  │
                  ▼
            5. Honesty layer
-      assumptions · what would improve this report
+      confidence · assumptions · what would improve this
 ```
 
 ### 1. Normalize
 
-Any supported input becomes one **case file**: identity, affected product, evidence, source severity, and whatever asset context was given.
-
-Adapters (v1):
+Any supported input becomes one **case file**.
 
 | Source | What we accept |
 |--------|----------------|
-| **Daybreak / Codex Security** | Official `documentType: codex-security.findings` (`findings.json`), a sealed scan directory, SARIF, or a single finding record |
-| **Mythos** | Write-up JSON/markdown: title, target/project, CWE/bug class, PoC, reproduced / triage flags |
-| **Qualys** | VM XML (`QID` / `HOST` / `VULN`) or CSV with a `QID` column |
+| **Daybreak / Codex Security** | `documentType: codex-security.findings`, sealed scan directory, or one finding record |
+| **Mythos** | Write-up JSON/markdown: title, target, CWE/bug class, **poc**, **discovery**, reproduced |
+| **Narrative** | Free-text (ticket, email). Hints extracted: internet-facing, RCE, critical, no AI, no fraud, PoC/discovery sections |
+| **Qualys** | VM XML (`QID` / `HOST` / `VULN`) or CSV with `QID` |
 | **OpenVAS / GVM** | Greenbone XML `<report>` or CSV with NVT / OID |
 | **Nessus** | `.nessus` or Tenable CSV. `--source nessus` also accepts `nexsus` |
 | **Rapid7 InsightVM / Nexpose** | `NexposeReport` XML |
@@ -55,23 +55,31 @@ Adapters (v1):
 | **Burp / ZAP** | DAST XML |
 | CVE only | Fallback: `CVE-YYYY-NNNNN` |
 
-Unknown fields are kept on the case as `raw` so nothing is silently dropped.
+Unknown fields are kept on the case as `raw`.
 
 ### 2. Validate
 
-Decide whether this is a real, actionable finding — not whether it “sounds serious.”
+Decide whether this is actionable — not whether it “sounds serious.”
 
 | Check | Result |
 |-------|--------|
-| Identity | CVE/NVD **or** (for Mythos/Daybreak 0-days) write-up + how it was found + PoC |
-| CISA KEV / EPSS | Only when a CVE exists — not expected on new AI 0-days |
+| Identity | For **AI 0-days**: write-up + how it was found + PoC. CVE/NVD only when a CVE exists |
+| CISA KEV / EPSS | Only when a CVE exists — **not expected** on new Mythos/Daybreak findings |
 | Evidence quality | PoC / exploit / sandbox reproduction is the primary proof |
 | Discovery | What the model traced (file, invariant, sanitizer) |
-| Completeness | Component/version on *our* build so we can replay the PoC |
+| Completeness | Component/version on *our* build so we can **replay the PoC** |
 
 Statuses: `confirmed` · `plausible` · `unconfirmed` · `rejected`.
 
-**Mythos and Daybreak 0-days will usually have no CVE.** That is normal. Do not wait for NVD. Judge the finding on the PoC and the discovery write-up. A sandbox-reproduced Daybreak finding with no CVE is `confirmed` or `plausible`. A narrative with no PoC stays `unconfirmed`.
+**Mythos and Daybreak 0-days will usually have no CVE.** That is normal. Do not wait for NVD. Judge the finding on the PoC and the discovery write-up.
+
+| Finder gave you… | Status |
+|------------------|--------|
+| Write-up + PoC / sandbox | `plausible` or `confirmed` — replay on our build |
+| Write-up only | `unconfirmed` — ask for the PoC first |
+| Neither write-up nor PoC | `rejected` |
+
+Scanner hits (Qualys, Nessus, …) stay **detections**, not exploit proof.
 
 ### 3. Map
 
@@ -85,43 +93,47 @@ Only after validation. Official catalogs first; the agent may only pick IDs that
 | ATLAS + AI RMF | Only if the asset is AI-in-scope |
 | F3 (Fight Fraud Framework) | Only if payment / identity / ATO / mule risk is in play |
 
-Every mapped ID carries `provenance` (`ctid-kev`, `cwe-heuristic`, `nvd-cwe`, `model-inferred`) and `confidence`.
+Every mapped ID carries `provenance` and `confidence`.
 
-### 4. Report (the thing the user keeps)
+### 4. Report
 
-| Field | Meaning |
-|-------|---------|
-| **Priority** | `P1`–`P4` — how bad *here*, not just CVSS |
-| **Urgency** | `immediate` (24h) · `this_week` · `30_days` · `backlog` |
-| **Remediation** | Patch, upgrade, config, or code change — vendor/Daybreak patch first |
-| **Compensating controls** | D3FEND (and CSF) you can apply *until* the fix lands |
-| **Next actions** | Ordered human work: owner, artifact, done-when |
+Eleven sections (markdown) or `--json`:
 
-Priority is not CVSS. KEV, validated exploitability, internet exposure, and whether the mapping unlocks credential access or privilege escalation outweigh a naked 9.8 on an isolated lab box.
+1. Vulnerability summary  
+2. Evidence — facts, **how the finder found it**, **PoC/exploit**, missing evidence  
+3. Validation notes  
+4. Likely attacker behaviors / ATT&CK (ATLAS / F3 only if tagged)  
+5. Defensive countermeasures (D3FEND)  
+6. NIST CSF alignment  
+7. Priority (`P1`–`P4`) and urgency (`immediate` / `this_week` / `30_days` / `backlog`)  
+8. Recommended remediation (for 0-days: replay PoC, patch the described root cause — do not wait for a CVE)  
+9. Compensating controls until the fix lands  
+10. Next actions — owner and done-when  
+11. Confidence, assumptions, uncertainty, what would improve the report  
+
+Priority is not CVSS. Internet exposure, a replayable PoC, and whether the mapping unlocks RCE / credentials outweigh a naked 9.8 on an isolated lab box.
 
 ### 5. Assumptions and “make this report better”
 
 The agent must never hide a guess.
 
-**Assumptions** — defaults it used because the finding did not say. Example: “internet-facing: assumed **no** (not stated).”
+For AI 0-days the useful questions are:
 
-**What would improve this report** — concrete missing facts, ranked by how much they would change priority or mapping:
-
+- What is the **PoC** (commands, request, crash, sandbox log)?
+- Can we **replay it on our build** (same file, commit, or image)?
+- How did the model **find** it (path, invariant, sanitizer)?
 - Is the service internet-facing?
-- What identity / data does it touch?
-- Is this an AI/model/RAG/agent host?
-- Is there a payment or account-takeover path?
-- Which build/version is actually deployed?
-- Was the Daybreak/Mythos PoC reproduced on *our* build?
+- What data does it touch?
+- Is this an AI host or a payment/ATO path?
 
-If those answers arrive later, the same case is re-run; mappings and priority can change.
+A missing CVE is **not** the main gap on Mythos/Daybreak. If those answers arrive later, re-run the same case; mappings and priority can change.
 
 ## What success looks like
 
-A user drops `daybreak-finding.json` or `mythos-finding.md` and, without another tool, can answer:
+A user drops `examples/mythos-zeroday.json` (no CVE) or `examples/narrative-rce.txt` and can answer:
 
-1. Is this real enough to work?
-2. What could an attacker do with it (ATT&CK / ATLAS)?
+1. Is this real enough to work? (PoC / write-up, not NVD)
+2. What could an attacker do with it?
 3. What do we do this week vs later?
 4. What can we put in front of it until the patch ships?
 5. What did the agent guess, and what should I go find out?

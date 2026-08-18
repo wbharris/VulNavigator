@@ -1,7 +1,7 @@
 [project]
 name = "vulnavigator"
 version = "0.1.0"
-description = "Normalize, validate, and map Mythos/Daybreak vulnerability findings into an actionable case."
+description = "Normalize, validate, and map Mythos/Daybreak 0-days and scanner findings into an 11-section case."
 readme = "README.md"
 requires-python = ">=3.11"
 license = { text = "GPL-3.0-or-later" }
