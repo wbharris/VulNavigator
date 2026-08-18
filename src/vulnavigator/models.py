@@ -18,6 +18,7 @@ class Evidence:
     reproduced: bool | None = None
     sandbox: bool | None = None
     poc: str = ""
+    discovery: str = ""
     notes: str = ""
     references: list[str] = field(default_factory=list)
 
@@ -103,3 +104,11 @@ class Case:
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
+
+
+AI_FINDERS = frozenset({"mythos", "daybreak", "narrative"})
+
+
+def is_ai_zeroday(case: Case) -> bool:
+    """Mythos/Daybreak/narrative 0-days are identified by write-up + PoC, not CVE."""
+    return case.source_kind in AI_FINDERS and not case.cves

@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from vulnavigator.models import Action, Assumption, Case, InfoNeed
+from vulnavigator.models import Action, Assumption, Case, InfoNeed, is_ai_zeroday
 
 
 def _assume(case: Case, field: str, assumed: str, because: str, impact: str) -> None:
@@ -82,9 +82,23 @@ def record_assumptions(case: Case) -> Case:
     if not case.evidence.poc and not case.evidence.reproduced and not case.evidence.sandbox:
         _need(
             case,
-            "Is the finding directly exploitable in this deployment (reachable path, no WAF/virtual patch)?",
-            "Without exploitability evidence this may be a false positive or an unreachable path",
-            "Validation status (plausible → confirmed) and urgency",
+            "What is the PoC or exploit the finder used (commands, request, crash, or sandbox log)?",
+            "AI 0-days are judged on the PoC, not on a CVE. Without it we cannot replay or refute the finding",
+            "Validation status and whether this is a real 0-day",
+        )
+    elif is_ai_zeroday(case):
+        _need(
+            case,
+            "Can we replay the finder PoC on our deployed build (same file, commit, or image)?",
+            "Mythos/Daybreak often prove a tree, not our production binary",
+            "Validation (plausible → confirmed) and residual risk",
+        )
+    if is_ai_zeroday(case) and not case.evidence.discovery and len(case.description) < 80:
+        _need(
+            case,
+            "How did the model find this (traced path, invariant broken, sanitizer report)?",
+            "The discovery write-up is the other half of a 0-day — it is how we reproduce and patch",
+            "Root-cause remediation and mapping confidence",
         )
     if not case.data_class:
         _need(
@@ -93,7 +107,7 @@ def record_assumptions(case: Case) -> Case:
             "Data class changes CSF language and legal/fraud involvement",
             "Priority rationale and owners",
         )
-    if not case.cves:
+    if not case.cves and not is_ai_zeroday(case):
         _need(
             case,
             "Has a CVE been assigned, or is disclosure still private?",
@@ -136,6 +150,12 @@ def prioritize(case: Case) -> Case:
     if case.evidence.reproduced or case.evidence.sandbox:
         score += 2
         reasons.append("Finder reproduced / sandbox-validated")
+    elif case.evidence.poc.strip():
+        score += 2
+        reasons.append("Finder included a PoC / exploit (no CVE expected for an AI 0-day)")
+    if case.evidence.discovery.strip():
+        score += 1
+        reasons.append("Finder described how the vulnerability was found")
     if internet:
         score += 2
         reasons.append("Asset is internet-facing")
@@ -186,6 +206,16 @@ def plan_actions(case: Case) -> Case:
             case.remediation.append(
                 f"Apply the vendor / distro fix for {', '.join(case.cves)} and verify the package version"
             )
+        elif is_ai_zeroday(case):
+            case.remediation.extend(
+                [
+                    "Replay the finder PoC on the deployed build (do not wait for a CVE)",
+                    "Patch the root cause described in the write-up (bounds check, authz, parser, …)",
+                    "If the PoC does not replay on our build, record not-applicable with the version/commit compared",
+                    "If patching cannot be immediate: remove public access if feasible, restrict source IPs, WAF/edge filter the PoC path, disable the feature",
+                    "Keep the PoC and discovery notes with the ticket for vendor/CVE assignment later",
+                ]
+            )
         else:
             case.remediation.extend(
                 [
@@ -207,9 +237,9 @@ def plan_actions(case: Case) -> Case:
             "Inventory shows version or 'not present'",
         ),
         Action(
-            "Reproduce or review finder evidence on our build",
+            "Replay the finder PoC / sandbox evidence on our build",
             "security",
-            "Confirmed, plausible-unreachable, or false positive",
+            "PoC replays, does not apply to our build, or is a false positive",
         ),
         Action(
             "Apply primary remediation and verify",

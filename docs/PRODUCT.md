@@ -63,16 +63,15 @@ Decide whether this is a real, actionable finding — not whether it “sounds s
 
 | Check | Result |
 |-------|--------|
-| Identity resolves (NVD / CVE.org) | confirmed identity or still a 0-day claim |
-| CISA KEV | exploited in the wild |
-| EPSS | exploitation probability |
-| Evidence quality | sandbox/PoC/reproduced vs description-only |
-| Internal consistency | severity vs CWE vs claimed impact |
-| Completeness | required fields present |
+| Identity | CVE/NVD **or** (for Mythos/Daybreak 0-days) write-up + how it was found + PoC |
+| CISA KEV / EPSS | Only when a CVE exists — not expected on new AI 0-days |
+| Evidence quality | PoC / exploit / sandbox reproduction is the primary proof |
+| Discovery | What the model traced (file, invariant, sanitizer) |
+| Completeness | Component/version on *our* build so we can replay the PoC |
 
 Statuses: `confirmed` · `plausible` · `unconfirmed` · `rejected`.
 
-A Daybreak “reproduced in sandbox” finding with no CVE can still be `plausible`. A Mythos write-up with no product, no evidence, and a contradictory CWE is `unconfirmed` or `rejected`.
+**Mythos and Daybreak 0-days will usually have no CVE.** That is normal. Do not wait for NVD. Judge the finding on the PoC and the discovery write-up. A sandbox-reproduced Daybreak finding with no CVE is `confirmed` or `plausible`. A narrative with no PoC stays `unconfirmed`.
 
 ### 3. Map
 
