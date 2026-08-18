@@ -94,6 +94,7 @@ vuln-nav analyze examples/trivy-report.json
 
 ```bash
 .venv/bin/python -m pytest -q
+.venv/bin/python tests/simulate_intake.py    # all example intakes → tests/last-results.html
 ```
 
 ## Status
