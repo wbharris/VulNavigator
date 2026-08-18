@@ -30,6 +30,8 @@ __all__ = [
     "SCANNER_KINDS",
     "alias_source",
     "cases_from_scanner_json",
+    "detect_csv_kind",
+    "detect_json_kind",
     "looks_like_csv",
     "looks_like_jsonl",
     "parse_jsonl",
@@ -98,13 +100,13 @@ def detect_csv_kind(headers: list[str]) -> str:
         return "nessus"
     if "nvt" in keys or "oid" in keys or "nvtname" in keys:
         return "openvas"
-    if "nexposeid" in keys or "vulnerabilityid" in keys and "assetipaddress" in keys:
+    if "nexposeid" in keys or ("vulnerabilityid" in keys and "assetipaddress" in keys):
         return "rapid7"
     if "vulnerabilityid" in keys and "pkgname" in keys:
         return "trivy"
     if "cveid" in keys and ("devicename" in keys or "machinename" in keys):
         return "defender"
-    if "snykid" in keys or "issueurl" in keys and "packagename" in keys:
+    if "snykid" in keys or ("issueurl" in keys and "packagename" in keys):
         return "snyk"
     return ""
 
@@ -205,9 +207,9 @@ def detect_json_kind(data: Any) -> str:
     if ext:
         return ext
     blob = json.dumps(data).lower() if not isinstance(data, str) else data.lower()
-    if "qid" in blob or "qualys" in blob:
+    if '"qid"' in blob or "qualys" in blob:
         return "qualys"
-    if "pluginid" in blob or "plugin_id" in blob or "plugin_name" in blob:
+    if '"pluginid"' in blob or '"plugin_id"' in blob or '"plugin_name"' in blob:
         return "nessus"
     if '"nvt"' in blob or "openvas" in blob or "greenbone" in blob:
         return "openvas"

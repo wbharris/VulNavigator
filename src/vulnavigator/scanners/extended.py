@@ -453,11 +453,32 @@ def parse_nuclei(data: Any) -> list[Case]:
     return cases
 
 
+def _rapid7_scope(row: dict[str, Any]) -> tuple[str, str]:
+    """Prefer the nested asset identity; keep host name and IP as distinct scopes."""
+    asset = row.get("asset") if isinstance(row.get("asset"), dict) else {}
+    host = str(
+        asset.get("hostName")
+        or asset.get("hostname")
+        or row.get("hostName")
+        or row.get("hostname")
+        or ""
+    )
+    ip = str(
+        asset.get("ip")
+        or asset.get("ipAddress")
+        or row.get("assetIp")
+        or row.get("ip")
+        or ""
+    )
+    return host or ip, ip or host
+
+
 def parse_rapid7_json(data: Any) -> list[Case]:
-    rows = flatten_rows(data, ("vulnerabilities", "resources", "findings"))
+    rows = flatten_rows(data, ("vulnerabilities", "resources", "findings", "data"))
     cases: list[Case] = []
     for row in rows:
         cves = row.get("cves") or row.get("cve") or []
+        product, location = _rapid7_scope(row)
         cases.append(
             make_case(
                 kind="rapid7",
@@ -465,9 +486,10 @@ def parse_rapid7_json(data: Any) -> list[Case]:
                 title=str(row.get("title") or row.get("vulnerability_id") or "InsightVM finding"),
                 description=str(row.get("description") or ""),
                 cves=cves_of(*cves if isinstance(cves, list) else [cves], row),
-                product=str(row.get("assetIp") or row.get("ip") or row.get("hostname") or ""),
+                product=product,
                 severity=str(row.get("severity") or row.get("severityScore") or ""),
                 remediation=str(row.get("solution") or ""),
+                location=location,
                 raw=row,
             )
         )
@@ -491,6 +513,27 @@ JSON_PARSERS = {
 }
 
 
+def _looks_defender(row: dict[str, Any]) -> bool:
+    return bool(
+        row.get("cveId")
+        and (row.get("deviceName") or row.get("machineId") or row.get("recommendedSecurityUpdate"))
+    )
+
+
+def _looks_wiz(row: dict[str, Any]) -> bool:
+    return bool(row.get("vulnerableAsset") is not None or row.get("vulnerabilityCVE"))
+
+
+def _looks_rapid7(row: dict[str, Any]) -> bool:
+    if row.get("host_info") is not None or row.get("vulnerableAsset") is not None:
+        return False
+    if row.get("nexposeId") or row.get("realRiskScore") is not None or row.get("vulnerability_id"):
+        return True
+    if isinstance(row.get("asset"), dict):
+        return True
+    return bool(row.get("assetIp") and (row.get("cves") or row.get("title")))
+
+
 def detect_extended_json(data: Any) -> str:
     if isinstance(data, dict):
         if data.get("template-id") or data.get("templateID"):
@@ -505,6 +548,13 @@ def detect_extended_json(data: Any) -> str:
             isinstance(c, dict) and (c.get("securityData") or c.get("securityIssues")) for c in data.get("components") or []
         ):
             return "nexus"
+        # Nested Graph / InsightVM / Wiz envelopes: look at rows, not the wrapper.
+        if any(_looks_defender(r) for r in flatten_rows(data, ("value", "findings", "vulnerabilities"))[:5]):
+            return "defender"
+        if any(_looks_wiz(r) for r in flatten_rows(data, ("issues", "nodes", "data", "vulnerabilities", "findings"))[:5]):
+            return "wiz"
+        if any(_looks_rapid7(r) for r in flatten_rows(data, ("vulnerabilities", "resources", "findings", "data"))[:5]):
+            return "rapid7"
         blob = json.dumps(data).lower()
     elif isinstance(data, list) and data and isinstance(data[0], dict):
         blob = json.dumps(data[0]).lower()
@@ -514,6 +564,12 @@ def detect_extended_json(data: Any) -> str:
             return "dependabot"
         if "VulnerabilityID" in data[0] or "PkgName" in data[0]:
             return "trivy"
+        if _looks_defender(data[0]):
+            return "defender"
+        if _looks_wiz(data[0]):
+            return "wiz"
+        if _looks_rapid7(data[0]):
+            return "rapid7"
     else:
         return ""
     if "packagevulnerabilitydetails" in blob or "findingarn" in blob:
@@ -524,7 +580,7 @@ def detect_extended_json(data: Any) -> str:
         return "crowdstrike"
     if "cveid" in blob and ("devicename" in blob or "machineid" in blob or "recommendedsecurityupdate" in blob):
         return "defender"
-    if "vulnerableasset" in blob or '"wiz"' in blob:
+    if "vulnerableasset" in blob:
         return "wiz"
     if "cve_list" in blob and "alert_id" in blob:
         return "orca"

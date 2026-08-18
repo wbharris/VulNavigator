@@ -1,0 +1,16 @@
+{
+  "@odata.context": "https://graph.microsoft.com/v1.0/$metadata#machineVulnerabilities",
+  "@odata.count": 1,
+  "value": [
+    {
+      "id": "mdvm-odata-1",
+      "cveId": "CVE-2014-0160",
+      "deviceName": "pc-finance-01",
+      "machineId": "m-1",
+      "productName": "OpenSSL",
+      "severity": "High",
+      "cvssV3": 7.5,
+      "recommendedSecurityUpdate": "Install the vendor security update"
+    }
+  ]
+}

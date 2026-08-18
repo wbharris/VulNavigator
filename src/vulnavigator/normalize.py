@@ -21,6 +21,7 @@ from vulnavigator.scanners import (
     SCANNER_KINDS,
     alias_source,
     cases_from_scanner_json,
+    detect_json_kind,
     looks_like_csv,
     looks_like_jsonl,
     parse_jsonl,
@@ -119,6 +120,11 @@ def detect_kind(data: Any, hint: str = "", forced: str = "") -> str:
             return "daybreak"
     else:
         blob += str(data).lower()
+    # Structural scanner signatures beat substring matches in descriptions.
+    if not isinstance(data, str):
+        scanner = detect_json_kind(data)
+        if scanner:
+            return scanner
     if "daybreak" in blob or "codex-security" in blob or "codex security" in blob:
         return "daybreak"
     if "mythos" in blob or "glasswing" in blob:
@@ -127,7 +133,7 @@ def detect_kind(data: Any, hint: str = "", forced: str = "") -> str:
         return "qualys"
     if "openvas" in blob or "greenbone" in blob or '"nvt"' in blob:
         return "openvas"
-    if "nessus" in blob or "pluginid" in blob or "plugin_id" in blob:
+    if "nessus" in blob or '"pluginid"' in blob or '"plugin_id"' in blob:
         return "nessus"
     for token, kind in (
         ("insightvm", "rapid7"),
