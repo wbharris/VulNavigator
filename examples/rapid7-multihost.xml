@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<NexposeReport version="2.0">
+  <nodes>
+    <node address="10.0.0.44">
+      <tests>
+        <test id="ssl-heartbleed" status="vulnerable-exploited"/>
+      </tests>
+    </node>
+    <node address="10.0.0.55">
+      <tests>
+        <test id="ssl-heartbleed" status="vulnerable"/>
+      </tests>
+    </node>
+  </nodes>
+  <VulnerabilityDefinitions>
+    <vulnerability id="ssl-heartbleed" title="OpenSSL Heartbleed" severity="9">
+      <description>TLS heartbeat read overrun.</description>
+      <solution>Upgrade OpenSSL.</solution>
+      <references>
+        <reference source="CVE">2014-0160</reference>
+      </references>
+    </vulnerability>
+  </VulnerabilityDefinitions>
+</NexposeReport>

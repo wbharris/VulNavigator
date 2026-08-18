@@ -39,24 +39,31 @@ __all__ = [
 
 
 def detect_xml_kind(root: ET.Element) -> str:
+    """Prefer distinctive root tags so mixed/vendor-variant files are not stolen."""
     tag = local_tag(root.tag).lower()
-    if tag == "nessusclientdata_v2" or xml_findall(root, "ReportItem"):
+    if tag == "nessusclientdata_v2":
         return "nessus"
     if tag in {"nexposereport", "nexposesimplexmlexport", "nexposesimplexmle"} or "nexpose" in tag:
         return "rapid7"
-    if tag in {"issues", "burp"} or xml_findall(root, "issue") and xml_findall(root, "issueDetail"):
-        return "burp"
-    if tag == "owaspzapreport" or xml_findall(root, "alertitem"):
+    if tag == "owaspzapreport":
         return "zap"
-    blob = tag.upper()
-    if "QUALYS" in blob or xml_findall(root, "QID") or xml_findall(root, "DETECTION"):
-        return "qualys"
+    if tag in {"issues", "burp"} and xml_findall(root, "issue"):
+        return "burp"
     if tag == "scan" and xml_findall(root, "VULN"):
         return "qualys"
+    blob = tag.upper()
+    if "QUALYS" in blob or tag in {"host_list_vm_detection_output", "scan"}:
+        if xml_findall(root, "QID") or xml_findall(root, "DETECTION") or xml_findall(root, "VULN"):
+            return "qualys"
     if xml_findall(root, "nvt") or "openvas" in tag or "gmp" in tag:
         return "openvas"
     if tag == "report" and xml_findall(root, "result"):
         return "openvas"
+    # Vendor variants that omit the usual root name
+    if xml_findall(root, "ReportItem"):
+        return "nessus"
+    if xml_findall(root, "alertitem"):
+        return "zap"
     return ""
 
 
@@ -159,30 +166,33 @@ def looks_like_csv(text: str) -> bool:
 
 
 def looks_like_jsonl(text: str) -> bool:
+    """True only for multi-record JSONL. A single JSON object/array is not JSONL."""
     lines = [ln for ln in text.splitlines() if ln.strip()]
-    if len(lines) < 1:
+    if len(lines) < 2:
         return False
+    try:
+        json.loads(text)
+        return False
+    except json.JSONDecodeError:
+        pass
     if not lines[0].lstrip().startswith("{"):
         return False
     try:
         json.loads(lines[0])
     except json.JSONDecodeError:
         return False
-    if len(lines) == 1:
-        return '"template-id"' in lines[0] or '"matched-at"' in lines[0]
-    try:
-        json.loads(lines[1])
-        return True
-    except json.JSONDecodeError:
-        return False
+    return lines[1].lstrip()[:1] in "{["
 
 
 def parse_jsonl(text: str, source: str = "") -> list[Case]:
     rows = []
-    for line in text.splitlines():
+    for i, line in enumerate(text.splitlines(), 1):
         if not line.strip():
             continue
-        rows.append(json.loads(line))
+        try:
+            rows.append(json.loads(line))
+        except json.JSONDecodeError as exc:
+            raise ValueError(f"truncated or invalid JSONL at line {i}: {exc}") from exc
     kind = alias_source(source) or detect_extended_json(rows) or "nuclei"
     parser = JSON_PARSERS.get(kind)
     if not parser:

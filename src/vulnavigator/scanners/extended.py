@@ -6,7 +6,7 @@ import json
 import xml.etree.ElementTree as ET
 from typing import Any
 
-from vulnavigator.models import Case
+from vulnavigator.models import Case, Location
 from vulnavigator.scanners.common import (
     cves_of,
     cwes_of,
@@ -35,26 +35,35 @@ def parse_sarif(data: dict[str, Any]) -> list[Case]:
                 help_text = str(rule["help"].get("text") or "")
             elif isinstance(rule.get("fullDescription"), dict):
                 help_text = str(rule["fullDescription"].get("text") or "")
-            locs = []
+            loc_objs = []
             for loc in result.get("locations") or []:
                 phys = (loc or {}).get("physicalLocation") or {}
-                uri = ((phys.get("artifactLocation") or {}).get("uri")) or ""
+                uri = str(((phys.get("artifactLocation") or {}).get("uri")) or "")
                 line = (phys.get("region") or {}).get("startLine")
-                locs.append(f"{uri}:{line}" if line else uri)
+                if uri or line:
+                    loc_objs.append(
+                        Location(path=uri, line=int(line) if line not in (None, "") else None)
+                    )
+            primary = loc_objs[0] if loc_objs else None
             props = result.get("properties") or rule.get("properties") or {}
             tags = props.get("tags") or []
+            extra_note = ""
+            if len(loc_objs) > 1:
+                extra_note = f"\n\nAlso reported at {len(loc_objs) - 1} other location(s)."
             cases.append(
                 make_case(
                     kind="sarif",
                     finding_id=str(result.get("guid") or rule_id),
                     title=f"[{tool}] {title}" if tool else title,
-                    description=str(msg.get("text") or "") + (("\n\n" + help_text) if help_text else ""),
+                    description=str(msg.get("text") or "")
+                    + (("\n\n" + help_text) if help_text else "")
+                    + extra_note,
                     cves=cves_of(title, msg, props, tags, result),
                     cwes=cwes_of(tags, props, result, rule),
                     product=tool,
-                    component=locs[0].split(":")[0] if locs else "",
+                    component=primary.path if primary else "",
                     severity=str(result.get("level") or props.get("severity") or "medium"),
-                    location=locs[0] if locs else "",
+                    extra_locations=loc_objs,
                     raw=result,
                 )
             )
@@ -101,24 +110,8 @@ def parse_rapid7_xml(root: ET.Element) -> list[Case]:
                     raw={"id": vid, "host": host, "status": status},
                 )
             )
-    if not cases:
-        for vuln in xml_findall(root, "vulnerability"):
-            vid = vuln.attrib.get("id", "")
-            meta = defs.get(vid, {})
-            if not meta.get("title"):
-                continue
-            cases.append(
-                make_case(
-                    kind="rapid7",
-                    finding_id=vid,
-                    title=meta["title"],
-                    description=meta.get("description") or meta["title"],
-                    cves=cves_of(meta.get("cves")),
-                    severity=meta.get("severity") or "medium",
-                    remediation=meta.get("solution") or "",
-                    raw={"id": vid},
-                )
-            )
+    # Do not emit host-less cases from VulnerabilityDefinitions alone —
+    # that hides whether the vuln is actually present on a node.
     return cases
 
 
@@ -201,11 +194,14 @@ def parse_trivy(data: Any) -> list[Case]:
 
 
 def parse_snyk(data: Any) -> list[Case]:
-    rows = []
+    rows: list[Any] = []
     if isinstance(data, dict):
-        rows = data.get("vulnerabilities") or data.get("vulnerabilities") or []
-        if not rows and isinstance(data.get("runs"), list):
+        if isinstance(data.get("runs"), list):
             return parse_sarif(data)
+        rows = data.get("vulnerabilities") or data.get("vulns") or []
+        if not rows and isinstance(data.get("applications"), list):
+            for app in data["applications"]:
+                rows.extend((app or {}).get("vulnerabilities") or [])
     elif isinstance(data, list):
         rows = data
     cases: list[Case] = []
@@ -496,6 +492,8 @@ JSON_PARSERS = {
 
 def detect_extended_json(data: Any) -> str:
     if isinstance(data, dict):
+        if data.get("template-id") or data.get("templateID"):
+            return "nuclei"
         if data.get("runs") is not None and (data.get("version") or data.get("$schema")):
             return "sarif"
         if data.get("Results") and any(isinstance(r, dict) and "Vulnerabilities" in r for r in data.get("Results") or []):

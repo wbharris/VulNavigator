@@ -177,8 +177,12 @@ def make_case(
     remediation: str = "",
     output: str = "",
     location: str = "",
+    extra_locations: list[Location] | None = None,
     raw: dict[str, Any] | None = None,
 ) -> Case:
+    locs: list[Location] = list(extra_locations or [])
+    if location and not any(l.path == location for l in locs):
+        locs.insert(0, Location(path=location))
     return Case(
         source=kind,
         source_kind=kind,
@@ -191,7 +195,7 @@ def make_case(
         product=product,
         component=component,
         version=version,
-        locations=[Location(path=location)] if location else [],
+        locations=locs,
         evidence=Evidence(
             notes=" | ".join(x for x in (f"{kind} scanner detection", output) if x)
         ),
