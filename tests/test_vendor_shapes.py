@@ -9,7 +9,12 @@ import pytest
 
 from vulnavigator.normalize import detect_kind, findings_from_path, findings_from_text
 from vulnavigator.scanners import detect_csv_kind, detect_json_kind
-from vulnavigator.scanners.extended import detect_extended_json, parse_rapid7_json, parse_sarif
+from vulnavigator.scanners.extended import (
+    _rapid7_scope,
+    detect_extended_json,
+    parse_rapid7_json,
+    parse_sarif,
+)
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -89,6 +94,20 @@ def test_wiz_description_mentioning_plugin_id_still_detects_wiz():
     assert cases[0].product == "vm-1"
 
 
+def test_rapid7_scope_prefers_asset_hostname_over_scan_hostname():
+    product, location = _rapid7_scope(
+        {
+            "hostname": "scan-alias",
+            "hostName": "scan-alias-2",
+            "assetIp": "10.0.0.99",
+            "ip": "10.0.0.98",
+            "asset": {"hostName": "web-prod-01", "ip": "10.0.0.44"},
+        }
+    )
+    assert product == "web-prod-01"
+    assert location == "10.0.0.44"
+
+
 def test_rapid7_json_prefers_asset_over_scan_host():
     data = json.loads((ROOT / "examples/rapid7-report.json").read_text())
     cases = parse_rapid7_json(data)
@@ -155,3 +174,32 @@ def test_sarif_same_rule_two_results_keep_separate_locations():
 )
 def test_detect_csv_kind_distinctive_headers(headers, kind):
     assert detect_csv_kind(headers) == kind
+
+
+@pytest.mark.parametrize(
+    "payload",
+    [
+        # Defender-ish Graph envelope without device/machine fields
+        {"@odata.count": 1, "value": [{"id": "x", "cveId": "CVE-2014-0160", "title": "lib"}]},
+        # Wiz-ish issues list without vulnerableAsset / vulnerabilityCVE
+        {"issues": [{"id": "x", "title": "Cloud issue", "severity": "HIGH"}]},
+        # Prose mentioning vendor field names must not flip routing
+        {"findings": [{"id": "x", "title": "review the vulnerableAsset and cveId deviceName fields"}]},
+        # Rapid7-ish resources without nexpose/asset/assetIp
+        {"resources": [{"id": "x", "title": "Heartbleed", "cves": ["CVE-2014-0160"], "hostname": "web-01"}]},
+        # Prisma-shaped data[] must not become Wiz/Rapid7
+        {"data": [{"id": "p1", "cve": "CVE-2014-0160", "packageName": "openssl", "packageVersion": "1.0.1e"}]},
+    ],
+)
+def test_detect_extended_json_near_misses_do_not_steal(payload):
+    kind = detect_extended_json(payload)
+    assert kind in {"", "prisma"}
+    if payload.get("data") and "packageName" in payload["data"][0]:
+        assert kind == "prisma"
+    else:
+        assert kind == ""
+
+
+def test_crowdstrike_resources_are_not_rapid7():
+    data = json.loads((ROOT / "examples/crowdstrike-report.json").read_text())
+    assert detect_extended_json({"resources": data["resources"]}) == "crowdstrike"

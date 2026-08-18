@@ -572,22 +572,22 @@ def detect_extended_json(data: Any) -> str:
             return "rapid7"
     else:
         return ""
-    if "packagevulnerabilitydetails" in blob or "findingarn" in blob:
+    if '"packagevulnerabilitydetails"' in blob or '"findingarn"' in blob:
         return "inspector"
-    if "security_advisory" in blob:
+    if '"security_advisory"' in blob:
         return "dependabot"
-    if "host_info" in blob and ("exprt_rating" in blob or "spotlight" in blob or "cid" in blob):
+    if '"host_info"' in blob and ('"exprt_rating"' in blob or "spotlight" in blob or '"cid"' in blob):
         return "crowdstrike"
-    if "cveid" in blob and ("devicename" in blob or "machineid" in blob or "recommendedsecurityupdate" in blob):
+    if '"cveid"' in blob and ('"devicename"' in blob or '"machineid"' in blob or '"recommendedsecurityupdate"' in blob):
         return "defender"
-    if "vulnerableasset" in blob:
+    if '"vulnerableasset"' in blob or '"vulnerabilitycve"' in blob:
         return "wiz"
-    if "cve_list" in blob and "alert_id" in blob:
+    if '"cve_list"' in blob and '"alert_id"' in blob:
         return "orca"
-    if "nexpose" in blob or "insightvm" in blob or "realriskscore" in blob:
+    if '"nexposeid"' in blob or '"realriskscore"' in blob or "nexpose" in blob or "insightvm" in blob:
         return "rapid7"
-    if "prismacloud" in blob or ("packagename" in blob and "packageversion" in blob and "cve" in blob):
+    if "prismacloud" in blob or ('"packagename"' in blob and '"packageversion"' in blob and '"cve"' in blob):
         return "prisma"
-    if "template-id" in blob and "matched-at" in blob:
+    if '"template-id"' in blob and '"matched-at"' in blob:
         return "nuclei"
     return ""
