@@ -1,0 +1,2 @@
+Plugin ID,CVE,Risk,Host,Port,Name,Description,Solution
+20007,CVE-2014-0160,Critical,10.0.0.12,443,OpenSSL Heartbleed,The TLS service may leak process memory.,Upgrade OpenSSL and rotate keys

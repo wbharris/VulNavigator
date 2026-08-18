@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SCAN>
+  <IP value="10.0.0.21" name="api-01.lab">
+    <VULN number="38227" severity="5" port="443">
+      <TITLE>OpenSSL Heartbleed Vulnerability</TITLE>
+      <DIAGNOSIS>The service is affected by the OpenSSL Heartbleed information disclosure vulnerability.</DIAGNOSIS>
+      <SOLUTION>Upgrade OpenSSL and rotate credentials that may have been exposed.</SOLUTION>
+      <CVE_ID_LIST>
+        <CVE_ID>CVE-2014-0160</CVE_ID>
+      </CVE_ID_LIST>
+      <RESULT>QID 38227 confirmed on tcp/443</RESULT>
+    </VULN>
+  </IP>
+</SCAN>
