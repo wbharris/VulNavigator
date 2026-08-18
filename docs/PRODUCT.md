@@ -115,6 +115,10 @@ Eleven sections (markdown) or `--json`:
 
 Priority is not CVSS. Internet exposure, a replayable PoC, and whether the mapping unlocks RCE / credentials outweigh a naked 9.8 on an isolated lab box.
 
+**`--offline`:** skips NVD / KEV / EPSS only. `case.kev`, `case.epss`, and `case.cvss` stay unset. Mapping tables are local (`src/vulnavigator/data/mappings.json`). Confidence values there are ordinal (0.62 CWE, 0.55 narrative RCE, 0.40 location-only), not calibrated probabilities.
+
+**Data quality** (0–100) is printed on the report: more gaps and assumptions lower the score. Use it to see which cases need more evidence.
+
 ### 5. Assumptions and “make this report better”
 
 The agent must never hide a guess.

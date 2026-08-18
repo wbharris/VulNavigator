@@ -96,11 +96,13 @@ class Case:
     urgency: str = "30_days"
     priority_reasons: list[str] = field(default_factory=list)
     remediation: list[str] = field(default_factory=list)
+    source_remediation: list[str] = field(default_factory=list)
     compensating_controls: list[str] = field(default_factory=list)
     next_actions: list[Action] = field(default_factory=list)
     assumptions: list[Assumption] = field(default_factory=list)
     improve: list[InfoNeed] = field(default_factory=list)
     confidence: str = ""
+    data_quality: int = 0
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)

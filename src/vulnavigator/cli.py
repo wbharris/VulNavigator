@@ -7,8 +7,11 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from pathlib import Path
+
+FINDING_ID_RE = re.compile(r"^[\w.:/=@+-]{1,256}$")
 
 from vulnavigator import __version__
 from vulnavigator.pipeline import analyze_path, analyze_text
@@ -25,6 +28,17 @@ def _source_arg(value: str) -> str:
             f"unknown source {value!r} (try mythos, daybreak, qualys, openvas, nessus)"
         )
     return mapped
+
+
+def _finding_id_arg(value: str) -> str:
+    text = (value or "").strip()
+    if not text:
+        return ""
+    if not FINDING_ID_RE.fullmatch(text):
+        raise argparse.ArgumentTypeError(
+            "finding id must be 1–256 characters: letters, digits, _.:/=@+-"
+        )
+    return text
 
 
 def _render(cases, as_json: bool) -> str:
@@ -65,7 +79,14 @@ def main(argv: list[str] | None = None) -> int:
     )
     an.add_argument("-o", "--output", help="Write report here (default: stdout)")
     an.add_argument("--json", action="store_true", help="Emit the case file as JSON")
-    an.add_argument("--offline", action="store_true", help="Skip NVD / KEV / EPSS")
+    an.add_argument(
+        "--offline",
+        action="store_true",
+        help=(
+            "Skip NVD, CISA KEV, and FIRST EPSS. Mapping, validation, and the "
+            "11-section report still run. Priority will not use live KEV/EPSS/CVSS."
+        ),
+    )
     an.add_argument(
         "--source",
         type=_source_arg,
@@ -75,6 +96,7 @@ def main(argv: list[str] | None = None) -> int:
         "--id",
         dest="finding_id",
         default="",
+        type=_finding_id_arg,
         help="Analyze only this finding id (Daybreak id, QID, plugin ID, NVT OID, Mythos id)",
     )
 
