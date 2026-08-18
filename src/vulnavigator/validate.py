@@ -11,9 +11,15 @@ def validate(case: Case) -> Case:
     ev = case.evidence
     has_identity = bool(case.cves) or bool(case.nvd_description)
     has_product = bool(case.product or case.component or case.locations)
-    has_writeup = len(case.description.strip()) >= 40 or bool(ev.discovery.strip())
+    has_structured = bool(case.cwes) or bool(case.locations) or bool(case.finding_id)
+    has_writeup = (
+        len(case.description.strip()) >= 40
+        or bool(ev.discovery.strip())
+        or (len(case.title.strip()) >= 12 and has_structured)
+    )
     has_proof = bool(ev.reproduced) or bool(ev.sandbox) or bool(ev.poc.strip())
     zeroday = is_ai_zeroday(case)
+    scanner = case.source_kind in SCANNER_KINDS
 
     if zeroday:
         notes.append(
@@ -52,18 +58,21 @@ def validate(case: Case) -> Case:
 
     if not has_product:
         notes.append("Affected product/component/location missing")
-    if not has_writeup and not has_identity and not has_proof:
+    if not has_writeup and not has_identity and not has_proof and not has_structured:
         notes.append("Description too thin to stand on its own")
 
-    # Status — AI 0-days stand on write-up + PoC, not NVD
-    if not has_identity and not has_writeup and not has_proof:
+    # Status — AI 0-days stand on write-up + PoC; scanners stand on CVE/CWE/location
+    if not has_identity and not has_writeup and not has_proof and not has_structured:
         status = "rejected"
-        notes.append("Rejected: no write-up, no PoC, and no CVE")
+        notes.append("Rejected: no write-up, no PoC, no CVE, and no structured identity")
     elif zeroday and ev.reproduced is False and not has_proof:
         status = "unconfirmed"
         notes.append("Writer said exploitability is not confirmed and no PoC was attached")
     elif case.kev or (has_identity and has_proof) or (zeroday and ev.sandbox and has_proof):
         status = "confirmed"
+    elif scanner and (has_identity or has_structured):
+        status = "plausible"
+        notes.append("Scanner/SAST detection with CVE, CWE, or a code/host location — not exploit-validated")
     elif has_proof and has_writeup:
         status = "plausible"
     elif zeroday and has_writeup:

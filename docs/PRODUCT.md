@@ -130,6 +130,14 @@ A missing CVE is **not** the main gap on Mythos/Daybreak. If those answers arriv
 
 ## What success looks like
 
+Simulation (every bundled example, offline):
+
+```bash
+python3 tests/simulate_intake.py
+```
+
+Writes `tests/last-results.html`. Scanner detections with a CVE/CWE/location must be `plausible`. AI 0-days with a PoC must be `plausible` or `confirmed`. A narrative with no PoC stays `unconfirmed`.
+
 A user drops `examples/mythos-zeroday.json` (no CVE) or `examples/narrative-rce.txt` and can answer:
 
 1. Is this real enough to work? (PoC / write-up, not NVD)
