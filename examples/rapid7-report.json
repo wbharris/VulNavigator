@@ -1,0 +1,22 @@
+{
+  "meta": { "count": 1 },
+  "resources": [
+    {
+      "id": "ssl-heartbleed",
+      "nexposeId": "ssl-heartbleed",
+      "title": "OpenSSL Heartbleed",
+      "description": "TLS heartbeat read overrun.",
+      "severity": "critical",
+      "realRiskScore": 900,
+      "cves": ["CVE-2014-0160"],
+      "solution": "Upgrade OpenSSL.",
+      "assetIp": "10.0.0.99",
+      "hostname": "scan-alias",
+      "asset": {
+        "id": 42,
+        "ip": "10.0.0.44",
+        "hostName": "web-prod-01"
+      }
+    }
+  ]
+}

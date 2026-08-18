@@ -6,8 +6,8 @@ th{background:#f3f3f3}.pass{color:#0a7a2f;font-weight:700}.fail{color:#b00020;fo
 code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem}
 pre{background:#111;color:#e8e8e8;padding:1rem;overflow:auto;border-radius:6px;max-height:22rem}</style></head><body>
 <h1>VulNavigator last simulation</h1>
-<p><strong>2026-08-18</strong> · 24 intake types · 
-<span class='pass'>24 passed, 0 failed</span></p>
+<p><strong>2026-08-18</strong> · 28 intake types · 
+<span class='pass'>28 passed, 0 failed</span></p>
 <p>Each example file was run through <code>analyze_path(..., offline=True)</code> 
 and the 11-section report was checked for source kind, identity, and required headings.</p>
 <table><thead><tr><th>Intake</th><th>File</th><th>Kind</th><th>Validation</th><th>Priority</th><th>Identity</th><th>Result</th></tr></thead><tbody>
@@ -21,14 +21,18 @@ and the 11-section report was checked for source kind, identity, and required he
 <tr><td>Qualys VM XML</td><td><code>examples/qualys-report.xml</code></td><td>qualys</td><td>plausible</td><td>P4 backlog</td><td><code>CVE-2014-0160</code></td><td class='pass'>PASS</td></tr>
 <tr><td>OpenVAS / GVM XML</td><td><code>examples/openvas-report.xml</code></td><td>openvas</td><td>plausible</td><td>P4 backlog</td><td><code>CVE-2014-0160</code></td><td class='pass'>PASS</td></tr>
 <tr><td>Rapid7 Nexpose XML</td><td><code>examples/rapid7-report.xml</code></td><td>rapid7</td><td>plausible</td><td>P4 backlog</td><td><code>CVE-2014-0160</code></td><td class='pass'>PASS</td></tr>
+<tr><td>Rapid7 InsightVM JSON (asset+host)</td><td><code>examples/rapid7-report.json</code></td><td>rapid7</td><td>plausible</td><td>P4 backlog</td><td><code>CVE-2014-0160</code></td><td class='pass'>PASS</td></tr>
 <tr><td>SARIF (CodeQL)</td><td><code>examples/sarif-report.sarif</code></td><td>sarif</td><td>plausible</td><td>P4 backlog</td><td><code>CWE-89</code></td><td class='pass'>PASS</td></tr>
+<tr><td>SARIF same rule, two files</td><td><code>examples/sarif-same-rule.sarif</code></td><td>sarif</td><td>plausible</td><td>P4 backlog</td><td><code>CWE-89</code></td><td class='pass'>PASS</td></tr>
 <tr><td>Trivy JSON</td><td><code>examples/trivy-report.json</code></td><td>trivy</td><td>plausible</td><td>P3 30_days</td><td><code>CVE-2014-0160</code></td><td class='pass'>PASS</td></tr>
 <tr><td>Snyk JSON</td><td><code>examples/snyk-report.json</code></td><td>snyk</td><td>plausible</td><td>P4 backlog</td><td><code>CVE-2020-8203</code></td><td class='pass'>PASS</td></tr>
 <tr><td>GitHub Dependabot JSON</td><td><code>examples/dependabot-report.json</code></td><td>dependabot</td><td>plausible</td><td>P4 backlog</td><td><code>CVE-2020-8203</code></td><td class='pass'>PASS</td></tr>
 <tr><td>Wiz issues JSON</td><td><code>examples/wiz-report.json</code></td><td>wiz</td><td>plausible</td><td>P3 30_days</td><td><code>CVE-2014-0160</code></td><td class='pass'>PASS</td></tr>
+<tr><td>Wiz GraphQL envelope</td><td><code>examples/wiz-graphql.json</code></td><td>wiz</td><td>plausible</td><td>P3 30_days</td><td><code>CVE-2014-0160</code></td><td class='pass'>PASS</td></tr>
 <tr><td>Prisma Cloud JSON</td><td><code>examples/prisma-report.json</code></td><td>prisma</td><td>plausible</td><td>P4 backlog</td><td><code>CVE-2014-0160</code></td><td class='pass'>PASS</td></tr>
 <tr><td>Orca alerts JSON</td><td><code>examples/orca-report.json</code></td><td>orca</td><td>plausible</td><td>P4 backlog</td><td><code>CVE-2014-0160</code></td><td class='pass'>PASS</td></tr>
 <tr><td>Microsoft Defender VM JSON</td><td><code>examples/defender-report.json</code></td><td>defender</td><td>plausible</td><td>P4 backlog</td><td><code>CVE-2014-0160</code></td><td class='pass'>PASS</td></tr>
+<tr><td>Defender Graph OData envelope</td><td><code>examples/defender-odata.json</code></td><td>defender</td><td>plausible</td><td>P4 backlog</td><td><code>CVE-2014-0160</code></td><td class='pass'>PASS</td></tr>
 <tr><td>CrowdStrike Spotlight JSON</td><td><code>examples/crowdstrike-report.json</code></td><td>crowdstrike</td><td>plausible</td><td>P4 backlog</td><td><code>CVE-2014-0160</code></td><td class='pass'>PASS</td></tr>
 <tr><td>AWS Inspector2 JSON</td><td><code>examples/inspector-report.json</code></td><td>inspector</td><td>plausible</td><td>P4 backlog</td><td><code>CVE-2014-0160</code></td><td class='pass'>PASS</td></tr>
 <tr><td>Nexus IQ JSON</td><td><code>examples/nexus-report.json</code></td><td>nexus</td><td>plausible</td><td>P4 backlog</td><td><code>CVE-2021-44228</code></td><td class='pass'>PASS</td></tr>
@@ -1333,6 +1337,128 @@ If immediate patching is not possible:
 - What is the PoC or exploit the finder used (commands, request, crash, or sandbox log)? — AI 0-days are judged on the PoC, not on a CVE. Without it we cannot replay or refute the finding (changes: Validation status and whether this is a real 0-day)
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
+<h2>Rapid7 InsightVM JSON (asset+host)</h2>
+<p class='pass'>PASS · plausible · P4</p>
+<pre># OpenSSL Heartbleed
+
+*VulNavigator™* · *Source:* rapid7 `ssl-heartbleed` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 22/100
+
+## 1. Vulnerability Summary
+
+**Finding:** OpenSSL Heartbleed.
+**Context:** TLS heartbeat read overrun.
+**Current status:** Exploitability is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
+
+## 2. Evidence Summary
+
+**Facts provided:**
+- ATT&amp;CK mapping includes exploit or execution techniques — heuristic only, not proof of RCE
+- No evidence of successful exploitation was provided
+- Finder/scanner rated the finding critical
+- CVE(s): CVE-2014-0160
+
+**Missing evidence:**
+- Is this service internet-facing or reachable from an untrusted network?
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent?
+- Does this sit on a payment, identity, or account-takeover path?
+- Which exact version / commit / image digest is in production?
+- What is the PoC or exploit the finder used (commands, request, crash, or sandbox log)?
+- What data does this component touch (none / internal / PII / payment)?
+
+## 3. Validation Notes
+
+- CVE-2014-0160 not resolved (offline or unknown to NVD)
+- No PoC, exploit, or sandbox reproduction in the finding
+- rapid7 scanner detection — not exploit-validated
+- Finder rule/bug class: ssl-heartbleed
+- Scanner/SAST detection with CVE, CWE, or a code/host location — not exploit-validated
+- Source severity is high/critical but evidence is thin
+
+Validation should confirm:
+- Replay the finder PoC on our deployed build (same file/commit/image)
+- The exact software/component and version the write-up names
+- Whether the vulnerable code path is reachable in our deployment
+- Whether mitigations exist (WAF, config restrictions, network controls)
+- Whether a known advisory/CVE applies
+
+## 4. Likely Attacker Behaviors / Technique Mapping
+
+Likely behaviors if exploitable:
+- Remote code execution against the exposed application component
+- Initial access through the internet-facing service
+- Follow-on actions such as credential theft, lateral movement, or data access
+
+**Tentative technique mapping (ATT&amp;CK):**
+- `T1190` Exploit Public-Facing Application
+
+ATLAS / AI RMF / F3: not in scope based on the write-up.
+
+## 5. Defensive Countermeasures
+
+- `D3-ITF` Inbound Traffic Filtering
+- `D3-NTA` Network Traffic Analysis
+- `D3-IAVA` Inbound Application Versioning
+
+## 6. NIST CSF Alignment
+
+Relevant functions and categories:
+- **Identify:** Asset and software inventory (`ID` / `GV.OC`)
+- **Protect:** Vulnerability management, secure configuration, access control (`PR.IR`, `PR.PS`, `PR.AA`)
+- **Detect:** Security monitoring and log analysis (`DE.CM`)
+- **Respond:** Triage and containment (`RS.MI`)
+- **Recover:** Restoration and validation after remediation
+
+Mapped categories from this case:
+- `PR.IR` Technology Infrastructure Resilience
+- `DE.CM` Continuous Monitoring
+- `GV.OC` Organizational Context
+
+## 7. Priority Assessment
+
+**Priority:** P4 — Low / backlog
+**Urgency:** backlog
+
+**Rationale:**
+- Finder severity=critical
+
+## 8. Recommended Remediation
+
+- Upgrade OpenSSL.
+
+## 9. Compensating Controls
+
+If immediate patching is not possible:
+- D3-ITF Inbound Traffic Filtering — until the fix is deployed
+- D3-NTA Network Traffic Analysis — until the fix is deployed
+- D3-IAVA Inbound Application Versioning — until the fix is deployed
+
+## 10. Next Actions
+
+- **asset-owner:** Confirm we run the affected product/version — done when: Inventory shows version or 'not present'
+- **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
+- **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
+- **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+
+## 11. Confidence and Assumptions
+
+**Confidence:** medium
+
+**Assumptions:**
+- **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
+- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
+- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
+
+**Uncertainty:**
+- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+
+**Information that would make this report better:**
+- Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Which exact version / commit / image digest is in production? — Daybreak and Mythos findings are often against a tree, not our build (changes: Whether remediation is 'patch now' vs 'not applicable')
+- What is the PoC or exploit the finder used (commands, request, crash, or sandbox log)? — AI 0-days are judged on the PoC, not on a CVE. Without it we cannot replay or refute the finding (changes: Validation status and whether this is a real 0-day)
+- What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
+</pre>
 <h2>SARIF (CodeQL)</h2>
 <p class='pass'>PASS · plausible · P4</p>
 <pre># [CodeQL] Possible SQL injection into a query.
@@ -1343,6 +1469,135 @@ If immediate patching is not possible:
 
 **Finding:** [CodeQL] Possible SQL injection into a query..
 **Context:** Possible SQL injection into a query.
+**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+
+## 2. Evidence Summary
+
+**Facts provided:**
+- ATT&amp;CK mapping includes exploit or execution techniques — heuristic only, not proof of RCE
+- No evidence of successful exploitation was provided
+- Finder/scanner rated the finding high
+
+**Missing evidence:**
+- Is this service internet-facing or reachable from an untrusted network?
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent?
+- Does this sit on a payment, identity, or account-takeover path?
+- Which exact version / commit / image digest is in production?
+- What is the PoC or exploit the finder used (commands, request, crash, or sandbox log)?
+- What data does this component touch (none / internal / PII / payment)?
+- Has a CVE been assigned, or is disclosure still private?
+
+## 3. Validation Notes
+
+- No CVE — treating as a 0-day / pre-CVE claim
+- No PoC, exploit, or sandbox reproduction in the finding
+- sarif scanner detection — not exploit-validated
+- Finder rule/bug class: js/sql-injection
+- Scanner/SAST detection with CVE, CWE, or a code/host location — not exploit-validated
+- Source severity is high/critical but evidence is thin
+
+Validation should confirm:
+- Replay the finder PoC on our deployed build (same file/commit/image)
+- The exact software/component and version the write-up names
+- Whether the vulnerable code path is reachable in our deployment
+- Whether mitigations exist (WAF, config restrictions, network controls)
+- Whether a known advisory/CVE applies
+
+## 4. Likely Attacker Behaviors / Technique Mapping
+
+Likely behaviors if exploitable:
+- Remote code execution against the exposed application component
+- Initial access through the internet-facing service
+- Follow-on actions such as credential theft, lateral movement, or data access
+
+**Tentative technique mapping (ATT&amp;CK):**
+- `T1190` Exploit Public-Facing Application
+- `T1505` Server Software Component
+
+ATLAS / AI RMF / F3: not in scope based on the write-up.
+
+## 5. Defensive Countermeasures
+
+- `D3-ITF` Inbound Traffic Filtering
+- `D3-NTA` Network Traffic Analysis
+- `D3-IAVA` Inbound Application Versioning
+
+## 6. NIST CSF Alignment
+
+Relevant functions and categories:
+- **Identify:** Asset and software inventory (`ID` / `GV.OC`)
+- **Protect:** Vulnerability management, secure configuration, access control (`PR.IR`, `PR.PS`, `PR.AA`)
+- **Detect:** Security monitoring and log analysis (`DE.CM`)
+- **Respond:** Triage and containment (`RS.MI`)
+- **Recover:** Restoration and validation after remediation
+
+Mapped categories from this case:
+- `PR.IR` Technology Infrastructure Resilience
+- `DE.CM` Continuous Monitoring
+- `GV.OC` Organizational Context
+- `PR.PS` Platform Security
+
+## 7. Priority Assessment
+
+**Priority:** P4 — Low / backlog
+**Urgency:** backlog
+
+**Rationale:**
+- Finder severity=high
+
+## 8. Recommended Remediation
+
+- Identify the exact component, version, and affected systems
+- Confirm vendor advisory / CVE applicability
+- Patch or upgrade to a non-vulnerable version
+- If patching cannot be immediate: remove public access if feasible, restrict source IPs, enforce WAF/edge filtering, disable the vulnerable path if supported
+- Rescan and review logs for exploitation attempts before and after the fix
+
+## 9. Compensating Controls
+
+If immediate patching is not possible:
+- D3-ITF Inbound Traffic Filtering — until the fix is deployed
+- D3-NTA Network Traffic Analysis — until the fix is deployed
+- D3-IAVA Inbound Application Versioning — until the fix is deployed
+
+## 10. Next Actions
+
+- **asset-owner:** Confirm we run the affected product/version — done when: Inventory shows version or 'not present'
+- **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
+- **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
+- **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+
+## 11. Confidence and Assumptions
+
+**Confidence:** medium
+
+**Assumptions:**
+- **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
+- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
+- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
+
+**Uncertainty:**
+- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+
+**Information that would make this report better:**
+- Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Which exact version / commit / image digest is in production? — Daybreak and Mythos findings are often against a tree, not our build (changes: Whether remediation is 'patch now' vs 'not applicable')
+- What is the PoC or exploit the finder used (commands, request, crash, or sandbox log)? — AI 0-days are judged on the PoC, not on a CVE. Without it we cannot replay or refute the finding (changes: Validation status and whether this is a real 0-day)
+- What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
+- Has a CVE been assigned, or is disclosure still private? — Without a CVE we cannot pull KEV/EPSS/NVD and must trust the finder (changes: Enrichment and priority)
+</pre>
+<h2>SARIF same rule, two files</h2>
+<p class='pass'>PASS · plausible · P4</p>
+<pre># [CodeQL] SQL injection sink.
+
+*VulNavigator™* · *Source:* sarif `res-db` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 4/100
+
+## 1. Vulnerability Summary
+
+**Finding:** [CodeQL] SQL injection sink..
+**Context:** SQL injection sink.
 **Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
@@ -1945,6 +2200,127 @@ If immediate patching is not possible:
 - What is the PoC or exploit the finder used (commands, request, crash, or sandbox log)? — AI 0-days are judged on the PoC, not on a CVE. Without it we cannot replay or refute the finding (changes: Validation status and whether this is a real 0-day)
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
+<h2>Wiz GraphQL envelope</h2>
+<p class='pass'>PASS · plausible · P3</p>
+<pre># Heartbleed on internet-facing VM
+
+*VulNavigator™* · *Source:* wiz `wiz-gql-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 36/100
+
+## 1. Vulnerability Summary
+
+**Finding:** Heartbleed on internet-facing VM.
+**Context:** TLS heartbeat extension read overrun.
+**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+
+## 2. Evidence Summary
+
+**Facts provided:**
+- Component is internet-facing / client-facing
+- ATT&amp;CK mapping includes exploit or execution techniques — heuristic only, not proof of RCE
+- No evidence of successful exploitation was provided
+- Finder/scanner rated the finding high
+- CVE(s): CVE-2014-0160
+
+**Missing evidence:**
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent?
+- Does this sit on a payment, identity, or account-takeover path?
+- Which exact version / commit / image digest is in production?
+- What is the PoC or exploit the finder used (commands, request, crash, or sandbox log)?
+- What data does this component touch (none / internal / PII / payment)?
+
+## 3. Validation Notes
+
+- CVE-2014-0160 not resolved (offline or unknown to NVD)
+- No PoC, exploit, or sandbox reproduction in the finding
+- wiz scanner detection — not exploit-validated
+- Finder rule/bug class: wiz-gql-1
+- Scanner/SAST detection with CVE, CWE, or a code/host location — not exploit-validated
+- Source severity is high/critical but evidence is thin
+
+Validation should confirm:
+- Replay the finder PoC on our deployed build (same file/commit/image)
+- The exact software/component and version the write-up names
+- Whether the vulnerable code path is reachable in our deployment
+- Whether mitigations exist (WAF, config restrictions, network controls)
+- Whether a known advisory/CVE applies
+
+## 4. Likely Attacker Behaviors / Technique Mapping
+
+Likely behaviors if exploitable:
+- Remote code execution against the exposed application component
+- Initial access through the internet-facing service
+- Follow-on actions such as credential theft, lateral movement, or data access
+
+**Tentative technique mapping (ATT&amp;CK):**
+- `T1190` Exploit Public-Facing Application
+
+ATLAS / AI RMF / F3: not in scope based on the write-up.
+
+## 5. Defensive Countermeasures
+
+- `D3-ITF` Inbound Traffic Filtering
+- `D3-NTA` Network Traffic Analysis
+- `D3-IAVA` Inbound Application Versioning
+
+## 6. NIST CSF Alignment
+
+Relevant functions and categories:
+- **Identify:** Asset and software inventory (`ID` / `GV.OC`)
+- **Protect:** Vulnerability management, secure configuration, access control (`PR.IR`, `PR.PS`, `PR.AA`)
+- **Detect:** Security monitoring and log analysis (`DE.CM`)
+- **Respond:** Triage and containment (`RS.MI`)
+- **Recover:** Restoration and validation after remediation
+
+Mapped categories from this case:
+- `PR.IR` Technology Infrastructure Resilience
+- `DE.CM` Continuous Monitoring
+- `GV.OC` Organizational Context
+
+## 7. Priority Assessment
+
+**Priority:** P3 — Medium — schedule within 30 days
+**Urgency:** 30_days
+
+**Rationale:**
+- Finder severity=high
+- Asset is internet-facing
+
+## 8. Recommended Remediation
+
+- Apply the vendor / distro fix for CVE-2014-0160 and verify the package version
+
+## 9. Compensating Controls
+
+If immediate patching is not possible:
+- D3-ITF Inbound Traffic Filtering — until the fix is deployed
+- D3-NTA Network Traffic Analysis — until the fix is deployed
+- D3-IAVA Inbound Application Versioning — until the fix is deployed
+
+## 10. Next Actions
+
+- **asset-owner:** Confirm we run the affected product/version — done when: Inventory shows version or 'not present'
+- **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
+- **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
+- **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+
+## 11. Confidence and Assumptions
+
+**Confidence:** medium
+
+**Assumptions:**
+- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
+- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
+
+**Uncertainty:**
+- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+
+**Information that would make this report better:**
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Which exact version / commit / image digest is in production? — Daybreak and Mythos findings are often against a tree, not our build (changes: Whether remediation is 'patch now' vs 'not applicable')
+- What is the PoC or exploit the finder used (commands, request, crash, or sandbox log)? — AI 0-days are judged on the PoC, not on a CVE. Without it we cannot replay or refute the finding (changes: Validation status and whether this is a real 0-day)
+- What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
+</pre>
 <h2>Prisma Cloud JSON</h2>
 <p class='pass'>PASS · plausible · P4</p>
 <pre># CVE-2014-0160
@@ -2219,6 +2595,128 @@ If immediate patching is not possible:
 - No PoC, exploit, or sandbox reproduction in the finding
 - defender scanner detection — not exploit-validated
 - Finder rule/bug class: mdvm-1
+- Scanner/SAST detection with CVE, CWE, or a code/host location — not exploit-validated
+- Source severity is high/critical but evidence is thin
+
+Validation should confirm:
+- Replay the finder PoC on our deployed build (same file/commit/image)
+- The exact software/component and version the write-up names
+- Whether the vulnerable code path is reachable in our deployment
+- Whether mitigations exist (WAF, config restrictions, network controls)
+- Whether a known advisory/CVE applies
+
+## 4. Likely Attacker Behaviors / Technique Mapping
+
+Likely behaviors if exploitable:
+- Remote code execution against the exposed application component
+- Initial access through the internet-facing service
+- Follow-on actions such as credential theft, lateral movement, or data access
+
+**Tentative technique mapping (ATT&amp;CK):**
+- `T1190` Exploit Public-Facing Application
+
+ATLAS / AI RMF / F3: not in scope based on the write-up.
+
+## 5. Defensive Countermeasures
+
+- `D3-ITF` Inbound Traffic Filtering
+- `D3-NTA` Network Traffic Analysis
+- `D3-IAVA` Inbound Application Versioning
+
+## 6. NIST CSF Alignment
+
+Relevant functions and categories:
+- **Identify:** Asset and software inventory (`ID` / `GV.OC`)
+- **Protect:** Vulnerability management, secure configuration, access control (`PR.IR`, `PR.PS`, `PR.AA`)
+- **Detect:** Security monitoring and log analysis (`DE.CM`)
+- **Respond:** Triage and containment (`RS.MI`)
+- **Recover:** Restoration and validation after remediation
+
+Mapped categories from this case:
+- `PR.IR` Technology Infrastructure Resilience
+- `DE.CM` Continuous Monitoring
+- `GV.OC` Organizational Context
+
+## 7. Priority Assessment
+
+**Priority:** P4 — Low / backlog
+**Urgency:** backlog
+
+**Rationale:**
+- Finder severity=high
+
+## 8. Recommended Remediation
+
+- Install the vendor security update
+
+## 9. Compensating Controls
+
+If immediate patching is not possible:
+- D3-ITF Inbound Traffic Filtering — until the fix is deployed
+- D3-NTA Network Traffic Analysis — until the fix is deployed
+- D3-IAVA Inbound Application Versioning — until the fix is deployed
+
+## 10. Next Actions
+
+- **asset-owner:** Confirm we run the affected product/version — done when: Inventory shows version or 'not present'
+- **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
+- **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
+- **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+
+## 11. Confidence and Assumptions
+
+**Confidence:** medium
+
+**Assumptions:**
+- **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
+- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
+- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
+
+**Uncertainty:**
+- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+
+**Information that would make this report better:**
+- Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Which exact version / commit / image digest is in production? — Daybreak and Mythos findings are often against a tree, not our build (changes: Whether remediation is 'patch now' vs 'not applicable')
+- What is the PoC or exploit the finder used (commands, request, crash, or sandbox log)? — AI 0-days are judged on the PoC, not on a CVE. Without it we cannot replay or refute the finding (changes: Validation status and whether this is a real 0-day)
+- What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
+</pre>
+<h2>Defender Graph OData envelope</h2>
+<p class='pass'>PASS · plausible · P4</p>
+<pre># CVE-2014-0160
+
+*VulNavigator™* · *Source:* defender `mdvm-odata-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 22/100
+
+## 1. Vulnerability Summary
+
+**Finding:** CVE-2014-0160.
+**Context:** Install the vendor security update
+**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+
+## 2. Evidence Summary
+
+**Facts provided:**
+- ATT&amp;CK mapping includes exploit or execution techniques — heuristic only, not proof of RCE
+- No evidence of successful exploitation was provided
+- Finder/scanner rated the finding high
+- CVE(s): CVE-2014-0160
+
+**Missing evidence:**
+- Is this service internet-facing or reachable from an untrusted network?
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent?
+- Does this sit on a payment, identity, or account-takeover path?
+- Which exact version / commit / image digest is in production?
+- What is the PoC or exploit the finder used (commands, request, crash, or sandbox log)?
+- What data does this component touch (none / internal / PII / payment)?
+
+## 3. Validation Notes
+
+- CVE-2014-0160 not resolved (offline or unknown to NVD)
+- No PoC, exploit, or sandbox reproduction in the finding
+- defender scanner detection — not exploit-validated
+- Finder rule/bug class: mdvm-odata-1
 - Scanner/SAST detection with CVE, CWE, or a code/host location — not exploit-validated
 - Source severity is high/critical but evidence is thin
 

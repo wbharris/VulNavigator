@@ -45,7 +45,7 @@ Any supported input becomes one **case file**.
 | **Qualys** | VM XML (`QID` / `HOST` / `VULN`) or CSV with `QID` |
 | **OpenVAS / GVM** | Greenbone XML `<report>` or CSV with NVT / OID |
 | **Nessus** | `.nessus` or Tenable CSV. `--source nessus` also accepts `nexsus` |
-| **Rapid7 InsightVM / Nexpose** | `NexposeReport` XML |
+| **Rapid7 InsightVM / Nexpose** | `NexposeReport` XML or InsightVM JSON (`resources` / `data`) |
 | **SARIF** | v2.1 runs/results (CodeQL, Semgrep, GHAS, other SAST) |
 | **Trivy / Snyk / Dependabot** | CI and GitHub SCA JSON |
 | **Wiz / Prisma Cloud / Orca** | Cloud issue / alert JSON |
