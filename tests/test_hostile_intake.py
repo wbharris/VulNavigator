@@ -62,6 +62,8 @@ def test_sarif_keeps_all_locations_and_tool_as_product():
     case = cases[0]
     assert case.product == "CodeQL"
     assert case.component == "src/db.js"
+    assert case.rule_id == "js/sql-injection"
+    assert case.finding_id == "js/sql-injection"
     assert len(case.locations) == 2
     assert {loc.path for loc in case.locations} == {"src/db.js", "src/api.js"}
     assert case.locations[0].line == 42
