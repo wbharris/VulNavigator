@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from vulnavigator.models import Action, Assumption, Case, InfoNeed, is_ai_zeroday
+from vulnavigator.scanners import SCANNER_KINDS
 
 
 def _assume(case: Case, field: str, assumed: str, because: str, impact: str) -> None:
@@ -73,13 +74,18 @@ def record_assumptions(case: Case) -> Case:
             "Validation status and priority",
         )
     if not case.version:
+        why = (
+            "Daybreak and Mythos findings are often against a tree, not our build"
+            if case.source_kind in {"mythos", "daybreak", "narrative"}
+            else "We cannot tell whether the installed build is still vulnerable"
+        )
         _need(
             case,
             "Which exact version / commit / image digest is in production?",
-            "Daybreak and Mythos findings are often against a tree, not our build",
+            why,
             "Whether remediation is 'patch now' vs 'not applicable'",
         )
-    if not case.evidence.poc and not case.evidence.reproduced and not case.evidence.sandbox:
+    if is_ai_zeroday(case) and not case.evidence.poc and not case.evidence.reproduced and not case.evidence.sandbox:
         _need(
             case,
             "What is the PoC or exploit the finder used (commands, request, crash, or sandbox log)?",
@@ -107,7 +113,9 @@ def record_assumptions(case: Case) -> Case:
             "Data class changes CSF language and legal/fraud involvement",
             "Priority rationale and owners",
         )
-    if not case.cves and not is_ai_zeroday(case):
+    scanner = case.source_kind in SCANNER_KINDS
+    # SAST/DAST with a rule/CWE already has identity; do not nag as if it were a 0-day.
+    if not case.cves and not is_ai_zeroday(case) and not (scanner and (case.cwes or case.rule_id)):
         _need(
             case,
             "Has a CVE been assigned, or is disclosure still private?",

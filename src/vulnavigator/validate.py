@@ -29,6 +29,10 @@ def validate(case: Case) -> Case:
         notes.append(f"{case.cves[0]} resolved in NVD")
     elif case.cves and not case.nvd_description:
         notes.append(f"{case.cves[0]} not resolved (offline or unknown to NVD)")
+    elif scanner:
+        notes.append(
+            "No CVE in this scanner finding — identity is the rule, CWE, or location (not a 0-day)"
+        )
     else:
         notes.append("No CVE — treating as a 0-day / pre-CVE claim")
 
