@@ -28,12 +28,20 @@ def validate(case: Case) -> Case:
         notes.append(f"CVSS={case.cvss}")
 
     if has_proof:
-        who = "Daybreak" if case.source_kind == "daybreak" else "Mythos" if case.source_kind == "mythos" else "Source"
+        who = {
+            "daybreak": "Daybreak",
+            "mythos": "Mythos",
+            "qualys": "Qualys",
+            "openvas": "OpenVAS",
+            "nessus": "Nessus",
+        }.get(case.source_kind, "Source")
         notes.append(f"{who} provided reproduction / sandbox / PoC evidence")
     else:
         notes.append("No reproduction evidence in the finding")
     if case.source_kind == "daybreak" and case.finder_confidence:
         notes.append(f"Daybreak confidence={case.finder_confidence}")
+    if case.source_kind in {"qualys", "openvas", "nessus"}:
+        notes.append(f"{case.source_kind} scanner detection — not exploit-validated")
     if case.rule_id:
         notes.append(f"Finder rule/bug class: {case.rule_id}")
 

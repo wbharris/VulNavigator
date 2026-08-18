@@ -1,7 +1,6 @@
 """CLI: vuln-nav analyze FILE.
 
-Expected input is a Mythos write-up or a Daybreak / Codex Security
-findings.json (or a sealed scan directory that contains one).
+Expected intake: Mythos, Daybreak, Qualys, OpenVAS, or Nessus.
 """
 
 from __future__ import annotations
@@ -14,6 +13,18 @@ from pathlib import Path
 from vulnavigator import __version__
 from vulnavigator.pipeline import analyze_path, analyze_text
 from vulnavigator.report import to_json, to_markdown
+from vulnavigator.scanners import alias_source
+
+_SOURCES = ("mythos", "daybreak", "qualys", "openvas", "nessus")
+
+
+def _source_arg(value: str) -> str:
+    mapped = alias_source(value)
+    if mapped not in _SOURCES:
+        raise argparse.ArgumentTypeError(
+            f"unknown source {value!r} (try mythos, daybreak, qualys, openvas, nessus)"
+        )
+    return mapped
 
 
 def _render(cases, as_json: bool) -> str:
@@ -31,32 +42,32 @@ def _render(cases, as_json: bool) -> str:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="vuln-nav",
-        description="Analyze a Mythos or Daybreak finding into an actionable case.",
+        description="Analyze a Mythos, Daybreak, Qualys, OpenVAS, or Nessus finding.",
     )
     parser.add_argument("-V", "--version", action="version", version=f"vuln-nav {__version__}")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
     an = sub.add_parser(
         "analyze",
-        help="Analyze a Mythos write-up or Daybreak findings.json / scan directory",
+        help="Analyze a Mythos, Daybreak, Qualys, OpenVAS, or Nessus finding",
     )
     an.add_argument(
         "input",
-        help="Mythos JSON/markdown, Daybreak findings.json, or a Codex Security scan directory",
+        help="Mythos write-up, Daybreak findings.json / scan dir, or Qualys / OpenVAS / Nessus export",
     )
     an.add_argument("-o", "--output", help="Write report here (default: stdout)")
     an.add_argument("--json", action="store_true", help="Emit the case file as JSON")
     an.add_argument("--offline", action="store_true", help="Skip NVD / KEV / EPSS")
     an.add_argument(
         "--source",
-        choices=("mythos", "daybreak"),
-        help="Force the finder (auto-detected from Codex Security documents)",
+        type=_source_arg,
+        help="Force the source: mythos, daybreak, qualys, openvas, nessus",
     )
     an.add_argument(
         "--id",
         dest="finding_id",
         default="",
-        help="Analyze only this Daybreak findingId (or Mythos id)",
+        help="Analyze only this finding id (Daybreak id, QID, plugin ID, NVT OID, Mythos id)",
     )
 
     args = parser.parse_args(argv)

@@ -2,14 +2,14 @@
 
 End goal: a defender drops in a **Mythos** (Anthropic) write-up or a **Daybreak** (OpenAI Codex Security) `findings.json` / scan directory and gets one case they can act on.
 
-Those two finders are the **main expected input**. CVE-only and generic JSON are fallbacks.
+**Mythos** and **Daybreak** are the AI-finder path. **Qualys**, **OpenVAS**, and **Nessus** are the scanner path. CVE-only is a fallback.
 
 VulNavigator does **not** replace Mythos or Daybreak. It sits after them. Findings without triage, mapping, and an honest “what we assumed” section are noise.
 
 ## User journey
 
 ```
-Mythos write-up  |  Daybreak findings.json / scan dir
+Mythos | Daybreak | Qualys | OpenVAS | Nessus
                  │
                  ▼
            1. Normalize
@@ -38,8 +38,11 @@ Adapters (v1):
 
 | Source | What we accept |
 |--------|----------------|
-| **Daybreak / Codex Security** (primary) | Official `documentType: codex-security.findings` (`findings.json`), a sealed scan directory with `scan-manifest.json`, SARIF export, or a single finding record |
-| **Mythos** (primary) | Write-up JSON/markdown: title, target/project, CWE/bug class, PoC, reproduced / triage flags. Thin Glasswing ledger hashes are not enough on their own |
+| **Daybreak / Codex Security** | Official `documentType: codex-security.findings` (`findings.json`), a sealed scan directory, SARIF, or a single finding record |
+| **Mythos** | Write-up JSON/markdown: title, target/project, CWE/bug class, PoC, reproduced / triage flags |
+| **Qualys** | VM XML (`QID` / `HOST` / `VULN`) or CSV with a `QID` column |
+| **OpenVAS / GVM** | Greenbone XML `<report>` or CSV with NVT / OID |
+| **Nessus** | `.nessus` (`NessusClientData_v2`) or Tenable CSV (`Plugin ID`). `--source nessus` also accepts the misspelling `nexsus` |
 | CVE only | Fallback: `CVE-YYYY-NNNNN` |
 
 Unknown fields are kept on the case as `raw` so nothing is silently dropped.

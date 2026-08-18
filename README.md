@@ -1,6 +1,6 @@
 # VulNavigator
 
-The expected input is a **Mythos** finding or a **Daybreak** (Codex Security) finding.
+Expected intake is a **Mythos** or **Daybreak** finding, or a **Qualys**, **OpenVAS**, or **Nessus** scan export.
 
 Those tools find bugs. This one answers: is it real, what can an attacker do with it, what do we do this week, and **what did the agent guess**.
 
@@ -10,15 +10,20 @@ Full contract: [`docs/PRODUCT.md`](docs/PRODUCT.md).
 
 | Source | File |
 |--------|------|
-| **Daybreak / Codex Security** | `findings.json` from a completed scan, a sealed scan directory (`findings.json` + `scan-manifest.json`), or one finding from that document |
-| **Mythos** | The write-up JSON or markdown Mythos emitted (title, target, PoC, reproduced) |
+| **Daybreak / Codex Security** | `findings.json`, a sealed scan directory, or one finding from that document |
+| **Mythos** | Write-up JSON or markdown (title, target, PoC, reproduced) |
+| **Qualys** | VM scan XML (`SCAN` / `HOST` / `QID`) or CSV with a `QID` column |
+| **OpenVAS / GVM** | Greenbone XML report (`<report><results>`) or CSV with NVT/OID |
+| **Nessus** | `.nessus` XML (`NessusClientData_v2`) or Tenable CSV (`Plugin ID`) |
 
-CVE-only is a fallback, not the main path.
+CVE-only is a fallback.
 
 ```bash
 vuln-nav analyze findings.json
-vuln-nav analyze /path/to/codex-security-scan/
 vuln-nav analyze mythos-writeup.json --source mythos
+vuln-nav analyze scan.nessus
+vuln-nav analyze qualys-report.xml
+vuln-nav analyze openvas-report.xml
 vuln-nav analyze findings.json --id db-heap-h2-headers
 ```
 
@@ -42,7 +47,10 @@ python3 -m venv .venv && .venv/bin/pip install -e .
 
 ```bash
 vuln-nav analyze examples/daybreak-findings.json
-vuln-nav analyze examples/mythos-finding.json -o report.md
+vuln-nav analyze examples/mythos-finding.json
+vuln-nav analyze examples/nessus-report.nessus
+vuln-nav analyze examples/qualys-report.xml
+vuln-nav analyze examples/openvas-report.xml
 ```
 
 `--offline` skips NVD / CISA KEV / FIRST EPSS.

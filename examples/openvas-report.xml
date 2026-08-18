@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<report>
+  <results>
+    <result>
+      <name>OpenSSL Heartbleed</name>
+      <host>10.0.0.33</host>
+      <port>443/tcp</port>
+      <threat>High</threat>
+      <severity>7.5</severity>
+      <nvt oid="1.3.6.1.4.1.25623.1.0.103857">
+        <name>OpenSSL Heartbleed</name>
+        <cve>CVE-2014-0160</cve>
+        <tags>solution=Upgrade OpenSSL to a fixed release.|summary=TLS heartbeat read overrun</tags>
+      </nvt>
+      <description>The remote TLS service is vulnerable to Heartbleed (CVE-2014-0160).</description>
+    </result>
+  </results>
+</report>

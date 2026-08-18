@@ -1,0 +1,20 @@
+<?xml version="1.0" ?>
+<NessusClientData_v2>
+  <Report name="lab">
+    <ReportHost name="web-01.lab">
+      <HostProperties>
+        <tag name="host-ip">10.0.0.12</tag>
+      </HostProperties>
+      <ReportItem port="443" svc_name="www" protocol="tcp" severity="4" pluginID="20007" pluginName="OpenSSL Heartbleed" pluginFamily="Service detection">
+        <cve>CVE-2014-0160</cve>
+        <cwe>CWE-119</cwe>
+        <description>The remote service is affected by Heartbleed and may leak process memory to a remote attacker.</description>
+        <synopsis>The TLS service is vulnerable to Heartbleed.</synopsis>
+        <solution>Upgrade OpenSSL to 1.0.1g or later and rotate exposed keys.</solution>
+        <plugin_output>Heartbleed check returned vulnerable.</plugin_output>
+        <risk_factor>Critical</risk_factor>
+        <cvss_base_score>7.5</cvss_base_score>
+      </ReportItem>
+    </ReportHost>
+  </Report>
+</NessusClientData_v2>

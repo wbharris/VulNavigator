@@ -1,11 +1,9 @@
-"""Load Mythos and Daybreak findings into Case objects.
+"""Load findings into Case objects.
 
-Primary inputs:
-  - Daybreak / Codex Security: findings.json, a sealed scan directory,
-    or a single finding record from that document
-  - Mythos: a write-up JSON/markdown, or a Glasswing-style finding object
-
-CVE-only and generic JSON still work, but they are not the expected path.
+Expected intake:
+  - Mythos write-ups
+  - Daybreak / Codex Security findings.json or scan directories
+  - Qualys, OpenVAS/GVM, and Nessus exports (XML, CSV, JSON)
 """
 
 from __future__ import annotations
@@ -16,6 +14,14 @@ from pathlib import Path
 from typing import Any
 
 from vulnavigator.models import Case, Evidence, Location
+from vulnavigator.scanners import (
+    SCANNER_KINDS,
+    alias_source,
+    cases_from_scanner_json,
+    looks_like_csv,
+    parse_scanner_csv,
+    parse_scanner_xml,
+)
 
 CVE_RE = re.compile(r"CVE-\d{4}-\d{4,}", re.I)
 CWE_RE = re.compile(r"CWE-\d+", re.I)
@@ -91,7 +97,8 @@ def _norm_cwe(values: Any) -> list[str]:
 
 
 def detect_kind(data: Any, hint: str = "", forced: str = "") -> str:
-    if forced in {"daybreak", "mythos", "cve", "generic"}:
+    forced = alias_source(forced)
+    if forced in {"daybreak", "mythos", "cve", "generic"} | SCANNER_KINDS:
         return forced
     blob = f"{hint} ".lower()
     if isinstance(data, dict):
@@ -111,6 +118,12 @@ def detect_kind(data: Any, hint: str = "", forced: str = "") -> str:
         return "daybreak"
     if "mythos" in blob or "glasswing" in blob:
         return "mythos"
+    if "qualys" in blob or '"qid"' in blob:
+        return "qualys"
+    if "openvas" in blob or "greenbone" in blob or '"nvt"' in blob:
+        return "openvas"
+    if "nessus" in blob or "pluginid" in blob or "plugin_id" in blob:
+        return "nessus"
     return "generic"
 
 
@@ -416,6 +429,11 @@ def findings_from_document(
     scan: dict[str, Any] | None = None,
 ) -> list[Case]:
     kind = detect_kind(data, hint, source)
+    scanner_cases = cases_from_scanner_json(data, source=kind if kind in SCANNER_KINDS else source)
+    if scanner_cases is not None:
+        if finding_id:
+            return [c for c in scanner_cases if c.finding_id == finding_id]
+        return scanner_cases
     raw, embedded_scan = _extract_raw_findings(data, kind)
     scan = scan or embedded_scan
     if kind == "daybreak" and raw and raw[0].get("message") and "physicalLocation" in json.dumps(raw[0]):
@@ -427,6 +445,10 @@ def findings_from_document(
             case = case_from_daybreak(item, scan)
         elif item_kind == "mythos":
             case = case_from_mythos(item)
+        elif item_kind in SCANNER_KINDS:
+            extra = cases_from_scanner_json(item, source=item_kind) or []
+            cases.extend(extra)
+            continue
         else:
             case = case_from_generic(item, item_kind)
         if finding_id and case.finding_id != finding_id and item.get("findingId") != finding_id:
@@ -452,6 +474,16 @@ def findings_from_text(
     text = text.strip()
     if not text:
         raise ValueError("empty finding")
+    if text.startswith("<"):
+        cases = parse_scanner_xml(text, source=source)
+        if finding_id:
+            cases = [c for c in cases if c.finding_id == finding_id]
+        return cases
+    if looks_like_csv(text):
+        cases = parse_scanner_csv(text, source=source)
+        if finding_id:
+            cases = [c for c in cases if c.finding_id == finding_id]
+        return cases
     if text[0] in "{[":
         data = json.loads(text)
         return findings_from_document(data, source=source, finding_id=finding_id, hint=hint, scan=scan)
@@ -494,8 +526,11 @@ def findings_from_path(
     if p.is_dir():
         data, scan, kind = _load_scan_dir(p)
         return findings_from_document(data, source=source or kind, finding_id=finding_id, hint=p.name, scan=scan)
+    hint_source = source
+    if not hint_source and p.suffix.lower() in {".nessus"}:
+        hint_source = "nessus"
     text = p.read_text(encoding="utf-8")
-    return findings_from_text(text, source=source, finding_id=finding_id, hint=p.stem)
+    return findings_from_text(text, source=hint_source, finding_id=finding_id, hint=p.stem)
 
 
 def normalize_path(path: str | Path, source_hint: str = "") -> Case:
