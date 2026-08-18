@@ -22,7 +22,9 @@ def to_markdown(case: Case) -> str:
     lines = [
         f"# {case.title}",
         "",
-        f"- **Source:** {case.source} ({case.source_kind})",
+        f"- **Source:** {case.source_kind}"
+        + (f" `{case.finding_id}`" if case.finding_id else "")
+        + (f" rule `{case.rule_id}`" if case.rule_id else ""),
         f"- **Validation:** {case.validation_status}",
         f"- **Priority:** {case.priority} · **Urgency:** {case.urgency}",
         f"- **CVE:** {', '.join(case.cves) or 'none'}",
