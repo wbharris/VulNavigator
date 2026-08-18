@@ -9,9 +9,12 @@ Expected intake:
 from __future__ import annotations
 
 import json
+import logging
 import re
 from pathlib import Path
 from typing import Any
+
+log = logging.getLogger("vulnavigator.normalize")
 
 from vulnavigator.models import Case, Evidence, Location
 from vulnavigator.scanners import (
@@ -406,6 +409,11 @@ def _extract_raw_findings(data: Any, kind: str) -> tuple[list[dict[str, Any]], d
         return rows, None
     if isinstance(data.get("findings"), list):
         return [x for x in data["findings"] if isinstance(x, dict)], scan
+    log.warning(
+        "JSON did not match a known bundle schema (Daybreak findings, SARIF, "
+        "or findings[]); treating the whole object as one finding (keys=%s)",
+        sorted(data.keys())[:20],
+    )
     return [data], scan
 
 

@@ -186,11 +186,30 @@ def prioritize(case: Case) -> Case:
 
     case.priority_reasons = reasons or ["Default: limited signal"]
     if case.validation_status == "unconfirmed" and not case.cves:
-        case.confidence = case.confidence or "medium"
+        case.confidence = "medium"
     elif case.validation_status == "confirmed" or case.kev:
-        case.confidence = case.confidence or "high"
+        case.confidence = "high"
     else:
-        case.confidence = case.confidence or "medium"
+        case.confidence = "medium"
+    return case
+
+
+def score_data_quality(case: Case) -> Case:
+    """0–100: how complete the case is (gaps and assumptions lower the score)."""
+    score = 70
+    if case.cves or case.evidence.poc.strip():
+        score += 10
+    if case.product or case.locations:
+        score += 8
+    if case.evidence.discovery.strip() or len(case.description) >= 80:
+        score += 6
+    if case.version:
+        score += 4
+    score -= 8 * len(case.improve)
+    score -= 6 * len(case.assumptions)
+    if case.validation_status == "rejected":
+        score = min(score, 20)
+    case.data_quality = max(0, min(100, score))
     return case
 
 

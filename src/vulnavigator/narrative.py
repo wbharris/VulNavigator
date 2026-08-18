@@ -4,9 +4,8 @@ from __future__ import annotations
 
 import re
 
+from vulnavigator.heuristics import mentions_rce
 from vulnavigator.models import Case
-
-_RCE = re.compile(r"\b(rce|remote code execution|remote cade execution)\b", re.I)
 _CRITICAL = re.compile(r"\bcritical\b", re.I)
 _INTERNET = re.compile(r"internet[-\s]?facing|public[-\s]?facing|client[-\s]?facing", re.I)
 _NO_AI = re.compile(r"no a[il]\b|not .*(ai|al) component|no (ai|al) components", re.I)
@@ -60,7 +59,7 @@ def apply_narrative(case: Case) -> Case:
     if _NO_EXPLOIT.search(blob) and not case.evidence.poc:
         case.evidence.reproduced = False
         case.evidence.sandbox = False
-    if _RCE.search(blob) and "CWE-94" not in case.cwes:
+    if mentions_rce(blob) and "CWE-94" not in case.cwes:
         case.cwes.append("CWE-94")
     if _OUTDATED.search(blob) and not case.product:
         case.component = case.component or "outdated application component"
@@ -69,6 +68,6 @@ def apply_narrative(case: Case) -> Case:
         if "mythos" not in blob.lower() and "daybreak" not in blob.lower():
             case.source_kind = "narrative"
             case.source = case.source or "narrative"
-    if (not case.title or case.title == blob.splitlines()[0][:120]) and _RCE.search(blob):
+    if (not case.title or case.title == blob.splitlines()[0][:120]) and mentions_rce(blob):
         case.title = "Outdated internet-facing application component with potential RCE"
     return case

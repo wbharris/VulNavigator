@@ -81,7 +81,8 @@ def to_markdown(case: Case) -> str:
         f"*VulNavigator™* · *Source:* {case.source_kind}"
         + (f" `{case.finding_id}`" if case.finding_id else "")
         + f" · *Validation:* {case.validation_status}"
-        + f" · *Confidence:* {case.confidence or 'medium'}",
+        + f" · *Confidence:* {case.confidence or 'medium'}"
+        + (f" · *Data quality:* {case.data_quality}/100" if case.data_quality else ""),
         "",
         "## 1. Vulnerability Summary",
         "",

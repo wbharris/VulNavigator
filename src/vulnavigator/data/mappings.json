@@ -1,0 +1,76 @@
+{
+  "confidence": {
+    "cwe": 0.62,
+    "cwe_note": "CWE commonly enables this ATT&CK technique (curated, not CTID KEV).",
+    "narrative": 0.55,
+    "narrative_note": "Prose claims RCE/exploit without a CWE.",
+    "narrative_followon": 0.45,
+    "narrative_followon_note": "Follow-on execution after a claimed RCE.",
+    "location": 0.4,
+    "location_note": "Only a file/host location; public-app placeholder.",
+    "overlay": 0.5,
+    "overlay_note": "ATLAS/AI RMF/F3 when the asset is tagged in-scope."
+  },
+  "cwe_attack": {
+    "CWE-78": [["T1190", "Exploit Public-Facing Application"], ["T1059", "Command and Scripting Interpreter"]],
+    "CWE-79": [["T1189", "Drive-by Compromise"], ["T1059.007", "JavaScript"]],
+    "CWE-89": [["T1190", "Exploit Public-Facing Application"], ["T1505", "Server Software Component"]],
+    "CWE-94": [["T1190", "Exploit Public-Facing Application"], ["T1059", "Command and Scripting Interpreter"]],
+    "CWE-119": [["T1203", "Exploitation for Client Execution"], ["T1068", "Exploitation for Privilege Escalation"]],
+    "CWE-121": [["T1203", "Exploitation for Client Execution"], ["T1068", "Exploitation for Privilege Escalation"]],
+    "CWE-400": [["T1499", "Endpoint Denial of Service"], ["T1190", "Exploit Public-Facing Application"]],
+    "CWE-125": [["T1203", "Exploitation for Client Execution"]],
+    "CWE-200": [["T1005", "Data from Local System"]],
+    "CWE-22": [["T1083", "File and Directory Discovery"], ["T1190", "Exploit Public-Facing Application"]],
+    "CWE-269": [["T1068", "Exploitation for Privilege Escalation"]],
+    "CWE-287": [["T1078", "Valid Accounts"], ["T1190", "Exploit Public-Facing Application"]],
+    "CWE-306": [["T1078", "Valid Accounts"], ["T1190", "Exploit Public-Facing Application"]],
+    "CWE-416": [["T1203", "Exploitation for Client Execution"]],
+    "CWE-434": [["T1190", "Exploit Public-Facing Application"], ["T1505.003", "Web Shell"]],
+    "CWE-502": [["T1190", "Exploit Public-Facing Application"], ["T1059", "Command and Scripting Interpreter"]],
+    "CWE-611": [["T1190", "Exploit Public-Facing Application"]],
+    "CWE-787": [["T1203", "Exploitation for Client Execution"], ["T1068", "Exploitation for Privilege Escalation"]],
+    "CWE-798": [["T1078", "Valid Accounts"], ["T1552", "Unsecured Credentials"]],
+    "CWE-918": [["T1090", "Proxy"], ["T1190", "Exploit Public-Facing Application"]]
+  },
+  "attack_d3fend": {
+    "T1005": [["D3-DENCR", "Disk Encryption"], ["D3-NTA", "Network Traffic Analysis"]],
+    "T1059": [["D3-EAL", "Executable Allowlisting"], ["D3-PSA", "Process Spawn Analysis"]],
+    "T1068": [["D3-LFP", "Local File Permissions"], ["D3-SUCP", "System Unprivileged Configuration"]],
+    "T1078": [["D3-MFA", "Multi-factor Authentication"], ["D3-UAP", "User Account Permissions"]],
+    "T1083": [["D3-LFP", "Local File Permissions"], ["D3-NTA", "Network Traffic Analysis"]],
+    "T1090": [["D3-NTA", "Network Traffic Analysis"], ["D3-ITF", "Inbound Traffic Filtering"]],
+    "T1189": [["D3-ITF", "Inbound Traffic Filtering"], ["D3-UA", "URL Analysis"]],
+    "T1190": [["D3-ITF", "Inbound Traffic Filtering"], ["D3-NTA", "Network Traffic Analysis"], ["D3-IAVA", "Inbound Application Versioning"]],
+    "T1499": [["D3-ITF", "Inbound Traffic Filtering"], ["D3-NTA", "Network Traffic Analysis"]],
+    "T1203": [["D3-SAOR", "Segment Address Offset Randomization"], ["D3-AH", "Application Hardening"]],
+    "T1505": [["D3-ITF", "Inbound Traffic Filtering"], ["D3-NTA", "Network Traffic Analysis"]],
+    "T1552": [["D3-CRO", "Credential Rotation"], ["D3-MFA", "Multi-factor Authentication"]]
+  },
+  "attack_csf": {
+    "T1005": [["PR.DS", "Data Security"], ["DE.CM", "Continuous Monitoring"]],
+    "T1059": [["PR.PS", "Platform Security"], ["DE.CM", "Continuous Monitoring"]],
+    "T1068": [["PR.AA", "Identity Management and Access Control"], ["PR.PS", "Platform Security"]],
+    "T1078": [["PR.AA", "Identity Management and Access Control"], ["DE.CM", "Continuous Monitoring"]],
+    "T1083": [["PR.DS", "Data Security"], ["DE.CM", "Continuous Monitoring"]],
+    "T1090": [["PR.IR", "Technology Infrastructure Resilience"], ["DE.CM", "Continuous Monitoring"]],
+    "T1189": [["PR.IR", "Technology Infrastructure Resilience"], ["DE.CM", "Continuous Monitoring"]],
+    "T1190": [["PR.IR", "Technology Infrastructure Resilience"], ["DE.CM", "Continuous Monitoring"], ["GV.OC", "Organizational Context"]],
+    "T1499": [["PR.IR", "Technology Infrastructure Resilience"], ["RS.MI", "Incident Mitigation"]],
+    "T1203": [["PR.PS", "Platform Security"], ["RS.MI", "Incident Mitigation"]],
+    "T1505": [["PR.PS", "Platform Security"], ["DE.CM", "Continuous Monitoring"]],
+    "T1552": [["PR.AA", "Identity Management and Access Control"], ["PR.DS", "Data Security"]]
+  },
+  "ai_cwe_atlas": {
+    "CWE-94": [["AML.T0051", "LLM Prompt Injection"]],
+    "CWE-502": [["AML.T0010", "AI Supply Chain Compromise"]],
+    "CWE-918": [["AML.T0053", "AI Agent Tool Invocation"]],
+    "CWE-200": [["AML.T0057", "LLM Data Leakage"]],
+    "CWE-798": [["AML.T0055", "Unsecured Credentials"]]
+  },
+  "fraud_attack_f3": {
+    "T1078": [["F3-ATO", "Account takeover via valid credentials"]],
+    "T1552": [["F3-CRED", "Abuse of exposed or reused credentials"]],
+    "T1190": [["F3-APP", "Fraud against a public application / payment path"]]
+  }
+}

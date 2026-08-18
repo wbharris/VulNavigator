@@ -1,13 +1,22 @@
-"""Optional live enrichment: NVD, CISA KEV, FIRST EPSS."""
+"""Live enrichment: NVD, CISA KEV, FIRST EPSS.
+
+``--offline`` skips all network calls. ``case.kev``, ``case.epss``,
+``case.cvss``, and ``case.nvd_description`` stay at defaults. The report
+is still actionable. KEV/EPSS only raise priority when a CVE exists and
+the network is up.
+"""
 
 from __future__ import annotations
 
 import json
+import logging
 import urllib.error
 import urllib.request
 from typing import Any
 
 from vulnavigator.models import Case
+
+log = logging.getLogger("vulnavigator.enrich")
 
 UA = "VulNavigator/0.1 (+https://github.com/wbharris/VulNavigator)"
 TIMEOUT = 12
@@ -23,7 +32,11 @@ def _get_json(url: str) -> dict[str, Any] | None:
 
 
 def enrich(case: Case, offline: bool = False) -> Case:
-    if offline or not case.cves:
+    if offline:
+        log.debug("offline: skip NVD/KEV/EPSS for %s", case.cves or case.title)
+        return case
+    if not case.cves:
+        log.debug("no CVE: skip NVD/KEV/EPSS (expected for AI 0-days)")
         return case
     cve = case.cves[0]
     nvd = _get_json(f"https://services.nvd.nist.gov/rest/json/cves/2.0?cveId={cve}")

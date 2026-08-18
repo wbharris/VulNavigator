@@ -32,7 +32,9 @@ vuln-nav analyze FINDING [--source NAME] [--id ID] [--offline] [--json] [-o repo
 | Qualys / OpenVAS / Nessus | `vuln-nav analyze scan.nessus` |
 | One finding in a batch | `vuln-nav analyze findings.json --id db-heap-h2-headers` |
 
-`--offline` skips NVD / CISA KEV / FIRST EPSS. `--source` forces `mythos`, `daybreak`, `nessus`, `qualys`, `sarif`, `trivy`, and the other adapters.
+`--offline` skips **only** live NVD, CISA KEV, and FIRST EPSS. Normalize, validate, ATT&CK/D3FEND/CSF mapping, and the 11-section report still run. Priority will not use KEV/EPSS/CVSS from the network. Output stays actionable.
+
+`--source` forces `mythos`, `daybreak`, `nessus`, `qualys`, `sarif`, `trivy`, and the other adapters. `--id` must be a short token (letters, digits, `_.:/=@+-`).
 
 ## What you drop in
 
