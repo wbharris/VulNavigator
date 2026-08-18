@@ -54,6 +54,7 @@ def parse_sarif(data: dict[str, Any]) -> list[Case]:
                 make_case(
                     kind="sarif",
                     finding_id=str(result.get("guid") or rule_id),
+                    rule_id=rule_id,
                     title=f"[{tool}] {title}" if tool else title,
                     description=str(msg.get("text") or "")
                     + (("\n\n" + help_text) if help_text else "")

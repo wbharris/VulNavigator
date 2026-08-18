@@ -5,12 +5,43 @@ from __future__ import annotations
 import json
 import re
 import xml.etree.ElementTree as ET
+from datetime import date
 from typing import Any
 
 from vulnavigator.models import Case, Evidence, Location
 
 CVE_RE = re.compile(r"CVE-\d{4}-\d{4,}", re.I)
 CWE_RE = re.compile(r"CWE-\d+", re.I)
+# Bare year-id fragments (Nexpose, some CSV exports). Not a CVE by itself.
+YEAR_ID_RE = re.compile(r"(?<![A-Za-z0-9])(\d{4}-\d{4,})(?!\d)")
+# Keys that make a dict look like one finding rather than a report wrapper.
+_ROW_HINTS = frozenset(
+    {
+        "id",
+        "alert_id",
+        "qid",
+        "pluginid",
+        "plugin_id",
+        "oid",
+        "cve",
+        "cves",
+        "cveid",
+        "cve_id",
+        "vulnerabilityid",
+        "template-id",
+        "templateid",
+        "ruleid",
+        "title",
+        "name",
+        "alert",
+        "description",
+        "severity",
+        "identifiers",
+        "nexposeid",
+        "findingarn",
+        "vulnerabilitycve",
+    }
+)
 
 SCANNER_KINDS = frozenset(
     {
@@ -36,6 +67,7 @@ SCANNER_KINDS = frozenset(
 )
 
 ALIASES = {
+    # Documented typo: PRODUCT.md and --source accept "nexsus".
     "nexsus": "nessus",
     "tenable": "nessus",
     "tenable.io": "nessus",
@@ -88,6 +120,7 @@ def xml_findall(el: ET.Element, name: str) -> list[ET.Element]:
 
 def cves_of(*chunks: Any) -> list[str]:
     found: list[str] = []
+    year_hi = date.today().year + 1
     for chunk in chunks:
         if chunk is None:
             continue
@@ -96,10 +129,17 @@ def cves_of(*chunks: Any) -> list[str]:
             cve = match.upper()
             if cve not in found:
                 found.append(cve)
-        for raw in re.findall(r"(?<![A-Z])(\d{4}-\d{4,})", text):
-            # Nexpose sometimes stores CVE year-id without prefix
-            if "cve" in text.lower() and f"CVE-{raw}" not in found:
-                pass
+        # Nexpose (and some CSV exports) store the year-id without a CVE- prefix.
+        # Only promote those fragments when the same chunk mentions "cve".
+        if "cve" not in text.lower():
+            continue
+        for raw in YEAR_ID_RE.findall(text):
+            year = int(raw.split("-", 1)[0])
+            if year < 1999 or year > year_hi:
+                continue
+            cve = f"CVE-{raw}"
+            if cve not in found:
+                found.append(cve)
     return found
 
 
@@ -179,15 +219,24 @@ def make_case(
     location: str = "",
     extra_locations: list[Location] | None = None,
     raw: dict[str, Any] | None = None,
+    rule_id: str = "",
 ) -> Case:
+    """Build a scanner Case.
+
+    ``finding_id`` is the instance identity (guid, host+plugin hit, alert id).
+    ``rule_id`` is the stable rule/plugin/QID class. When omitted, scanners
+    whose plugin/QID *is* the identity (Nessus, Qualys, OpenVAS) reuse
+    ``finding_id``. Pass ``rule_id`` separately when they differ (SARIF).
+    """
     locs: list[Location] = list(extra_locations or [])
     if location and not any(l.path == location for l in locs):
         locs.insert(0, Location(path=location))
+    fid = str(finding_id or "")
     return Case(
         source=kind,
         source_kind=kind,
-        finding_id=str(finding_id or ""),
-        rule_id=str(finding_id or ""),
+        finding_id=fid,
+        rule_id=str(rule_id or "") or fid,
         title=title or f"{kind} {finding_id}".strip(),
         description=description,
         cves=cves or [],
@@ -218,4 +267,12 @@ def flatten_rows(data: Any, keys: tuple[str, ...] = ()) -> list[dict[str, Any]]:
             nested = flatten_rows(val, keys)
             if nested:
                 return nested
-    return [data] if any(data.values()) else []
+    if not any(data.values()):
+        return []
+    # Bare object with no wrapper keys: treat as one row.
+    if not keys:
+        return [data]
+    # Wrapper keys were given but none matched. Only wrap if this dict
+    # itself looks like a finding, not a report envelope.
+    hints = {str(k).lower() for k in data}
+    return [data] if hints & _ROW_HINTS else []
