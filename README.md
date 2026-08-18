@@ -1,4 +1,4 @@
-# Grok
+# VulNavigator
 
 Personal workspace and tools.
 
@@ -15,11 +15,11 @@ This repository is attached to the mounted volume at:
 ## Initial Setup
 
 - Branch: `main`
-- Remote: `origin` → https://github.com/wbharris/Grok.git
+- Remote: `origin` → https://github.com/wbharris/VulNavigator.git
 
 ## Getting Started
 
 ```bash
-git clone https://github.com/wbharris/Grok.git
-cd Grok
+git clone https://github.com/wbharris/VulNavigator.git
+cd VulNavigator
 ```
