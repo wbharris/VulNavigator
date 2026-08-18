@@ -100,6 +100,33 @@ def map_case(case: Case) -> Case:
 
     # No CWE: still give a conservative public-app / client-exec guess when the
     # write-up is about a remotely reachable component.
+    blob = f"{case.title} {case.description}".lower()
+    if not case.attack and (
+        "remote code execution" in blob or " rce " in blob or "remote cade execution" in blob
+    ):
+        _add_unique(
+            case.attack,
+            Mapping(
+                id="T1190",
+                name="Exploit Public-Facing Application",
+                framework="ATT&CK",
+                provenance="narrative-heuristic",
+                confidence=0.55,
+                rationale="Write-up claims possible RCE on an exposed application",
+            ),
+        )
+        _add_unique(
+            case.attack,
+            Mapping(
+                id="T1059",
+                name="Command and Scripting Interpreter",
+                framework="ATT&CK",
+                provenance="narrative-heuristic",
+                confidence=0.45,
+                rationale="RCE typically implies code or command execution after exploit",
+            ),
+        )
+
     if not case.attack and case.locations:
         _add_unique(
             case.attack,

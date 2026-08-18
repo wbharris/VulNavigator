@@ -52,6 +52,9 @@ def validate(case: Case) -> Case:
     if not has_identity and not has_writeup:
         status = "rejected"
         notes.append("Rejected: neither a CVE nor a usable write-up")
+    elif case.evidence.reproduced is False and not has_identity:
+        status = "unconfirmed"
+        notes.append("Writer said exploitability is not confirmed — treating as unconfirmed")
     elif case.kev or (has_identity and has_proof):
         status = "confirmed"
     elif has_proof and has_writeup:

@@ -82,8 +82,8 @@ def record_assumptions(case: Case) -> Case:
     if not case.evidence.poc and not case.evidence.reproduced and not case.evidence.sandbox:
         _need(
             case,
-            "Can we reproduce this on our build (or do we have the Daybreak/Mythos sandbox log)?",
-            "Without evidence this may be a false positive or an unreachable path",
+            "Is the finding directly exploitable in this deployment (reachable path, no WAF/virtual patch)?",
+            "Without exploitability evidence this may be a false positive or an unreachable path",
             "Validation status (plausible → confirmed) and urgency",
         )
     if not case.data_class:
@@ -142,9 +142,18 @@ def prioritize(case: Case) -> Case:
     if high_path:
         score += 1
         reasons.append("Mapping unlocks privilege, credentials, or code execution")
-    if case.validation_status == "unconfirmed":
+    if case.data_class:
+        score += 1
+        reasons.append(f"Data class: {case.data_class}")
+    rce = any(m.id.split(".")[0] in {"T1190", "T1059", "T1203"} for m in case.attack)
+    if internet and rce and case.source_severity.lower() == "critical":
+        score += 2
+        reasons.append("Internet-facing + possible RCE + scanner critical (exploitability still unconfirmed)")
+    if case.validation_status == "unconfirmed" and not (internet and rce):
         score -= 2
         reasons.append("Validation is unconfirmed — do not over-rank")
+    elif case.validation_status == "unconfirmed":
+        reasons.append("Exploitability is unconfirmed — treat as highest-priority *validation*, not a confirmed breach")
 
     if score >= 7:
         case.priority, case.urgency = "P1", "immediate"
@@ -156,6 +165,12 @@ def prioritize(case: Case) -> Case:
         case.priority, case.urgency = "P4", "backlog"
 
     case.priority_reasons = reasons or ["Default: limited signal"]
+    if case.validation_status == "unconfirmed" and not case.cves:
+        case.confidence = case.confidence or "medium"
+    elif case.validation_status == "confirmed" or case.kev:
+        case.confidence = case.confidence or "high"
+    else:
+        case.confidence = case.confidence or "medium"
     return case
 
 
@@ -172,8 +187,14 @@ def plan_actions(case: Case) -> Case:
                 f"Apply the vendor / distro fix for {', '.join(case.cves)} and verify the package version"
             )
         else:
-            case.remediation.append(
-                "Land the finder-suggested patch (or equivalent) on a branch and re-run tests"
+            case.remediation.extend(
+                [
+                    "Identify the exact component, version, and affected systems",
+                    "Confirm vendor advisory / CVE applicability",
+                    "Patch or upgrade to a non-vulnerable version",
+                    "If patching cannot be immediate: remove public access if feasible, restrict source IPs, enforce WAF/edge filtering, disable the vulnerable path if supported",
+                    "Rescan and review logs for exploitation attempts before and after the fix",
+                ]
             )
 
     for ctrl in case.d3fend:
