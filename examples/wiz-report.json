@@ -1,0 +1,12 @@
+{
+  "issues": [
+    {
+      "id": "wiz-1",
+      "name": "CVE-2014-0160",
+      "title": "Heartbleed on internet-facing VM",
+      "severity": "HIGH",
+      "CVEDescription": "TLS heartbeat extension read overrun.",
+      "vulnerableAsset": { "name": "i-0abc", "type": "VIRTUAL_MACHINE" }
+    }
+  ]
+}

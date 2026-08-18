@@ -1,0 +1,19 @@
+{
+  "Results": [
+    {
+      "Target": "openssl:1.0.1",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2014-0160",
+          "PkgName": "openssl",
+          "InstalledVersion": "1.0.1e",
+          "FixedVersion": "1.0.1g",
+          "Severity": "HIGH",
+          "Title": "OpenSSL Heartbleed",
+          "Description": "TLS heartbeat extension read overrun.",
+          "CweIDs": ["CWE-119"]
+        }
+      ]
+    }
+  ]
+}

@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from vulnavigator.models import Case
+from vulnavigator.scanners import SCANNER_KINDS
 
 
 def validate(case: Case) -> Case:
@@ -31,16 +32,13 @@ def validate(case: Case) -> Case:
         who = {
             "daybreak": "Daybreak",
             "mythos": "Mythos",
-            "qualys": "Qualys",
-            "openvas": "OpenVAS",
-            "nessus": "Nessus",
-        }.get(case.source_kind, "Source")
+        }.get(case.source_kind, case.source_kind.title() if case.source_kind in SCANNER_KINDS else "Source")
         notes.append(f"{who} provided reproduction / sandbox / PoC evidence")
     else:
         notes.append("No reproduction evidence in the finding")
     if case.source_kind == "daybreak" and case.finder_confidence:
         notes.append(f"Daybreak confidence={case.finder_confidence}")
-    if case.source_kind in {"qualys", "openvas", "nessus"}:
+    if case.source_kind in SCANNER_KINDS:
         notes.append(f"{case.source_kind} scanner detection — not exploit-validated")
     if case.rule_id:
         notes.append(f"Finder rule/bug class: {case.rule_id}")

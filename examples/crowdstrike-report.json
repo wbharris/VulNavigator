@@ -1,0 +1,10 @@
+{
+  "resources": [
+    {
+      "id": "cs-1",
+      "status": "open",
+      "cve": { "id": "CVE-2014-0160", "severity": 7.5, "exprt_rating": "HIGH", "description": "Heartbleed" },
+      "host_info": { "hostname": "win-dc01" }
+    }
+  ]
+}
