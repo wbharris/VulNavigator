@@ -1,0 +1,29 @@
+{
+  "source": "daybreak",
+  "title": "Heap overflow in HTTP/2 header decoder",
+  "severity": "critical",
+  "cve": "CVE-2026-00001",
+  "cwe": ["CWE-400", "CWE-787"],
+  "product": "example-http2-proxy",
+  "component": "src/h2/headers.c",
+  "version": "1.4.2",
+  "locations": [
+    {
+      "path": "src/h2/headers.c",
+      "line": 412,
+      "snippet": "memcpy(buf, frame->payload, frame->len);"
+    }
+  ],
+  "description": "A crafted HTTP/2 HEADERS frame can overflow a fixed decoder buffer. Daybreak Codex Security reproduced a crash in the sandbox and sketched a path to process memory corruption when the proxy is internet-facing.",
+  "validation": {
+    "status": "reproduced",
+    "sandbox": true,
+    "evidence": "Sandbox crash on malformed HEADERS frame; ASAN report attached in Daybreak case."
+  },
+  "remediation": {
+    "summary": "Bound frame->len against sizeof(buf) before copy; add a regression test from the Daybreak PoC."
+  },
+  "internet_facing": true,
+  "ai_system": false,
+  "fraud_relevant": false
+}
