@@ -28,9 +28,14 @@ def validate(case: Case) -> Case:
         notes.append(f"CVSS={case.cvss}")
 
     if has_proof:
-        notes.append("Source provided reproduction / sandbox / PoC evidence")
+        who = "Daybreak" if case.source_kind == "daybreak" else "Mythos" if case.source_kind == "mythos" else "Source"
+        notes.append(f"{who} provided reproduction / sandbox / PoC evidence")
     else:
         notes.append("No reproduction evidence in the finding")
+    if case.source_kind == "daybreak" and case.finder_confidence:
+        notes.append(f"Daybreak confidence={case.finder_confidence}")
+    if case.rule_id:
+        notes.append(f"Finder rule/bug class: {case.rule_id}")
 
     if not has_product:
         notes.append("Affected product/component/location missing")

@@ -1,31 +1,33 @@
 # VulNavigator product contract
 
-End goal: a defender pastes or uploads a **Mythos** (Anthropic) or **Daybreak** (OpenAI / Codex Security) finding — or a CVE / advisory / scanner export — and gets one case they can act on.
+End goal: a defender drops in a **Mythos** (Anthropic) write-up or a **Daybreak** (OpenAI Codex Security) `findings.json` / scan directory and gets one case they can act on.
 
-VulNavigator does **not** replace those finders. It sits after them. Findings without triage, mapping, and an honest “what we assumed” section are noise.
+Those two finders are the **main expected input**. CVE-only and generic JSON are fallbacks.
+
+VulNavigator does **not** replace Mythos or Daybreak. It sits after them. Findings without triage, mapping, and an honest “what we assumed” section are noise.
 
 ## User journey
 
 ```
-Mythos | Daybreak | CVE | advisory | scanner JSON
-                    │
-                    ▼
-              1. Normalize
-                    │
-                    ▼
-              2. Validate
-                    │
-                    ▼
-              3. Map
-                    │
-                    ▼
-              4. Report
-         priority · urgency · remediation
-         compensating controls · next actions
-                    │
-                    ▼
-              5. Honesty layer
-         assumptions · what would improve this report
+Mythos write-up  |  Daybreak findings.json / scan dir
+                 │
+                 ▼
+           1. Normalize
+                 │
+                 ▼
+           2. Validate
+                 │
+                 ▼
+           3. Map
+                 │
+                 ▼
+           4. Report
+      priority · urgency · remediation
+      compensating controls · next actions
+                 │
+                 ▼
+           5. Honesty layer
+      assumptions · what would improve this report
 ```
 
 ### 1. Normalize
@@ -36,10 +38,9 @@ Adapters (v1):
 
 | Source | What we accept |
 |--------|----------------|
-| Daybreak / Codex Security | JSON report: title, severity, locations, validation evidence, suggested patch |
-| Mythos | JSON / markdown-ish finding: target, description, PoC, reproduced yes/no |
-| CVE only | `CVE-YYYY-NNNNN` |
-| Generic | Same schema fields under any vendor name |
+| **Daybreak / Codex Security** (primary) | Official `documentType: codex-security.findings` (`findings.json`), a sealed scan directory with `scan-manifest.json`, SARIF export, or a single finding record |
+| **Mythos** (primary) | Write-up JSON/markdown: title, target/project, CWE/bug class, PoC, reproduced / triage flags. Thin Glasswing ledger hashes are not enough on their own |
+| CVE only | Fallback: `CVE-YYYY-NNNNN` |
 
 Unknown fields are kept on the case as `raw` so nothing is silently dropped.
 

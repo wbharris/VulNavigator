@@ -1,7 +1,11 @@
 {
   "source": "mythos",
+  "ant_id": "MYTHOS-2026-0042",
   "title": "Stack buffer overflow in RPC credential parse",
+  "bug_class": "stack-buffer-overflow",
   "severity": "high",
+  "claude_severity": "high",
+  "project": "example-rpcd",
   "target": {
     "product": "example-rpcd",
     "component": "svc_rpcsec_gss_validate",
@@ -11,5 +15,6 @@
   "description": "Mythos Preview reports that svc_rpcsec_gss_validate rebuilds an RPC header into a fixed 128-byte stack buffer and copies attacker-controlled credential bytes without checking oa_length against the remaining space. Network-reachable if the RPC service is exposed.",
   "poc": "Send an RPC AUTH_GSS credential with oa_length=400 (MAX_AUTH_BYTES). Process crashes; Mythos claims first-try reproduction in its container.",
   "reproduced": true,
+  "passed_triage": true,
   "references": ["https://red.anthropic.com/2026/mythos-preview/"]
 }

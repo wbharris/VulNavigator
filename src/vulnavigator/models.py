@@ -58,6 +58,10 @@ class InfoNeed:
 class Case:
     source: str = "generic"
     source_kind: str = "unknown"  # daybreak | mythos | cve | generic
+    finding_id: str = ""
+    rule_id: str = ""
+    scan_id: str = ""
+    finder_confidence: str = ""
     title: str = ""
     description: str = ""
     cves: list[str] = field(default_factory=list)

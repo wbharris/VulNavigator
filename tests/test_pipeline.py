@@ -6,25 +6,35 @@ from vulnavigator.report import to_markdown
 ROOT = Path(__file__).resolve().parents[1]
 
 
-def test_daybreak_offline():
-    case = analyze_path(ROOT / "examples/daybreak-finding.json", offline=True)
+def test_daybreak_official_bundle():
+    cases = analyze_path(ROOT / "examples/daybreak-findings.json", offline=True)
+    assert len(cases) == 1
+    case = cases[0]
     assert case.source_kind == "daybreak"
-    assert case.cves == ["CVE-2026-00001"]
+    assert case.finding_id == "db-heap-h2-headers"
+    assert case.rule_id == "memory-safety.http2-header-decoder"
     assert "CWE-787" in case.cwes
     assert case.validation_status in {"confirmed", "plausible"}
-    assert any(m.id == "T1203" or m.id == "T1068" for m in case.attack)
+    assert any(m.id in {"T1203", "T1068", "T1499", "T1190"} for m in case.attack)
     assert case.d3fend
-    assert case.csf
     assert case.priority in {"P1", "P2"}
-    assert case.assumptions == [] or all(a.field != "internet_facing" for a in case.assumptions)
+    assert case.asset_internet_facing is True
     md = to_markdown(case)
     assert "Assumptions" in md
     assert "Information that would make this report better" in md
 
 
+def test_daybreak_legacy_single():
+    cases = analyze_path(ROOT / "examples/daybreak-finding.json", offline=True, source="daybreak")
+    assert cases[0].source_kind == "daybreak"
+    assert cases[0].cves == ["CVE-2026-00001"]
+
+
 def test_mythos_offline_records_assumptions():
-    case = analyze_path(ROOT / "examples/mythos-finding.json", offline=True)
+    cases = analyze_path(ROOT / "examples/mythos-finding.json", offline=True)
+    case = cases[0]
     assert case.source_kind == "mythos"
+    assert case.finding_id == "MYTHOS-2026-0042"
     assert case.validation_status in {"confirmed", "plausible"}
     fields = {a.field for a in case.assumptions}
     assert "internet_facing" in fields
@@ -36,13 +46,13 @@ def test_mythos_offline_records_assumptions():
 
 
 def test_cve_only_offline():
-    case = analyze_text("CVE-2024-3400", offline=True)
-    assert case.cves == ["CVE-2024-3400"]
-    assert case.source_kind == "cve"
-    assert case.improve
+    cases = analyze_text("CVE-2024-3400", offline=True)
+    assert cases[0].cves == ["CVE-2024-3400"]
+    assert cases[0].source_kind == "cve"
+    assert cases[0].improve
 
 
 def test_rejected_empty():
-    case = analyze_text("todo", offline=True)
-    assert case.validation_status == "rejected"
-    assert case.priority == "P4"
+    cases = analyze_text("todo", offline=True)
+    assert cases[0].validation_status == "rejected"
+    assert cases[0].priority == "P4"

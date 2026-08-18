@@ -1,0 +1,56 @@
+{
+  "documentType": "codex-security.findings",
+  "schemaVersion": "1.0",
+  "scanId": "scan-example-001",
+  "findings": [
+    {
+      "findingId": "db-heap-h2-headers",
+      "occurrenceId": "scan-example-001:db-heap-h2-headers",
+      "ruleId": "memory-safety.http2-header-decoder",
+      "identity": { "anchor": "h2-header-decode" },
+      "fingerprints": { "algorithm": "codex-security/v1", "primary": "abc" },
+      "title": "Heap overflow in HTTP/2 header decoder",
+      "summary": "A crafted HTTP/2 HEADERS frame can overflow a fixed decoder buffer. Codex Security reproduced a crash in the sandbox and sketched a path to process memory corruption when the proxy is internet-facing.",
+      "severity": {
+        "level": "critical",
+        "rationale": "Network-reachable memory corruption on the request path"
+      },
+      "confidence": { "level": "high", "rationale": "Sandbox crash plus ASAN report" },
+      "taxonomy": { "category": "memory-safety", "cwe": ["CWE-787", "CWE-400"] },
+      "locations": [
+        { "path": "src/h2/headers.c", "startLine": 412, "role": "root_control" }
+      ],
+      "codeEvidence": [
+        {
+          "id": "copy",
+          "label": "Unbounded copy",
+          "path": "src/h2/headers.c",
+          "startLine": 412,
+          "code": "memcpy(buf, frame->payload, frame->len);",
+          "explanation": "frame->len is not checked against sizeof(buf)"
+        }
+      ],
+      "rootCause": {
+        "summary": "Decoder trusts attacker-controlled frame length."
+      },
+      "remediation": "Bound frame->len against sizeof(buf) before copy; add a regression test from the Daybreak PoC.",
+      "validation": {
+        "disposition": "reportable",
+        "method": "sandbox reproduction",
+        "confidence": "high",
+        "evidence": "Sandbox crash on malformed HEADERS frame; ASAN report attached."
+      },
+      "attackPath": {
+        "decision": "reportable",
+        "reachability": {
+          "attacker": "unauthenticated remote",
+          "entry": "HTTPS listener",
+          "narrative": "Any client that can send HTTP/2 to the proxy can trigger the copy."
+        },
+        "severity": "critical"
+      },
+      "preventiveControls": ["WAF / HTTP/2 inspection until patched"],
+      "provenance": { "source": "codex-security" }
+    }
+  ]
+}
