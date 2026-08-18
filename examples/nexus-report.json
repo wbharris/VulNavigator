@@ -1,0 +1,12 @@
+{
+  "components": [
+    {
+      "displayName": "org.apache.logging.log4j:log4j-core:2.14.1",
+      "securityData": {
+        "securityIssues": [
+          { "reference": "CVE-2021-44228", "severity": 10, "threatCategory": "critical" }
+        ]
+      }
+    }
+  ]
+}

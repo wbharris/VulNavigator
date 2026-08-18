@@ -1,0 +1,16 @@
+[
+  {
+    "number": 17,
+    "state": "open",
+    "security_advisory": {
+      "cve_id": "CVE-2020-8203",
+      "severity": "high",
+      "summary": "Prototype Pollution in lodash"
+    },
+    "security_vulnerability": {
+      "package": { "name": "lodash" },
+      "severity": "high",
+      "first_patched_version": { "identifier": "4.17.19" }
+    }
+  }
+]

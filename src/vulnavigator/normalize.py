@@ -19,6 +19,8 @@ from vulnavigator.scanners import (
     alias_source,
     cases_from_scanner_json,
     looks_like_csv,
+    looks_like_jsonl,
+    parse_jsonl,
     parse_scanner_csv,
     parse_scanner_xml,
 )
@@ -106,8 +108,8 @@ def detect_kind(data: Any, hint: str = "", forced: str = "") -> str:
         doc = str(data.get("documentType") or "")
         if doc.startswith("codex-security"):
             return "daybreak"
-        if data.get("version") == "2.1.0" and "runs" in data:
-            return "daybreak"
+        if data.get("runs") is not None and (str(data.get("version") or "").startswith("2.") or data.get("$schema")):
+            return "sarif"
         if "hash" in data and "claude_severity" in data:
             return "mythos"
         if data.get("findingId") and data.get("ruleId") and data.get("taxonomy"):
@@ -124,6 +126,20 @@ def detect_kind(data: Any, hint: str = "", forced: str = "") -> str:
         return "openvas"
     if "nessus" in blob or "pluginid" in blob or "plugin_id" in blob:
         return "nessus"
+    for token, kind in (
+        ("insightvm", "rapid7"),
+        ("nexpose", "rapid7"),
+        ("trivy", "trivy"),
+        ("snyk", "snyk"),
+        ("wiz.io", "wiz"),
+        ("crowdstrike", "crowdstrike"),
+        ("nuclei", "nuclei"),
+        ("dependabot", "dependabot"),
+        ("inspector2", "inspector"),
+        ("prisma", "prisma"),
+    ):
+        if token in blob:
+            return kind
     return "generic"
 
 
@@ -484,6 +500,11 @@ def findings_from_text(
         if finding_id:
             cases = [c for c in cases if c.finding_id == finding_id]
         return cases
+    if looks_like_jsonl(text):
+        cases = parse_jsonl(text, source=source)
+        if finding_id:
+            cases = [c for c in cases if c.finding_id == finding_id]
+        return cases
     if text[0] in "{[":
         data = json.loads(text)
         return findings_from_document(data, source=source, finding_id=finding_id, hint=hint, scan=scan)
@@ -529,6 +550,8 @@ def findings_from_path(
     hint_source = source
     if not hint_source and p.suffix.lower() in {".nessus"}:
         hint_source = "nessus"
+    if not hint_source and p.suffix.lower() in {".sarif"}:
+        hint_source = "sarif"
     text = p.read_text(encoding="utf-8")
     return findings_from_text(text, source=hint_source, finding_id=finding_id, hint=p.stem)
 

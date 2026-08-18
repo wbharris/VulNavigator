@@ -9,7 +9,7 @@ VulNavigator does **not** replace Mythos or Daybreak. It sits after them. Findin
 ## User journey
 
 ```
-Mythos | Daybreak | Qualys | OpenVAS | Nessus
+Mythos | Daybreak | scanners (Qualys, Nessus, Rapid7, Wiz, Trivy, SARIF, …)
                  │
                  ▼
            1. Normalize
@@ -42,7 +42,17 @@ Adapters (v1):
 | **Mythos** | Write-up JSON/markdown: title, target/project, CWE/bug class, PoC, reproduced / triage flags |
 | **Qualys** | VM XML (`QID` / `HOST` / `VULN`) or CSV with a `QID` column |
 | **OpenVAS / GVM** | Greenbone XML `<report>` or CSV with NVT / OID |
-| **Nessus** | `.nessus` (`NessusClientData_v2`) or Tenable CSV (`Plugin ID`). `--source nessus` also accepts the misspelling `nexsus` |
+| **Nessus** | `.nessus` or Tenable CSV. `--source nessus` also accepts `nexsus` |
+| **Rapid7 InsightVM / Nexpose** | `NexposeReport` XML |
+| **SARIF** | v2.1 runs/results (CodeQL, Semgrep, GHAS, other SAST) |
+| **Trivy / Snyk / Dependabot** | CI and GitHub SCA JSON |
+| **Wiz / Prisma Cloud / Orca** | Cloud issue / alert JSON |
+| **Microsoft Defender VM** | Graph-style `value[]` with `cveId` |
+| **CrowdStrike Spotlight** | `resources[]` with `cve` + `host_info` |
+| **AWS Inspector** | Inspector2 `findings[]` |
+| **Nexus IQ** | `components[].securityData.securityIssues` |
+| **Nuclei** | JSONL (`template-id`, `matched-at`) |
+| **Burp / ZAP** | DAST XML |
 | CVE only | Fallback: `CVE-YYYY-NNNNN` |
 
 Unknown fields are kept on the case as `raw` so nothing is silently dropped.

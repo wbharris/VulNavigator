@@ -1,0 +1,1 @@
+{"template-id":"cves/CVE-2014-0160","info":{"name":"OpenSSL Heartbleed","severity":"critical","description":"TLS heartbeat read overrun","classification":{"cve-id":["CVE-2014-0160"]}},"host":"https://10.0.0.12","matched-at":"https://10.0.0.12:443"}

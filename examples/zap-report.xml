@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<OWASPZAPReport>
+  <site>
+    <alerts>
+      <alertitem>
+        <pluginid>40018</pluginid>
+        <alert>SQL Injection</alert>
+        <riskcode>3</riskcode>
+        <riskdesc>High</riskdesc>
+        <cweid>89</cweid>
+        <desc>A SQL injection was found.</desc>
+        <solution>Use parameterized queries.</solution>
+        <uri>https://shop.lab/search</uri>
+      </alertitem>
+    </alerts>
+  </site>
+</OWASPZAPReport>

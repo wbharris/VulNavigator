@@ -1,6 +1,6 @@
 """CLI: vuln-nav analyze FILE.
 
-Expected intake: Mythos, Daybreak, Qualys, OpenVAS, or Nessus.
+Expected intake: Mythos, Daybreak, and mainstream scanner / SARIF exports.
 """
 
 from __future__ import annotations
@@ -13,9 +13,9 @@ from pathlib import Path
 from vulnavigator import __version__
 from vulnavigator.pipeline import analyze_path, analyze_text
 from vulnavigator.report import to_json, to_markdown
-from vulnavigator.scanners import alias_source
+from vulnavigator.scanners import SCANNER_KINDS, alias_source
 
-_SOURCES = ("mythos", "daybreak", "qualys", "openvas", "nessus")
+_SOURCES = ("mythos", "daybreak") + tuple(sorted(SCANNER_KINDS))
 
 
 def _source_arg(value: str) -> str:
@@ -42,18 +42,18 @@ def _render(cases, as_json: bool) -> str:
 def main(argv: list[str] | None = None) -> int:
     parser = argparse.ArgumentParser(
         prog="vuln-nav",
-        description="Analyze a Mythos, Daybreak, Qualys, OpenVAS, or Nessus finding.",
+        description="Analyze a Mythos, Daybreak, or scanner/SARIF finding.",
     )
     parser.add_argument("-V", "--version", action="version", version=f"vuln-nav {__version__}")
     sub = parser.add_subparsers(dest="cmd", required=True)
 
     an = sub.add_parser(
         "analyze",
-        help="Analyze a Mythos, Daybreak, Qualys, OpenVAS, or Nessus finding",
+        help="Analyze a Mythos, Daybreak, or scanner/SARIF finding",
     )
     an.add_argument(
         "input",
-        help="Mythos write-up, Daybreak findings.json / scan dir, or Qualys / OpenVAS / Nessus export",
+        help="Finding file: Mythos, Daybreak, Qualys, OpenVAS, Nessus, Rapid7, SARIF, Trivy, Snyk, …",
     )
     an.add_argument("-o", "--output", help="Write report here (default: stdout)")
     an.add_argument("--json", action="store_true", help="Emit the case file as JSON")
@@ -61,7 +61,7 @@ def main(argv: list[str] | None = None) -> int:
     an.add_argument(
         "--source",
         type=_source_arg,
-        help="Force the source: mythos, daybreak, qualys, openvas, nessus",
+        help="Force the source (mythos, daybreak, nessus, qualys, sarif, trivy, …)",
     )
     an.add_argument(
         "--id",

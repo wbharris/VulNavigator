@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<issues burpVersion="2026.1">
+  <issue>
+    <type>1048832</type>
+    <name>SQL injection</name>
+    <host>https://shop.lab</host>
+    <path>/search</path>
+    <severity>High</severity>
+    <issueDetail>The q parameter is interpolated into a SQL query.</issueDetail>
+    <remediationBackground>Use parameterized queries.</remediationBackground>
+    <vulnerabilityClassifications>CWE-89</vulnerabilityClassifications>
+  </issue>
+</issues>

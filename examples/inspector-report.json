@@ -1,0 +1,15 @@
+{
+  "findings": [
+    {
+      "findingArn": "arn:aws:inspector2:us-east-1:123:finding/abc",
+      "title": "CVE-2014-0160 - openssl",
+      "severity": "HIGH",
+      "description": "Heartbleed in AMI package",
+      "packageVulnerabilityDetails": {
+        "vulnerabilityId": "CVE-2014-0160",
+        "vulnerablePackages": [{ "name": "openssl", "version": "1.0.1e" }]
+      },
+      "remediation": { "recommendation": { "text": "yum update openssl" } }
+    }
+  ]
+}
