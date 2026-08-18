@@ -1,0 +1,2 @@
+A scan identified an outdated internet-facing application component that may allow remote code execution. The application supports a client-facing workflow and processes sensitive business data.
+Exploitability has not been confirmed, but the finding is rated critical by the scanner. No evidence yet shows successful exploitation. No AI components are believed to be involved. Fraud risk is not currently suspected.

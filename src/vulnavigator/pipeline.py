@@ -7,12 +7,14 @@ from pathlib import Path
 from vulnavigator.enrich import enrich
 from vulnavigator.map import map_case
 from vulnavigator.models import Case
+from vulnavigator.narrative import apply_narrative
 from vulnavigator.normalize import findings_from_path, findings_from_text, normalize_path, normalize_text
 from vulnavigator.prioritize import plan_actions, prioritize, record_assumptions
 from vulnavigator.validate import validate
 
 
 def analyze_case(case: Case, offline: bool = False) -> Case:
+    apply_narrative(case)
     enrich(case, offline=offline)
     validate(case)
     map_case(case)

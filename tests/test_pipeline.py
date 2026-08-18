@@ -20,7 +20,7 @@ def test_daybreak_official_bundle():
     assert case.priority in {"P1", "P2"}
     assert case.asset_internet_facing is True
     md = to_markdown(case)
-    assert "Assumptions" in md
+    assert "11. Confidence and Assumptions" in md
     assert "Information that would make this report better" in md
 
 

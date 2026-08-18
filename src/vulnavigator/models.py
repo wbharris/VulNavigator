@@ -99,6 +99,7 @@ class Case:
     next_actions: list[Action] = field(default_factory=list)
     assumptions: list[Assumption] = field(default_factory=list)
     improve: list[InfoNeed] = field(default_factory=list)
+    confidence: str = ""
 
     def to_dict(self) -> dict[str, Any]:
         return asdict(self)
