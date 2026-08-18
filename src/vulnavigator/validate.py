@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from vulnavigator.models import Case
+from vulnavigator.models import Case, is_ai_zeroday
 from vulnavigator.scanners import SCANNER_KINDS
 
 
@@ -11,10 +11,15 @@ def validate(case: Case) -> Case:
     ev = case.evidence
     has_identity = bool(case.cves) or bool(case.nvd_description)
     has_product = bool(case.product or case.component or case.locations)
-    has_writeup = len(case.description.strip()) >= 40
+    has_writeup = len(case.description.strip()) >= 40 or bool(ev.discovery.strip())
     has_proof = bool(ev.reproduced) or bool(ev.sandbox) or bool(ev.poc.strip())
+    zeroday = is_ai_zeroday(case)
 
-    if case.cves and case.nvd_description:
+    if zeroday:
+        notes.append(
+            "No CVE expected — AI 0-day identity is the write-up, how it was found, and the PoC/exploit"
+        )
+    elif case.cves and case.nvd_description:
         notes.append(f"{case.cves[0]} resolved in NVD")
     elif case.cves and not case.nvd_description:
         notes.append(f"{case.cves[0]} not resolved (offline or unknown to NVD)")
@@ -33,9 +38,11 @@ def validate(case: Case) -> Case:
             "daybreak": "Daybreak",
             "mythos": "Mythos",
         }.get(case.source_kind, case.source_kind.title() if case.source_kind in SCANNER_KINDS else "Source")
-        notes.append(f"{who} provided reproduction / sandbox / PoC evidence")
+        notes.append(f"{who} provided a PoC / exploit or sandbox reproduction — that is the primary evidence")
     else:
-        notes.append("No reproduction evidence in the finding")
+        notes.append("No PoC, exploit, or sandbox reproduction in the finding")
+    if ev.discovery.strip():
+        notes.append("Finder described how the issue was discovered")
     if case.source_kind == "daybreak" and case.finder_confidence:
         notes.append(f"Daybreak confidence={case.finder_confidence}")
     if case.source_kind in SCANNER_KINDS:
@@ -45,20 +52,23 @@ def validate(case: Case) -> Case:
 
     if not has_product:
         notes.append("Affected product/component/location missing")
-    if not has_writeup and not has_identity:
+    if not has_writeup and not has_identity and not has_proof:
         notes.append("Description too thin to stand on its own")
 
-    # Status
-    if not has_identity and not has_writeup:
+    # Status — AI 0-days stand on write-up + PoC, not NVD
+    if not has_identity and not has_writeup and not has_proof:
         status = "rejected"
-        notes.append("Rejected: neither a CVE nor a usable write-up")
-    elif case.evidence.reproduced is False and not has_identity:
+        notes.append("Rejected: no write-up, no PoC, and no CVE")
+    elif zeroday and ev.reproduced is False and not has_proof:
         status = "unconfirmed"
-        notes.append("Writer said exploitability is not confirmed — treating as unconfirmed")
-    elif case.kev or (has_identity and has_proof):
+        notes.append("Writer said exploitability is not confirmed and no PoC was attached")
+    elif case.kev or (has_identity and has_proof) or (zeroday and ev.sandbox and has_proof):
         status = "confirmed"
     elif has_proof and has_writeup:
         status = "plausible"
+    elif zeroday and has_writeup:
+        status = "unconfirmed"
+        notes.append("0-day write-up only — replay a PoC before treating this as confirmed")
     elif has_identity or (has_writeup and has_product):
         status = "plausible" if has_writeup else "unconfirmed"
     else:

@@ -23,3 +23,19 @@ def test_sample_narrative_rce():
     assert "## 11. Confidence and Assumptions" in md
     assert "ATLAS" in md
     assert "medium" in md.lower()
+    assert "PoC" in md or "poc" in md.lower()
+    assert not any("CVE been assigned" in i.question for i in case.improve)
+
+
+def test_ai_zeroday_poc_is_primary_evidence():
+    cases = analyze_path(ROOT / "examples/mythos-zeroday.json", offline=True)
+    case = cases[0]
+    assert case.cves == []
+    assert case.evidence.poc
+    assert case.evidence.discovery
+    assert case.validation_status in {"confirmed", "plausible"}
+    assert any("PoC" in r or "0-day" in r or "sandbox" in r.lower() for r in case.priority_reasons)
+    assert not any("CVE been assigned" in i.question for i in case.improve)
+    md = to_markdown(case)
+    assert "No CVE expected" in md or "No CVE — expected" in md
+    assert "parse_headers" in md

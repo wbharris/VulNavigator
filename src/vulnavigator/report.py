@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import json
 
-from vulnavigator.models import Case
+from vulnavigator.models import Case, is_ai_zeroday
 
 
 def _bullets(items: list[str]) -> list[str]:
@@ -31,8 +31,14 @@ def _facts(case: Case) -> list[str]:
         facts.append("Fraud risk is not currently suspected")
     if case.source_severity:
         facts.append(f"Finder/scanner rated the finding {case.source_severity}")
+    if case.evidence.poc.strip():
+        facts.append("PoC / exploit steps were provided (primary evidence for an AI 0-day)")
+    if case.evidence.discovery.strip():
+        facts.append("Finder described how the vulnerability was discovered")
     if case.cves:
         facts.append("CVE(s): " + ", ".join(case.cves))
+    elif is_ai_zeroday(case):
+        facts.append("No CVE — expected for a Mythos/Daybreak 0-day")
     return facts or ["Writer provided a narrative with limited structured fields"]
 
 
@@ -56,9 +62,9 @@ def to_markdown(case: Case) -> str:
     }.get(case.priority, case.priority)
 
     missing = [i.question for i in case.improve]
-    if not case.cves:
-        if "CVE" not in " ".join(missing):
-            missing.insert(0, "Exact component name, version, and CVE/advisory mapping")
+    if is_ai_zeroday(case) and not case.evidence.poc.strip():
+        if not any("PoC" in q or "poc" in q.lower() for q in missing):
+            missing.insert(0, "PoC or exploit the finder used (commands, request, crash, sandbox log)")
 
     rem = case.remediation or ["Identify the component and apply the vendor fix"]
     comp = case.compensating_controls or [
@@ -85,9 +91,9 @@ def to_markdown(case: Case) -> str:
             f"**Current status:** Exploitability is {case.validation_status}. "
             f"Scanner/finder severity: {case.source_severity or 'not stated'}. "
             + (
-                "No evidence of successful exploitation has been provided. "
-                if not (case.evidence.reproduced or case.evidence.sandbox)
-                else "Finder provided reproduction/sandbox evidence. "
+                "Finder provided a PoC, exploit, or sandbox reproduction. "
+                if (case.evidence.reproduced or case.evidence.sandbox or case.evidence.poc.strip())
+                else "No PoC or exploit was attached. "
             )
         ),
         "",
@@ -96,6 +102,10 @@ def to_markdown(case: Case) -> str:
         "**Facts provided:**",
     ]
     lines.extend(_bullets(_facts(case)))
+    if case.evidence.discovery.strip():
+        lines += ["", "**How the finder found it:**", "", case.evidence.discovery.strip()]
+    if case.evidence.poc.strip():
+        lines += ["", "**PoC / exploit:**", "", case.evidence.poc.strip()]
     lines += ["", "**Missing evidence:**"]
     lines.extend(_bullets(missing))
     lines += ["", "## 3. Validation Notes", ""]
@@ -103,10 +113,14 @@ def to_markdown(case: Case) -> str:
     lines += [
         "",
         "Validation should confirm:",
-        "- The exact software/component and version",
-        "- Whether that version is affected by a known RCE or other advisory",
-        "- Whether the vulnerable code path is reachable externally",
+        "- Replay the finder PoC on our deployed build (same file/commit/image)",
+        "- The exact software/component and version the write-up names",
+        "- Whether the vulnerable code path is reachable in our deployment",
         "- Whether mitigations exist (WAF, config restrictions, network controls)",
+    ]
+    if not is_ai_zeroday(case):
+        lines.append("- Whether a known advisory/CVE applies")
+    lines += [
         "",
         "## 4. Likely Attacker Behaviors / Technique Mapping",
         "",
@@ -210,7 +224,7 @@ def to_markdown(case: Case) -> str:
         for i in case.improve:
             lines.append(f"- {i.question} — {i.why_it_matters} (changes: {i.would_change})")
     else:
-        lines.append("- nothing material; re-run when inventory or a CVE is attached")
+        lines.append("- nothing material; re-run when the PoC is replayed on our build")
     lines.append("")
     return "\n".join(lines)
 

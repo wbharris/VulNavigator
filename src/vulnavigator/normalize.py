@@ -272,7 +272,8 @@ def case_from_daybreak(finding: dict[str, Any], scan: dict[str, Any] | None = No
         evidence=Evidence(
             reproduced=reproduced or None,
             sandbox=sandbox or None,
-            poc=str(val.get("evidence") or val.get("poc") or ""),
+            poc=str(val.get("evidence") or val.get("poc") or finding.get("poc") or ""),
+            discovery=str(root_text or finding.get("discovery") or ""),
             notes=" ".join(
                 x
                 for x in (
@@ -352,7 +353,8 @@ def case_from_mythos(finding: dict[str, Any]) -> Case:
         evidence=Evidence(
             reproduced=None if reproduced is None else bool(reproduced),
             sandbox=_optional_bool(finding, "sandbox", "sandbox_validated"),
-            poc=str(finding.get("poc") or finding.get("proof_of_concept") or ""),
+            poc=str(finding.get("poc") or finding.get("proof_of_concept") or finding.get("exploit") or ""),
+            discovery=str(finding.get("discovery") or finding.get("analysis") or ""),
             notes=str(finding.get("status") or finding.get("reveal_tier") or ""),
             references=_as_list(finding.get("references")),
         ),

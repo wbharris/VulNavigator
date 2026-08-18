@@ -4,6 +4,8 @@ Expected intake is a **Mythos** or **Daybreak** finding, or a mainstream scanner
 
 Those tools find bugs. This one answers: is it real, what can an attacker do with it, what do we do this week, and **what did the agent guess**.
 
+Mythos and Daybreak **0-days usually have no CVE**. The PoC/exploit and the write-up of how the model found the bug *are* the finding.
+
 Full contract: [`docs/PRODUCT.md`](docs/PRODUCT.md).
 
 ## What you drop in

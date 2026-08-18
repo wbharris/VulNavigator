@@ -17,6 +17,23 @@ _NO_EXPLOIT = re.compile(
 )
 _SENSITIVE = re.compile(r"sensitive (business )?data|pii|payment", re.I)
 _OUTDATED = re.compile(r"\boutdated\b", re.I)
+_POC_HEAD = re.compile(
+    r"(?im)^(?:poc|p\.o\.c\.|proof[-\s]of[-\s]concept|exploit(?:\s+steps)?)\s*[:\-]\s*(.+)$"
+)
+_DISC_HEAD = re.compile(
+    r"(?im)^(?:how\s+(?:it|the\s+(?:model|agent|scanner|finder))\s+found|discovery|analysis|root\s+cause)\s*[:\-]\s*(.+)$"
+)
+
+
+def _section_after(pattern: re.Pattern[str], text: str) -> str:
+    match = pattern.search(text)
+    if not match:
+        return ""
+    start = match.start(1)
+    rest = text[start:]
+    nxt = re.search(r"\n(?:[A-Z][^\n]{0,40}:|\n\n)", rest[1:])
+    chunk = rest[: nxt.start() + 1] if nxt else rest
+    return chunk.strip()
 
 
 def apply_narrative(case: Case) -> Case:
@@ -34,7 +51,13 @@ def apply_narrative(case: Case) -> Case:
         case.source_severity = "critical"
     if not case.data_class and _SENSITIVE.search(blob):
         case.data_class = "sensitive-business"
-    if _NO_EXPLOIT.search(blob):
+    poc = _section_after(_POC_HEAD, blob)
+    if poc and not case.evidence.poc:
+        case.evidence.poc = poc
+    disc = _section_after(_DISC_HEAD, blob)
+    if disc and not case.evidence.discovery:
+        case.evidence.discovery = disc
+    if _NO_EXPLOIT.search(blob) and not case.evidence.poc:
         case.evidence.reproduced = False
         case.evidence.sandbox = False
     if _RCE.search(blob) and "CWE-94" not in case.cwes:
