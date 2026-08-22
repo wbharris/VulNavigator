@@ -59,7 +59,7 @@ def apply_narrative(case: Case) -> Case:
     if _NO_EXPLOIT.search(blob) and not case.evidence.poc:
         case.evidence.reproduced = False
         case.evidence.sandbox = False
-    if mentions_rce(blob) and "CWE-94" not in case.cwes:
+    if mentions_rce(blob) and "CWE-94" not in case.cwes and not case.cves and not case.cwes:
         case.cwes.append("CWE-94")
     if _OUTDATED.search(blob) and not case.product:
         case.component = case.component or "outdated application component"

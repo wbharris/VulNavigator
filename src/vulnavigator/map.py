@@ -49,13 +49,22 @@ def map_case(case: Case) -> Case:
         return case
 
     conf_cwe = _conf("cwe")
+    local_cwes: list[str] = []
     for cve in case.cves:
         for cwe in _tables().get("cve_cwe", {}).get(cve.upper(), []) or []:
             if cwe not in case.cwes:
                 case.cwes.append(cwe)
+            if cwe not in local_cwes:
+                local_cwes.append(cwe)
 
-    for cwe in case.cwes:
+    rce_ids = {"T1190", "T1059", "T1203", "T1068"}
+    ordered = local_cwes + [c for c in case.cwes if c not in local_cwes]
+    for cwe in ordered:
+        if cwe == "CWE-400" and any(m.id.split(".")[0] in rce_ids for m in case.attack):
+            continue
         for tid, name in _pairs("cwe_attack", cwe):
+            if tid.split(".")[0] == "T1499" and any(m.id.split(".")[0] in rce_ids for m in case.attack):
+                continue
             _add_unique(
                 case.attack,
                 Mapping(
@@ -69,7 +78,7 @@ def map_case(case: Case) -> Case:
             )
 
     blob = f"{case.title} {case.description}"
-    if not case.attack and mentions_rce(blob):
+    if not case.attack and case.source_kind == "narrative" and mentions_rce(blob):
         log.info("narrative RCE heuristic for %s", case.title)
         _add_unique(
             case.attack,

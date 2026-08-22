@@ -102,6 +102,105 @@ def test_finding_id_validation():
         _finding_id_arg("bad id with spaces and ; rm")
 
 
+def test_kev_without_version_is_not_confirmed():
+    case = Case(
+        source_kind="generic",
+        title="Apache Log4j2 JNDI lookup RCE",
+        description="Message lookup substitution loads remote code via LDAP (Log4Shell).",
+        product="log4j-core",
+        component="JndiLookup",
+        cves=["CVE-2021-44228"],
+        kev=True,
+        cvss=10.0,
+        source_severity="critical",
+    )
+    validate(case)
+    assert case.validation_status == "plausible"
+    assert any("does not confirm" in n for n in case.validation_notes)
+
+
+def test_kev_with_product_and_version_can_confirm():
+    case = Case(
+        source_kind="generic",
+        title="Log4Shell",
+        description="JNDI lookup RCE in Log4j2.",
+        product="log4j-core",
+        version="2.14.1",
+        cves=["CVE-2021-44228"],
+        kev=True,
+    )
+    validate(case)
+    assert case.validation_status == "confirmed"
+
+
+def test_poc_text_is_not_reproduction():
+    case = Case(
+        source_kind="mythos",
+        title="heap overflow",
+        description="AI found a heap overflow in the parser.",
+        evidence=Evidence(poc="printf AAAA | nc host 80"),
+        cwes=["CWE-787"],
+    )
+    validate(case)
+    assert case.validation_status == "plausible"
+    assert case.validation_status != "confirmed"
+
+
+def test_nvd_description_is_not_identity():
+    case = Case(
+        source_kind="generic",
+        title="unknown",
+        description="short",
+        nvd_description="A long NVD paragraph that is enrichment only.",
+    )
+    validate(case)
+    assert case.validation_status == "rejected"
+
+
+def test_writeup_and_product_without_proof_is_unconfirmed():
+    case = Case(
+        source_kind="generic",
+        title="Something in the login service",
+        description="A reasonably long write-up about a bug in authentication handling.",
+        product="login-service",
+    )
+    validate(case)
+    assert case.validation_status == "unconfirmed"
+
+
+def test_unknown_json_is_generic_not_mythos():
+    from vulnavigator.normalize import findings_from_text
+
+    cases = findings_from_text(
+        '{"title": "Apache Log4j2 JNDI lookup RCE", "cve": "CVE-2021-44228", '
+        '"product": "log4j-core", "description": "LDAP lookup RCE."}'
+    )
+    assert cases[0].source_kind == "generic"
+    assert cases[0].cves == ["CVE-2021-44228"]
+    assert cases[0].product == "log4j-core"
+
+
+def test_prose_mentioning_nessus_is_not_a_nessus_scan():
+    from vulnavigator.normalize import detect_kind
+
+    assert detect_kind({"description": "Looks like a Nessus finding about SMB"}) == "generic"
+
+
+def test_cwe400_does_not_add_t1499_when_rce_cwe_present():
+    case = Case(
+        source_kind="generic",
+        title="Log4Shell",
+        description="JNDI RCE",
+        cves=["CVE-2021-44228"],
+        cwes=["CWE-502", "CWE-400"],
+        validation_status="plausible",
+    )
+    map_case(case)
+    ids = {m.id.split(".")[0] for m in case.attack}
+    assert "T1190" in ids or "T1059" in ids
+    assert "T1499" not in ids
+
+
 def test_data_quality_score_drops_with_gaps():
     thin = Case(source_kind="narrative", title="x", description="short")
     validate(thin)

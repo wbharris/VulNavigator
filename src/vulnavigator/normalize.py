@@ -103,52 +103,32 @@ def _norm_cwe(values: Any) -> list[str]:
 
 
 def detect_kind(data: Any, hint: str = "", forced: str = "") -> str:
+    """Classify by structure and explicit source fields, not keywords in prose."""
     forced = alias_source(forced)
-    if forced in {"daybreak", "mythos", "cve", "generic"} | SCANNER_KINDS:
+    if forced in {"daybreak", "mythos", "cve", "generic", "narrative"} | SCANNER_KINDS:
         return forced
-    blob = f"{hint} ".lower()
     if isinstance(data, dict):
-        blob += json.dumps(data).lower()
         doc = str(data.get("documentType") or "")
         if doc.startswith("codex-security"):
             return "daybreak"
         if data.get("runs") is not None and (str(data.get("version") or "").startswith("2.") or data.get("$schema")):
             return "sarif"
+        src = str(data.get("source") or "").strip().lower()
+        if src in {"mythos", "glasswing"}:
+            return "mythos"
+        if src in {"daybreak", "codex-security", "codex"}:
+            return "daybreak"
         if "hash" in data and "claude_severity" in data:
             return "mythos"
         if data.get("findingId") and data.get("ruleId") and data.get("taxonomy"):
             return "daybreak"
-    else:
-        blob += str(data).lower()
-    # Structural scanner signatures beat substring matches in descriptions.
-    if not isinstance(data, str):
         scanner = detect_json_kind(data)
         if scanner:
             return scanner
-    if "daybreak" in blob or "codex-security" in blob or "codex security" in blob:
-        return "daybreak"
-    if "mythos" in blob or "glasswing" in blob:
-        return "mythos"
-    if "qualys" in blob or '"qid"' in blob:
-        return "qualys"
-    if "openvas" in blob or "greenbone" in blob or '"nvt"' in blob:
-        return "openvas"
-    if "nessus" in blob or '"pluginid"' in blob or '"plugin_id"' in blob:
-        return "nessus"
-    for token, kind in (
-        ("insightvm", "rapid7"),
-        ("nexpose", "rapid7"),
-        ("trivy", "trivy"),
-        ("snyk", "snyk"),
-        ("wiz.io", "wiz"),
-        ("crowdstrike", "crowdstrike"),
-        ("nuclei", "nuclei"),
-        ("dependabot", "dependabot"),
-        ("inspector2", "inspector"),
-        ("prisma", "prisma"),
-    ):
-        if token in blob:
-            return kind
+    elif not isinstance(data, str):
+        scanner = detect_json_kind(data)
+        if scanner:
+            return scanner
     return "generic"
 
 
@@ -335,14 +315,18 @@ def case_from_mythos(finding: dict[str, Any]) -> Case:
         or ""
     )
     reproduced = finding.get("reproduced")
-    if reproduced is None:
-        reproduced = bool(finding.get("poc") or finding.get("proof_of_concept"))
-        if finding.get("passed_triage") or finding.get("vendor_confirmed"):
-            reproduced = True
+    if reproduced is None and (finding.get("passed_triage") or finding.get("vendor_confirmed")):
+        reproduced = True
+
+    kind = str(finding.get("source") or "").strip().lower()
+    if kind not in {"mythos", "generic", "narrative"}:
+        kind = "mythos"
+    if title == "Mythos finding" and kind == "generic":
+        title = "Generic finding"
 
     case = Case(
-        source="mythos",
-        source_kind="mythos",
+        source=kind,
+        source_kind=kind,
         finding_id=str(finding.get("ant_id") or finding.get("finding_id") or finding.get("id") or ""),
         rule_id=str(finding.get("bug_class") or finding.get("ruleId") or ""),
         finder_confidence=str(finding.get("confidence") or ""),
@@ -357,7 +341,12 @@ def case_from_mythos(finding: dict[str, Any]) -> Case:
             or finding.get("package")
             or ""
         ),
-        component=str(finding.get("component") or target.get("component") or ""),
+        component=str(
+            finding.get("component")
+            or finding.get("affected_component")
+            or target.get("component")
+            or ""
+        ),
         version=str(finding.get("version") or target.get("version") or ""),
         locations=_locations_from(finding.get("locations") or finding.get("affected_locations")),
         evidence=Evidence(
@@ -388,11 +377,9 @@ def case_from_generic(data: dict[str, Any], kind: str = "generic") -> Case:
         return case_from_daybreak(data)
     if kind == "mythos":
         return case_from_mythos(data)
-    # Fall back: treat unknown JSON as a Mythos-style write-up if it has a narrative,
-    # else as a thin Daybreak-like record.
     if data.get("findingId") or data.get("ruleId") or data.get("taxonomy"):
         return case_from_daybreak(data)
-    return case_from_mythos({**data, "source": data.get("source") or kind})
+    return case_from_mythos({**data, "source": data.get("source") or kind or "generic"})
 
 
 def _extract_raw_findings(data: Any, kind: str) -> tuple[list[dict[str, Any]], dict[str, Any] | None]:
@@ -422,6 +409,15 @@ def _extract_raw_findings(data: Any, kind: str) -> tuple[list[dict[str, Any]], d
         sorted(data.keys())[:20],
     )
     return [data], scan
+
+
+def _looks_like_sarif_result(row: dict[str, Any]) -> bool:
+    if not row.get("message"):
+        return False
+    for loc in row.get("locations") or []:
+        if isinstance(loc, dict) and loc.get("physicalLocation"):
+            return True
+    return False
 
 
 def _sarif_to_daybreakish(result: dict[str, Any]) -> dict[str, Any]:
@@ -469,7 +465,7 @@ def findings_from_document(
         return scanner_cases
     raw, embedded_scan = _extract_raw_findings(data, kind)
     scan = scan or embedded_scan
-    if kind == "daybreak" and raw and raw[0].get("message") and "physicalLocation" in json.dumps(raw[0]):
+    if kind == "daybreak" and raw and _looks_like_sarif_result(raw[0]):
         raw = [_sarif_to_daybreakish(r) for r in raw]
     cases: list[Case] = []
     for item in raw:
@@ -536,10 +532,21 @@ def findings_from_text(
                 raw={"cve": cves[0]},
             )
         ]
-    kind = detect_kind({"description": text}, hint, source) or "mythos"
+    kind = detect_kind({"description": text}, hint, source) or "generic"
+    first = text.splitlines()[0][:120]
     if kind == "daybreak":
-        return [case_from_daybreak({"title": text.splitlines()[0][:120], "summary": text})]
-    return [case_from_mythos({"title": text.splitlines()[0][:120], "description": text, "source": "mythos"})]
+        return [case_from_daybreak({"title": first, "summary": text})]
+    if kind == "mythos":
+        return [case_from_mythos({"title": first, "description": text, "source": "mythos"})]
+    return [
+        Case(
+            source="generic",
+            source_kind="generic",
+            title=first,
+            description=text,
+            raw={"text": text},
+        )
+    ]
 
 
 def _load_scan_dir(path: Path) -> tuple[Any, dict[str, Any] | None, str]:
