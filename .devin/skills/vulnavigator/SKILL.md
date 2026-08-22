@@ -50,6 +50,10 @@ Bundled examples: `examples/daybreak-findings.json`, `examples/mythos-zeroday.js
 4. Prioritize: exposure, replayable PoC, and whether mapping unlocks RCE/credentials. KEV/EPSS/CVSS only when a CVE exists and `--offline` was not used. Priority is not CVSS.
 5. 11-section markdown or `--json`
 
+## Recent Fixes
+
+- **Title preservation**: Generic title rewrite now only applies to true narrative tickets (source_kind == "narrative"), preserving proper titles from structured JSON inputs.
+
 AI 0-days usually have no CVE. Judge PoC + discovery write-up. Do not wait for NVD.
 
 ## After the report
