@@ -103,6 +103,34 @@ vuln-nav analyze examples/trivy-report.json
 
 v0.1 on GitHub `main`. Next slice: pinned ATT&CK / D3FEND / ATLAS snapshots and a reasoning model.
 
+## Devin Integration
+
+This repository includes Devin skills for AI-assisted vulnerability analysis:
+
+- **vulnavigator**: Command-line VulNavigator analysis with MITRE integration
+- **vulnavigator-web**: Web interface launcher with live MITRE MCP integration
+
+These skills are available in `.devin/skills/` and provide:
+- **MITRE ATT&CK v15.0**: Adversary Tactics, Techniques, and Procedures
+- **MITRE D3FEND v1.1**: Cybersecurity Countermeasures Knowledge Graph
+- **CWE Top 25**: Most Dangerous Software Weaknesses (2024)
+- **CVE lookup**: OSV.dev vulnerability database
+- **Shodan exposure**: InternetDB network reconnaissance
+
+## MCP Integration
+
+The VulNavigator web interface uses MCP servers for enhanced threat intelligence:
+
+### compliance-api MCP Server
+- **MITRE ATT&CK v15.0**: Adversary Tactics, Techniques, and Procedures
+- **MITRE D3FEND v1.1**: Cybersecurity Countermeasures Knowledge Graph
+- **CWE Top 25**: Most Dangerous Software Weaknesses (2024)
+
+### voraxx-mcp-server (Direct Integration)
+- **CVE lookup**: OSV.dev vulnerability database
+- **Shodan exposure**: InternetDB network reconnaissance
+- **Nuclei scanning**: Template-based vulnerability detection
+
 ## Trademark
 
 **VulNavigator™** is a trademark of wbharris. See [`TRADEMARK.md`](TRADEMARK.md).
