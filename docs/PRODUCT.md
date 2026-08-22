@@ -151,3 +151,13 @@ A user drops `examples/mythos-zeroday.json` (no CVE) or `examples/narrative-rce.
 3. What do we do this week vs later?
 4. What can we put in front of it until the patch ships?
 5. What did the agent guess, and what should I go find out?
+
+## Out of scope for this package
+
+This repository ships `vuln-nav` and the 11-section case. It does **not** ship:
+
+- a web UI
+- live MITRE ATT&CK / D3FEND / CWE MCP
+- OSV.dev, Shodan, or Nuclei lookups
+
+Optional Devin skill files under [`.devin/skills/`](../.devin/skills/) only document how an agent should run `vuln-nav` (or start a local Flask UI if the operator already has one). Mapping tables stay in `src/vulnavigator/data/mappings.json`. Priority is not CVSS; KEV/EPSS/CVSS apply only when a CVE exists and `--offline` was not used.
