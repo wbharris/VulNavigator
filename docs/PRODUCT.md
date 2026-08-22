@@ -78,13 +78,13 @@ Statuses: `confirmed` · `plausible` · `unconfirmed` · `rejected`.
 | Finder gave you… | Status |
 |------------------|--------|
 | Sandbox / explicit `reproduced=true` | `confirmed` |
-| CISA KEV **and** product + version | `confirmed` (CVE is KEV; still replay on our build) |
 | Write-up + PoC text (no reproduction) | `plausible` — replay on our build |
 | Scanner hit with CVE/CWE/location | `plausible` — detection, not exploit proof |
+| CISA KEV (any product/version) | at most `plausible` — KEV is wild exploitation, not our build |
 | Write-up + product, no CVE, no PoC | `unconfirmed` |
 | Neither write-up nor PoC nor structured identity | `rejected` |
 
-CISA KEV alone does **not** confirm the finding on our asset. NVD description is enrichment, not identity. A PoC string is not reproduction.
+CISA KEV raises **priority/urgency**, not validation status. NVD description is enrichment, not identity. A PoC string is not reproduction.
 
 Scanner hits (Qualys, Nessus, …) stay **detections**, not exploit proof. Unknown JSON is `generic`, not Mythos.
 
