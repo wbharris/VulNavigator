@@ -32,31 +32,17 @@ def record_assumptions(case: Case) -> Case:
             "Priority and urgency",
         )
     if case.asset_ai_system is None:
-        _assume(
-            case,
-            "ai_system",
-            "no",
-            "No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off",
-            "If this hosts a model or agent, ATLAS/AI RMF overlays should fire",
-        )
         _need(
             case,
             "Does this asset host a model, RAG index, training pipeline, or tool-calling agent?",
-            "AI overlays stay dark unless we know this",
+            "ATLAS / AI RMF stay off until this is tagged; we do not assume no",
             "ATLAS / AI RMF sections",
         )
     if case.asset_fraud_relevant is None:
-        _assume(
-            case,
-            "fraud_relevant",
-            "no",
-            "No payment / identity / ATO context — F3 left off",
-            "A payment or login path would add F3 techniques and a fraud owner",
-        )
         _need(
             case,
             "Does this sit on a payment, identity, or account-takeover path?",
-            "Fraud teams need a different owner and SLA than a generic host vuln",
+            "F3 stays off until this is tagged; we do not assume no",
             "F3 overlay and next-action owners",
         )
     if not case.product:
@@ -193,9 +179,7 @@ def prioritize(case: Case) -> Case:
         case.priority, case.urgency = "P4", "backlog"
 
     case.priority_reasons = reasons or ["Default: limited signal"]
-    if case.validation_status == "unconfirmed" and not case.cves:
-        case.confidence = "medium"
-    elif case.validation_status == "confirmed" or case.kev:
+    if case.validation_status == "confirmed":
         case.confidence = "high"
     else:
         case.confidence = "medium"

@@ -38,8 +38,10 @@ def test_mythos_offline_records_assumptions():
     assert case.validation_status in {"confirmed", "plausible"}
     fields = {a.field for a in case.assumptions}
     assert "internet_facing" in fields
-    assert "ai_system" in fields
-    assert "fraud_relevant" in fields
+    assert "ai_system" not in fields
+    assert "fraud_relevant" not in fields
+    assert case.asset_ai_system is None
+    assert case.asset_fraud_relevant is None
     assert case.atlas == []
     assert case.f3 == []
     assert any("internet-facing" in i.question.lower() for i in case.improve)

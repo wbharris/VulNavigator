@@ -9,7 +9,7 @@ from vulnavigator.scanners import SCANNER_KINDS
 def validate(case: Case) -> Case:
     notes: list[str] = []
     ev = case.evidence
-    has_identity = bool(case.cves) or bool(case.nvd_description)
+    has_identity = bool(case.cves)
     has_product = bool(case.product or case.component or case.locations)
     has_structured = bool(case.cwes) or bool(case.locations) or bool(case.finding_id)
     has_writeup = (
@@ -17,7 +17,9 @@ def validate(case: Case) -> Case:
         or bool(ev.discovery.strip())
         or (len(case.title.strip()) >= 12 and has_structured)
     )
-    has_proof = bool(ev.reproduced) or bool(ev.sandbox) or bool(ev.poc.strip())
+    has_poc_text = bool(ev.poc.strip())
+    has_reproduction = ev.reproduced is True or ev.sandbox is True
+    on_named_build = bool(case.product and case.version)
     zeroday = is_ai_zeroday(case)
     scanner = case.source_kind in SCANNER_KINDS
 
@@ -26,7 +28,7 @@ def validate(case: Case) -> Case:
             "No CVE expected — AI 0-day identity is the write-up, how it was found, and the PoC/exploit"
         )
     elif case.cves and case.nvd_description:
-        notes.append(f"{case.cves[0]} resolved in NVD")
+        notes.append(f"{case.cves[0]} resolved in NVD (enrichment, not asset identity)")
     elif case.cves and not case.nvd_description:
         notes.append(f"{case.cves[0]} not resolved (offline or unknown to NVD)")
     elif scanner:
@@ -37,59 +39,79 @@ def validate(case: Case) -> Case:
         notes.append("No CVE — treating as a 0-day / pre-CVE claim")
 
     if case.kev:
-        notes.append("Listed in CISA KEV (exploited in the wild)")
+        notes.append(
+            "CVE is on CISA KEV (exploited in the wild) — this does not confirm the CVE on our asset"
+        )
     if case.epss is not None:
         notes.append(f"EPSS={case.epss:.3f}")
     if case.cvss is not None:
         notes.append(f"CVSS={case.cvss}")
 
-    if has_proof:
+    if has_reproduction:
         who = {
             "daybreak": "Daybreak",
             "mythos": "Mythos",
-        }.get(case.source_kind, case.source_kind.title() if case.source_kind in SCANNER_KINDS else "Source")
-        notes.append(f"{who} provided a PoC / exploit or sandbox reproduction — that is the primary evidence")
+        }.get(case.source_kind, case.source_kind.title() if scanner else "Source")
+        notes.append(f"{who} provided sandbox reproduction or an explicit reproduced=true flag")
+    elif has_poc_text:
+        notes.append("Finder included a PoC / exploit write-up — text is not the same as reproduction")
     else:
         notes.append("No PoC, exploit, or sandbox reproduction in the finding")
     if ev.discovery.strip():
         notes.append("Finder described how the issue was discovered")
     if case.source_kind == "daybreak" and case.finder_confidence:
         notes.append(f"Daybreak confidence={case.finder_confidence}")
-    if case.source_kind in SCANNER_KINDS:
+    if scanner:
         notes.append(f"{case.source_kind} scanner detection — not exploit-validated")
     if case.rule_id:
         notes.append(f"Finder rule/bug class: {case.rule_id}")
 
     if not has_product:
         notes.append("Affected product/component/location missing")
-    if not has_writeup and not has_identity and not has_proof and not has_structured:
+    if not has_writeup and not has_identity and not has_poc_text and not has_structured:
         notes.append("Description too thin to stand on its own")
 
-    # Status — AI 0-days stand on write-up + PoC; scanners stand on CVE/CWE/location
-    if not has_identity and not has_writeup and not has_proof and not has_structured:
+    # Status — reproduction or (KEV + named product/version). PoC text is not proof.
+    if not has_identity and not has_writeup and not has_poc_text and not has_structured:
         status = "rejected"
         notes.append("Rejected: no write-up, no PoC, no CVE, and no structured identity")
-    elif zeroday and ev.reproduced is False and not has_proof:
+    elif zeroday and ev.reproduced is False and not has_reproduction and not has_poc_text:
         status = "unconfirmed"
         notes.append("Writer said exploitability is not confirmed and no PoC was attached")
-    elif case.kev or (has_identity and has_proof) or (zeroday and ev.sandbox and has_proof):
+    elif has_reproduction and (has_identity or zeroday or has_writeup):
         status = "confirmed"
+    elif case.kev and on_named_build:
+        status = "confirmed"
+        notes.append("Confirmed only as KEV on a named product/version — still replay on our build")
+    elif case.kev:
+        notes.append("KEV applies to the CVE, not to this asset (need product + version or a replay)")
+        if scanner and (has_identity or has_structured):
+            status = "plausible"
+            notes.append("Scanner/SAST detection with CVE, CWE, or a code/host location — not exploit-validated")
+        elif has_identity and has_product:
+            status = "plausible"
+        else:
+            status = "unconfirmed"
     elif scanner and (has_identity or has_structured):
         status = "plausible"
         notes.append("Scanner/SAST detection with CVE, CWE, or a code/host location — not exploit-validated")
-    elif has_proof and has_writeup:
+    elif has_poc_text and has_writeup:
         status = "plausible"
     elif zeroday and has_writeup:
         status = "unconfirmed"
         notes.append("0-day write-up only — replay a PoC before treating this as confirmed")
-    elif has_identity or (has_writeup and has_product):
-        status = "plausible" if has_writeup else "unconfirmed"
+    elif has_identity and (scanner or has_product or has_structured):
+        status = "plausible"
+    elif has_writeup and has_product:
+        status = "unconfirmed"
+        notes.append("Write-up names a product but has no CVE detection or reproduction")
+    elif has_identity:
+        status = "unconfirmed"
     else:
         status = "unconfirmed"
 
-    # Contradictions
     sev = case.source_severity.lower()
-    if sev in {"critical", "high"} and not has_proof and not case.kev:
+    if sev in {"critical", "high"} and not has_reproduction and not case.kev:
         notes.append("Source severity is high/critical but evidence is thin")
 
     case.validation_status = status

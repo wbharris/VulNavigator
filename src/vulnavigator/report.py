@@ -76,7 +76,6 @@ def _likely_behaviors(case: Case) -> list[str]:
 
 
 def to_markdown(case: Case) -> str:
-    attack_names = [f"`{m.id}` {m.name}" for m in case.attack]
     d3 = [f"`{m.id}` {m.name}" for m in case.d3fend]
     csf = [f"`{m.id}` {m.name}" for m in case.csf]
     overlay = []
@@ -99,13 +98,13 @@ def to_markdown(case: Case) -> str:
         if not any("PoC" in q or "poc" in q.lower() for q in missing):
             missing.insert(0, "PoC or exploit the finder used (commands, request, crash, sandbox log)")
 
-    rem = case.remediation or ["Identify the component and apply the vendor fix"]
+    rem = case.remediation or [
+        "Default advice (no finder-supplied fix): identify the component and apply the vendor fix if one exists"
+    ]
     comp = case.compensating_controls or [
-        "Temporary network segmentation / remove public access if feasible",
-        "Firewall allowlisting and WAF or edge filtering (virtual patch)",
-        "Enhanced logging and alerting on the exposed service",
-        "Tightened service-account permissions",
-        "Backup and recovery readiness",
+        "Default until a specific control is chosen: reduce exposure if the service is public",
+        "Default: extra logging on the affected service",
+        "Default: confirm backups — WAF/segmentation only if this issue is actually network-reachable",
     ]
 
     lines = [
@@ -122,12 +121,16 @@ def to_markdown(case: Case) -> str:
         f"**Finding:** {case.title}.",
         f"**Context:** {case.description.strip() or 'No additional write-up.'}",
         (
-            f"**Current status:** Exploitability is {case.validation_status}. "
+            f"**Current status:** Validation is {case.validation_status}. "
             f"Scanner/finder severity: {case.source_severity or 'not stated'}. "
             + (
-                "Finder provided a PoC, exploit, or sandbox reproduction. "
-                if (case.evidence.reproduced or case.evidence.sandbox or case.evidence.poc.strip())
-                else "No PoC or exploit was attached. "
+                "Finder marked the issue reproduced or sandbox-validated. "
+                if (case.evidence.reproduced is True or case.evidence.sandbox is True)
+                else (
+                    "Finder included a PoC write-up (not the same as reproduction). "
+                    if case.evidence.poc.strip()
+                    else "No PoC or exploit was attached. "
+                )
             )
         ),
         "",
@@ -172,12 +175,18 @@ def to_markdown(case: Case) -> str:
         "",
         "**Tentative technique mapping (ATT&CK):**",
     ]
-    lines.extend(_bullets(attack_names or ["Insufficient identity to map beyond a generic public-app exploit"]))
+    attack_labels = []
+    for m in case.attack:
+        label = f"`{m.id}` {m.name}"
+        if m.provenance in {"cve-heuristic", "location-heuristic"}:
+            label += " (placeholder)"
+        attack_labels.append(label)
+    lines.extend(_bullets(attack_labels or ["Insufficient identity to map beyond a generic public-app exploit"]))
     if overlay:
         lines += ["", "**Overlays:**"]
         lines.extend(_bullets(overlay))
     else:
-        lines += ["", "ATLAS / AI RMF / F3: not in scope based on the write-up."]
+        lines += ["", "ATLAS / AI RMF / F3: not tagged on this finding."]
     lines += [
         "",
         "## 5. Defensive Countermeasures",
@@ -254,10 +263,24 @@ def to_markdown(case: Case) -> str:
     else:
         lines.append("- The scanner critical rating reflects a real issue in a reachable component.")
         lines.append("- The component may be exploitable in the deployed configuration (not yet proven).")
+    if case.validation_status == "confirmed":
+        uncertainty = (
+            "Validation is confirmed for this case file; still confirm product/version on our build."
+        )
+    elif case.validation_status == "plausible":
+        uncertainty = (
+            "This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven."
+        )
+    elif case.validation_status == "rejected":
+        uncertainty = "Rejected — do not treat this as a vulnerability until stronger evidence arrives."
+    else:
+        uncertainty = (
+            "Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence."
+        )
     lines += [
         "",
         "**Uncertainty:**",
-        "- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.",
+        f"- {uncertainty}",
         "",
         "**Information that would make this report better:**",
     ]

@@ -6,15 +6,15 @@ th{background:#f3f3f3}.pass{color:#0a7a2f;font-weight:700}.fail{color:#b00020;fo
 code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem}
 pre{background:#111;color:#e8e8e8;padding:1rem;overflow:auto;border-radius:6px;max-height:22rem}</style></head><body>
 <h1>VulNavigator last simulation</h1>
-<p><strong>2026-08-18</strong> · 28 intake types · 
+<p><strong>2026-08-22</strong> · 28 intake types · 
 <span class='pass'>28 passed, 0 failed</span></p>
 <p>Each example file was run through <code>analyze_path(..., offline=True)</code> 
 and the 11-section report was checked for source kind, identity, and required headings.</p>
 <table><thead><tr><th>Intake</th><th>File</th><th>Kind</th><th>Validation</th><th>Priority</th><th>Identity</th><th>Result</th></tr></thead><tbody>
 <tr><td>Daybreak official findings.json</td><td><code>examples/daybreak-findings.json</code></td><td>daybreak</td><td>confirmed</td><td>P1 immediate</td><td><code>CWE-787, CWE-400</code></td><td class='pass'>PASS</td></tr>
 <tr><td>Daybreak single finding</td><td><code>examples/daybreak-finding.json</code></td><td>daybreak</td><td>confirmed</td><td>P1 immediate</td><td><code>CVE-2026-00001</code></td><td class='pass'>PASS</td></tr>
-<tr><td>Mythos write-up</td><td><code>examples/mythos-finding.json</code></td><td>mythos</td><td>plausible</td><td>P2 this_week</td><td><code>CWE-121, CWE-119</code></td><td class='pass'>PASS</td></tr>
-<tr><td>Mythos 0-day (PoC, no CVE)</td><td><code>examples/mythos-zeroday.json</code></td><td>mythos</td><td>plausible</td><td>P2 this_week</td><td><code>CWE-787</code></td><td class='pass'>PASS</td></tr>
+<tr><td>Mythos write-up</td><td><code>examples/mythos-finding.json</code></td><td>mythos</td><td>confirmed</td><td>P2 this_week</td><td><code>CWE-121, CWE-119</code></td><td class='pass'>PASS</td></tr>
+<tr><td>Mythos 0-day (PoC, no CVE)</td><td><code>examples/mythos-zeroday.json</code></td><td>mythos</td><td>confirmed</td><td>P2 this_week</td><td><code>CWE-787</code></td><td class='pass'>PASS</td></tr>
 <tr><td>Narrative ticket (possible RCE)</td><td><code>examples/narrative-rce.txt</code></td><td>narrative</td><td>unconfirmed</td><td>P1 immediate</td><td><code>CWE-94</code></td><td class='pass'>PASS</td></tr>
 <tr><td>Nessus .nessus XML</td><td><code>examples/nessus-report.nessus</code></td><td>nessus</td><td>plausible</td><td>P3 30_days</td><td><code>CVE-2014-0160</code></td><td class='pass'>PASS</td></tr>
 <tr><td>Nessus CSV</td><td><code>examples/nessus-report.csv</code></td><td>nessus</td><td>plausible</td><td>P3 30_days</td><td><code>CVE-2014-0160</code></td><td class='pass'>PASS</td></tr>
@@ -44,7 +44,7 @@ and the 11-section report was checked for source kind, identity, and required he
 <p class='pass'>PASS · confirmed · P1</p>
 <pre># Heap overflow in HTTP/2 header decoder
 
-*VulNavigator™* · *Source:* daybreak `db-heap-h2-headers` · *Validation:* confirmed · *Confidence:* high · *Data quality:* 28/100
+*VulNavigator™* · *Source:* daybreak `db-heap-h2-headers` · *Validation:* confirmed · *Confidence:* high · *Data quality:* 40/100
 
 ## 1. Vulnerability Summary
 
@@ -54,7 +54,7 @@ and the 11-section report was checked for source kind, identity, and required he
 Decoder trusts attacker-controlled frame length.
 
 Any client that can send HTTP/2 to the proxy can trigger the copy.
-**Current status:** Exploitability is confirmed. Scanner/finder severity: critical. Finder provided a PoC, exploit, or sandbox reproduction. 
+**Current status:** Validation is confirmed. Scanner/finder severity: critical. Finder marked the issue reproduced or sandbox-validated. 
 
 ## 2. Evidence Summary
 
@@ -85,7 +85,7 @@ Sandbox crash on malformed HEADERS frame; ASAN report attached.
 ## 3. Validation Notes
 
 - No CVE expected — AI 0-day identity is the write-up, how it was found, and the PoC/exploit
-- Daybreak provided a PoC / exploit or sandbox reproduction — that is the primary evidence
+- Daybreak provided sandbox reproduction or an explicit reproduced=true flag
 - Finder described how the issue was discovered
 - Daybreak confidence=high
 - Finder rule/bug class: memory-safety.http2-header-decoder
@@ -105,10 +105,8 @@ Likely behaviors if exploitable:
 **Tentative technique mapping (ATT&amp;CK):**
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
-- `T1499` Endpoint Denial of Service
-- `T1190` Exploit Public-Facing Application
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -116,9 +114,6 @@ ATLAS / AI RMF / F3: not in scope based on the write-up.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
-- `D3-ITF` Inbound Traffic Filtering
-- `D3-NTA` Network Traffic Analysis
-- `D3-IAVA` Inbound Application Versioning
 
 ## 6. NIST CSF Alignment
 
@@ -133,9 +128,6 @@ Mapped categories from this case:
 - `PR.PS` Platform Security
 - `RS.MI` Incident Mitigation
 - `PR.AA` Identity Management and Access Control
-- `PR.IR` Technology Infrastructure Resilience
-- `DE.CM` Continuous Monitoring
-- `GV.OC` Organizational Context
 
 ## 7. Priority Assessment
 
@@ -162,9 +154,6 @@ If immediate patching is not possible:
 - D3-AH Application Hardening — until the fix is deployed
 - D3-LFP Local File Permissions — until the fix is deployed
 - D3-SUCP System Unprivileged Configuration — until the fix is deployed
-- D3-ITF Inbound Traffic Filtering — until the fix is deployed
-- D3-NTA Network Traffic Analysis — until the fix is deployed
-- D3-IAVA Inbound Application Versioning — until the fix is deployed
 
 ## 10. Next Actions
 
@@ -178,16 +167,14 @@ If immediate patching is not possible:
 **Confidence:** high
 
 **Assumptions:**
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 - **product** = `unknown` because No product / package name in the finding. Impact: Cannot confirm we actually run the affected build
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- Validation is confirmed for this case file; still confirm product/version on our build.
 
 **Information that would make this report better:**
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - What product, package, and deployed version do we run? — A finding against software we do not ship is not our P1 (changes: Validation status and priority)
 - Which exact version / commit / image digest is in production? — Daybreak and Mythos findings are often against a tree, not our build (changes: Whether remediation is 'patch now' vs 'not applicable')
 - Can we replay the finder PoC on our deployed build (same file, commit, or image)? — Mythos/Daybreak often prove a tree, not our production binary (changes: Validation (plausible → confirmed) and residual risk)
@@ -203,7 +190,7 @@ If immediate patching is not possible:
 
 **Finding:** Heap overflow in HTTP/2 header decoder.
 **Context:** A crafted HTTP/2 HEADERS frame can overflow a fixed decoder buffer. Daybreak Codex Security reproduced a crash in the sandbox and sketched a path to process memory corruption when the proxy is internet-facing.
-**Current status:** Exploitability is confirmed. Scanner/finder severity: critical. Finder provided a PoC, exploit, or sandbox reproduction. 
+**Current status:** Validation is confirmed. Scanner/finder severity: critical. Finder marked the issue reproduced or sandbox-validated. 
 
 ## 2. Evidence Summary
 
@@ -226,7 +213,7 @@ Sandbox crash on malformed HEADERS frame; ASAN report attached in Daybreak case.
 ## 3. Validation Notes
 
 - CVE-2026-00001 not resolved (offline or unknown to NVD)
-- Daybreak provided a PoC / exploit or sandbox reproduction — that is the primary evidence
+- Daybreak provided sandbox reproduction or an explicit reproduced=true flag
 
 Validation should confirm:
 - Replay the finder PoC on our deployed build (same file/commit/image)
@@ -247,7 +234,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -319,22 +306,22 @@ If immediate patching is not possible:
 - The component may be exploitable in the deployed configuration (not yet proven).
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- Validation is confirmed for this case file; still confirm product/version on our build.
 
 **Information that would make this report better:**
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
 <h2>Mythos write-up</h2>
-<p class='pass'>PASS · plausible · P2</p>
+<p class='pass'>PASS · confirmed · P2</p>
 <pre># Stack buffer overflow in RPC credential parse
 
-*VulNavigator™* · *Source:* mythos `MYTHOS-2026-0042` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 40/100
+*VulNavigator™* · *Source:* mythos `MYTHOS-2026-0042` · *Validation:* confirmed · *Confidence:* high · *Data quality:* 52/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** Stack buffer overflow in RPC credential parse.
 **Context:** Mythos Preview reports that svc_rpcsec_gss_validate rebuilds an RPC header into a fixed 128-byte stack buffer and copies attacker-controlled credential bytes without checking oa_length against the remaining space. Network-reachable if the RPC service is exposed.
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. Finder provided a PoC, exploit, or sandbox reproduction. 
+**Current status:** Validation is confirmed. Scanner/finder severity: high. Finder marked the issue reproduced or sandbox-validated. 
 
 ## 2. Evidence Summary
 
@@ -358,7 +345,7 @@ Send an RPC AUTH_GSS credential with oa_length=400 (MAX_AUTH_BYTES). Process cra
 ## 3. Validation Notes
 
 - No CVE expected — AI 0-day identity is the write-up, how it was found, and the PoC/exploit
-- Mythos provided a PoC / exploit or sandbox reproduction — that is the primary evidence
+- Mythos provided sandbox reproduction or an explicit reproduced=true flag
 - Finder rule/bug class: stack-buffer-overflow
 
 Validation should confirm:
@@ -376,7 +363,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -434,34 +421,32 @@ If immediate patching is not possible:
 
 ## 11. Confidence and Assumptions
 
-**Confidence:** medium
+**Confidence:** high
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- Validation is confirmed for this case file; still confirm product/version on our build.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Can we replay the finder PoC on our deployed build (same file, commit, or image)? — Mythos/Daybreak often prove a tree, not our production binary (changes: Validation (plausible → confirmed) and residual risk)
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
 <h2>Mythos 0-day (PoC, no CVE)</h2>
-<p class='pass'>PASS · plausible · P2</p>
+<p class='pass'>PASS · confirmed · P2</p>
 <pre># Heap overflow in custom HTTP header fold
 
-*VulNavigator™* · *Source:* mythos `MYTHOS-0DAY-001` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 40/100
+*VulNavigator™* · *Source:* mythos `MYTHOS-0DAY-001` · *Validation:* confirmed · *Confidence:* high · *Data quality:* 52/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** Heap overflow in custom HTTP header fold.
 **Context:** Mythos traced request header folding into a fixed heap buffer. An attacker-controlled header line is copied without checking remaining capacity.
-**Current status:** Exploitability is plausible. Scanner/finder severity: critical. Finder provided a PoC, exploit, or sandbox reproduction. 
+**Current status:** Validation is confirmed. Scanner/finder severity: critical. Finder marked the issue reproduced or sandbox-validated. 
 
 ## 2. Evidence Summary
 
@@ -490,7 +475,7 @@ printf 'GET / HTTP/1.1\r\nHost: x\r\nX-Fold: AAAA... (8k)\r\n\tBBBB\r\n\r\n' | n
 ## 3. Validation Notes
 
 - No CVE expected — AI 0-day identity is the write-up, how it was found, and the PoC/exploit
-- Mythos provided a PoC / exploit or sandbox reproduction — that is the primary evidence
+- Mythos provided sandbox reproduction or an explicit reproduced=true flag
 - Finder described how the issue was discovered
 - Finder rule/bug class: heap-buffer-overflow
 
@@ -509,7 +494,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -568,20 +553,18 @@ If immediate patching is not possible:
 
 ## 11. Confidence and Assumptions
 
-**Confidence:** medium
+**Confidence:** high
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- Validation is confirmed for this case file; still confirm product/version on our build.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Can we replay the finder PoC on our deployed build (same file, commit, or image)? — Mythos/Daybreak often prove a tree, not our production binary (changes: Validation (plausible → confirmed) and residual risk)
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -596,7 +579,7 @@ If immediate patching is not possible:
 **Finding:** Outdated internet-facing application component with potential RCE.
 **Context:** A scan identified an outdated internet-facing application component that may allow remote code execution. The application supports a client-facing workflow and processes sensitive business data.
 Exploitability has not been confirmed, but the finding is rated critical by the scanner. No evidence yet shows successful exploitation. No AI components are believed to be involved. Fraud risk is not currently suspected.
-**Current status:** Exploitability is unconfirmed. Scanner/finder severity: critical. No PoC or exploit was attached. 
+**Current status:** Validation is unconfirmed. Scanner/finder severity: critical. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -639,7 +622,7 @@ Likely behaviors if exploitable:
 - `T1190` Exploit Public-Facing Application
 - `T1059` Command and Scripting Interpreter
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -720,13 +703,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># OpenSSL Heartbleed
 
-*VulNavigator™* · *Source:* nessus `20007` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 36/100
+*VulNavigator™* · *Source:* nessus `20007` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 48/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** OpenSSL Heartbleed.
 **Context:** The remote service is affected by Heartbleed and may leak process memory to a remote attacker.
-**Current status:** Exploitability is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -768,7 +751,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -825,16 +808,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -842,13 +823,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># OpenSSL Heartbleed
 
-*VulNavigator™* · *Source:* nessus `20007` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 30/100
+*VulNavigator™* · *Source:* nessus `20007` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** OpenSSL Heartbleed.
 **Context:** The TLS service may leak process memory.
-**Current status:** Exploitability is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -890,7 +871,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -947,16 +928,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -964,13 +943,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># OpenSSL Heartbleed Vulnerability
 
-*VulNavigator™* · *Source:* qualys `38227` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 36/100
+*VulNavigator™* · *Source:* qualys `38227` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 48/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** OpenSSL Heartbleed Vulnerability.
 **Context:** The service is affected by the OpenSSL Heartbleed information disclosure vulnerability.
-**Current status:** Exploitability is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -1012,7 +991,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -1069,16 +1048,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -1086,13 +1063,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># OpenSSL Heartbleed
 
-*VulNavigator™* · *Source:* openvas `1.3.6.1.4.1.25623.1.0.103857` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 30/100
+*VulNavigator™* · *Source:* openvas `1.3.6.1.4.1.25623.1.0.103857` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** OpenSSL Heartbleed.
 **Context:** The remote TLS service is vulnerable to Heartbleed (CVE-2014-0160).
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -1134,7 +1111,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -1191,16 +1168,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -1208,13 +1183,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># OpenSSL Heartbleed
 
-*VulNavigator™* · *Source:* rapid7 `ssl-heartbleed` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 30/100
+*VulNavigator™* · *Source:* rapid7 `ssl-heartbleed` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** OpenSSL Heartbleed.
 **Context:** TLS heartbeat read overrun.
-**Current status:** Exploitability is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -1256,7 +1231,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -1313,16 +1288,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -1330,13 +1303,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># OpenSSL Heartbleed
 
-*VulNavigator™* · *Source:* rapid7 `ssl-heartbleed` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 30/100
+*VulNavigator™* · *Source:* rapid7 `ssl-heartbleed` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** OpenSSL Heartbleed.
 **Context:** TLS heartbeat read overrun.
-**Current status:** Exploitability is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -1378,7 +1351,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -1435,16 +1408,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -1452,13 +1423,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P4</p>
 <pre># [CodeQL] Possible SQL injection into a query.
 
-*VulNavigator™* · *Source:* sarif `js/sql-injection` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 20/100
+*VulNavigator™* · *Source:* sarif `js/sql-injection` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 32/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** [CodeQL] Possible SQL injection into a query..
 **Context:** Possible SQL injection into a query.
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -1500,7 +1471,7 @@ Likely behaviors if exploitable:
 - `T1190` Exploit Public-Facing Application
 - `T1505` Server Software Component
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -1559,16 +1530,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -1576,13 +1545,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P4</p>
 <pre># [CodeQL] SQL injection sink.
 
-*VulNavigator™* · *Source:* sarif `res-db` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 20/100
+*VulNavigator™* · *Source:* sarif `res-db` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 32/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** [CodeQL] SQL injection sink..
 **Context:** SQL injection sink.
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -1624,7 +1593,7 @@ Likely behaviors if exploitable:
 - `T1190` Exploit Public-Facing Application
 - `T1505` Server Software Component
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -1683,16 +1652,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -1700,13 +1667,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># OpenSSL Heartbleed
 
-*VulNavigator™* · *Source:* trivy `CVE-2014-0160` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
+*VulNavigator™* · *Source:* trivy `CVE-2014-0160` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 54/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** OpenSSL Heartbleed.
 **Context:** TLS heartbeat extension read overrun.
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -1747,7 +1714,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -1804,29 +1771,27 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
 <h2>Snyk JSON</h2>
 <p class='pass'>PASS · plausible · P3</p>
 <pre># Prototype Pollution
 
-*VulNavigator™* · *Source:* snyk `SNYK-JS-LODASH-567746` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
+*VulNavigator™* · *Source:* snyk `SNYK-JS-LODASH-567746` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 54/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** Prototype Pollution.
 **Context:** lodash is vulnerable to prototype pollution.
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -1868,7 +1833,7 @@ Likely behaviors if exploitable:
 - `T1190` Exploit Public-Facing Application
 - `T1059` Command and Scripting Interpreter
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -1928,29 +1893,27 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
 <h2>GitHub Dependabot JSON</h2>
 <p class='pass'>PASS · plausible · P3</p>
 <pre># Prototype Pollution in lodash
 
-*VulNavigator™* · *Source:* dependabot `17` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 30/100
+*VulNavigator™* · *Source:* dependabot `17` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** Prototype Pollution in lodash.
 **Context:** No additional write-up.
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -1993,7 +1956,7 @@ Likely behaviors if exploitable:
 - `T1190` Exploit Public-Facing Application
 - `T1059` Command and Scripting Interpreter
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -2053,16 +2016,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -2070,13 +2031,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P2</p>
 <pre># Heartbleed on internet-facing VM
 
-*VulNavigator™* · *Source:* wiz `wiz-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 44/100
+*VulNavigator™* · *Source:* wiz `wiz-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 56/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** Heartbleed on internet-facing VM.
 **Context:** TLS heartbeat extension read overrun.
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -2119,7 +2080,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -2176,15 +2137,15 @@ If immediate patching is not possible:
 **Confidence:** medium
 
 **Assumptions:**
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
+- The scanner critical rating reflects a real issue in a reachable component.
+- The component may be exploitable in the deployed configuration (not yet proven).
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -2192,13 +2153,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P2</p>
 <pre># Heartbleed on internet-facing VM
 
-*VulNavigator™* · *Source:* wiz `wiz-gql-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 44/100
+*VulNavigator™* · *Source:* wiz `wiz-gql-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 56/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** Heartbleed on internet-facing VM.
 **Context:** TLS heartbeat extension read overrun.
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -2241,7 +2202,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -2298,15 +2259,15 @@ If immediate patching is not possible:
 **Confidence:** medium
 
 **Assumptions:**
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
+- The scanner critical rating reflects a real issue in a reachable component.
+- The component may be exploitable in the deployed configuration (not yet proven).
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -2314,13 +2275,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># CVE-2014-0160
 
-*VulNavigator™* · *Source:* prisma `prisma-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
+*VulNavigator™* · *Source:* prisma `prisma-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 54/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** CVE-2014-0160.
 **Context:** Vulnerable package in container image
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -2361,7 +2322,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -2418,29 +2379,27 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
 <h2>Orca alerts JSON</h2>
 <p class='pass'>PASS · plausible · P3</p>
 <pre># Heartbleed on workload
 
-*VulNavigator™* · *Source:* orca `orca-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 30/100
+*VulNavigator™* · *Source:* orca `orca-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** Heartbleed on workload.
 **Context:** Heartbleed on workload
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -2482,7 +2441,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -2539,16 +2498,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -2556,13 +2513,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># CVE-2014-0160
 
-*VulNavigator™* · *Source:* defender `mdvm-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 30/100
+*VulNavigator™* · *Source:* defender `mdvm-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** CVE-2014-0160.
 **Context:** Install the vendor security update
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -2604,7 +2561,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -2661,16 +2618,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -2678,13 +2633,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># CVE-2014-0160
 
-*VulNavigator™* · *Source:* defender `mdvm-odata-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 30/100
+*VulNavigator™* · *Source:* defender `mdvm-odata-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** CVE-2014-0160.
 **Context:** Install the vendor security update
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -2726,7 +2681,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -2783,16 +2738,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -2800,13 +2753,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># CVE-2014-0160
 
-*VulNavigator™* · *Source:* crowdstrike `cs-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 30/100
+*VulNavigator™* · *Source:* crowdstrike `cs-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** CVE-2014-0160.
 **Context:** Heartbleed
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -2848,7 +2801,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -2905,16 +2858,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -2922,13 +2873,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># CVE-2014-0160 - openssl
 
-*VulNavigator™* · *Source:* inspector `abc` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
+*VulNavigator™* · *Source:* inspector `abc` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 54/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** CVE-2014-0160 - openssl.
 **Context:** Heartbleed in AMI package
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -2969,7 +2920,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -3026,29 +2977,27 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
 <h2>Nexus IQ JSON</h2>
 <p class='pass'>PASS · plausible · P3</p>
 <pre># org.apache.logging.log4j:log4j-core:2.14.1: CVE-2021-44228
 
-*VulNavigator™* · *Source:* nexus `CVE-2021-44228` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 30/100
+*VulNavigator™* · *Source:* nexus `CVE-2021-44228` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** org.apache.logging.log4j:log4j-core:2.14.1: CVE-2021-44228.
 **Context:** critical
-**Current status:** Exploitability is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -3091,7 +3040,7 @@ Likely behaviors if exploitable:
 - `T1190` Exploit Public-Facing Application
 - `T1059` Command and Scripting Interpreter
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -3151,16 +3100,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -3168,13 +3115,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># OpenSSL Heartbleed
 
-*VulNavigator™* · *Source:* nuclei `cves/CVE-2014-0160` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 30/100
+*VulNavigator™* · *Source:* nuclei `cves/CVE-2014-0160` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** OpenSSL Heartbleed.
 **Context:** TLS heartbeat read overrun
-**Current status:** Exploitability is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -3216,7 +3163,7 @@ Likely behaviors if exploitable:
 - `T1203` Exploitation for Client Execution
 - `T1068` Exploitation for Privilege Escalation
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -3273,16 +3220,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -3290,13 +3235,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P4</p>
 <pre># SQL injection
 
-*VulNavigator™* · *Source:* burp `1048832` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 20/100
+*VulNavigator™* · *Source:* burp `1048832` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 32/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** SQL injection.
 **Context:** The q parameter is interpolated into a SQL query.
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -3338,7 +3283,7 @@ Likely behaviors if exploitable:
 - `T1190` Exploit Public-Facing Application
 - `T1505` Server Software Component
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -3393,16 +3338,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
@@ -3410,13 +3353,13 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P4</p>
 <pre># SQL Injection
 
-*VulNavigator™* · *Source:* zap `40018` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 20/100
+*VulNavigator™* · *Source:* zap `40018` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 32/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** SQL Injection.
 **Context:** A SQL injection was found.
-**Current status:** Exploitability is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
 
 ## 2. Evidence Summary
 
@@ -3458,7 +3401,7 @@ Likely behaviors if exploitable:
 - `T1190` Exploit Public-Facing Application
 - `T1505` Server Software Component
 
-ATLAS / AI RMF / F3: not in scope based on the write-up.
+ATLAS / AI RMF / F3: not tagged on this finding.
 
 ## 5. Defensive Countermeasures
 
@@ -3513,16 +3456,14 @@ If immediate patching is not possible:
 
 **Assumptions:**
 - **internet_facing** = `no` because Finding did not say whether the component is reachable from the internet. Impact: If it is exposed, urgency should usually rise one band
-- **ai_system** = `no` because No AI/model/RAG/agent tag on the finding — ATLAS and AI RMF left off. Impact: If this hosts a model or agent, ATLAS/AI RMF overlays should fire
-- **fraud_relevant** = `no` because No payment / identity / ATO context — F3 left off. Impact: A payment or login path would add F3 techniques and a fraud owner
 
 **Uncertainty:**
-- Exploitability, exact vulnerability identity, and affected scope remain unconfirmed from the provided evidence.
+- This is a detection or a named CVE, not a replay on our build. Identity is enough to act; exploitability is not proven.
 
 **Information that would make this report better:**
 - Is this service internet-facing or reachable from an untrusted network? — Exposure is the biggest swing factor after KEV / validated exploit (changes: Priority and urgency)
-- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — AI overlays stay dark unless we know this (changes: ATLAS / AI RMF sections)
-- Does this sit on a payment, identity, or account-takeover path? — Fraud teams need a different owner and SLA than a generic host vuln (changes: F3 overlay and next-action owners)
+- Does this asset host a model, RAG index, training pipeline, or tool-calling agent? — ATLAS / AI RMF stay off until this is tagged; we do not assume no (changes: ATLAS / AI RMF sections)
+- Does this sit on a payment, identity, or account-takeover path? — F3 stays off until this is tagged; we do not assume no (changes: F3 overlay and next-action owners)
 - Which exact version / commit / image digest is in production? — We cannot tell whether the installed build is still vulnerable (changes: Whether remediation is 'patch now' vs 'not applicable')
 - What data does this component touch (none / internal / PII / payment)? — Data class changes CSF language and legal/fraud involvement (changes: Priority rationale and owners)
 </pre>
