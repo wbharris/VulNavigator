@@ -68,6 +68,6 @@ def apply_narrative(case: Case) -> Case:
         if "mythos" not in blob.lower() and "daybreak" not in blob.lower():
             case.source_kind = "narrative"
             case.source = case.source or "narrative"
-    if (not case.title or case.title == blob.splitlines()[0][:120]) and mentions_rce(blob):
+    if case.source_kind == "narrative" and (not case.title or case.title == blob.splitlines()[0][:120]) and mentions_rce(blob):
         case.title = "Outdated internet-facing application component with potential RCE"
     return case
