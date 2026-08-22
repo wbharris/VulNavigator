@@ -119,7 +119,7 @@ def test_kev_without_version_is_not_confirmed():
     assert any("does not confirm" in n for n in case.validation_notes)
 
 
-def test_kev_with_product_and_version_can_confirm():
+def test_kev_with_product_and_version_stays_plausible():
     case = Case(
         source_kind="generic",
         title="Log4Shell",
@@ -130,7 +130,8 @@ def test_kev_with_product_and_version_can_confirm():
         kev=True,
     )
     validate(case)
-    assert case.validation_status == "confirmed"
+    assert case.validation_status == "plausible"
+    assert any("does not confirm" in n for n in case.validation_notes)
 
 
 def test_poc_text_is_not_reproduction():

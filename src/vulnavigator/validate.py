@@ -19,7 +19,6 @@ def validate(case: Case) -> Case:
     )
     has_poc_text = bool(ev.poc.strip())
     has_reproduction = ev.reproduced is True or ev.sandbox is True
-    on_named_build = bool(case.product and case.version)
     zeroday = is_ai_zeroday(case)
     scanner = case.source_kind in SCANNER_KINDS
 
@@ -71,7 +70,7 @@ def validate(case: Case) -> Case:
     if not has_writeup and not has_identity and not has_poc_text and not has_structured:
         notes.append("Description too thin to stand on its own")
 
-    # Status — reproduction or (KEV + named product/version). PoC text is not proof.
+    # Status — only reproduction/sandbox confirms. KEV raises priority, not validation.
     if not has_identity and not has_writeup and not has_poc_text and not has_structured:
         status = "rejected"
         notes.append("Rejected: no write-up, no PoC, no CVE, and no structured identity")
@@ -80,18 +79,6 @@ def validate(case: Case) -> Case:
         notes.append("Writer said exploitability is not confirmed and no PoC was attached")
     elif has_reproduction and (has_identity or zeroday or has_writeup):
         status = "confirmed"
-    elif case.kev and on_named_build:
-        status = "confirmed"
-        notes.append("Confirmed only as KEV on a named product/version — still replay on our build")
-    elif case.kev:
-        notes.append("KEV applies to the CVE, not to this asset (need product + version or a replay)")
-        if scanner and (has_identity or has_structured):
-            status = "plausible"
-            notes.append("Scanner/SAST detection with CVE, CWE, or a code/host location — not exploit-validated")
-        elif has_identity and has_product:
-            status = "plausible"
-        else:
-            status = "unconfirmed"
     elif scanner and (has_identity or has_structured):
         status = "plausible"
         notes.append("Scanner/SAST detection with CVE, CWE, or a code/host location — not exploit-validated")
