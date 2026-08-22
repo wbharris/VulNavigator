@@ -103,33 +103,18 @@ vuln-nav analyze examples/trivy-report.json
 
 v0.1 on GitHub `main`. Next slice: pinned ATT&CK / D3FEND / ATLAS snapshots and a reasoning model.
 
-## Devin Integration
+## Agent skills (Devin)
 
-This repository includes Devin skills for AI-assisted vulnerability analysis:
+Optional Devin skill files live in [`.devin/skills/`](.devin/skills/). They tell an agent how to invoke this repo. They are not extra product features.
 
-- **vulnavigator**: Command-line VulNavigator analysis with MITRE integration
-- **vulnavigator-web**: Web interface launcher with live MITRE MCP integration
+| Skill | What it does |
+|-------|----------------|
+| `vulnavigator` | Run `vuln-nav analyze` and summarize the 11-section case |
+| `vulnavigator-web` | Start a **local** Flask UI **if you keep one out of tree** |
 
-These skills are available in `.devin/skills/` and provide:
-- **MITRE ATT&CK v15.0**: Adversary Tactics, Techniques, and Procedures
-- **MITRE D3FEND v1.1**: Cybersecurity Countermeasures Knowledge Graph
-- **CWE Top 25**: Most Dangerous Software Weaknesses (2024)
-- **CVE lookup**: OSV.dev vulnerability database
-- **Shodan exposure**: InternetDB network reconnaissance
+`vuln-nav` maps ATT&CK / D3FEND / CSF from [`src/vulnavigator/data/mappings.json`](src/vulnavigator/data/mappings.json). It does not call MITRE MCP, OSV, Shodan, or Nuclei.
 
-## MCP Integration
-
-The VulNavigator web interface uses MCP servers for enhanced threat intelligence:
-
-### compliance-api MCP Server
-- **MITRE ATT&CK v15.0**: Adversary Tactics, Techniques, and Procedures
-- **MITRE D3FEND v1.1**: Cybersecurity Countermeasures Knowledge Graph
-- **CWE Top 25**: Most Dangerous Software Weaknesses (2024)
-
-### voraxx-mcp-server (Direct Integration)
-- **CVE lookup**: OSV.dev vulnerability database
-- **Shodan exposure**: InternetDB network reconnaissance
-- **Nuclei scanning**: Template-based vulnerability detection
+A separate local `vulnavigator_web.py` (not in this package) can optionally look up CVEs on OSV.dev and host exposure on Shodan InternetDB via `voraxx-mcp-server`. ATT&CK/D3FEND IDs in that UI are still the ones `vuln-nav` already printed. Extra “threat actor / prevalence / live MITRE v15.0” prose in that UI is heuristic copy, not a live MITRE query.
 
 ## Trademark
 

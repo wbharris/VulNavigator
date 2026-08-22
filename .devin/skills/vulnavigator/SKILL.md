@@ -1,6 +1,6 @@
 ---
 name: vulnavigator
-description: Analyze vulnerabilities using VulNavigator tool with MITRE ATT&CK and D3FEND integration
+description: Run vuln-nav analyze on a finding file and summarize the 11-section case.
 argument-hint: "<finding_file> [options]"
 allowed-tools:
   - read
@@ -10,105 +10,62 @@ allowed-tools:
 permissions:
   allow:
     - Exec(vuln-nav analyze)
-    - Exec(Projects/VulNavigator/.venv/bin/python)
+    - Exec(.venv/bin/python)
+    - Exec(.venv/bin/python -m pytest)
 ---
 
-Help analyze vulnerabilities using the VulNavigator tool with MITRE ATT&CK and D3FEND integration.
+Run VulNavigator from this repository. Product contract: `docs/PRODUCT.md`.
 
-## VulNavigator Overview
-VulNavigator transforms security findings from AI tools (Mythos, Daybreak) or mainstream scanners into actionable defender cases. It performs normalization, validation, ATT&CK/D3FEND/CSF mapping, prioritization, and generates comprehensive reports.
+## What this skill is
 
-**NEW:** Web interface with live MITRE MCP integration for enhanced threat intelligence!
+This skill invokes the CLI (`vuln-nav analyze`). It does **not** call MITRE MCP, OSV, Shodan, or Nuclei. ATT&CK / D3FEND / CSF IDs come from `src/vulnavigator/data/mappings.json`.
 
-## Web Interface
-Run the VulNavigator web interface at http://localhost:5000:
+Do not start a web UI from this skill. That is `vulnavigator-web`, and the Flask app is not part of this package.
+
+## Command
+
+From the repo root (after `python3 -m venv .venv && .venv/bin/pip install -e .`):
+
 ```bash
-cd /home/iceroot
-/home/iceroot/web_venv/bin/python vulnavigator_web.py
+.venv/bin/vuln-nav analyze <finding_file> [--source NAME] [--id ID] [--offline] [--json] [-o report.md]
 ```
 
-### Web Interface Features
-- **Interactive web UI** for vulnerability analysis
-- **MITRE ATT&CK integration** via compliance-api MCP server
-- **D3FEND countermeasures** with implementation guidance
-- **CVE lookup** via OSV.dev using voraxx-mcp-server
-- **Shodan exposure assessment** for network intelligence
-- **Smart enhancement** based on vulnerability type
-- **Real-time threat intelligence** from MITRE databases
+If `vuln-nav` is already on PATH, that name is fine.
 
-### Web Interface Usage
-1. Open http://localhost:5000 in your browser
-2. Enter findings as JSON, text, or CVE
-3. Enable MITRE enhancement options:
-   - 🚀 Enhance with MITRE data (ATT&CK + D3FEND)
-   - 🔍 CVE lookup (OSV.dev)
-   - 🌐 Shodan exposure (network intelligence)
-4. Get enhanced reports with real threat intelligence
+## Inputs
 
-## Command Line Usage
-Run VulNavigator analysis on a finding file:
+AI finders (primary): Daybreak `findings.json`, Mythos write-up, narrative ticket.
+
+Scanners: Qualys, OpenVAS/GVM, Nessus, Rapid7, SARIF, Trivy/Snyk/Dependabot, Wiz/Prisma/Orca, Defender VM, CrowdStrike Spotlight, AWS Inspector, Nexus IQ, Nuclei JSONL, Burp/ZAP XML.
+
+CVE-only (`CVE-YYYY-NNNNN`) is a fallback. Scanner hits are detections, not exploit proof.
+
+Bundled examples: `examples/daybreak-findings.json`, `examples/mythos-zeroday.json`, `examples/narrative-rce.txt`, `examples/nessus-report.nessus`, `examples/sarif-report.sarif`, `examples/trivy-report.json`.
+
+## Pipeline (do not skip)
+
+1. Normalize to one case file
+2. Validate evidence / PoC / identity
+3. Map ATT&CK, D3FEND, NIST CSF from local tables
+4. Prioritize: exposure, replayable PoC, and whether mapping unlocks RCE/credentials. KEV/EPSS/CVSS only when a CVE exists and `--offline` was not used. Priority is not CVSS.
+5. 11-section markdown or `--json`
+
+AI 0-days usually have no CVE. Judge PoC + discovery write-up. Do not wait for NVD.
+
+## After the report
+
+Summarize for the user:
+
+- validation status (`confirmed` / `plausible` / `unconfirmed` / `rejected`)
+- priority and urgency
+- what the agent guessed
+- next actions (owner + done-when)
+
+If they want a web form, point them to `vulnavigator-web` and say that UI is local/out-of-tree.
+
+## Tests
+
 ```bash
-vuln-nav analyze <finding_file> [--source NAME] [--id ID] [--offline] [--json] [-o report.md]
-```
-
-## Supported Input Sources
-- **AI Finders**: Daybreak findings.json, Mythos write-ups, narrative tickets
-- **Scanners**: Qualys VM XML/CSV, OpenVAS/GVM XML/CSV, Nessus .nessus, Rapid7 Nexpose XML, SARIF, Trivy/Snyk, Wiz/Prisma/Orca, Defender VM, CrowdStrike Spotlight, AWS Inspector, Nexus IQ, Nuclei JSONL, Burp/ZAP XML
-- **CVE-only**: CVE-YYYY-NNNNN format as fallback
-
-## Analysis Steps
-1. **Normalize**: Convert scanner-specific format to standardized finding
-2. **Validate**: Check evidence, PoC, reproducibility
-3. **Map**: ATT&CK behaviors, D3FEND countermeasures, NIST CSF alignment
-4. **Prioritize**: Using KEV, EPSS, CVSS scores
-5. **Report**: Generate 11-section markdown or JSON case file
-
-## MCP Integration
-The VulNavigator web interface uses MCP servers for enhanced threat intelligence:
-
-### compliance-api MCP Server
-- **MITRE ATT&CK v15.0**: Adversary Tactics, Techniques, and Procedures
-- **MITRE D3FEND v1.1**: Cybersecurity Countermeasures Knowledge Graph
-- **CWE Top 25**: Most Dangerous Software Weaknesses (2024)
-
-### voraxx-mcp-server (Direct Integration)
-- **CVE lookup**: OSV.dev vulnerability database
-- **Shodan exposure**: InternetDB network reconnaissance
-- **Nuclei scanning**: Template-based vulnerability detection
-
-## Report Sections
-1. Vulnerability summary
-2. Evidence (facts, how found, PoC/exploit, missing evidence)
-3. Validation notes
-4. Attacker behaviors / ATT&CK
-5. Defensive countermeasures (D3FEND)
-6. NIST CSF alignment
-7. Priority and urgency
-8. Remediation
-9. Compensating controls
-10. Next actions (owner + done-when)
-11. Confidence, assumptions, and improvements
-
-## Key Options
-- `--source NAME`: Force specific adapter (mythos, daybreak, nessus, qualys, sarif, trivy, etc.)
-- `--id ID`: Analyze single finding by ID (short token with letters, digits, _.:/=@+-)
-- `--offline`: Skip live NVD, CISA KEV, and FIRST EPSS calls (still runs normalize/validate/mapping/report)
-- `--json`: Output JSON case file instead of markdown
-- `-o report.md`: Specify output file
-
-## Example Files
-Check the examples directory for sample inputs:
-- `examples/daybreak-findings.json`
-- `examples/mythos-zeroday.json`
-- `examples/narrative-rce.txt`
-- `examples/nessus-report.nessus`
-- `examples/sarif-report.sarif`
-- `examples/trivy-report.json`
-
-## Test Command
-Run example intakes:
-```bash
+.venv/bin/python -m pytest -q
 .venv/bin/python tests/simulate_intake.py
 ```
-
-When the user provides a finding file, analyze it using VulNavigator and provide a summary of the key findings, priority level, and recommended actions. For enhanced analysis with MITRE intelligence, suggest using the web interface at http://localhost:5000.

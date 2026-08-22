@@ -1,75 +1,55 @@
 ---
 name: vulnavigator-web
-description: Start VulNavigator web interface with MITRE MCP integration
+description: Start a local out-of-tree VulNavigator Flask UI if the operator already has one.
 argument-hint: ""
 allowed-tools:
   - exec
   - read
 permissions:
   allow:
-    - Exec(/home/iceroot/web_venv/bin/python)
-    - Exec(/home/iceroot/vulnavigator_web.py)
+    - Exec(python)
+    - Exec(python3)
 ---
 
-Start the VulNavigator web interface with live MITRE ATT&CK and D3FEND integration.
+Start a **local** Flask UI for VulNavigator only if the operator already has that script. It is **not** shipped in this git repository.
 
-## VulNavigator Web Interface
-The VulNavigator web interface provides an interactive UI for vulnerability analysis with enhanced threat intelligence from MITRE MCP servers.
+## What this skill is not
 
-## Starting the Web Interface
+- Not live MITRE ATT&CK / D3FEND MCP
+- Not a substitute for `vuln-nav` (use the `vulnavigator` skill for analysis)
+- Not a public service. Bind to `127.0.0.1`. Do not print LAN IPs from the machine.
+
+The core CLI maps ATT&CK/D3FEND from `src/vulnavigator/data/mappings.json`. The local UI may append OSV.dev / Shodan InternetDB results. It does not query MITRE MCP.
+
+## Locate the UI
+
+Search in this order; stop at the first file that exists:
+
+1. `$VULNAVIGATOR_WEB` if set
+2. `vulnavigator_web.py` in the current workspace
+3. `~/vulnavigator_web.py`
+
+If none exist, stop. Tell the user the Flask UI is out of tree and they should use `vuln-nav analyze` instead. Do not invent a path.
+
+Use that script’s interpreter if a sibling `web_venv` exists; otherwise `python3`. Example:
+
 ```bash
-cd /home/iceroot
-/home/iceroot/web_venv/bin/python vulnavigator_web.py
+python3 vulnavigator_web.py
 ```
 
-The interface will be available at:
-- **Local**: http://localhost:5000
-- **Network**: http://192.168.0.188:5000
+Prefer `--host 127.0.0.1 --port 5000` when the script accepts those flags. Otherwise assume `http://127.0.0.1:5000`.
 
-## Web Interface Features
-- **Interactive vulnerability analysis** through web UI
-- **MITRE ATT&CK integration** via compliance-api MCP server
-- **D3FEND countermeasures** with implementation guidance
-- **CVE lookup** via OSV.dev using voraxx-mcp-server
-- **Shodan exposure assessment** for network intelligence
-- **Smart enhancement** based on vulnerability type
-- **Real-time threat intelligence** from MITRE databases
+## Optional lookups (if the local UI implements them)
 
-## Usage
-1. Open http://localhost:5000 in your browser
-2. Enter findings as JSON, text, or CVE
-3. Enable MITRE enhancement options:
-   - 🚀 Enhance with MITRE data (ATT&CK + D3FEND)
-   - 🔍 CVE lookup (OSV.dev)
-   - 🌐 Shodan exposure (network intelligence)
-4. Get enhanced reports with real threat intelligence
+A local UI may call `voraxx-mcp-server` for:
 
-## Example Input
-```json
-{
-  "title": "Log4Shell Vulnerability",
-  "severity": "critical",
-  "description": "Apache Log4j2 remote code execution vulnerability",
-  "affected_component": "log4j-core",
-  "cve": "CVE-2021-44228",
-  "cvss_score": 10.0
-}
-```
+- CVE lookup via OSV.dev
+- host exposure via Shodan InternetDB
 
-## MCP Integration
-The web interface uses MCP servers for enhanced threat intelligence:
+Do not advertise Nuclei; the local UI does not run it.
 
-### compliance-api MCP Server
-- **MITRE ATT&CK v15.0**: Adversary Tactics, Techniques, and Procedures
-- **MITRE D3FEND v1.1**: Cybersecurity Countermeasures Knowledge Graph
-- **CWE Top 25**: Most Dangerous Software Weaknesses (2024)
+## Usage to tell the user
 
-### voraxx-mcp-server (Direct Integration)
-- **CVE lookup**: OSV.dev vulnerability database
-- **Shodan exposure**: InternetDB network reconnaissance
-- **Nuclei scanning**: Template-based vulnerability detection
-
-## Stopping the Web Interface
-Press Ctrl+C in the terminal where the web interface is running, or use the terminal management to stop the process.
-
-When the user wants to analyze vulnerabilities using the web interface, start the VulNavigator web server and provide the URL for access.
+1. Open `http://127.0.0.1:5000`
+2. Paste JSON, narrative, or a CVE
+3. Read the 11-section `vuln-nav` case first. Optional lookup sections are labeled separately.
