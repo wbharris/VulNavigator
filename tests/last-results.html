@@ -6,7 +6,7 @@ th{background:#f3f3f3}.pass{color:#0a7a2f;font-weight:700}.fail{color:#b00020;fo
 code,pre{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:.85rem}
 pre{background:#111;color:#e8e8e8;padding:1rem;overflow:auto;border-radius:6px;max-height:22rem}</style></head><body>
 <h1>VulNavigator last simulation</h1>
-<p><strong>2026-08-22</strong> · 28 intake types · 
+<p><strong>2026-08-25</strong> · 28 intake types · 
 <span class='pass'>28 passed, 0 failed</span></p>
 <p>Each example file was run through <code>analyze_path(..., offline=True)</code> 
 and the 11-section report was checked for source kind, identity, and required headings.</p>
@@ -55,6 +55,7 @@ Decoder trusts attacker-controlled frame length.
 
 Any client that can send HTTP/2 to the proxy can trigger the copy.
 **Current status:** Validation is confirmed. Scanner/finder severity: critical. Finder marked the issue reproduced or sandbox-validated. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -95,6 +96,7 @@ Validation should confirm:
 - The exact software/component and version the write-up names
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -114,6 +116,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -146,6 +149,7 @@ Mapped categories from this case:
 
 - Bound frame->len against sizeof(buf) before copy; add a regression test from the Daybreak PoC.
 - WAF / HTTP/2 inspection until patched
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -161,6 +165,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -191,6 +196,7 @@ If immediate patching is not possible:
 **Finding:** Heap overflow in HTTP/2 header decoder.
 **Context:** A crafted HTTP/2 HEADERS frame can overflow a fixed decoder buffer. Daybreak Codex Security reproduced a crash in the sandbox and sketched a path to process memory corruption when the proxy is internet-facing.
 **Current status:** Validation is confirmed. Scanner/finder severity: critical. Finder marked the issue reproduced or sandbox-validated. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -221,6 +227,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -245,6 +252,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -278,6 +286,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Bound frame->len against sizeof(buf) before copy; add a regression test from the Daybreak PoC.
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -296,6 +305,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -315,13 +325,14 @@ If immediate patching is not possible:
 <p class='pass'>PASS · confirmed · P2</p>
 <pre># Stack buffer overflow in RPC credential parse
 
-*VulNavigator™* · *Source:* mythos `MYTHOS-2026-0042` · *Validation:* confirmed · *Confidence:* high · *Data quality:* 52/100
+*VulNavigator™* · *Source:* mythos `MYTHOS-2026-0042` · *Validation:* confirmed · *Confidence:* high · *Data quality:* 47/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** Stack buffer overflow in RPC credential parse.
 **Context:** Mythos Preview reports that svc_rpcsec_gss_validate rebuilds an RPC header into a fixed 128-byte stack buffer and copies attacker-controlled credential bytes without checking oa_length against the remaining space. Network-reachable if the RPC service is exposed.
 **Current status:** Validation is confirmed. Scanner/finder severity: high. Finder marked the issue reproduced or sandbox-validated. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -353,6 +364,7 @@ Validation should confirm:
 - The exact software/component and version the write-up names
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -371,6 +383,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -403,6 +416,7 @@ Mapped categories from this case:
 - If the PoC does not replay on our build, record not-applicable with the version/commit compared
 - If patching cannot be immediate: remove public access if feasible, restrict source IPs, WAF/edge filter the PoC path, disable the feature
 - Keep the PoC and discovery notes with the ticket for vendor/CVE assignment later
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -418,6 +432,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -440,13 +455,14 @@ If immediate patching is not possible:
 <p class='pass'>PASS · confirmed · P2</p>
 <pre># Heap overflow in custom HTTP header fold
 
-*VulNavigator™* · *Source:* mythos `MYTHOS-0DAY-001` · *Validation:* confirmed · *Confidence:* high · *Data quality:* 52/100
+*VulNavigator™* · *Source:* mythos `MYTHOS-0DAY-001` · *Validation:* confirmed · *Confidence:* high · *Data quality:* 47/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** Heap overflow in custom HTTP header fold.
 **Context:** Mythos traced request header folding into a fixed heap buffer. An attacker-controlled header line is copied without checking remaining capacity.
 **Current status:** Validation is confirmed. Scanner/finder severity: critical. Finder marked the issue reproduced or sandbox-validated. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -484,6 +500,7 @@ Validation should confirm:
 - The exact software/component and version the write-up names
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -502,6 +519,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -535,6 +553,7 @@ Mapped categories from this case:
 - If the PoC does not replay on our build, record not-applicable with the version/commit compared
 - If patching cannot be immediate: remove public access if feasible, restrict source IPs, WAF/edge filter the PoC path, disable the feature
 - Keep the PoC and discovery notes with the ticket for vendor/CVE assignment later
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -550,6 +569,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -572,7 +592,7 @@ If immediate patching is not possible:
 <p class='pass'>PASS · unconfirmed · P1</p>
 <pre># Outdated internet-facing application component with potential RCE
 
-*VulNavigator™* · *Source:* narrative · *Validation:* unconfirmed · *Confidence:* medium · *Data quality:* 46/100
+*VulNavigator™* · *Source:* narrative `is` · *Validation:* unconfirmed · *Confidence:* medium · *Data quality:* 41/100
 
 ## 1. Vulnerability Summary
 
@@ -710,6 +730,7 @@ If immediate patching is not possible:
 **Finding:** OpenSSL Heartbleed.
 **Context:** The remote service is affected by Heartbleed and may leak process memory to a remote attacker.
 **Current status:** Validation is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -741,6 +762,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -759,6 +781,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -786,6 +809,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Upgrade OpenSSL to 1.0.1g or later and rotate exposed keys.
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -801,6 +825,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -830,6 +855,7 @@ If immediate patching is not possible:
 **Finding:** OpenSSL Heartbleed.
 **Context:** The TLS service may leak process memory.
 **Current status:** Validation is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -861,6 +887,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -879,6 +906,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -906,6 +934,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Upgrade OpenSSL and rotate keys
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -921,6 +950,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -950,6 +980,7 @@ If immediate patching is not possible:
 **Finding:** OpenSSL Heartbleed Vulnerability.
 **Context:** The service is affected by the OpenSSL Heartbleed information disclosure vulnerability.
 **Current status:** Validation is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -981,6 +1012,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -999,6 +1031,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -1026,6 +1059,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Upgrade OpenSSL and rotate credentials that may have been exposed.
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -1041,6 +1075,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -1070,6 +1105,7 @@ If immediate patching is not possible:
 **Finding:** OpenSSL Heartbleed.
 **Context:** The remote TLS service is vulnerable to Heartbleed (CVE-2014-0160).
 **Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -1101,6 +1137,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -1119,6 +1156,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -1146,6 +1184,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Upgrade OpenSSL to a fixed release.
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -1161,6 +1200,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -1190,6 +1230,7 @@ If immediate patching is not possible:
 **Finding:** OpenSSL Heartbleed.
 **Context:** TLS heartbeat read overrun.
 **Current status:** Validation is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -1221,6 +1262,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -1239,6 +1281,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -1266,6 +1309,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Upgrade OpenSSL.
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -1281,6 +1325,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -1310,6 +1355,7 @@ If immediate patching is not possible:
 **Finding:** OpenSSL Heartbleed.
 **Context:** TLS heartbeat read overrun.
 **Current status:** Validation is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -1341,6 +1387,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -1359,6 +1406,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -1386,6 +1434,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Upgrade OpenSSL.
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -1401,6 +1450,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -1437,6 +1487,7 @@ If immediate patching is not possible:
 - ATT&amp;CK mapping includes exploit or execution techniques — heuristic only, not proof of RCE
 - No evidence of successful exploitation was provided
 - Finder/scanner rated the finding high
+- Scanner/tool named in the write-up: codeql
 
 **Missing evidence:**
 - Is this service internet-facing or reachable from an untrusted network?
@@ -1559,6 +1610,7 @@ If immediate patching is not possible:
 - ATT&amp;CK mapping includes exploit or execution techniques — heuristic only, not proof of RCE
 - No evidence of successful exploitation was provided
 - Finder/scanner rated the finding high
+- Scanner/tool named in the write-up: codeql
 
 **Missing evidence:**
 - Is this service internet-facing or reachable from an untrusted network?
@@ -1674,6 +1726,7 @@ If immediate patching is not possible:
 **Finding:** OpenSSL Heartbleed.
 **Context:** TLS heartbeat extension read overrun.
 **Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -1704,6 +1757,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -1722,6 +1776,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -1749,6 +1804,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Upgrade to 1.0.1g
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -1764,6 +1820,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -1785,7 +1842,7 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># Prototype Pollution
 
-*VulNavigator™* · *Source:* snyk `SNYK-JS-LODASH-567746` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 54/100
+*VulNavigator™* · *Source:* snyk `SNYK-JS-LODASH-567746` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 49/100
 
 ## 1. Vulnerability Summary
 
@@ -1907,7 +1964,7 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># Prototype Pollution in lodash
 
-*VulNavigator™* · *Source:* dependabot `17` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
+*VulNavigator™* · *Source:* dependabot `17` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 37/100
 
 ## 1. Vulnerability Summary
 
@@ -2038,6 +2095,7 @@ If immediate patching is not possible:
 **Finding:** Heartbleed on internet-facing VM.
 **Context:** TLS heartbeat extension read overrun.
 **Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -2069,6 +2127,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -2088,6 +2147,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -2116,6 +2176,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Apply the vendor / distro fix for CVE-2014-0160 and verify the package version
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -2131,6 +2192,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -2160,6 +2222,7 @@ If immediate patching is not possible:
 **Finding:** Heartbleed on internet-facing VM.
 **Context:** TLS heartbeat extension read overrun.
 **Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -2191,6 +2254,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -2210,6 +2274,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -2238,6 +2303,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Apply the vendor / distro fix for CVE-2014-0160 and verify the package version
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -2253,6 +2319,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -2275,13 +2342,14 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># CVE-2014-0160
 
-*VulNavigator™* · *Source:* prisma `prisma-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 54/100
+*VulNavigator™* · *Source:* prisma `prisma-1` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 49/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** CVE-2014-0160.
 **Context:** Vulnerable package in container image
 **Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -2312,6 +2380,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -2330,6 +2399,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -2357,6 +2427,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Apply the vendor / distro fix for CVE-2014-0160 and verify the package version
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -2372,6 +2443,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -2400,6 +2472,7 @@ If immediate patching is not possible:
 **Finding:** Heartbleed on workload.
 **Context:** Heartbleed on workload
 **Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -2431,6 +2504,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -2449,6 +2523,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -2476,6 +2551,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Apply the vendor / distro fix for CVE-2014-0160 and verify the package version
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -2491,6 +2567,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -2520,6 +2597,7 @@ If immediate patching is not possible:
 **Finding:** CVE-2014-0160.
 **Context:** Install the vendor security update
 **Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -2551,6 +2629,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -2569,6 +2648,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -2596,6 +2676,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Install the vendor security update
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -2611,6 +2692,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -2640,6 +2722,7 @@ If immediate patching is not possible:
 **Finding:** CVE-2014-0160.
 **Context:** Install the vendor security update
 **Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -2671,6 +2754,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -2689,6 +2773,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -2716,6 +2801,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Install the vendor security update
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -2731,6 +2817,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -2760,6 +2847,7 @@ If immediate patching is not possible:
 **Finding:** CVE-2014-0160.
 **Context:** Heartbleed
 **Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -2791,6 +2879,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -2809,6 +2898,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -2836,6 +2926,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Apply the vendor / distro fix for CVE-2014-0160 and verify the package version
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -2851,6 +2942,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -2873,13 +2965,14 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># CVE-2014-0160 - openssl
 
-*VulNavigator™* · *Source:* inspector `abc` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 54/100
+*VulNavigator™* · *Source:* inspector `abc` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 49/100
 
 ## 1. Vulnerability Summary
 
 **Finding:** CVE-2014-0160 - openssl.
 **Context:** Heartbleed in AMI package
 **Current status:** Validation is plausible. Scanner/finder severity: high. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -2910,6 +3003,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -2928,6 +3022,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -2955,6 +3050,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - yum update openssl
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -2970,6 +3066,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 
@@ -2991,7 +3088,7 @@ If immediate patching is not possible:
 <p class='pass'>PASS · plausible · P3</p>
 <pre># org.apache.logging.log4j:log4j-core:2.14.1: CVE-2021-44228
 
-*VulNavigator™* · *Source:* nexus `CVE-2021-44228` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 42/100
+*VulNavigator™* · *Source:* nexus `CVE-2021-44228` · *Validation:* plausible · *Confidence:* medium · *Data quality:* 37/100
 
 ## 1. Vulnerability Summary
 
@@ -3122,6 +3219,7 @@ If immediate patching is not possible:
 **Finding:** OpenSSL Heartbleed.
 **Context:** TLS heartbeat read overrun
 **Current status:** Validation is plausible. Scanner/finder severity: critical. No PoC or exploit was attached. 
+**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.
 
 ## 2. Evidence Summary
 
@@ -3153,6 +3251,7 @@ Validation should confirm:
 - Whether the vulnerable code path is reachable in our deployment
 - Whether mitigations exist (WAF, config restrictions, network controls)
 - Whether a known advisory/CVE applies
+- Whether the process already runs with the target privilege (false 'escalation')
 
 ## 4. Likely Attacker Behaviors / Technique Mapping
 
@@ -3171,6 +3270,7 @@ ATLAS / AI RMF / F3: not tagged on this finding.
 - `D3-AH` Application Hardening
 - `D3-LFP` Local File Permissions
 - `D3-SUCP` System Unprivileged Configuration
+- Drop capabilities / run unprivileged until the bug is patched
 
 ## 6. NIST CSF Alignment
 
@@ -3198,6 +3298,7 @@ Mapped categories from this case:
 ## 8. Recommended Remediation
 
 - Apply the vendor / distro fix for CVE-2014-0160 and verify the package version
+- Reduce the service to least privilege so a successful exploit does not yield root/admin
 
 ## 9. Compensating Controls
 
@@ -3213,6 +3314,7 @@ If immediate patching is not possible:
 - **security:** Replay the finder PoC / sandbox evidence on our build — done when: PoC replays, does not apply to our build, or is a false positive
 - **security:** Enable compensating controls if the patch cannot ship inside the urgency window — done when: Control in place or accepted residual risk signed
 - **engineering:** Apply primary remediation and verify — done when: Patched build deployed or change rejected with reason
+- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented
 
 ## 11. Confidence and Assumptions
 

@@ -9,6 +9,18 @@ from vulnavigator.models import Case, is_ai_zeroday
 from vulnavigator.scanners import SCANNER_KINDS
 
 
+def attack_class(case: Case) -> str:
+    """Narrow class for extra report bullets. Empty means generic template."""
+    ids = {m.id.split(".")[0] for m in case.attack}
+    cwes = set(case.cwes)
+    blob = f"{case.title} {case.description}".lower()
+    if cwes & {"CWE-798", "CWE-259", "CWE-521"} or "T1552" in ids or "hardcoded" in blob:
+        return "hardcoded_creds"
+    if cwes & {"CWE-269", "CWE-250"} or "T1068" in ids or "privilege" in blob:
+        return "privesc"
+    return ""
+
+
 def _bullets(items: list[str]) -> list[str]:
     return [f"- {item}" for item in items] if items else ["- none"]
 
@@ -50,6 +62,12 @@ def _facts(case: Case) -> list[str]:
         facts.append("CVE(s): " + ", ".join(case.cves))
     elif is_ai_zeroday(case):
         facts.append("No CVE — expected for a Mythos/Daybreak 0-day")
+    if case.detected_tool:
+        facts.append(f"Scanner/tool named in the write-up: {case.detected_tool}")
+    if case.host:
+        facts.append(f"Host: {case.host}")
+    if case.endpoint:
+        facts.append(f"Endpoint: {case.endpoint}")
     return facts or ["Writer provided a narrative with limited structured fields"]
 
 
@@ -93,7 +111,8 @@ def to_markdown(case: Case) -> str:
         "P4": "Low / backlog",
     }.get(case.priority, case.priority)
 
-    missing = [i.question for i in case.improve]
+    missing = list(case.missing_evidence) if case.missing_evidence else [i.question for i in case.improve]
+    klass = attack_class(case)
     if is_ai_zeroday(case) and not case.evidence.poc.strip():
         if not any("PoC" in q or "poc" in q.lower() for q in missing):
             missing.insert(0, "PoC or exploit the finder used (commands, request, crash, sandbox log)")
@@ -133,6 +152,12 @@ def to_markdown(case: Case) -> str:
                 )
             )
         ),
+    ]
+    if klass == "hardcoded_creds":
+        lines.append("**Class:** Hardcoded / embedded credentials — treat as a secret incident, not only a patch.")
+    elif klass == "privesc":
+        lines.append("**Class:** Privilege escalation — confirm the privilege boundary before ranking as host compromise.")
+    lines += [
         "",
         "## 2. Evidence Summary",
         "",
@@ -164,6 +189,10 @@ def to_markdown(case: Case) -> str:
     ]
     if not is_ai_zeroday(case):
         lines.append("- Whether a known advisory/CVE applies")
+    if klass == "hardcoded_creds":
+        lines.append("- Whether the credential is still valid and where else it is reused")
+    elif klass == "privesc":
+        lines.append("- Whether the process already runs with the target privilege (false 'escalation')")
     lines += [
         "",
         "## 4. Likely Attacker Behaviors / Technique Mapping",
@@ -205,6 +234,10 @@ def to_markdown(case: Case) -> str:
                 "- Validate least-privilege service permissions",
             ]
         )
+    if klass == "hardcoded_creds":
+        lines.append("- Rotate the secret and block it in VCS/history scanning (D3-CH / secret hygiene)")
+    elif klass == "privesc":
+        lines.append("- Drop capabilities / run unprivileged until the bug is patched")
     lines += [
         "",
         "## 6. NIST CSF Alignment",
@@ -229,6 +262,14 @@ def to_markdown(case: Case) -> str:
         "**Rationale:**",
     ]
     lines.extend(_bullets(case.priority_reasons))
+    if klass == "hardcoded_creds":
+        extra = "Rotate the exposed credential and purge it from images, tickets, and git history"
+        if extra not in rem:
+            rem = list(rem) + [extra]
+    elif klass == "privesc":
+        extra = "Reduce the service to least privilege so a successful exploit does not yield root/admin"
+        if extra not in rem:
+            rem = list(rem) + [extra]
     lines += ["", "## 8. Recommended Remediation", ""]
     lines.extend(_bullets(rem))
     lines += ["", "## 9. Compensating Controls", "", "If immediate patching is not possible:"]
@@ -249,6 +290,10 @@ def to_markdown(case: Case) -> str:
                 "- Escalate incident response if any compromise indicators are found",
             ]
         )
+    if klass == "hardcoded_creds":
+        lines.append("- **security:** Hunt for reuse of the same secret — done when: secret scanning + rotation complete")
+    elif klass == "privesc":
+        lines.append("- **platform:** Confirm the service account's actual privileges — done when: capability/uid documented")
     lines += [
         "",
         "## 11. Confidence and Assumptions",

@@ -41,7 +41,7 @@ Any supported input becomes one **case file**.
 |--------|----------------|
 | **Daybreak / Codex Security** | `documentType: codex-security.findings`, sealed scan directory, or one finding record |
 | **Mythos** | Write-up JSON/markdown: title, target, CWE/bug class, **poc**, **discovery**, reproduced |
-| **Narrative** | Free-text (ticket, email). Hints extracted: internet-facing, RCE, critical, no AI, no fraud, PoC/discovery sections |
+| **Narrative** | Free-text (ticket, email). Hints extracted: internet-facing, RCE (negation-aware), critical, no AI, no fraud, PoC/discovery sections. Also pulls tool name, finding id, host, endpoint, `file:line`, and component/version when present. A scanner *name* in prose sets `detected_tool` for detection-status; it does **not** relabel the source as Nessus/Qualys. |
 | **Qualys** | VM XML (`QID` / `HOST` / `VULN`) or CSV with `QID` |
 | **OpenVAS / GVM** | Greenbone XML `<report>` or CSV with NVT / OID |
 | **Nessus** | `.nessus` or Tenable CSV. `--source nessus` also accepts `nexsus` |

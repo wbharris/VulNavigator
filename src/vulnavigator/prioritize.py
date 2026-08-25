@@ -99,7 +99,7 @@ def record_assumptions(case: Case) -> Case:
             "Data class changes CSF language and legal/fraud involvement",
             "Priority rationale and owners",
         )
-    scanner = case.source_kind in SCANNER_KINDS
+    scanner = case.source_kind in SCANNER_KINDS or bool(case.detected_tool)
     # SAST/DAST with a rule/CWE already has identity; do not nag as if it were a 0-day.
     if not case.cves and not is_ai_zeroday(case) and not (scanner and (case.cwes or case.rule_id)):
         _need(
@@ -178,6 +178,11 @@ def prioritize(case: Case) -> Case:
     else:
         case.priority, case.urgency = "P4", "backlog"
 
+    # Floor after deductions so internet-facing work is not buried on the backlog.
+    if internet and case.validation_status != "rejected" and case.priority == "P4":
+        case.priority, case.urgency = "P3", "30_days"
+        reasons.append("Internet-facing floor (applied after deductions)")
+
     case.priority_reasons = reasons or ["Default: limited signal"]
     if case.validation_status == "confirmed":
         case.confidence = "high"
@@ -199,6 +204,12 @@ def score_data_quality(case: Case) -> Case:
         score += 4
     score -= 8 * len(case.improve)
     score -= 6 * len(case.assumptions)
+    if not case.cwes:
+        score -= 10
+    if not case.attack:
+        score -= 10
+    if not case.host and not case.endpoint and not any(loc.path for loc in case.locations):
+        score -= 5
     if case.validation_status == "rejected":
         score = min(score, 20)
     case.data_quality = max(0, min(100, score))

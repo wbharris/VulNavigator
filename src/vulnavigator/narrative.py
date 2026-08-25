@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import re
 
-from vulnavigator.heuristics import mentions_rce
+from vulnavigator.artifacts import extract_artifacts
+from vulnavigator.heuristics import mentions_rce, mentions_sensitive_data
 from vulnavigator.models import Case
 _CRITICAL = re.compile(r"\bcritical\b", re.I)
 _INTERNET = re.compile(r"internet[-\s]?facing|public[-\s]?facing|client[-\s]?facing", re.I)
@@ -14,7 +15,6 @@ _NO_EXPLOIT = re.compile(
     r"exploitability has not been confirmed|not been confirmed|no evidence.{0,40}exploitation",
     re.I,
 )
-_SENSITIVE = re.compile(r"sensitive (business )?data|pii|payment", re.I)
 _OUTDATED = re.compile(r"\boutdated\b", re.I)
 _POC_HEAD = re.compile(
     r"(?im)^(?:poc|p\.o\.c\.|proof[-\s]of[-\s]concept|exploit(?:\s+steps)?)\s*[:\-]\s*(.+)$"
@@ -36,6 +36,7 @@ def _section_after(pattern: re.Pattern[str], text: str) -> str:
 
 
 def apply_narrative(case: Case) -> Case:
+    extract_artifacts(case)
     blob = f"{case.title}\n{case.description}"
     if not blob.strip():
         return case
@@ -48,7 +49,7 @@ def apply_narrative(case: Case) -> Case:
         case.asset_fraud_relevant = False
     if not case.source_severity and _CRITICAL.search(blob):
         case.source_severity = "critical"
-    if not case.data_class and _SENSITIVE.search(blob):
+    if not case.data_class and mentions_sensitive_data(blob):
         case.data_class = "sensitive-business"
     poc = _section_after(_POC_HEAD, blob)
     if poc and not case.evidence.poc:
@@ -63,8 +64,13 @@ def apply_narrative(case: Case) -> Case:
         case.cwes.append("CWE-94")
     if _OUTDATED.search(blob) and not case.product:
         case.component = case.component or "outdated application component"
-    if case.source_kind in {"unknown", "generic", "mythos"} and len(blob) > 200 and not case.cves:
-        # Prose ticket / analyst write-up, not a Mythos JSON object
+    if (
+        case.source_kind in {"unknown", "generic", "mythos"}
+        and len(blob) > 200
+        and not case.cves
+        and not case.detected_tool
+    ):
+        # Prose ticket / analyst write-up, not a Mythos JSON object or scanner paste
         if "mythos" not in blob.lower() and "daybreak" not in blob.lower():
             case.source_kind = "narrative"
             case.source = case.source or "narrative"

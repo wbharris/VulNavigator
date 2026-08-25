@@ -77,6 +77,9 @@ class Case:
     asset_ai_system: bool | None = None
     asset_fraud_relevant: bool | None = None
     data_class: str = ""
+    detected_tool: str = ""
+    host: str = ""
+    endpoint: str = ""
     raw: dict[str, Any] = field(default_factory=dict)
 
     # filled later
@@ -101,6 +104,7 @@ class Case:
     next_actions: list[Action] = field(default_factory=list)
     assumptions: list[Assumption] = field(default_factory=list)
     improve: list[InfoNeed] = field(default_factory=list)
+    missing_evidence: list[str] = field(default_factory=list)
     confidence: str = ""
     data_quality: int = 0
 

@@ -20,7 +20,7 @@ def validate(case: Case) -> Case:
     has_poc_text = bool(ev.poc.strip())
     has_reproduction = ev.reproduced is True or ev.sandbox is True
     zeroday = is_ai_zeroday(case)
-    scanner = case.source_kind in SCANNER_KINDS
+    scanner = case.source_kind in SCANNER_KINDS or bool(case.detected_tool)
 
     if zeroday:
         notes.append(
@@ -61,7 +61,8 @@ def validate(case: Case) -> Case:
     if case.source_kind == "daybreak" and case.finder_confidence:
         notes.append(f"Daybreak confidence={case.finder_confidence}")
     if scanner:
-        notes.append(f"{case.source_kind} scanner detection — not exploit-validated")
+        tool = case.source_kind if case.source_kind in SCANNER_KINDS else (case.detected_tool or "scanner")
+        notes.append(f"{tool} scanner detection — not exploit-validated")
     if case.rule_id:
         notes.append(f"Finder rule/bug class: {case.rule_id}")
 

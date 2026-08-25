@@ -53,6 +53,7 @@ def reset_derived(case: Case) -> None:
     case.compensating_controls = []
     case.priority_reasons = []
     case.validation_notes = []
+    case.missing_evidence = []
     case.remediation = list(case.source_remediation)
 
 
@@ -63,6 +64,7 @@ def analyze_case(case: Case, offline: bool = False) -> Case:
     validate(case)
     map_case(case)
     record_assumptions(case)
+    case.missing_evidence = [i.question for i in case.improve]
     prioritize(case)
     score_data_quality(case)
     plan_actions(case)
