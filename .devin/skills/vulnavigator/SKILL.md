@@ -67,7 +67,33 @@ Narrative should pull, when the words are there:
 - product + version (`in … System 1.0`, `Bagisto … versions prior to 2.3.10`) — not the last word (`System`, `including`, `versions`)
 - “exploit has been released” → evidence **note** (claim, not a replayable PoC)
 
-Frozen corpus: `tests/data/blind_cve_2026.json` (first **300** published CVE-2026-*, ids stripped). Pytest `tests/test_blind_corpus.py` must stay green. Refresh via `tests/training/refresh_blind_cve.py N`. Do not paste CVE ids into analyze. Score **phrase → CWE** from the description, not NVD fields the prose never states (AV:N-only, CWE-20-only).
+Frozen corpus: `tests/data/blind_cve_2026.json` (first **300** published CVE-2026-*, ids stripped; grows +150/week). Pytest `tests/test_blind_corpus.py` must stay green. Score **phrase → CWE** from the description, not NVD fields the prose never states (AV:N-only, CWE-20-only).
+
+## Weekly training (autonomous, sized by SuperGrok %)
+
+When the user reports SuperGrok usage from Settings → Usage as a percent (0–100):
+
+1. **Do not ask to confirm.** Do not wait for more input.
+2. Run `.venv/bin/python tests/training/weekly.py --used N` with **that** percent (suggests grow + rounds, then fetch/rescan + `cases/error-pack.md` locally).
+3. Read **only** `cases/error-pack.md` and the `SUGGESTED` line. Do not open `blind-first-N.json`. Do not print every CVE. No subagents.
+4. If mode is `report-only`, or the pack is CLEAN with nothing new: skip code edits and go to the final report.
+5. Else implement phrase extractors (description text only), 3–8 tests in `tests/test_blind_advisory.py`, and skill bullets. Phrase → CWE; not NVD-only labels.
+6. `.venv/bin/python -m pytest -q` then `.venv/bin/python tests/training/weekly.py --rescan`.
+7. Read the **new** error pack. Repeat steps 5–6 up to the printed `rounds`. Stop early on CLEAN.
+8. Do not push unless the user already said push.
+
+**% → grow / fix rounds** (also printed by `weekly.py --used N --suggest-only`):
+
+| % used | remaining | grow | rounds | mode |
+|---|---|---|---|---|
+| 0–25 | 75–100 | +150 | 3 | full |
+| 26–50 | 50–74 | +100 | 3 | full |
+| 51–70 | 30–49 | +50 | 2 | medium |
+| 71–85 | 15–29 | +25 | 2 | small |
+| 86–94 | 6–14 | +0 | 1 | fix-only |
+| 95–100 | 0–5 | +0 | 0 | report-only |
+
+**Final message** (always): suggested vs executed; CLEAN before → after; table of **errors found** and **fixes implemented** (phrase / CWE / product extractor / skill line); leftover fails (NVD-only, not taught). Details: `tests/training/README.md`.
 
 ## Pipeline (do not skip)
 
@@ -95,4 +121,5 @@ If they want a web form, point them to `vulnavigator-web` and say that UI is loc
 ```bash
 .venv/bin/python -m pytest -q
 .venv/bin/python tests/simulate_intake.py
+.venv/bin/python tests/training/weekly.py          # compact error pack only
 ```

@@ -97,7 +97,10 @@ vuln-nav analyze examples/trivy-report.json
 ```bash
 .venv/bin/python -m pytest -q
 .venv/bin/python tests/simulate_intake.py    # all example intakes → tests/last-results.html
+.venv/bin/python tests/training/weekly.py --used N   # N = SuperGrok Usage percent
 ```
+
+Blind-CVE training: give Grok your **current** Settings → Usage percent. It sizes the batch, runs locally, fixes errors, updates the skill, retests, and reports errors + fixes without waiting. See `tests/training/README.md`.
 
 ## Status
 

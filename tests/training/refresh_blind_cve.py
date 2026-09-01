@@ -291,15 +291,13 @@ def issues_for(cve: dict, case) -> list[str]:
 def _print_rows(rows: list[dict], dest: Path) -> None:
     dest.parent.mkdir(parents=True, exist_ok=True)
     dest.write_text(json.dumps(rows, indent=2) + "\n", encoding="utf-8")
+    fails = [row for row in rows if row.get("issues")]
     print(f"wrote {dest} n={len(rows)}")
-    clean = 0
-    for row in rows:
-        print("---", row["cve"], row["vn_kind"], row["vn_status"], row["vn_priority"], "issues", len(row["issues"]))
+    for row in fails:
+        print("---", row["cve"], row["vn_kind"], "issues", len(row["issues"]))
         for item in row["issues"]:
             print("   ", item)
-        if not row["issues"]:
-            clean += 1
-    print(f"CLEAN {clean}/{len(rows)}")
+    print(f"CLEAN {len(rows) - len(fails)}/{len(rows)} fails={len(fails)}")
 
 
 def _configs_from_products(products: list[str]) -> list:
