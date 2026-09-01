@@ -8,7 +8,56 @@ from vulnavigator.artifacts import extract_artifacts
 from vulnavigator.heuristics import mentions_rce, mentions_sensitive_data
 from vulnavigator.models import Case
 _CRITICAL = re.compile(r"\bcritical\b", re.I)
-_INTERNET = re.compile(r"internet[-\s]?facing|public[-\s]?facing|client[-\s]?facing", re.I)
+_INTERNET = re.compile(
+    r"internet[-\s]?facing|public[-\s]?facing|client[-\s]?facing|"
+    r"\bremotely\b|\bremote attacker\b|\blaunch(?:ed)? the attack remotely\b|"
+    r"\blaunched remotely\b|\bperformed from remote\b|\bfrom remote\b|"
+    r"\bunauthenticated remote\b|\bunauthenticated,\s*remote\b|"
+    r"\bunauthenticated attacker\b|"
+    r"password recovery endpoint|exploited remotely|"
+    r"carried out remotely|REST API|plugin for WordPress",
+    re.I,
+)
+_LOCAL_ONLY = re.compile(
+    r"malicious package|package manager|local attacker|physical access|--destdir",
+    re.I,
+)
+_WEB_CWE = frozenset(
+    {
+        "CWE-77",
+        "CWE-78",
+        "CWE-79",
+        "CWE-89",
+        "CWE-93",
+        "CWE-203",
+        "CWE-204",
+        "CWE-285",
+        "CWE-287",
+        "CWE-352",
+        "CWE-434",
+        "CWE-639",
+        "CWE-306",
+        "CWE-862",
+        "CWE-918",
+        "CWE-1336",
+        "CWE-1333",
+        "CWE-284",
+        "CWE-425",
+        "CWE-863",
+        "CWE-601",
+        "CWE-288",
+        "CWE-90",
+        "CWE-98",
+        "CWE-1385",
+        "CWE-384",
+        "CWE-611",
+        "CWE-502",
+        "CWE-915",
+        "CWE-307",
+        "CWE-1004",
+        "CWE-269",
+    }
+)
 _NO_AI = re.compile(r"no a[il]\b|not .*(ai|al) component|no (ai|al) components", re.I)
 _NO_FRAUD = re.compile(r"fraud risk is not|not currently suspected|no fraud", re.I)
 _NO_EXPLOIT = re.compile(
@@ -43,6 +92,9 @@ def apply_narrative(case: Case) -> Case:
 
     if case.asset_internet_facing is None and _INTERNET.search(blob):
         case.asset_internet_facing = True
+    if case.asset_internet_facing is None and not _LOCAL_ONLY.search(blob):
+        if any(cwe in _WEB_CWE for cwe in case.cwes):
+            case.asset_internet_facing = True
     if case.asset_ai_system is None and _NO_AI.search(blob):
         case.asset_ai_system = False
     if case.asset_fraud_relevant is None and _NO_FRAUD.search(blob):
@@ -60,7 +112,7 @@ def apply_narrative(case: Case) -> Case:
     if _NO_EXPLOIT.search(blob) and not case.evidence.poc:
         case.evidence.reproduced = False
         case.evidence.sandbox = False
-    if mentions_rce(blob) and "CWE-94" not in case.cwes and not case.cves and not case.cwes:
+    if mentions_rce(blob) and not case.cves and not case.cwes:
         case.cwes.append("CWE-94")
     if _OUTDATED.search(blob) and not case.product:
         case.component = case.component or "outdated application component"

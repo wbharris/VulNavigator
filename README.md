@@ -101,11 +101,11 @@ vuln-nav analyze examples/trivy-report.json
 
 ## Status
 
-v0.1 on GitHub `main`. Next slice: pinned ATT&CK / D3FEND / ATLAS snapshots and a reasoning model.
+v0.1.1 on GitHub `main`. Narrative/blind-CVE training uses the **description only** (CVE id stripped, `analyze --offline`) against a frozen corpus of the first 300 published CVE-2026-* (`tests/data/blind_cve_2026.json`). Score **phrase → CWE** from the prose, not NVD fields the write-up never states. A pasted advisory without a CVE id is not an AI 0-day. Next slice: pinned ATT&CK / D3FEND / ATLAS snapshots and a reasoning model.
 
-## Agent skills (Devin)
+## Agent skills
 
-Optional Devin skill files live in [`.devin/skills/`](.devin/skills/). They tell an agent how to invoke this repo. They are not extra product features.
+Optional skill files live in [`.grok/skills/`](.grok/skills/) and [`.devin/skills/`](.devin/skills/). They tell an agent how to invoke this repo. They are not extra product features.
 
 | Skill | What it does |
 |-------|----------------|

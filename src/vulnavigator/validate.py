@@ -35,7 +35,9 @@ def validate(case: Case) -> Case:
             "No CVE in this scanner finding — identity is the rule, CWE, or location (not a 0-day)"
         )
     else:
-        notes.append("No CVE — treating as a 0-day / pre-CVE claim")
+        notes.append(
+            "No CVE in this write-up — identity is the product, CWE, or location (not an AI 0-day)"
+        )
 
     if case.kev:
         notes.append(

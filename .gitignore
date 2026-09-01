@@ -30,6 +30,9 @@ secrets/
 *.log
 *.tmp
 
+# Local scorecards (corpus is tests/data/blind_cve_2026.json)
+cases/
+
 # IDE / editor
 .idea/
 .vscode/

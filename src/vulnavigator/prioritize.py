@@ -101,7 +101,7 @@ def record_assumptions(case: Case) -> Case:
         )
     scanner = case.source_kind in SCANNER_KINDS or bool(case.detected_tool)
     # SAST/DAST with a rule/CWE already has identity; do not nag as if it were a 0-day.
-    if not case.cves and not is_ai_zeroday(case) and not (scanner and (case.cwes or case.rule_id)):
+    if not case.cves and not is_ai_zeroday(case) and not case.cwes and not case.rule_id:
         _need(
             case,
             "Has a CVE been assigned, or is disclosure still private?",

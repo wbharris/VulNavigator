@@ -1,0 +1,2564 @@
+[
+  {
+    "cve": "CVE-2026-0544",
+    "description": "A security flaw has been discovered in itsourcecode School Management System 1.0. This affects an unknown part of the file /student/index.php. The manipulation of the argument ID results in sql injection. It is possible to launch the attack remotely. The exploit has been released to the public and may be used for attacks.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-21428",
+    "description": "cpp-httplib is a C++11 single-file header-only cross platform HTTP/HTTPS library. Prior to version 0.30.0, the ``write_headers`` function does not check for CR & LF characters in user supplied headers, allowing untrusted header value to escape header lines.\nThis vulnerability allows attackers to add extra headers, modify request body unexpectedly & trigger an SSRF attack. When combined with a server that supports http1.1 pipelining (springboot, python twisted etc), this can be used for server side request forgery (SSRF). Version 0.30.0 fixes this issue.",
+    "nvd_cwe": [
+      "CWE-93"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-21436",
+    "description": "eopkg is a Solus package manager implemented in python3. In versions prior to 4.4.0, a malicious package could escape the directory set by `--destdir`. This requires the installation of a package from a malicious or compromised source. Files in such packages would not be installed in the path given by `--destdir`, but on a different location on the host. The issue has been fixed in v4.4.0. Users only installing packages from the Solus repositories are not affected.",
+    "nvd_cwe": [
+      "CWE-24"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-21437",
+    "description": "eopkg is a Solus package manager implemented in python3. In versions prior to 4.4.0, a malicious package could include files that are not tracked by `eopkg`. This requires the installation of a package from a malicious or compromised source. Files in such packages would not be shown by `lseopkg` and related tools. The issue has been fixed in v4.4.0. Users only installing packages from the Solus repositories are not affected.",
+    "nvd_cwe": [
+      "CWE-353"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-0546",
+    "description": "A vulnerability was determined in code-projects Content Management System 1.0. This impacts an unknown function of the file search.php. This manipulation of the argument Value causes sql injection. The attack is possible to be carried out remotely. The exploit has been publicly disclosed and may be utilized.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0547",
+    "description": "A vulnerability was found in PHPGurukul Online Course Registration up to 3.1. This issue affects some unknown processing of the file /admin/edit-student-profile.php of the component Student Registration Page. The manipulation of the argument photo results in unrestricted upload. The attack may be launched remotely. The exploit has been made public and could be used.",
+    "nvd_cwe": [
+      "CWE-284",
+      "CWE-434"
+    ],
+    "nvd_cvss": 6.3
+  },
+  {
+    "cve": "CVE-2026-0565",
+    "description": "A weakness has been identified in code-projects Content Management System 1.0. This issue affects some unknown processing of the file /admin/delete.php. Executing a manipulation of the argument del can lead to sql injection. The attack can be executed remotely. The exploit has been made available to the public and could be used for attacks.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0566",
+    "description": "A security vulnerability has been detected in code-projects Content Management System 1.0. Impacted is an unknown function of the file /admin/edit_posts.php. The manipulation of the argument image leads to unrestricted upload. The attack is possible to be carried out remotely. The exploit has been disclosed publicly and may be used.",
+    "nvd_cwe": [
+      "CWE-284",
+      "CWE-434"
+    ],
+    "nvd_cvss": 4.7
+  },
+  {
+    "cve": "CVE-2026-0567",
+    "description": "A vulnerability was detected in code-projects Content Management System 1.0. The affected element is an unknown function of the file /pages.php. The manipulation of the argument ID results in sql injection. The attack may be performed from remote. The exploit is now public and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0568",
+    "description": "A flaw has been found in code-projects Online Music Site 1.0. The impacted element is an unknown function of the file /Frontend/ViewSongs.php. This manipulation of the argument ID causes sql injection. It is possible to initiate the attack remotely. The exploit has been published and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-21429",
+    "description": "Emlog is an open source website building system. In version 2.5.23, the admin can set controls which makes users unable to edit or delete their articles after publishing them. As of time of publication, no known patched versions are available.",
+    "nvd_cwe": [
+      "CWE-862"
+    ],
+    "nvd_cvss": 4.3
+  },
+  {
+    "cve": "CVE-2026-0569",
+    "description": "A vulnerability has been found in code-projects Online Music Site 1.0. This affects an unknown function of the file /Frontend/AlbumByCategory.php. Such manipulation of the argument ID leads to sql injection. It is possible to launch the attack remotely. The exploit has been disclosed to the public and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0570",
+    "description": "A vulnerability was found in code-projects Online Music Site 1.0. This impacts an unknown function of the file /Frontend/Feedback.php. Performing a manipulation of the argument fname results in sql injection. The attack can be initiated remotely. The exploit has been made public and could be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-21430",
+    "description": "Emlog is an open source website building system. In version 2.5.23, article creation functionality is vulnerable to cross-site request forgery (CSRF). This can lead to a user being forced to post an article with arbitrary, attacker-controlled content. This, when combined with stored cross-site scripting, leads to account takeover. As of time of publication, no known patched versions are available.",
+    "nvd_cwe": [
+      "CWE-79",
+      "CWE-352"
+    ],
+    "nvd_cvss": 9.3
+  },
+  {
+    "cve": "CVE-2026-21431",
+    "description": "Emlog is an open source website building system. Version 2.5.23 has a stored cross-site scripting vulnerability in the `Resource media library ` function while publishing an article. As of time of publication, no known patched versions are available.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 5.4
+  },
+  {
+    "cve": "CVE-2026-21432",
+    "description": "Emlog is an open source website building system. Version 2.5.23 has a stored cross-site scripting vulnerability that can lead to account takeover, including takeover of admin accounts. As of time of publication, no known patched versions are available.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 5.4
+  },
+  {
+    "cve": "CVE-2026-21433",
+    "description": "Emlog is an open source website building system. Versions up to and including 2.5.19 are vulnerable to server-side Out-of-Band (OOB) requests / SSRF via uploaded SVG files. An attacker can upload a crafted SVG to http[:]//emblog/admin/media[.]php which contains external resource references. When the server processes/renders the SVG (thumbnailing, preview, or sanitization), it issues an HTTP request to the attacker-controlled host. Impact: server-side SSRF/OOB leading to internal network probing and potential metadata/credential exposure. As of time of publication, no known patched versions are available.",
+    "nvd_cwe": [
+      "CWE-918"
+    ],
+    "nvd_cvss": 7.7
+  },
+  {
+    "cve": "CVE-2026-21440",
+    "description": "AdonisJS is a TypeScript-first web framework. A Path Traversal vulnerability in AdonisJS multipart file handling may allow a remote attacker to write arbitrary files to arbitrary locations on the server filesystem. This impacts @adonisjs/bodyparser through version 10.1.1 and 11.x prerelease versions prior to 11.0.0-next.6. This issue has been patched in @adonisjs/bodyparser versions 10.1.2 and 11.0.0-next.6.",
+    "nvd_cwe": [
+      "CWE-22"
+    ],
+    "nvd_cvss": 9.2
+  },
+  {
+    "cve": "CVE-2026-21444",
+    "description": "libtpms, a library that provides software emulation of a Trusted Platform Module, has a flaw in versions 0.10.0 and 0.10.1. The commonly used integration of libtpms with OpenSSL 3.x contained a vulnerability related to the returned IV (initialization vector) when certain symmetric ciphers were used. Instead of returning the last IV it returned the initial IV to the caller, thus weakening the subsequent encryption and decryption steps. The highest threat from this vulnerability is to data confidentiality. Version 0.10.2 fixes the issue. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-327",
+      "CWE-330"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-0571",
+    "description": "A security flaw has been discovered in yeqifu warehouse up to aaf29962ba407d22d991781de28796ee7b4670e4. Affected by this issue is the function createResponseEntity of the file warehouse\\src\\main\\java\\com\\yeqifu\\sys\\common\\AppFileUtils.java. The manipulation of the argument path results in path traversal. The attack may be launched remotely. The exploit has been released to the public and may be used for attacks. This product operates on a rolling release basis, ensuring continuous delivery. Consequently, there are no version details for either affected or updated releases.",
+    "nvd_cwe": [
+      "CWE-22"
+    ],
+    "nvd_cvss": 4.3
+  },
+  {
+    "cve": "CVE-2026-21445",
+    "description": "Langflow is a tool for building and deploying AI-powered agents and workflows. Prior to version 1.7.0.dev45, multiple critical API endpoints in Langflow are missing authentication controls. The issue allows any unauthenticated user to access sensitive user conversation data, transaction histories, and perform destructive operations including message deletion. This affects endpoints handling personal data and system operations that should require proper authorization. Version 1.7.0.dev45 contains a patch.",
+    "nvd_cwe": [
+      "CWE-306"
+    ],
+    "nvd_cvss": 9.1
+  },
+  {
+    "cve": "CVE-2026-21446",
+    "description": "Bagisto is an open source laravel eCommerce platform. In versions on the 2.3 branch prior to 2.3.10, API routes remain active even after initial installation is complete. The underlying API endpoints (`/install/api/*`) are directly accessible and exploitable without any authentication. An attacker can bypass the Ib installer entirely by calling the API endpoints directly. This allows any unauthenticated attacker to create admin accounts, modify application configurations, and potentially overwrite existing data. Version 2.3.10 fixes the issue.",
+    "nvd_cwe": [
+      "CWE-306"
+    ],
+    "nvd_cvss": 9.8
+  },
+  {
+    "cve": "CVE-2026-21447",
+    "description": "Bagisto is an open source laravel eCommerce platform. Prior to version 2.3.10, an Insecure Direct Object Reference vulnerability in the customer order reorder function allows any authenticated customer to add items from another customer's order to their own shopping cart by manipulating the order ID parameter. This exposes sensitive purchase information and enables potential fraud. Version 2.3.10 patches the issue.",
+    "nvd_cwe": [
+      "CWE-284",
+      "CWE-639"
+    ],
+    "nvd_cvss": 7.1
+  },
+  {
+    "cve": "CVE-2026-21448",
+    "description": "Bagisto is an open source laravel eCommerce platform. Versions prior to 2.3.10 are vulnerable to server-side template injection. When a normal customer orders any product, in the `add address` step they can inject a value to run in admin view. The issue can lead to remote code execution. Version 2.3.10 contains a patch.",
+    "nvd_cwe": [
+      "CWE-1336"
+    ],
+    "nvd_cvss": 9.8
+  },
+  {
+    "cve": "CVE-2026-21449",
+    "description": "Bagisto is an open source laravel eCommerce platform. Versions prior to 2.3.10 are vulnerable to server-side template injection via first name and last name from a low-privilege user. Version 2.3.10 fixes the issue.",
+    "nvd_cwe": [
+      "CWE-1336"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-21450",
+    "description": "Bagisto is an open source laravel eCommerce platform. Versions prior to 2.3.10 are vulnerable to server-side template injection via type parameter, which can lead to remote code execution or another exploitation. Version 2.3.10 fixes the issue.",
+    "nvd_cwe": [
+      "CWE-1336"
+    ],
+    "nvd_cvss": 9.8
+  },
+  {
+    "cve": "CVE-2026-21451",
+    "description": "Bagisto is an open source laravel eCommerce platform. A stored Cross-Site Scripting (XSS) vulnerability exists in Bagisto prior to version 2.3.10 within the CMS page editor. Although the platform normally attempts to sanitize `<script>` tags, the filtering can be bypassed by manipulating the raw HTTP POST request before submission. As a result, arbitrary JavaScript can be stored in the CMS content and executed whenever the page is viewed or edited. This exposes administrators to a high-severity risk, including complete account takeover, backend hijacking, and malicious script execution. Version 2.3.10 fixes the issue.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 8.4
+  },
+  {
+    "cve": "CVE-2026-21452",
+    "description": "MessagePack for Java is a serializer implementation for Java. A denial-of-service vulnerability exists in versions prior to 0.9.11 when deserializing .msgpack files containing EXT32 objects with attacker-controlled payload lengths. While MessagePack-Java parses extension headers lazily, it later trusts the declared EXT payload length when materializing the extension data. When ExtensionValue.getData() is invoked, the library attempts to allocate a byte array of the declared length without enforcing any upper bound. A malicious .msgpack file of only a few bytes can therefore trigger unbounded heap allocation, resulting in JVM heap exhaustion, process termination, or service unavailability. This vulnerability is triggered during model loading / deserialization, making it a model format vulnerability suitable for remote exploitation. The vulnerability enables a remote denial-of-service attack against applications that deserialize untrusted .msgpack model files using MessagePack for Java. A specially crafted but syntactically valid .msgpack file containing an EXT32 object with an attacker-controlled, excessively large payload length can trigger unbounded memory allocation during deserialization. When the model file is loaded, the library trusts the declared length metadata and attempts to allocate a byte array of that size, leading to rapid heap exhaustion, excessive garbage collection, or immediate JVM termination with an OutOfMemoryError. The attack requires no malformed bytes, user interaction, or elevated privileges and can be exploited remotely in real-world environments such as model registries, inference services, CI/CD pipelines, and cloud-based model hosting platforms that accept or fetch .msgpack artifacts. Because the malicious file is extremely small yet valid, it can bypass basic validation and scanning mechanisms, resulting in complete service unavailability and potential cascading failures in production systems. Version 0.9.11 fixes the vulnerability.",
+    "nvd_cwe": [
+      "CWE-400",
+      "CWE-789"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-21483",
+    "description": "listmonk is a standalone, self-hosted, newsletter and mailing list manager. Prior to version 6.0.0, lower-privileged user with campaign management permissions can inject malicious JavaScript into campaigns or templates. When a higher-privileged user (Super Admin) views or previews this content, the XSS executes in their browser context, allowing the attacker to perform privileged actions such as creating backdoor admin accounts. The attack can be weaponized via the public archive feature, where victims simply need to visit a link - no preview click required. Version 6.0.0 fixes the issue.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 5.4
+  },
+  {
+    "cve": "CVE-2026-21484",
+    "description": "AnythingLLM is an application that turns pieces of content into context that any LLM can use as references during chatting. Prior to commit e287fab56089cf8fcea9ba579a3ecdeca0daa313, the password recovery endpoint returns different error messages depending on whether a username exists, so enabling username enumeration. Commit e287fab56089cf8fcea9ba579a3ecdeca0daa313 fixes this issue.",
+    "nvd_cwe": [
+      "CWE-203",
+      "CWE-204"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-0574",
+    "description": "A weakness has been identified in yeqifu warehouse up to aaf29962ba407d22d991781de28796ee7b4670e4. This affects the function saveUserRole of the file warehouse\\src\\main\\java\\com\\yeqifu\\sys\\controller\\UserController.java of the component Request Handler. This manipulation causes improper authorization. The attack is possible to be carried out remotely. The exploit has been made available to the public and could be used for attacks. This product adopts a rolling release strategy to maintain continuous delivery. Therefore, version details for affected or updated releases cannot be specified.",
+    "nvd_cwe": [
+      "CWE-266",
+      "CWE-285"
+    ],
+    "nvd_cvss": 6.3
+  },
+  {
+    "cve": "CVE-2026-0575",
+    "description": "A security vulnerability has been detected in code-projects Online Product Reservation System 1.0. This impacts an unknown function of the file /handgunner-administrator/adminlogin.php of the component Administrator Login. Such manipulation of the argument emailadd/pass leads to sql injection. The attack may be performed from remote. The exploit has been disclosed publicly and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0576",
+    "description": "A vulnerability was detected in code-projects Online Product Reservation System 1.0. Affected is an unknown function of the file /handgunner-administrator/prod.php of the component Parameter Handler. Performing a manipulation of the argument cat/price/name/model/serial results in sql injection. It is possible to initiate the attack remotely. The exploit is now public and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0577",
+    "description": "A flaw has been found in code-projects Online Product Reservation System 1.0. Affected by this vulnerability is an unknown functionality of the file /handgunner-administrator/prod.php. Executing a manipulation can lead to unrestricted upload. It is possible to launch the attack remotely. The exploit has been published and may be used.",
+    "nvd_cwe": [
+      "CWE-284",
+      "CWE-434"
+    ],
+    "nvd_cvss": 6.3
+  },
+  {
+    "cve": "CVE-2026-0578",
+    "description": "A vulnerability has been found in code-projects Online Product Reservation System 1.0. Affected by this issue is some unknown functionality of the file /handgunner-administrator/delete.php. The manipulation of the argument ID leads to sql injection. The attack can be initiated remotely. The exploit has been disclosed to the public and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0579",
+    "description": "A vulnerability was found in code-projects Online Product Reservation System 1.0. This affects an unknown part of the file /handgunner-administrator/edit.php of the component POST Parameter Handler. The manipulation of the argument prod_id/name/price/model/serial results in sql injection. The attack can be launched remotely. The exploit has been made public and could be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0580",
+    "description": "A vulnerability was found in SourceCodester API Key Manager App 1.0. Affected by this vulnerability is an unknown functionality of the component Import Key Handler. Performing a manipulation results in cross site scripting. The attack can be initiated remotely.",
+    "nvd_cwe": [
+      "CWE-79",
+      "CWE-94"
+    ],
+    "nvd_cvss": 3.5
+  },
+  {
+    "cve": "CVE-2026-0581",
+    "description": "A vulnerability was determined in Tenda AC1206 15.03.06.23. Affected by this issue is the function formBehaviorManager of the file /goform/BehaviorManager of the component httpd. Executing a manipulation of the argument modulename/option/data/switch can lead to command injection. The attack can be launched remotely. The exploit has been publicly disclosed and may be utilized.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-77"
+    ],
+    "nvd_cvss": 6.3
+  },
+  {
+    "cve": "CVE-2026-0582",
+    "description": "A vulnerability was identified in itsourcecode Society Management System 1.0. This affects an unknown part of the file /admin/edit_activity_query.php. The manipulation of the argument Title leads to sql injection. The attack may be initiated remotely. The exploit is publicly available and might be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 6.3
+  },
+  {
+    "cve": "CVE-2026-0583",
+    "description": "A security flaw has been discovered in code-projects Online Product Reservation System 1.0. This vulnerability affects unknown code of the file app/user/login.php of the component User Login. The manipulation of the argument emailadd results in sql injection. The attack may be launched remotely. The exploit has been released to the public and may be used for attacks.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0584",
+    "description": "A weakness has been identified in code-projects Online Product Reservation System 1.0. This issue affects some unknown processing of the file app/products/left_cart.php. This manipulation of the argument ID causes sql injection. Remote exploitation of the attack is possible. The exploit has been made available to the public and could be used for attacks.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 6.3
+  },
+  {
+    "cve": "CVE-2026-0585",
+    "description": "A security vulnerability has been detected in code-projects Online Product Reservation System 1.0. Impacted is an unknown function of the file /order_view.php of the component GET Parameter Handler. Such manipulation of the argument transaction_id leads to sql injection. The attack can be executed remotely. The exploit has been disclosed publicly and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0586",
+    "description": "A vulnerability was detected in code-projects Online Product Reservation System 1.0. The affected element is an unknown function of the file handgunner-administrator/prod.php. Performing a manipulation of the argument cat results in cross site scripting. The attack is possible to be carried out remotely. The exploit is now public and may be used.",
+    "nvd_cwe": [
+      "CWE-79",
+      "CWE-94"
+    ],
+    "nvd_cvss": 4.3
+  },
+  {
+    "cve": "CVE-2026-0587",
+    "description": "A security flaw has been discovered in Xinhu Rainrock RockOA up to 2.7.1. Affected is an unknown function of the file rock_page_gong.php of the component Cover Image Handler. The manipulation of the argument fengmian results in cross site scripting. The attack can be launched remotely. The exploit has been released to the public and may be used for attacks. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "nvd_cwe": [
+      "CWE-79",
+      "CWE-94"
+    ],
+    "nvd_cvss": 3.5
+  },
+  {
+    "cve": "CVE-2026-0588",
+    "description": "A weakness has been identified in Xinhu Rainrock RockOA up to 2.7.1. Affected by this vulnerability is an unknown functionality of the file rockfun.php of the component API. This manipulation of the argument callback causes cross site scripting. The attack may be initiated remotely. The exploit has been made available to the public and could be used for attacks. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "nvd_cwe": [
+      "CWE-79",
+      "CWE-94"
+    ],
+    "nvd_cvss": 3.5
+  },
+  {
+    "cve": "CVE-2026-0589",
+    "description": "A vulnerability was found in code-projects Online Product Reservation System 1.0. Impacted is an unknown function of the component Administration Backend. The manipulation results in improper authentication. The attack may be performed from remote. The exploit has been made public and could be used.",
+    "nvd_cwe": [
+      "CWE-287"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0590",
+    "description": "A vulnerability was determined in code-projects Online Product Reservation System 1.0. The affected element is an unknown function of the file /app/checkout/delete.php of the component POST Parameter Handler. This manipulation of the argument ID causes sql injection. It is possible to initiate the attack remotely. The exploit has been publicly disclosed and may be utilized.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 6.3
+  },
+  {
+    "cve": "CVE-2026-0591",
+    "description": "A vulnerability was identified in code-projects Online Product Reservation System 1.0. The impacted element is an unknown function of the file /app/checkout/update.php of the component Cart Update Handler. Such manipulation of the argument id/qty leads to sql injection. It is possible to launch the attack remotely. The exploit is publicly available and might be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 6.3
+  },
+  {
+    "cve": "CVE-2026-0592",
+    "description": "A security flaw has been discovered in code-projects Online Product Reservation System 1.0. This affects an unknown function of the file /handgunner-administrator/register_code.php of the component User Registration Handler. Performing a manipulation of the argument fname/lname/address/city/province/country/zip/tel_no/email/username results in sql injection. The attack can be initiated remotely. The exploit has been released to the public and may be used for attacks.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0597",
+    "description": "A flaw has been found in Campcodes Supplier Management System 1.0. Affected by this issue is some unknown functionality of the file /retailer/edit_profile.php. This manipulation of the argument txtRetailerAddress causes sql injection. Remote exploitation of the attack is possible. The exploit has been published and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 6.3
+  },
+  {
+    "cve": "CVE-2026-21633",
+    "description": "A malicious actor with access to the adjacent network could obtain unauthorized access to a UniFi Protect Camera by exploiting a discovery protocol vulnerability in the Unifi Protect Application (Version 6.1.79 and earlier).\r\n\r\n \r\n\r\nAffected Products:\r\n\r\nUniFi Protect Application (Version 6.1.79 and earlier).\r\n\r\n \r\n\r\nMitigation:\r\n\r\nUpdate your UniFi Protect Application to Version 6.2.72 or later.",
+    "nvd_cwe": [
+      "CWE-287"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-21634",
+    "description": "A malicious actor with access to the adjacent network could overflow the UniFi Protect Application (Version 6.1.79 and earlier) discovery protocol causing it to restart.\r\n\r\n\r\nAffected Products:\r\nUniFi Protect Application (Version 6.1.79 and earlier). \r\n \r\nMitigation:\r\nUpdate your UniFi Protect Application to Version 6.2.72 or later.",
+    "nvd_cwe": [
+      "CWE-119"
+    ],
+    "nvd_cvss": 6.5
+  },
+  {
+    "cve": "CVE-2026-21635",
+    "description": "An Improper Access Control could allow a malicious actor in Wi-Fi range to the EV Station Lite (v1.5.2 and earlier) to use WiFi AutoLink feature on a device that was only adopted via Ethernet.",
+    "nvd_cwe": [
+      "CWE-284"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-0605",
+    "description": "A security vulnerability has been detected in code-projects Online Music Site 1.0. Affected by this vulnerability is an unknown functionality of the file /login.php. Such manipulation of the argument username/password leads to sql injection. The attack may be performed from remote. The exploit has been disclosed publicly and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0621",
+    "description": "Anthropic's MCP TypeScript SDK versions up to and including 1.25.1 contain a regular expression denial of service (ReDoS) vulnerability in the UriTemplate class when processing RFC 6570 exploded array patterns. The dynamically generated regular expression used during URI matching contains nested quantifiers that can trigger catastrophic backtracking on specially crafted inputs, resulting in excessive CPU consumption. An attacker can exploit this by supplying a malicious URI that causes the Node.js process to become unresponsive, leading to a denial of service.",
+    "nvd_cwe": [
+      "CWE-1333"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-0625",
+    "description": "Multiple D-Link DSL/DIR/DNS devices contain an authentication bypass and improper access control vulnerability in the dnscfg.cgi endpoint that allows an unauthenticated attacker to access DNS configuration functionality. By directly requesting this endpoint, an attacker can modify the device\u2019s DNS settings without valid credentials, enabling DNS hijacking (\u201cDNSChanger\u201d) attacks that redirect user traffic to attacker-controlled infrastructure. In 2019, D-Link reported that this behavior was leveraged by the \"GhostDNS\" malware ecosystem targeting consumer and carrier routers. All impacted products were subsequently designated end-of-life/end-of-service, and no longer receive security updates.\u00a0Exploitation evidence was observed by the Shadowserver Foundation on 2025-11-27 (UTC).",
+    "nvd_cwe": [
+      "CWE-306"
+    ],
+    "nvd_cvss": 9.3
+  },
+  {
+    "cve": "CVE-2026-0606",
+    "description": "A vulnerability was detected in code-projects Online Music Site 1.0. Affected by this issue is some unknown functionality of the file /FrontEnd/Albums.php. Performing a manipulation of the argument ID results in sql injection. It is possible to initiate the attack remotely. The exploit is now public and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0607",
+    "description": "A flaw has been found in code-projects Online Music Site 1.0. This affects an unknown part of the file /Administrator/PHP/AdminViewSongs.php. Executing a manipulation of the argument ID can lead to sql injection. It is possible to launch the attack remotely. The exploit has been published and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-21439",
+    "description": "badkeys is a tool and library for checking cryptographic public keys for known vulnerabilities. In versions 0.0.15 and below, an attacker may inject content with ASCII control characters like vertical tabs, ANSI escape sequences, etc., that can create misleading output of the badkeys command-line tool. This impacts scanning DKIM keys (both --dkim and --dkim-dns), SSH keys (--ssh-lines mode), and filenames in various modes. This issue is fixed in version 0.0.16.",
+    "nvd_cwe": [
+      "CWE-150"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-21507",
+    "description": "iccDEV provides a set of libraries and tools for working with ICC color management profiles. Versions 2.3.1 and below have an infinite loop in the IccProfile.cpp function, CalcProfileID. This issue is fixed in version 2.3.1.1.",
+    "nvd_cwe": [
+      "CWE-835"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-21673",
+    "description": "iccDEV provides a set of libraries and tools for working with ICC color management profiles. Versions 2.3.1 and below have overflows and underflows in  CIccXmlArrayType::ParseTextCountNum(). This vulnerability affects users of the iccDEV library who process ICC color profiles. This issue is fixed in version 2.3.1.1.",
+    "nvd_cwe": [
+      "CWE-190",
+      "CWE-681",
+      "CWE-704"
+    ],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-21674",
+    "description": "iccDEV provides a set of libraries and tools for working with ICC color management profiles. Versions 2.3.1 and below contain a memory leak vulnerability in its XML MPE Parsing Path (iccFromXml). This issue is fixed in version 2.3.1.1.",
+    "nvd_cwe": [
+      "CWE-401"
+    ],
+    "nvd_cvss": 3.3
+  },
+  {
+    "cve": "CVE-2026-21675",
+    "description": "iccDEV provides a set of libraries and tools for working with ICC color management profiles. Versions 2.3.1 and below contain a Use After Free vulnerability in the CIccXform::Create() function, where it deletes the hint. This issue is fixed in version 2.3.1.1.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-416"
+    ],
+    "nvd_cvss": 9.8
+  },
+  {
+    "cve": "CVE-2026-0604",
+    "description": "The FastDup \u2013 Fastest WordPress Migration & Duplicator plugin for WordPress is vulnerable to Path Traversal in all versions up to, and including, 2.7 via the 'dir_path' parameter in the 'njt-fastdup/v1/template/directory-tree' REST API endpoint. This makes it possible for authenticated attackers, with Contributor-level access and above, to read the contents of arbitrary directories on the server, which can contain sensitive information.",
+    "nvd_cwe": [
+      "CWE-22"
+    ],
+    "nvd_cvss": 6.5
+  },
+  {
+    "cve": "CVE-2026-21485",
+    "description": "iccDEV provides a set of libraries and tools for working with ICC color management profiles. Versions 2.3.1.1 and below are prone to have Undefined Behavior (UB) and Out of Memory errors. This issue is fixed in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-125",
+      "CWE-190",
+      "CWE-400",
+      "CWE-476",
+      "CWE-787",
+      "CWE-1284"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-21486",
+    "description": "iccDEV provides a set of libraries and tools for working with ICC color management profiles. Versions 2.3.1.1 and below contain Use After Free, Heap-based Buffer Overflow and Integer Overflow or Wraparound and Out-of-bounds Write vulnerabilities in its CIccSparseMatrix::CIccSparseMatrix function. This issue is fixed in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-122",
+      "CWE-190",
+      "CWE-416",
+      "CWE-787"
+    ],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-21487",
+    "description": "iccDEV provides a set of libraries and tools for working with ICC color management profiles. Versions 2.3.1.1 and below have an Out-of-bounds Read, Use of Out-of-range Pointer Offset and have Improper Input Validation in its CIccProfile::LoadTag function. This issue is fixed in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-125",
+      "CWE-823"
+    ],
+    "nvd_cvss": 6.1
+  },
+  {
+    "cve": "CVE-2026-21676",
+    "description": "iccDEV provides a set of libraries and tools for working with ICC color management profiles. Versions 2.3.1 and below have a Heap-based Buffer Overflow in its CIccMBB::Validate function which checks tag data validity. This issue is fixed in version 2.3.1.1.",
+    "nvd_cwe": [
+      "CWE-122"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-21677",
+    "description": "iccDEV provides a set of libraries and tools for working with ICC color management profiles. Versions 2.3.1 and below have Undefined Behavior in its CIccCLUT::Init function which initializes and sets the size of a CLUT. This issue is fixed in version 2.3.1.1.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-758"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-21411",
+    "description": "Authentication bypass issue exists in OpenBlocks series versions prior to FW5.0.8, which may allow an attacker to bypass administrator authentication and change the password.",
+    "nvd_cwe": [
+      "CWE-288"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-21488",
+    "description": "iccDEV provides a set of libraries and tools for working with ICC color management profiles. Versions 2.3.1.1 and below are vulnerable to Out-of-bounds Read, Heap-based Buffer Overflow and Improper Null Termination through its CIccTagText::Read function. This issue is fixed in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-122",
+      "CWE-125",
+      "CWE-170"
+    ],
+    "nvd_cvss": 6.1
+  },
+  {
+    "cve": "CVE-2026-21489",
+    "description": "iccDEV provides a set of libraries and tools for working with ICC color management profiles. Versions 2.3.1.1 and below have Out-of-bounds Read and Integer Underflow (Wrap or Wraparound) vulnerabilities in its CIccCalculatorFunc::SequenceNeedTempReset function. This issue is fixed in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-125",
+      "CWE-191"
+    ],
+    "nvd_cvss": 6.1
+  },
+  {
+    "cve": "CVE-2026-21493",
+    "description": "iccDEV provides a set of libraries and tools for working with ICC color management profiles. Versions 2.3.1.1 and below are vulnerable to Type Confusion in its CIccSingleSampledeCurveXml class during XML Curve Serialization. This issue is fixed in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-188",
+      "CWE-703",
+      "CWE-843"
+    ],
+    "nvd_cvss": 6.6
+  },
+  {
+    "cve": "CVE-2026-0640",
+    "description": "A weakness has been identified in Tenda AC23 16.03.07.52. This affects the function sscanf of the file /goform/PowerSaveSet. Executing a manipulation of the argument Time can lead to buffer overflow. The attack can be launched remotely. The exploit has been made available to the public and could be used for attacks.",
+    "nvd_cwe": [
+      "CWE-119",
+      "CWE-120"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-0641",
+    "description": "A security vulnerability has been detected in TOTOLINK WA300 5.2cu.7112_B20190227. This vulnerability affects the function sub_401510 of the file cstecgi.cgi. The manipulation of the argument UPLOAD_FILENAME leads to command injection. The attack may be initiated remotely. The exploit has been disclosed publicly and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-77"
+    ],
+    "nvd_cvss": 6.3
+  },
+  {
+    "cve": "CVE-2026-21490",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. A vulnerability present in versions prior to 2.3.1.2 affects users of the iccDEV library who process ICC color profiles. It results in heap buffer overflow in `CIccTagLut16::Validate()`. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-122",
+      "CWE-125",
+      "CWE-193"
+    ],
+    "nvd_cvss": 6.1
+  },
+  {
+    "cve": "CVE-2026-21491",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. A vulnerability present in versions prior to 2.3.1.2 affects users of the iccDEV library who process ICC color profiles. It results in unicode buffer overflow in `CIccTagTextDescription`. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-122",
+      "CWE-125",
+      "CWE-193"
+    ],
+    "nvd_cvss": 6.1
+  },
+  {
+    "cve": "CVE-2026-21494",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. A vulnerability present in versions prior to 2.3.1.2 affects users of the iccDEV library who process ICC color profiles. It results in heap buffer overflow in `CIccTagLut8::Validate()`. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-122",
+      "CWE-125",
+      "CWE-193"
+    ],
+    "nvd_cvss": 6.1
+  },
+  {
+    "cve": "CVE-2026-21492",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have a NULL pointer member call vulnerability. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-252",
+      "CWE-476"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-0628",
+    "description": "Insufficient policy enforcement in WebView tag in Google Chrome prior to 143.0.7499.192 allowed an attacker who convinced a user to install a malicious extension to inject scripts or HTML into a privileged page via a crafted Chrome Extension. (Chromium security severity: High)",
+    "nvd_cwe": [
+      "CWE-862"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-0642",
+    "description": "A vulnerability was detected in projectworlds House Rental and Property Listing 1.0. This issue affects some unknown processing of the file /app/complaint.php. The manipulation of the argument Name results in cross site scripting. The attack may be launched remotely. The exploit is now public and may be used.",
+    "nvd_cwe": [
+      "CWE-79",
+      "CWE-94"
+    ],
+    "nvd_cvss": 2.4
+  },
+  {
+    "cve": "CVE-2026-0643",
+    "description": "A flaw has been found in projectworlds House Rental and Property Listing 1.0. Impacted is an unknown function of the file /app/register.php?action=reg of the component Signup. This manipulation of the argument image causes unrestricted upload. Remote exploitation of the attack is possible. The exploit has been published and may be used.",
+    "nvd_cwe": [
+      "CWE-284",
+      "CWE-434"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0649",
+    "description": "A security vulnerability has been detected in invoiceninja up to 5.12.38. The affected element is the function copy of the file /app/Jobs/Util/Import.php of the component Migration Import. The manipulation of the argument company_logo leads to server-side request forgery. It is possible to initiate the attack remotely. The exploit has been disclosed publicly and may be used. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "nvd_cwe": [
+      "CWE-918"
+    ],
+    "nvd_cvss": 4.7
+  },
+  {
+    "cve": "CVE-2026-0650",
+    "description": "OpenFlagr versions prior to and including 1.1.18 contain an authentication bypass vulnerability in the HTTP middleware. Due to improper handling of path normalization in the whitelist logic, crafted requests can bypass authentication and access protected API endpoints without valid credentials. Unauthorized access may allow modification of feature flags and export of sensitive data.",
+    "nvd_cwe": [
+      "CWE-306",
+      "CWE-425"
+    ],
+    "nvd_cvss": 9.3
+  },
+  {
+    "cve": "CVE-2026-0656",
+    "description": "The iPaymu Payment Gateway for WooCommerce plugin for WordPress is vulnerable to Missing Authentication in all versions up to, and including, 2.0.2 via the 'check_ipaymu_response' function. This is due to the plugin not validating webhook request authenticity through signature verification or origin checks. This makes it possible for unauthenticated attackers to mark WooCommerce orders as paid by sending crafted POST requests to the webhook endpoint without any payment occurring, as well as enumerate order IDs and obtain valid order keys via GET requests, exposing customer order PII including names, addresses, and purchased products.",
+    "nvd_cwe": [
+      "CWE-862"
+    ],
+    "nvd_cvss": 8.2
+  },
+  {
+    "cve": "CVE-2026-20893",
+    "description": "Origin validation error issue exists in Fujitsu Security Solution AuthConductor Client Basic V2 2.0.25.0 and earlier. If this vulnerability is exploited, an attacker who can log in to the Windows system where the affected product is installed may execute arbitrary code with SYSTEM privilege and/or modify the registry value.",
+    "nvd_cwe": [
+      "CWE-346"
+    ],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-22540",
+    "description": "The massive sending of ARP requests causes a denial of service on one board of the charger that allows control of the EV interfaces. Since the board must be operating correctly for the charger to also function correctly.",
+    "nvd_cwe": [
+      "CWE-400"
+    ],
+    "nvd_cvss": 9.2
+  },
+  {
+    "cve": "CVE-2026-22541",
+    "description": "The massive sending of ICMP requests causes a denial of service on one of the boards from the EVCharger that allows control the EV interfaces. Since the board must be operating correctly for the charger to also function correctly.",
+    "nvd_cwe": [
+      "CWE-400"
+    ],
+    "nvd_cvss": 8.2
+  },
+  {
+    "cve": "CVE-2026-22542",
+    "description": "An attacker with access to the system's internal network can cause a denial of service on the system by making two concurrent connections through the Telnet service.",
+    "nvd_cwe": [
+      "CWE-400"
+    ],
+    "nvd_cvss": 9.2
+  },
+  {
+    "cve": "CVE-2026-0618",
+    "description": "Cross-site Scripting vulnerability in Devolutions PowerShell Universal.This issue affects Powershell Universal: before 4.5.6, before 5.6.13.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 6.1
+  },
+  {
+    "cve": "CVE-2026-20026",
+    "description": "Multiple&nbsp;Cisco products are affected by a vulnerability in the processing of DCE/RPC requests that could allow an unauthenticated, remote attacker to cause the Snort 3 Detection Engine to leak sensitive information or to restart, resulting in an interruption of packet inspection.\r\n\r\nThis vulnerability is due to an error in buffer handling logic when processing DCE/RPC requests, which can result in a buffer use-after-free read. An attacker could exploit this vulnerability by sending a large number of DCE/RPC requests through an established connection that is inspected by Snort 3. A successful exploit could allow the attacker to unexpectedly restart the Snort 3 Detection Engine, which could cause a denial of service (DoS).",
+    "nvd_cwe": [
+      "CWE-415"
+    ],
+    "nvd_cvss": 5.8
+  },
+  {
+    "cve": "CVE-2026-20027",
+    "description": "Multiple Cisco products are affected by a vulnerability in the processing of DCE/RPC requests that could allow an unauthenticated, remote attacker to cause the Snort 3 Detection Engine to leak sensitive information or to restart, resulting in an interruption of packet inspection.\r\n\r\nThis vulnerability is due to an error in buffer handling logic when processing DCE/RPC requests, which can result in a buffer out-of-bounds read. An attacker could exploit this vulnerability by sending a large number of DCE/RPC requests through an established connection that is inspected by Snort 3. A successful exploit could allow the attacker to obtain sensitive information in the Snort 3 data stream.",
+    "nvd_cwe": [
+      "CWE-200"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-20029",
+    "description": "A vulnerability in the licensing features of&nbsp;Cisco Identity Services Engine (ISE) and Cisco ISE Passive Identity Connector (ISE-PIC) could allow an authenticated, remote attacker with administrative privileges to gain access to sensitive information.&nbsp;\r\n\r\nThis vulnerability is due to improper parsing of XML that is processed by the web-based management interface of Cisco ISE and Cisco ISE-PIC. An attacker could exploit this vulnerability by uploading a malicious file to the application. A successful exploit could allow the attacker to read arbitrary files from the underlying operating system that could include sensitive data that should otherwise be inaccessible even to administrators. To exploit this vulnerability, the attacker must have valid administrative credentials.",
+    "nvd_cwe": [
+      "CWE-611"
+    ],
+    "nvd_cvss": 4.9
+  },
+  {
+    "cve": "CVE-2026-22535",
+    "description": "An attacker with the ability to interact through the network and with access credentials, could, thanks to the unsecured (unencrypted) MQTT communications protocol, write on the server topics of the board that controls the MQTT communications",
+    "nvd_cwe": [
+      "CWE-1366"
+    ],
+    "nvd_cvss": 8.9
+  },
+  {
+    "cve": "CVE-2026-22536",
+    "description": "The absence of permissions control for the user XXX allows the current configuration in the sudoers file to escalate privileges without any restrictions",
+    "nvd_cwe": [
+      "CWE-269"
+    ],
+    "nvd_cvss": 8.6
+  },
+  {
+    "cve": "CVE-2026-22537",
+    "description": "The lack of hardening of the system allows the user used to manage and maintain the charger to consult different files containing clear-text credentials or valuable information for an attacker.",
+    "nvd_cwe": [
+      "CWE-497"
+    ],
+    "nvd_cvss": 6.8
+  },
+  {
+    "cve": "CVE-2026-22543",
+    "description": "The credentials required to access the device's web server are sent in base64 within the HTTP headers. Since base64 is not considered a strong cipher, an attacker could intercept the web request handling the login and obtain the credentials",
+    "nvd_cwe": [
+      "CWE-261"
+    ],
+    "nvd_cvss": 6.9
+  },
+  {
+    "cve": "CVE-2026-22544",
+    "description": "An attacker with a network connection could detect credentials in clear text.",
+    "nvd_cwe": [
+      "CWE-319"
+    ],
+    "nvd_cvss": 8.7
+  },
+  {
+    "cve": "CVE-2026-0668",
+    "description": "Inefficient Regular Expression Complexity vulnerability in Wikimedia Foundation MediaWiki - VisualData Extension allows Regular Expression Exponential Blowup.This issue affects MediaWiki - VisualData Extension: 1.45.",
+    "nvd_cwe": [
+      "CWE-1333"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-0669",
+    "description": "Improper Limitation of a Pathname to a Restricted Directory ('Path Traversal') vulnerability in Wikimedia Foundation MediaWiki - CSS extension allows Path Traversal.This issue affects MediaWiki - CSS extension: 1.44, 1.43, 1.39.",
+    "nvd_cwe": [
+      "CWE-22"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-21495",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of ICC color management profiles. Prior to version 2.3.1.2, iccDEV is vulnerable to division by zero in the TIFF Image Reader. This issue has been patched in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-369"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-21496",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of ICC color management profiles. Prior to version 2.3.1.2, iccDEV is vulnerable to NULL pointer dereference via the signature parser. This issue has been patched in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-252",
+      "CWE-476",
+      "CWE-690"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-21497",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of ICC color management profiles. Prior to version 2.3.1.2, iccDEV is vulnerable to NULL pointer dereference via an unknown tag parser. This issue has been patched in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-252",
+      "CWE-476"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-21498",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of ICC color management profiles. Prior to version 2.3.1.2, iccDEV is vulnerable to NULL pointer dereference via the XML calculator parser. This issue has been patched in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-252",
+      "CWE-476",
+      "CWE-690"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-21499",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of ICC color management profiles. Prior to version 2.3.1.2, iccDEV is vulnerable to NULL pointer dereference via the XML parser. This issue has been patched in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-476",
+      "CWE-690"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-21500",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of ICC color management profiles. Prior to version 2.3.1.2, iccDEV is vulnerable to stack overflow in the XML calculator macro expansion. This issue has been patched in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-400",
+      "CWE-674",
+      "CWE-1119",
+      "CWE-787"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-21501",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of ICC color management profiles. Prior to version 2.3.1.2, iccDEV is vulnerable to stack overflow in the calculator parser. This issue has been patched in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-787"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-21502",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of ICC color management profiles. Prior to version 2.3.1.2, iccDEV is vulnerable to NULL pointer dereference via the XML tag parser. This issue has been patched in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-252",
+      "CWE-476",
+      "CWE-690"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-21503",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of ICC color management profiles. Prior to version 2.3.1.2, iccDEV has undefined behavior due to a null pointer passed to memcpy() in CIccTagSparseMatrixArray. This issue has been patched in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-131",
+      "CWE-476",
+      "CWE-628"
+    ],
+    "nvd_cvss": 6.1
+  },
+  {
+    "cve": "CVE-2026-21504",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of ICC color management profiles. Prior to version 2.3.1.2, iccDEV is vulnerable to heap buffer overflow in the ToneMap parser. This issue has been patched in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-122",
+      "CWE-193",
+      "CWE-787"
+    ],
+    "nvd_cvss": 6.6
+  },
+  {
+    "cve": "CVE-2026-21505",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of ICC color management profiles. Prior to version 2.3.1.2, iccDEV has undefined behavior due to an invalid enum value. This issue has been patched in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-843"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-21506",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of ICC color management profiles. Prior to version 2.3.1.2, iccDEV is vulnerable to Null pointer dereference in CIccProfileXml::ParseBasic(), leading to denial of service. This issue has been patched in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-476"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-21678",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of ICC color management profiles. Prior to version 2.3.1.2, iccDEV is vulnerable to heap-buffer-overflow vulnerability in IccTagXml(). This issue has been patched in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-122",
+      "CWE-125",
+      "CWE-787"
+    ],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-21679",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of ICC color management profiles. Prior to version 2.3.1.2, iccDEV is vulnerable to heap-buffer-overflow in CIccLocalizedUnicode::GetText(). This issue has been patched in version 2.3.1.2.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-787"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-21680",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have a NULL pointer dereference vulnerability. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-476"
+    ],
+    "nvd_cvss": 6.5
+  },
+  {
+    "cve": "CVE-2026-22539",
+    "description": "As the service interaction is performed without authentication, an attacker with some knowledge of the protocol could obtain information about the charger via OCPP v1.6.",
+    "nvd_cwe": [
+      "CWE-201"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-0670",
+    "description": "Improper Neutralization of Input During Web Page Generation (XSS or 'Cross-site Scripting') vulnerability in Wikimedia Foundation MediaWiki - ProofreadPage Extension allows Cross-Site Scripting (XSS).This issue affects MediaWiki - ProofreadPage Extension: 1.45, 1.44, 1.43, 1.39.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 6.1
+  },
+  {
+    "cve": "CVE-2026-21854",
+    "description": "The Tarkov Data Manager is a tool to manage the Tarkov item data. Prior to 02 January 2025, an authentication bypass vulnerability in the login endpoint allows any unauthenticated user to gain full admin access to the Tarkov Data Manager admin panel by exploiting a JavaScript prototype property access vulnerability, combined with loose equality type coercion. A series of fix commits on 02 January 2025 fixed this and other vulnerabilities.",
+    "nvd_cwe": [
+      "CWE-287",
+      "CWE-843",
+      "CWE-1321"
+    ],
+    "nvd_cvss": 9.8
+  },
+  {
+    "cve": "CVE-2026-21855",
+    "description": "The Tarkov Data Manager is a tool to manage the Tarkov item data. Prior to 02 January 2025, a reflected Cross Site Scripting (XSS) vulnerability in the toast notification system allows any attacker to execute arbitrary JavaScript in the context of a victim's browser session by crafting a malicious URL. A series of fix commits on 02 January 2025 fixed this and other vulnerabilities.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 9.3
+  },
+  {
+    "cve": "CVE-2026-21856",
+    "description": "The Tarkov Data Manager is a tool to manage the Tarkov item data. Prior to commit 9bdb3a75a98a7047b6d70144eb1da1655d6992a8, a time based blind SQL injection vulnerability in the webhook edit and scanner api endpoints that allow an authenticated attacker to execute arbitrary SQL queries against the MySQL database. Commit 9bdb3a75a98a7047b6d70144eb1da1655d6992a8 contains a patch.",
+    "nvd_cwe": [
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.2
+  },
+  {
+    "cve": "CVE-2026-21681",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have a Undefined Behavior runtime error. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20"
+    ],
+    "nvd_cvss": 7.1
+  },
+  {
+    "cve": "CVE-2026-21682",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have a heap-buffer-overflow in `CIccXmlArrayType::ParseText()`. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-122"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-22184",
+    "description": "zlib versions up to and including 1.3.1.2 include a global buffer overflow in the untgz utility located under contrib/untgz. The vulnerability is limited to the standalone demonstration utility and does not affect the core zlib compression library. The flaw occurs when a user executes the untgz command with an excessively long archive name supplied via the command line, leading to an out-of-bounds write in a fixed-size global buffer.",
+    "nvd_cwe": [
+      "CWE-787",
+      "CWE-120"
+    ],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-22185",
+    "description": "OpenLDAP Lightning Memory-Mapped Database (LMDB) versions up to and including 0.9.14, prior to commit 8e1fda8, contain a heap buffer underflow in the readline() function of mdb_load. When processing malformed input containing an embedded NUL byte, an unsigned offset calculation can underflow and cause an out-of-bounds read of one byte before the allocated heap buffer. This can cause mdb_load to crash, leading to a limited denial-of-service condition.",
+    "nvd_cwe": [
+      "CWE-125",
+      "CWE-191"
+    ],
+    "nvd_cvss": 4.6
+  },
+  {
+    "cve": "CVE-2026-22186",
+    "description": "Bio-Formats versions up to and including 8.3.0 contain an XML External Entity (XXE) vulnerability in the Leica Microsystems metadata parsing component (e.g., XLEF). The parser uses an insecurely configured DocumentBuilderFactory when processing Leica XML-based metadata files, allowing external entity expansion and external DTD loading. A crafted metadata file can trigger outbound network requests (SSRF), access local system resources where readable, or cause a denial of service during XML parsing.",
+    "nvd_cwe": [
+      "CWE-611"
+    ],
+    "nvd_cvss": 7.1
+  },
+  {
+    "cve": "CVE-2026-22187",
+    "description": "Bio-Formats versions up to and including 8.3.0 perform unsafe Java deserialization of attacker-controlled memoization cache files (.bfmemo) during image processing. The loci.formats.Memoizer class automatically loads and deserializes memo files associated with images without validation, integrity checks, or trust enforcement. An attacker who can supply a crafted .bfmemo file alongside an image can trigger deserialization of untrusted data, which may result in denial of service, logic manipulation, or potentially remote code execution in environments where suitable gadget chains are present on the classpath.",
+    "nvd_cwe": [
+      "CWE-502"
+    ],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-22188",
+    "description": "The deploy-stub component in Panda3D versions up to and including 1.10.16 contains a denial of service vulnerability due to unbounded stack allocation. The deploy-stub executable allocates argv_copy and argv_copy2 using alloca() based directly on the attacker-controlled argc value without validation. Supplying a large number of command-line arguments can exhaust stack space and propagate uninitialized stack memory into Python interpreter initialization, resulting in a reliable crash and undefined behavior.",
+    "nvd_cwe": [
+      "CWE-457",
+      "CWE-789",
+      "CWE-908"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-22189",
+    "description": "The egg-mkfont utility in Panda3D versions up to and including 1.10.16 contains a stack-based buffer overflow vulnerability due to use of an unbounded sprintf() call with attacker-controlled input. When constructing glyph filenames, egg-mkfont formats a user-supplied glyph pattern (-gp) into a fixed-size stack buffer without length validation. Supplying an excessively long glyph pattern string can overflow the stack buffer, resulting in memory corruption and a deterministic crash. Depending on build configuration and execution environment, the overflow may also be exploitable for arbitrary code execution.",
+    "nvd_cwe": [
+      "CWE-121",
+      "CWE-787"
+    ],
+    "nvd_cvss": 9.8
+  },
+  {
+    "cve": "CVE-2026-22190",
+    "description": "The egg-mkfont utility in Panda3D versions up to and including 1.10.16 contains an uncontrolled format string vulnerability. The -gp (glyph pattern) command-line option is used directly as the format string for sprintf() with only a single argument supplied. If an attacker provides additional format specifiers, egg-mkfont may read unintended stack values and write the formatted output into generated .egg and .png files, resulting in disclosure of stack-resident memory and pointer values.",
+    "nvd_cwe": [
+      "CWE-134"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-21441",
+    "description": "urllib3 is an HTTP client library for Python. urllib3's streaming API is designed for the efficient handling of large HTTP responses by reading the content in chunks, rather than loading the entire response body into memory at once. urllib3 can perform decoding or decompression based on the HTTP `Content-Encoding` header (e.g., `gzip`, `deflate`, `br`, or `zstd`). When using the streaming API, the library decompresses only the necessary bytes, enabling partial content consumption. Starting in version 1.22 and prior to version 2.6.3, for HTTP redirect responses, the library would read the entire response body to drain the connection and decompress the content unnecessarily. This decompression occurred even before any read methods were called, and configured read limits did not restrict the amount of decompressed data. As a result, there was no safeguard against decompression bombs. A malicious server could exploit this to trigger excessive resource consumption on the client. Applications and libraries are affected when they stream content from untrusted sources by setting `preload_content=False` when they do not disable redirects. Users should upgrade to at least urllib3 v2.6.3, in which the library does not decode content of redirect responses when `preload_content=False`. If upgrading is not immediately possible, disable redirects by setting `redirect=False` for requests to untrusted source.",
+    "nvd_cwe": [
+      "CWE-409"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-21683",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have a Type Confusion vulnerability in `icStatusCMM::CIccEvalCompare::EvaluateProfile()`. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-843"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-21684",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have Undefined Behavior in `CIccTagSpectralViewingConditions()`. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-758"
+    ],
+    "nvd_cvss": 7.1
+  },
+  {
+    "cve": "CVE-2026-21685",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have Undefined Behavior in `CIccTagLut16::Read()`. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-758"
+    ],
+    "nvd_cvss": 7.1
+  },
+  {
+    "cve": "CVE-2026-21686",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have Undefined Behavior in `CIccTagLutAtoB::Validate()`. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-758"
+    ],
+    "nvd_cvss": 7.1
+  },
+  {
+    "cve": "CVE-2026-21687",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have Undefined Behavior in `CIccTagCurve::CIccTagCurve()`. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-758"
+    ],
+    "nvd_cvss": 7.1
+  },
+  {
+    "cve": "CVE-2026-21688",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have a Type Confusion vulnerability in `SIccCalcOp::ArgsPushed()` at `IccProfLib/IccMpeCalc.cpp`. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-190",
+      "CWE-476",
+      "CWE-681"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-21689",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have a Type Confusion vulnerability in `CIccProfileXml::ParseBasic()` at `IccXML/IccLibXML/IccProfileXml.cpp`. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-190",
+      "CWE-232",
+      "CWE-476",
+      "CWE-690",
+      "CWE-754",
+      "CWE-843"
+    ],
+    "nvd_cvss": 6.5
+  },
+  {
+    "cve": "CVE-2026-21690",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have a Type Confusion vulnerability in `CIccTagXmlTagData::ToXml()`. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-457",
+      "CWE-475",
+      "CWE-843"
+    ],
+    "nvd_cvss": 6.3
+  },
+  {
+    "cve": "CVE-2026-21691",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have a Type Confusion vulnerability in `CIccTag:IsTypeCompressed()`. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-140",
+      "CWE-476",
+      "CWE-697",
+      "CWE-1025",
+      "CWE-843"
+    ],
+    "nvd_cvss": 5.4
+  },
+  {
+    "cve": "CVE-2026-21692",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have a Type Confusion vulnerability in `ToXmlCurve()` at `IccXML/IccLibXML/IccMpeXml.cpp`. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-588",
+      "CWE-704",
+      "CWE-843"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-21693",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have a Type Confusion vulnerability in `CIccSegmentedCurveXml::ToXml()` at `IccXML/IccLibXML/IccMpeXml.cpp`. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-681",
+      "CWE-754",
+      "CWE-843"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-22046",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have a heap-buffer-overflow vulnerability in `CIccProfileXml::ParseBasic()` at `IccXML/IccLibXML/IccProfileXml.cpp`. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-130",
+      "CWE-252",
+      "CWE-843",
+      "CWE-787"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-22047",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have a heap-buffer-overflow vulnerability in `SIccCalcOp::Describe()` at `IccProfLib/IccMpeCalc.cpp`. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-130",
+      "CWE-252",
+      "CWE-787"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-21697",
+    "description": "axios4go is a Go HTTP client library. Prior to version 0.6.4, a race condition vulnerability exists in the shared HTTP client configuration. The global `defaultClient` is mutated during request execution without synchronization, directly modifying the shared `http.Client`'s `Transport`, `Timeout`, and `CheckRedirect` properties. Impacted applications include that that use axios4go with concurrent requests (multiple goroutines, `GetAsync`, `PostAsync`, etc.), those where different requests use different proxy configurations, and those that handle sensitive data (authentication credentials, tokens, API keys). Version 0.6.4 fixes this issue.",
+    "nvd_cwe": [
+      "CWE-362"
+    ],
+    "nvd_cvss": 8.1
+  },
+  {
+    "cve": "CVE-2026-21851",
+    "description": "MONAI (Medical Open Network for AI) is an AI toolkit for health care imaging. In versions up to and including 1.5.1, a Path Traversal (Zip Slip) vulnerability exists in MONAI's `_download_from_ngc_private()` function. The function uses `zipfile.ZipFile.extractall()` without path validation, while other similar download functions in the same codebase properly use the existing `safe_extract_member()` function. Commit 4014c8475626f20f158921ae0cf98ed259ae4d59 fixes this issue.",
+    "nvd_cwe": [
+      "CWE-22"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-21857",
+    "description": "REDAXO is a PHP-based content management system. Prior to version 5.20.2, authenticated users with backup permissions can read arbitrary files within the webroot via path traversal in the Backup addon's file export functionality. The Backup addon does not validate the `EXPDIR` POST parameter against the UI-generated allowlist of permitted directories. An attacker can supply relative paths containing `../` sequences (or even absolute paths inside the document root) to include any readable file in the generated `.tar.gz` archive. Version 5.20.2 fixes this issue.",
+    "nvd_cwe": [
+      "CWE-22",
+      "CWE-24"
+    ],
+    "nvd_cvss": 6.5
+  },
+  {
+    "cve": "CVE-2026-21694",
+    "description": "Titra is open source project time tracking software. Versions 0.99.49 and below have Improper Access Control, allowing users to view and edit other users' time entries in private projects they have not been granted access to. This issue is fixed in version 0.99.50.",
+    "nvd_cwe": [
+      "CWE-284"
+    ],
+    "nvd_cvss": 6.8
+  },
+  {
+    "cve": "CVE-2026-21695",
+    "description": "Titra is open source project time tracking software. In versions 0.99.49 and below, an API has a Mass Assignment vulnerability which allows authenticated users to inject arbitrary fields into time entries, bypassing business logic controls via the customfields parameter. The affected endpoint uses the JavaScript spread operator (...customfields) to merge user-controlled input directly into the database document. While customfields is validated as an Object type, there is no validation of which keys are permitted inside that object. This allows attackers to overwrite protected fields such as userId, hours, and state. The issue is fixed in version 0.99.50.",
+    "nvd_cwe": [
+      "CWE-915"
+    ],
+    "nvd_cvss": 4.3
+  },
+  {
+    "cve": "CVE-2026-21858",
+    "description": "n8n is an open source workflow automation platform. Versions starting with 1.65.0 and below 1.121.0 enable an attacker to access files on the underlying server through execution of certain form-based workflows. A vulnerable workflow could grant access to an unauthenticated remote attacker, resulting in exposure of sensitive information stored on the system and may enable further compromise depending on deployment configuration and workflow usage. This issue is fixed in version 1.121.0.",
+    "nvd_cwe": [
+      "CWE-20"
+    ],
+    "nvd_cvss": 10.0
+  },
+  {
+    "cve": "CVE-2026-21859",
+    "description": "Mailpit is an email testing tool and API for developers. Versions 1.28.0 and below have a Server-Side Request Forgery (SSRF) vulnerability in the /proxy endpoint, allowing attackers to make requests to internal network resources. The /proxy endpoint validates http:// and https:// schemes, but it does not block internal IP addresses, enabling attackers to access internal services and APIs. This vulnerability is limited to HTTP GET requests with minimal headers. The issue is fixed in version 1.28.1.",
+    "nvd_cwe": [
+      "CWE-918"
+    ],
+    "nvd_cvss": 5.8
+  },
+  {
+    "cve": "CVE-2026-21869",
+    "description": "llama.cpp is an inference of several LLM models in C/C++. In commits 55d4206c8 and prior, the n_discard parameter is parsed directly from JSON input in the llama.cpp server's completion endpoints without validation to ensure it's non-negative. When a negative value is supplied and the context fills up, llama_memory_seq_rm/add receives a reversed range and negative offset, causing out-of-bounds memory writes in the token evaluation loop. This deterministic memory corruption can crash the process or enable remote code execution (RCE). There is no fix at the time of publication.",
+    "nvd_cwe": [
+      "CWE-787"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-21875",
+    "description": "ClipBucket v5 is an open source video sharing platform. Versions 5.5.2-#187 and below allow an attacker to perform Blind SQL Injection through the add comment section within a channel. When adding a comment within a channel, there is a POST request to the /actions/ajax.php endpoint. The obj_id parameter within the POST request to /actions/ajax.php is then used within the user_exists function of the upload/includes/classes/user.class. php file as the $id parameter. It is then used within the count function of the upload/includes/classes/db.class. php file. The $id parameter is concatenated into the query without validation or sanitization, and a user-supplied input like 1' or 1=1-- - can be used to trigger the injection. This issue does not have a fix at the time of publication.",
+    "nvd_cwe": [
+      "CWE-89"
+    ],
+    "nvd_cvss": 9.8
+  },
+  {
+    "cve": "CVE-2026-21868",
+    "description": "Flag Forge is a Capture The Flag (CTF) platform. Versions 2.3.2 and below have a Regular Expression Denial of Service (ReDoS) vulnerability in the user profile API endpoint (/api/user/[username]). The application constructs a regular expression dynamically using unescaped user input (the username parameter). An attacker can exploit this by sending a specially crafted username containing regex meta-characters (e.g., deeply nested groups or quantifiers), causing the MongoDB regex engine to consume excessive CPU resources. This can lead to Denial of Service for other users. The issue is fixed in version 2.3.3. To workaround this issue, implement a Web Application Firewall (WAF) rule to block requests containing regex meta-characters in the URL path.",
+    "nvd_cwe": [
+      "CWE-1333"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-21877",
+    "description": "n8n is an open source workflow automation platform. In versions 0.121.2 and below, an authenticated attacker may be able to execute malicious code using the n8n service. This could result in full compromise and can impact both self-hosted and n8n Cloud instances. This issue is fixed in version 1.121.3. Administrators can reduce exposure by disabling the Git node and limiting access for untrusted users, but upgrading to the latest version is recommended.",
+    "nvd_cwe": [
+      "CWE-94",
+      "CWE-434"
+    ],
+    "nvd_cvss": 9.9
+  },
+  {
+    "cve": "CVE-2026-22035",
+    "description": "Greenshot is an open source Windows screenshot utility. Versions 1.3.310 and below arvulnerable to OS Command Injection through unsanitized filename processing. The FormatArguments method in ExternalCommandDestination.cs:269 uses string.Format() to insert user-controlled filenames directly into shell commands without sanitization, allowing attackers to execute arbitrary commands by crafting malicious filenames containing shell metacharacters. This issue is fixed in version 1.3.311.",
+    "nvd_cwe": [
+      "CWE-78"
+    ],
+    "nvd_cvss": 7.7
+  },
+  {
+    "cve": "CVE-2026-21879",
+    "description": "Kanboard is project management software focused on Kanban methodology. Versions 1.2.48 and below are vulnerable to an Open Redirect attack that allows malicious actors to redirect authenticated users to attacker-controlled websites. By crafting URLs such as //evil.com, attackers can bypass the filter_var($url, FILTER_VALIDATE_URL) validation check. This vulnerability could be exploited to conduct phishing attacks, steal user credentials, or distribute malware. The issue is fixed in version 1.2.49.",
+    "nvd_cwe": [
+      "CWE-601"
+    ],
+    "nvd_cvss": 4.7
+  },
+  {
+    "cve": "CVE-2026-21880",
+    "description": "Kanboard is project management software focused on Kanban methodology. Versions 1.2.48 and below have an LDAP Injection vulnerability in the LDAP authentication mechanism. User-supplied input is directly substituted into LDAP search filters without proper sanitization, allowing attackers to enumerate all LDAP users, discover sensitive user attributes, and perform targeted attacks against specific accounts. This issue is fixed in version 1.2.49.",
+    "nvd_cwe": [
+      "CWE-90",
+      "CWE-200"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-21881",
+    "description": "Kanboard is project management software focused on Kanban methodology. Versions 1.2.48 and below is vulnerable to a critical authentication bypass when REVERSE_PROXY_AUTH is enabled. The application blindly trusts HTTP headers for user authentication without verifying the request originated from a trusted reverse proxy. An attacker can impersonate any user, including administrators, by simply sending a spoofed HTTP header. This issue is fixed in version 1.2.49.",
+    "nvd_cwe": [
+      "CWE-287"
+    ],
+    "nvd_cvss": 9.1
+  },
+  {
+    "cve": "CVE-2026-21883",
+    "description": "Bokeh is an interactive visualization library written in Python. In versions 3.8.1 and below, if a server is configured with an allowlist (e.g., dashboard.corp), an attacker can register a domain like dashboard.corp.attacker.com (or use a subdomain if applicable) and lure a victim to visit it. The malicious site can then initiate a WebSocket connection to the vulnerable Bokeh server. Since the Origin header (e.g., http://dashboard.corp.attacker.com/) matches the allowlist according to the flawed logic, the connection is accepted. Once connected, the attacker can interact with the Bokeh server on behalf of the victim, potentially accessing sensitive data, or modifying visualizations. This issue is fixed in version 3.8.2.",
+    "nvd_cwe": [
+      "CWE-1385"
+    ],
+    "nvd_cvss": 5.4
+  },
+  {
+    "cve": "CVE-2026-0707",
+    "description": "A flaw was found in Keycloak. The Keycloak Authorization header parser is overly permissive regarding the formatting of the \"Bearer\" authentication scheme. It accepts non-standard characters (such as tabs) as separators and tolerates case variations that deviate from RFC 6750 specifications.",
+    "nvd_cwe": [
+      "CWE-551"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-21427",
+    "description": "The installers for multiple products provided by PIONEER CORPORATION contain an issue with the DLL search path, which may lead to insecurely loading Dynamic Link Libraries. As a result,  arbitrary code may be executed with the privileges of the running installer.",
+    "nvd_cwe": [
+      "CWE-427"
+    ],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-0697",
+    "description": "A flaw has been found in code-projects Intern Membership Management System 1.0. The impacted element is an unknown function of the file /intern/admin/edit_admin.php. This manipulation of the argument admin_id causes sql injection. The attack may be initiated remotely. The exploit has been published and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 4.7
+  },
+  {
+    "cve": "CVE-2026-0698",
+    "description": "A vulnerability has been found in code-projects Intern Membership Management System 1.0. This affects an unknown function of the file /intern/admin/edit_students.php. Such manipulation of the argument admin_id leads to sql injection. The attack may be launched remotely. The exploit has been disclosed to the public and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 4.7
+  },
+  {
+    "cve": "CVE-2026-0699",
+    "description": "A vulnerability was found in code-projects Intern Membership Management System 1.0. This impacts an unknown function of the file /intern/admin/edit_activity.php. Performing a manipulation of the argument activity_id results in sql injection. Remote exploitation of the attack is possible. The exploit has been made public and could be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 4.7
+  },
+  {
+    "cve": "CVE-2026-0700",
+    "description": "A vulnerability was determined in code-projects Intern Membership Management System 1.0. Affected is an unknown function of the file /intern/admin/check_admin.php. Executing a manipulation of the argument Username can lead to sql injection. The attack can be executed remotely. The exploit has been publicly disclosed and may be utilized.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-0701",
+    "description": "A vulnerability was identified in code-projects Intern Membership Management System 1.0. Affected by this vulnerability is an unknown functionality of the file /intern/admin/add_admin.php. The manipulation of the argument Username leads to sql injection. The attack is possible to be carried out remotely. The exploit is publicly available and might be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 4.7
+  },
+  {
+    "cve": "CVE-2026-0674",
+    "description": "Missing Authorization vulnerability in Campaign Monitor Campaign Monitor for WordPress allows Exploiting Incorrectly Configured Access Control Security Levels.\n\nThis issue affects Campaign Monitor for WordPress: from n/a through 2.9.1.",
+    "nvd_cwe": [
+      "CWE-862"
+    ],
+    "nvd_cvss": 4.3
+  },
+  {
+    "cve": "CVE-2026-0676",
+    "description": "Missing Authorization vulnerability in G5Theme Zorka zorka allows Exploiting Incorrectly Configured Access Control Security Levels.This issue affects Zorka: from n/a through <= 1.5.7.",
+    "nvd_cwe": [
+      "CWE-862"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-21871",
+    "description": "NiceGUI is a Python-based UI framework. From versions 2.13.0 to 3.4.1, there is a XSS risk in NiceGUI when developers pass attacker-controlled strings into ui.navigate.history.push() or ui.navigate.history.replace(). These helpers are documented as History API wrappers for updating the browser URL without page reload. However, if the URL argument is embedded into generated JavaScript without proper escaping, a crafted payload can break out of the intended string context and execute arbitrary JavaScript in the victim\u2019s browser. Applications that do not pass untrusted input into ui.navigate.history.push/replace are not affected. This issue has been patched in version 3.5.0.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 6.1
+  },
+  {
+    "cve": "CVE-2026-21872",
+    "description": "NiceGUI is a Python-based UI framework. From versions 2.22.0 to 3.4.1, an unsafe implementation in the click event listener used by ui.sub_pages, combined with attacker-controlled link rendering on the page, causes XSS when the user actively clicks on the link. This issue has been patched in version 3.5.0.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 6.1
+  },
+  {
+    "cve": "CVE-2026-21873",
+    "description": "NiceGUI is a Python-based UI framework. From versions 2.22.0 to 3.4.1, an unsafe implementation in the pushstate event listener used by ui.sub_pages allows an attacker to manipulate the fragment identifier of the URL, which they can do despite being cross-site, using an iframe. This issue has been patched in version 3.5.0.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 7.2
+  },
+  {
+    "cve": "CVE-2026-21874",
+    "description": "NiceGUI is a Python-based UI framework. From versions v2.10.0 to 3.4.1, an unauthenticated attacker can exhaust Redis connections by repeatedly opening and closing browser tabs on any NiceGUI application using Redis-backed storage. Connections are never released, leading to service degradation when Redis hits its connection limit. NiceGUI continues accepting new connections - errors are logged but the app stays up with broken storage functionality. This issue has been patched in version 3.5.0.",
+    "nvd_cwe": [
+      "CWE-772"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-21894",
+    "description": "n8n is an open source workflow automation platform. In versions from 0.150.0 to before 2.2.2, an authentication bypass vulnerability in the Stripe Trigger node allows unauthenticated parties to trigger workflows by sending forged Stripe webhook events. The Stripe Trigger creates and stores a Stripe webhook signing secret when registering the webhook endpoint, but incoming webhook requests were not verified against this secret. As a result, any HTTP client that knows the webhook URL could send a POST request containing a matching event type, causing the workflow to execute as if a legitimate Stripe event had been received. This issue affects n8n users who have active workflows using the Stripe Trigger node. An attacker could potentially fake payment or subscription events and influence downstream workflow behavior. The practical risk is reduced by the fact that the webhook URL contains a high-entropy UUID; however, authenticated n8n users with access to the workflow can view this webhook ID. This issue has been patched in version 2.2.2. A temporary workaround for this issue involves users deactivating affected workflows or restricting access to workflows containing Stripe Trigger nodes to trusted users only.",
+    "nvd_cwe": [
+      "CWE-290"
+    ],
+    "nvd_cvss": 6.5
+  },
+  {
+    "cve": "CVE-2026-22242",
+    "description": "CoreShop is a Pimcore enhanced eCommerce solution. Prior to version 4.1.8, a blind SQL injection vulnerability exists in the application that allows an authenticated administrator-level user to extract database contents using boolean-based or time-based techniques. The database account used by the application is read-only and non-DBA, limiting impact to confidential data disclosure only. No data modification or service disruption is possible. This issue has been patched in version 4.1.8.",
+    "nvd_cwe": [
+      "CWE-564",
+      "CWE-89"
+    ],
+    "nvd_cvss": 4.9
+  },
+  {
+    "cve": "CVE-2026-0719",
+    "description": "A flaw was identified in the NTLM authentication handling of the libsoup HTTP library, used by GNOME and other applications for network communication. When processing extremely long passwords, an internal size calculation can overflow due to improper use of signed integers. This results in incorrect memory allocation on the stack, followed by unsafe memory copying. As a result, applications using libsoup may crash unexpectedly, creating a denial-of-service risk.",
+    "nvd_cwe": [
+      "CWE-121"
+    ],
+    "nvd_cvss": 8.6
+  },
+  {
+    "cve": "CVE-2026-21876",
+    "description": "The OWASP core rule set (CRS) is a set of generic attack detection rules for use with compatible web application firewalls. Prior to versions 4.22.0 and 3.3.8, the current rule 922110 has a bug when processing multipart requests with multiple parts. When the first rule in a chain iterates over a collection (like `MULTIPART_PART_HEADERS`), the capture variables (`TX:0`, `TX:1`) get overwritten with each iteration. Only the last captured value is available to the chained rule, which means malicious charsets in earlier parts can be missed if a later part has a legitimate charset. Versions 4.22.0 and 3.3.8 patch the issue.",
+    "nvd_cwe": [
+      "CWE-794"
+    ],
+    "nvd_cvss": 9.3
+  },
+  {
+    "cve": "CVE-2026-21885",
+    "description": "Miniflux 2 is an open source feed reader. Prior to version 2.2.16, Miniflux's media proxy endpoint (`GET /proxy/{encodedDigest}/{encodedURL}`) can be abused to perform Server-Side Request Forgery (SSRF). An authenticated user can cause Miniflux to generate a signed proxy URL for attacker-chosen media URLs embedded in feed entry content, including internal addresses (e.g., localhost, private RFC1918 ranges, or link-local metadata endpoints). Requesting the resulting `/proxy/...` URL makes Miniflux fetch and return the internal response. Version 2.2.16 fixes the issue.",
+    "nvd_cwe": [
+      "CWE-918"
+    ],
+    "nvd_cvss": 6.5
+  },
+  {
+    "cve": "CVE-2026-21891",
+    "description": "ZimaOS is a fork of CasaOS, an operating system for Zima devices and x86-64 systems with UEFI. In versions up to and including 1.5.0, the application checks the validity of the username but appears to skip, misinterpret, or incorrectly validate the password when the provided username matches a known system service account. The application's login function fails to properly handle the password validation result for these users, effectively granting authenticated access to anyone who knows one of these common usernames and provides any password. As of time of publication, no known patched versions are available.",
+    "nvd_cwe": [
+      "CWE-287"
+    ],
+    "nvd_cvss": 9.4
+  },
+  {
+    "cve": "CVE-2026-21892",
+    "description": "Parsl is a Python parallel scripting library. A SQL Injection vulnerability exists in the parsl-visualize component of versions prior to 2026.01.05. The application constructs SQL queries using unsafe string formatting (Python % operator) with user-supplied input (workflow_id) directly from URL routes. This allows an unauthenticated attacker with access to the visualization dashboard to inject arbitrary SQL commands, potentially leading to data exfiltration or denial of service against the monitoring database. Version 2026.01.05 fixes the issue.",
+    "nvd_cwe": [
+      "CWE-89"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-21895",
+    "description": "The `rsa` crate is an RSA implementation written in rust. Prior to version 0.9.10, when creating a RSA private key from its components, the construction panics instead of returning an error when one of the primes is `1`. Version 0.9.10 fixes the issue.",
+    "nvd_cwe": [
+      "CWE-703"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-22028",
+    "description": "Preact, a lightweight web development framework, JSON serialization protection to prevent Virtual DOM elements from being constructed from arbitrary JSON. A regression introduced in Preact 10.26.5 caused this protection to be softened. In applications where values from JSON payloads are assumed to be strings and passed unmodified to Preact as children, a specially-crafted JSON payload could be constructed that would be incorrectly treated as a valid VNode. When this chain of failures occurs it can result in HTML injection, which can allow arbitrary script execution if not mitigated by CSP or other means. Applications using affected Preact versions are vulnerable if they meet all of the following conditions: first, pass unmodified, unsanitized values from user-modifiable data sources (APIs, databases, local storage, etc.) directly into the render tree; second assume these values are strings but the data source could return actual JavaScript objects instead of JSON strings; and third, the data source either fails to perform type sanitization AND blindly stores/returns raw objects interchangeably with strings, OR is compromised (e.g., poisoned local storage, filesystem, or database). Versions 10.26.10, 10.27.3, and 10.28.2 patch the issue. The patch versions restore the previous strict equality checks that prevent JSON-parsed objects from being treated as valid VNodes. Other mitigations are available for those who cannot immediately upgrade. Validate input types, cast or validate network data, sanitize external data, and use Content Security Policy (CSP).",
+    "nvd_cwe": [
+      "CWE-843"
+    ],
+    "nvd_cvss": 6.1
+  },
+  {
+    "cve": "CVE-2026-22032",
+    "description": "Directus is a real-time API and App dashboard for managing SQL database content. Prior to version 11.14.0, an open redirect vulnerability exists in the Directus SAML authentication callback endpoint. During SAML authentication, the `RelayState` parameter is intended to preserve the user's original destination. However, while the login initiation flow validates redirect targets against allowed domains, this validation is not applied to the callback endpoint. This allows an attacker to craft a malicious authentication request that redirects users to an arbitrary external URL upon completion. The vulnerability is present in both the success and error handling paths of the callback. This vulnerability can be exploited without authentication. Version 11.14.0 contains a patch.",
+    "nvd_cwe": [
+      "CWE-601"
+    ],
+    "nvd_cvss": 4.3
+  },
+  {
+    "cve": "CVE-2026-22034",
+    "description": "Snuffleupagus is a module that raises the cost of attacks against website by killing bug classes and providing a virtual patching system. On deployments of Snuffleupagus prior to version 0.13.0 with the non-default upload validation feature enabled and configured to use one of the upstream validation scripts based on Vulcan Logic Disassembler (VLD) while the VLD extension is not available to the CLI SAPI, all files from multipart POST requests are evaluated as PHP code. The issue was fixed in version 0.13.0.",
+    "nvd_cwe": [
+      "CWE-636"
+    ],
+    "nvd_cvss": 9.8
+  },
+  {
+    "cve": "CVE-2026-22041",
+    "description": "Logging Redactor is a Python library designed to redact sensitive data in logs based on regex patterns and / or dictionary keys. Prior to version 0.0.6, non-string types are converted into string types, leading to type errors in %d conversions. The problem has been patched in version 0.0.6. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-704"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-22042",
+    "description": "RustFS is a distributed object storage system built in Rust. Prior to version 1.0.0-alpha.79, he `ImportIam` admin API validates permissions using `ExportIAMAction` instead of `ImportIAMAction`, allowing a principal with export-only IAM permissions to perform import operations. Since importing IAM data performs privileged write actions (creating/updating users, groups, policies, and service accounts), this can lead to unauthorized IAM modification and privilege escalation. Version 1.0.0-alpha.79 fixes the issue.",
+    "nvd_cwe": [
+      "CWE-285",
+      "CWE-863"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-22043",
+    "description": "RustFS is a distributed object storage system built in Rust. In versions 1.0.0-alpha.13 through 1.0.0-alpha.78, a flawed `deny_only` short-circuit in RustFS IAM allows a restricted service account or STS credential to self-issue an unrestricted service account, inheriting the parent\u2019s full privileges. This enables privilege escalation and bypass of session/inline policy restrictions. Version 1.0.0-alpha.79 fixes the issue.",
+    "nvd_cwe": [
+      "CWE-269",
+      "CWE-284",
+      "CWE-522"
+    ],
+    "nvd_cvss": 9.8
+  },
+  {
+    "cve": "CVE-2026-22241",
+    "description": "The Open eClass platform (formerly known as GUnet eClass) is a complete course management system. Prior to version 4.2, an arbitrary file upload vulnerability in the theme import functionality enables an attacker with administrative privileges to upload arbitrary files on the server's file system. The main cause of the issue is that no validation or sanitization of the file's present inside the zip archive. This leads to remote code execution on the web server. Version 4.2 patches the issue.",
+    "nvd_cwe": [
+      "CWE-434"
+    ],
+    "nvd_cvss": 7.2
+  },
+  {
+    "cve": "CVE-2026-22244",
+    "description": "OpenMetadata is a unified metadata platform. Versions 1.5.0 through 1.11.3 are vulnerable to remote code execution via Server-Side Template Injection (SSTI) in FreeMarker email templates. An attacker must have administrative privileges to exploit the vulnerability. Version 1.11.4 contains a patch.",
+    "nvd_cwe": [
+      "CWE-1336",
+      "CWE-94"
+    ],
+    "nvd_cvss": 7.2
+  },
+  {
+    "cve": "CVE-2026-22245",
+    "description": "Mastodon is a free, open-source social network server based on ActivityPub. By nature, Mastodon performs a lot of outbound requests to user-provided domains. Mastodon, however, has some protection mechanism to disallow requests to local IP addresses (unless specified in `ALLOWED_PRIVATE_ADDRESSES`) to avoid the \"confused deputy\" problem. The list of disallowed IP address ranges was lacking some IP address ranges that can be used to reach local IP addresses. An attacker can use an IP address in the affected ranges to make Mastodon perform HTTP requests against loopback or local network hosts, potentially allowing access to otherwise private resources and services. This is fixed in Mastodon v4.5.4, v4.4.11, v4.3.17 and v4.2.29.",
+    "nvd_cwe": [
+      "CWE-918"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-22246",
+    "description": "Mastodon is a free, open-source social network server based on ActivityPub. Mastodon 4.3 added notifications of severed relationships, allowing end-users to inspect the relationships they lost as the result of a moderation action. The code allowing users to download lists of severed relationships for a particular event fails to check the owner of the list before returning the lost relationships. Any registered local user can access the list of lost followers and followed users caused by any severance event, and go through all severance events this way. The leaked information does not include the name of the account which has lost follows and followers. This has been fixed in Mastodon v4.3.17, v4.4.11 and v4.5.4.",
+    "nvd_cwe": [
+      "CWE-201"
+    ],
+    "nvd_cvss": 6.5
+  },
+  {
+    "cve": "CVE-2026-22255",
+    "description": "iccDEV provides a set of libraries and tools that allow for the interaction, manipulation, and application of International Color Consortium (ICC) color management profiles. Versions prior to 2.3.1.2 have a heap-buffer-overflow vulnerability in `CIccCLUT::Init()` at `IccProfLib/IccTagLut.cpp`. This vulnerability affects users of the iccDEV library who process ICC color profiles. Version 2.3.1.2 contains a patch. No known workarounds are available.",
+    "nvd_cwe": [
+      "CWE-20",
+      "CWE-130",
+      "CWE-252"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-0671",
+    "description": "Improper Neutralization of Input During Web Page Generation (XSS or 'Cross-site Scripting') vulnerability in Wikimedia Foundation MediaWiki - UploadWizard extension allows Cross-Site Scripting (XSS).This issue affects MediaWiki - UploadWizard extension: 1.45, 1.44, 1.43, 1.39.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 6.1
+  },
+  {
+    "cve": "CVE-2026-21638",
+    "description": "A malicious actor in Wi-Fi range of the affected product could leverage a vulnerability in the airMAX Wireless Protocol to achieve a remote code execution (RCE) within the affected product.\r\n\r\n\r\nAffected Products:\r\nUBB-XG (Version 1.2.2 and earlier) \r\nUDB-Pro/UDB-Pro-Sector  (Version 1.4.1 and earlier) \r\nUBB  (Version 3.1.5 and earlier) \r\n \r\nMitigation:\r\nUpdate your UBB-XG to Version 1.2.3 or later.\r\nUpdate your UDB-Pro/UDB-Pro-Sector  to Version 1.4.2 or later.\r\nUpdate your UBB to Version 3.1.7 or later.",
+    "nvd_cwe": [
+      "CWE-77"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-21639",
+    "description": "A malicious actor in Wi-Fi range of the affected product could leverage a vulnerability in the airMAX Wireless Protocol to achieve a remote code execution (RCE) within the affected product.",
+    "nvd_cwe": [
+      "CWE-120",
+      "CWE-77"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-22486",
+    "description": "Missing Authorization vulnerability in Re Gallery allows Exploiting Incorrectly Configured Access Control Security Levels.This issue affects Re Gallery: from n/a through 1.18.9.",
+    "nvd_cwe": [
+      "CWE-862"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-22487",
+    "description": "Missing Authorization vulnerability in baqend Speed Kit baqend allows Exploiting Incorrectly Configured Access Control Security Levels.This issue affects Speed Kit: from n/a through <= 2.0.2.",
+    "nvd_cwe": [
+      "CWE-862"
+    ],
+    "nvd_cvss": 4.3
+  },
+  {
+    "cve": "CVE-2026-22488",
+    "description": "Missing Authorization vulnerability in IdeaBox Creations Dashboard Welcome for Beaver Builder dashboard-welcome-for-beaver-builder allows Exploiting Incorrectly Configured Access Control Security Levels.This issue affects Dashboard Welcome for Beaver Builder: from n/a through <= 1.0.8.",
+    "nvd_cwe": [
+      "CWE-862"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-22489",
+    "description": "Authorization Bypass Through User-Controlled Key vulnerability in Wptexture Image Slider Slideshow image-slider-slideshow allows Exploiting Incorrectly Configured Access Control Security Levels.This issue affects Image Slider Slideshow: from n/a through <= 1.8.",
+    "nvd_cwe": [
+      "CWE-639"
+    ],
+    "nvd_cvss": 4.3
+  },
+  {
+    "cve": "CVE-2026-22490",
+    "description": "Missing Authorization vulnerability in niklaslindemann Bulk Landing Page Creator for WordPress LPagery lpagery allows Exploiting Incorrectly Configured Access Control Security Levels.This issue affects Bulk Landing Page Creator for WordPress LPagery: from n/a through <= 2.4.9.",
+    "nvd_cwe": [
+      "CWE-862"
+    ],
+    "nvd_cvss": 5.4
+  },
+  {
+    "cve": "CVE-2026-22492",
+    "description": "Missing Authorization vulnerability in Nawawi Jamili Docket Cache docket-cache allows Exploiting Incorrectly Configured Access Control Security Levels.This issue affects Docket Cache: from n/a through <= 24.07.04.",
+    "nvd_cwe": [
+      "CWE-862"
+    ],
+    "nvd_cvss": 4.3
+  },
+  {
+    "cve": "CVE-2026-22517",
+    "description": "Missing Authorization vulnerability in Passionate Brains GA4WP: Google Analytics for WordPress ga-for-wp allows Exploiting Incorrectly Configured Access Control Security Levels.This issue affects GA4WP: Google Analytics for WordPress: from n/a through <= 2.10.0.",
+    "nvd_cwe": [
+      "CWE-862"
+    ],
+    "nvd_cvss": 5.4
+  },
+  {
+    "cve": "CVE-2026-22518",
+    "description": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in pencilwp X Addons for Elementor x-addons-elementor allows DOM-Based XSS.This issue affects X Addons for Elementor: from n/a through <= 1.0.23.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 6.5
+  },
+  {
+    "cve": "CVE-2026-22519",
+    "description": "Improper Neutralization of Input During Web Page Generation ('Cross-site Scripting') vulnerability in BuddyDev MediaPress mediapress allows Stored XSS.This issue affects MediaPress: from n/a through <= 1.6.2.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 6.5
+  },
+  {
+    "cve": "CVE-2026-22521",
+    "description": "Improper Control of Filename for Include/Require Statement in PHP Program ('PHP Remote File Inclusion') vulnerability in G5Theme Handmade Framework handmade-framework allows PHP Local File Inclusion.This issue affects Handmade Framework: from n/a through <= 3.9.",
+    "nvd_cwe": [
+      "CWE-98"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-22522",
+    "description": "Missing Authorization vulnerability in Munir Kamal Block Slider block-slider allows Exploiting Incorrectly Configured Access Control Security Levels.This issue affects Block Slider: from n/a through <= 2.2.3.",
+    "nvd_cwe": [
+      "CWE-862"
+    ],
+    "nvd_cvss": 6.5
+  },
+  {
+    "cve": "CVE-2026-21896",
+    "description": "Kirby is an open-source content management system. From versions 5.0.0 to 5.2.1, Kirby is missing permission checks in the content changes API. This vulnerability affects all Kirby sites where user permissions are configured to prevent specific role(s) from performing write actions, specifically by disabling the update permission with the intent to prevent modifications to site content. This vulnerability does not affect those who have not altered the deviated from default user permissions. This issue has been patched in version 5.2.2.",
+    "nvd_cwe": [
+      "CWE-863"
+    ],
+    "nvd_cvss": 5.7
+  },
+  {
+    "cve": "CVE-2026-22230",
+    "description": "OPEXUS eCASE Audit allows an authenticated attacker to modify client-side JavaScript or craft HTTP requests to access functions or buttons that have been disabled or blocked by an administrator. Fixed in eCASE Platform 11.14.1.0.",
+    "nvd_cwe": [
+      "CWE-863"
+    ],
+    "nvd_cvss": 7.6
+  },
+  {
+    "cve": "CVE-2026-22231",
+    "description": "OPEXUS eCASE Audit allows an authenticated attacker to save JavaScript as a comment within the Document Check Out functionality. The JavaScript is executed whenever another user views the Action History Log. Fixed in OPEXUS eCASE Platform 11.14.1.0.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-22232",
+    "description": "OPEXUS eCASE Audit allows an authenticated attacker to save JavaScript in the \"A or SIC Number\" field within the Project Setup functionality. The JavaScript is executed whenever another user views the project. Fixed in OPEXUS eCASE Audit 11.14.2.0.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-22233",
+    "description": "OPEXUS eCASE Audit allows an authenticated attacker to save JavaScript as a comment in the \"Estimated Staff Hours\" field. The JavaScript is executed whenever another user visits the Project Cost tab. Fixed in OPEXUS eCASE Audit 11.14.2.0.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-22234",
+    "description": "OPEXUS eCasePortal before version 9.0.45.0 allows an unauthenticated attacker to navigate to the 'Attachments.aspx' endpoint, iterate through predictable values of 'formid', and download or delete all user-uploaded files, or upload new files.",
+    "nvd_cwe": [
+      "CWE-639"
+    ],
+    "nvd_cvss": 9.8
+  },
+  {
+    "cve": "CVE-2026-22235",
+    "description": "OPEXUS eComplaint before version 9.0.45.0 allows an attacker to visit the the 'DocumentOpen.aspx' endpoint, iterate through predictable values of 'chargeNumber', and download any uploaded files.",
+    "nvd_cwe": [
+      "CWE-639"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-22587",
+    "description": "Ideagen DevonWay contains a stored cross site scripting vulnerability. A remote, authenticated attacker could craft a payload in the 'Reports' page that executes when another user views the report. Fixed in 2.62.4 and 2.62 LTS.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-21860",
+    "description": "Werkzeug is a comprehensive WSGI web application library. Prior to version 3.1.5, Werkzeug's safe_join function allows path segments with Windows device names that have file extensions or trailing spaces. On Windows, there are special device names such as CON, AUX, etc that are implicitly present and readable in every directory. Windows still accepts them with any file extension, such as CON.txt, or trailing spaces such as CON. This issue has been patched in version 3.1.5.",
+    "nvd_cwe": [
+      "CWE-67"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-22253",
+    "description": "Soft Serve is a self-hostable Git server for the command line. Prior to version 0.11.2, an authorization bypass in the LFS lock deletion endpoint allows any authenticated user with repository write access to delete locks owned by other users by setting the force flag. The vulnerable code path processes force deletions before retrieving user context, bypassing ownership validation entirely. This issue has been patched in version 0.11.2.",
+    "nvd_cwe": [
+      "CWE-863"
+    ],
+    "nvd_cvss": 5.4
+  },
+  {
+    "cve": "CVE-2026-22256",
+    "description": "Salvo is a Rust web backend framework. Prior to version 0.88.1, the function list_html generate an file view of a folder which include a render of the current path, in which its inserted in the HTML without proper sanitation, this leads to reflected XSS using the fact that request path is decoded and normalized in the matching stage but not is inserted raw in the html view (current.path), the only constraint here is for the root path (eg. /files in the PoC example) to have a sub directory (e.g common ones styles/scripts/etc\u2026) so that the matching return the list HTML page instead of the Not Found page. This issue has been patched in version 0.88.1.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-22257",
+    "description": "Salvo is a Rust web backend framework. Prior to version 0.88.1, the function list_html generates a file view of a folder without sanitizing the files or folders names, this may potentially lead to XSS in cases where a website allow the access to public files using this feature and anyone can upload a file. This issue has been patched in version 0.88.1.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-0747",
+    "description": "Exposure of sensitive information in the TeamViewer entry dashboard component in Devolutions Remote Desktop Manager 2025.3.24.0 through 2025.3.28.0 on Windows allows an external observer to view a password on screen via a defective masking feature, for example during physical observation or screen sharing.",
+    "nvd_cwe": [
+      "CWE-200"
+    ],
+    "nvd_cvss": 3.3
+  },
+  {
+    "cve": "CVE-2026-0728",
+    "description": "A security vulnerability has been detected in code-projects Intern Membership Management System 1.0. This issue affects some unknown processing of the file /intern/admin/delete_admin.php. Such manipulation of the argument admin_id leads to sql injection. The attack may be launched remotely. The exploit has been disclosed publicly and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 4.7
+  },
+  {
+    "cve": "CVE-2026-22588",
+    "description": "Spree is an open source e-commerce solution built with Ruby on Rails. Prior to versions 4.10.2, 5.0.7, 5.1.9, and 5.2.5, an Authenticated Insecure Direct Object Reference (IDOR) vulnerability was identified that allows an authenticated user to retrieve other users\u2019 address information by modifying an existing order. By editing an order they legitimately own and manipulating address identifiers in the request, the backend server accepts and processes references to addresses belonging to other users, subsequently associating those addresses with the attacker\u2019s order and returning them in the response. This issue has been patched in versions 4.10.2, 5.0.7, 5.1.9, and 5.2.5.",
+    "nvd_cwe": [
+      "CWE-639"
+    ],
+    "nvd_cvss": 6.5
+  },
+  {
+    "cve": "CVE-2026-0729",
+    "description": "A vulnerability was detected in code-projects Intern Membership Management System 1.0. Impacted is an unknown function of the file /intern/admin/add_activity.php. Performing a manipulation of the argument Title results in sql injection. Remote exploitation of the attack is possible. The exploit is now public and may be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 4.7
+  },
+  {
+    "cve": "CVE-2026-0730",
+    "description": "A flaw has been found in PHPGurukul Staff Leave Management System 1.0. The affected element is the function ADD_STAFF/UPDATE_STAFF of the file /staffleave/slms/slms/adminviews.py of the component SVG File Handler. Executing a manipulation of the argument profile_pic can lead to cross site scripting. The attack can be executed remotely. The exploit has been published and may be used.",
+    "nvd_cwe": [
+      "CWE-79",
+      "CWE-94"
+    ],
+    "nvd_cvss": 2.4
+  },
+  {
+    "cve": "CVE-2026-0731",
+    "description": "A vulnerability has been found in TOTOLINK WA1200 5.9c.2914. The impacted element is an unknown function of the file cstecgi.cgi of the component HTTP Request Handler. The manipulation leads to null pointer dereference. The attack is possible to be carried out remotely. The exploit has been disclosed to the public and may be used.",
+    "nvd_cwe": [
+      "CWE-404",
+      "CWE-476"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-0732",
+    "description": "A vulnerability was found in D-Link DI-8200G 17.12.20A1. This affects an unknown function of the file /upgrade_filter.asp. The manipulation of the argument path results in command injection. The attack may be performed from remote. The exploit has been made public and could be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-77"
+    ],
+    "nvd_cvss": 6.3
+  },
+  {
+    "cve": "CVE-2026-0733",
+    "description": "A vulnerability was determined in PHPGurukul Online Course Registration System up to 3.1. This impacts an unknown function of the file /onlinecourse/admin/manage-students.php. This manipulation of the argument id/cid causes sql injection. It is possible to initiate the attack remotely. The exploit has been publicly disclosed and may be utilized.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 6.3
+  },
+  {
+    "cve": "CVE-2026-22710",
+    "description": "Improper Neutralization of Input During Web Page Generation (XSS or 'Cross-site Scripting') vulnerability in The Wikimedia Foundation Mediawiki - Wikibase Extension allows Cross-Site Scripting (XSS).This issue affects Mediawiki - Wikibase Extension: 1.45, 1.44, 1.43, 1.39.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 5.4
+  },
+  {
+    "cve": "CVE-2026-22712",
+    "description": "Improper Encoding or Escaping of Output\u00a0due to magic word replacement in ParserAfterTidy vulnerability in The Wikimedia Foundation Mediawiki - ApprovedRevs Extension allows Input Data Manipulation.This issue affects Mediawiki - ApprovedRevs Extension: 1.45, 1.44, 1.43, 1.39.",
+    "nvd_cwe": [
+      "CWE-116"
+    ],
+    "nvd_cvss": 4.3
+  },
+  {
+    "cve": "CVE-2026-22713",
+    "description": "Improper Neutralization of Input During Web Page Generation (XSS or 'Cross-site Scripting') vulnerability in The Wikimedia Foundation Mediawiki - GrowthExperiments Extension allows Cross-Site Scripting (XSS).This issue affects Mediawiki - GrowthExperiments Extension: 1.45, 1.44, 1.43, 1.39.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 5.4
+  },
+  {
+    "cve": "CVE-2026-22714",
+    "description": "Improper Neutralization of Input During Web Page Generation (XSS or 'Cross-site Scripting') vulnerability in The Wikimedia Foundation Mediawiki - Monaco Skin allows Cross-Site Scripting (XSS).This issue affects Mediawiki - Monaco Skin: 1.45, 1.44, 1.43, 1.39.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 2.3
+  },
+  {
+    "cve": "CVE-2026-0563",
+    "description": "The WP Google Street View (with 360\u00b0 virtual tour) & Google maps + Local SEO plugin for WordPress is vulnerable to Stored Cross-Site Scripting via the 'wpgsv_map' shortcode in all versions up to, and including, 1.1.8 due to insufficient input sanitization and output escaping. This makes it possible for authenticated attackers, with contributor level access and above, to inject arbitrary web scripts in pages that will execute whenever a user accesses an injected page.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 6.4
+  },
+  {
+    "cve": "CVE-2026-20968",
+    "description": "Use after free in DualDAR prior to SMR Jan-2026 Release 1 allows local privileged attackers to execute arbitrary code.",
+    "nvd_cwe": [
+      "CWE-416"
+    ],
+    "nvd_cvss": 6.7
+  },
+  {
+    "cve": "CVE-2026-20969",
+    "description": "Improper input validation in SecSettings prior to SMR Jan-2026 Release 1 allows local attacker to access file with system privilege. User interaction is required for triggering this vulnerability.",
+    "nvd_cwe": [],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-20970",
+    "description": "Improper access control in SLocation prior to SMR Jan-2026 Release 1 allows local attackers to execute the privileged APIs.",
+    "nvd_cwe": [],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-20971",
+    "description": "Use After Free in PROCA driver prior to SMR Jan-2026 Release 1 allows local attackers to potentially execute arbitrary code.",
+    "nvd_cwe": [
+      "CWE-416"
+    ],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-20972",
+    "description": "Improper Export of Android Application Components in UwbTest prior to SMR Jan-2026 Release 1 allows local attackers to enable UWB.",
+    "nvd_cwe": [],
+    "nvd_cvss": 3.3
+  },
+  {
+    "cve": "CVE-2026-20973",
+    "description": "Out-of-bounds read in libimagecodec.quram.so prior to SMR Jan-2026 Release 1 allows remote attacker to access out-of-bounds memory.",
+    "nvd_cwe": [
+      "CWE-125"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-20974",
+    "description": "Improper input validation in data related to network restrictions prior to SMR Jan-2026 Release 1 allows physical attackers to bypass Carrier Relock.",
+    "nvd_cwe": [],
+    "nvd_cvss": 4.6
+  },
+  {
+    "cve": "CVE-2026-20975",
+    "description": "Improper handling of insufficient permission in Samsung Cloud prior to version 5.6.11 allows local attackers to access specific files in arbitrary path.",
+    "nvd_cwe": [],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-20976",
+    "description": "Improper input validation in Galaxy Store prior to version 4.6.02 allows local attacker to execute arbitrary script.",
+    "nvd_cwe": [],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-21409",
+    "description": "Improper authorization vulnerability exists in RICOH Streamline NX 3.5.1 to 24R3. If a man-in-the-middle attack is conducted on the communication between the affected product and its user, and some crafted request is processed by the product, the user's registration information and/or OIDC (OpenID Connect) tokens may be retrieved.",
+    "nvd_cwe": [
+      "CWE-639"
+    ],
+    "nvd_cvss": 5.9
+  },
+  {
+    "cve": "CVE-2026-0627",
+    "description": "The AMP for WP plugin for WordPress is vulnerable to Stored Cross-Site Scripting via SVG file uploads in all versions up to, and including, 1.1.10. This is due to insufficient sanitization of SVG file content that only removes `<script>` tags while allowing other XSS vectors such as event handlers (onload, onerror, onmouseover), foreignObject elements, and SVG animation attributes. This makes it possible for authenticated attackers, with Author-level access and above, to inject arbitrary web scripts via malicious SVG file uploads that will execute whenever a user views the uploaded file.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 6.4
+  },
+  {
+    "cve": "CVE-2026-22079",
+    "description": "This vulnerability exists in Tenda wireless routers (300Mbps Wireless Router F3 and N300 Easy Setup Router) due to the plaintext transmission of login credentials during the initial login or post-factory reset setup through the web-based administrative interface. An attacker on the same network could exploit this vulnerability by intercepting network traffic and capturing the credentials transmitted in plaintext.\n\nSuccessful exploitation of this vulnerability could allow the attacker to obtain sensitive information and gain unauthorized access to the targeted device.",
+    "nvd_cwe": [
+      "CWE-319"
+    ],
+    "nvd_cvss": 8.7
+  },
+  {
+    "cve": "CVE-2026-22080",
+    "description": "This vulnerability exists in Tenda wireless routers (300Mbps Wireless Router F3 and N300 Easy Setup Router) due to the transmission of credentials encoded using reversible Base64 encoding through the web-based administrative interface. An attacker on the same network could exploit this vulnerability by intercepting network traffic and capturing the Base64-encoded credentials.\n\nSuccessful exploitation of this vulnerability could allow the attacker to obtain sensitive information and gain unauthorized access to the targeted device.",
+    "nvd_cwe": [
+      "CWE-319"
+    ],
+    "nvd_cvss": 8.7
+  },
+  {
+    "cve": "CVE-2026-22081",
+    "description": "This vulnerability exists in Tenda wireless routers (300Mbps Wireless Router F3 and N300 Easy Setup Router) due to the missing HTTPOnly flag for session cookies associated with the web-based administrative interface. A remote at-tacker could exploit this vulnerability by capturing session cookies transmitted over an insecure HTTP connection.\n\nSuccessful exploitation of this vulnerability could allow the attacker to obtain sensitive information and gain unau-thorized access to the targeted device.",
+    "nvd_cwe": [
+      "CWE-1004"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-22082",
+    "description": "This vulnerability exists in Tenda wireless routers (300Mbps Wireless Router F3 and N300 Easy Setup Router) due to the use of login credentials as the session ID through its web-based administrative interface. A remote attacker could exploit this vulnerability by intercepting network traffic and capturing the session ID during insecure transmission.\n  \nSuccessful exploitation of this vulnerability could allow the attacker to hijack an authenticated session and compromise sensitive configuration information on the targeted device.",
+    "nvd_cwe": [
+      "CWE-384"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-0803",
+    "description": "A vulnerability was found in PHPGurukul Online Course Registration System up to 3.1. This affects an unknown part of the file /enroll.php. The manipulation of the argument studentregno/Pincode/session/department/level/course/sem results in sql injection. The attack may be launched remotely. The exploit has been made public and could be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 6.3
+  },
+  {
+    "cve": "CVE-2026-0817",
+    "description": "Missing Authorization vulnerability in Wikimedia Foundation MediaWiki - CampaignEvents extension allows Privilege Abuse.This issue affects MediaWiki - CampaignEvents extension: 1.45, 1.44, 1.43, 1.39.",
+    "nvd_cwe": [
+      "CWE-862"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-22194",
+    "description": "GestSup versions up to and including 3.2.60 contain a cross-site request forgery (CSRF) vulnerability where the application does not verify the authenticity of client requests. An attacker can induce a logged-in user to submit crafted requests that perform actions with the victim's privileges. This can be exploited to create privileged accounts by targeting the administrative user creation endpoint.",
+    "nvd_cwe": [
+      "CWE-352"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-22195",
+    "description": "GestSup versions prior to\u00a03.2.60 contain a SQL injection vulnerability in the search bar functionality. User-controlled search input is incorporated into SQL queries without sufficient neutralization, allowing an authenticated attacker to manipulate database queries. Successful exploitation can result in unauthorized access to or modification of database contents depending on database privileges.",
+    "nvd_cwe": [
+      "CWE-89"
+    ],
+    "nvd_cvss": 8.1
+  },
+  {
+    "cve": "CVE-2026-22196",
+    "description": "GestSup versions prior to\u00a03.2.60 contain a SQL injection vulnerability in ticket creation functionality. User-controlled input provided during ticket creation is incorporated into SQL queries without sufficient neutralization, allowing an authenticated attacker to manipulate database queries. Successful exploitation can result in unauthorized access to or modification of database contents depending on database privileges.",
+    "nvd_cwe": [
+      "CWE-89"
+    ],
+    "nvd_cvss": 8.1
+  },
+  {
+    "cve": "CVE-2026-22197",
+    "description": "GestSup versions prior to\u00a03.2.60 contain multiple SQL injection vulnerabilities in the asset list functionality. Multiple request parameters used to filter, search, or sort assets are incorporated into SQL queries without sufficient neutralization, allowing an authenticated attacker to manipulate database queries. Successful exploitation can result in unauthorized access to or modification of database contents depending on database privileges.",
+    "nvd_cwe": [
+      "CWE-89"
+    ],
+    "nvd_cvss": 8.1
+  },
+  {
+    "cve": "CVE-2026-22198",
+    "description": "GestSup versions prior to\u00a03.2.60 contain a pre-authentication stored cross-site scripting (XSS) vulnerability in the API error logging functionality. By sending an API request with a crafted X-API-KEY header value (for example, to /api/v1/ticket.php), an unauthenticated attacker can cause attacker-controlled HTML/JavaScript to be written to log entries. When an administrator later views the affected logs in the web interface, the injected content is rendered without proper output encoding, resulting in arbitrary script execution in the administrator\u2019s browser session.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 6.1
+  },
+  {
+    "cve": "CVE-2026-0830",
+    "description": "Processing specially crafted workspace folder names could allow for arbitrary command injection in the Kiro GitLab Merge-Request helper in Kiro IDE before version 0.6.18 when opening maliciously crafted workspaces.\n\nTo mitigate, users should update to the latest version.",
+    "nvd_cwe": [
+      "CWE-78"
+    ],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-22584",
+    "description": "Improper Control of Generation of Code ('Code Injection') vulnerability in Salesforce Uni2TS on MacOS, Windows, Linux allows Leverage Executable Code in Non-Executable Files.This issue affects Uni2TS: through 1.2.0.",
+    "nvd_cwe": [
+      "CWE-94"
+    ],
+    "nvd_cvss": 9.8
+  },
+  {
+    "cve": "CVE-2026-21897",
+    "description": "CryptoLib provides a software-only solution using the CCSDS Space Data Link Security Protocol - Extended Procedures (SDLS-EP) to secure communications between a spacecraft running the core Flight System (cFS) and a ground station. Prior to version 1.4.3, the Crypto_Config_Add_Gvcid_Managed_Parameters function only checks whether gvcid_counter > GVCID_MAN_PARAM_SIZE. As a result, it allows up to the 251st entry, which causes a write past the end of the array, overwriting gvcid_counter located immediately after gvcid_managed_parameters_array[250]. This leads to an out-of-bounds write, and the overwritten gvcid_counter may become an arbitrary value, potentially affecting the parameter lookup/registration logic that relies on it. This issue has been patched in version 1.4.3.",
+    "nvd_cwe": [
+      "CWE-787"
+    ],
+    "nvd_cvss": 7.3
+  },
+  {
+    "cve": "CVE-2026-21898",
+    "description": "CryptoLib provides a software-only solution using the CCSDS Space Data Link Security Protocol - Extended Procedures (SDLS-EP) to secure communications between a spacecraft running the core Flight System (cFS) and a ground station. Prior to version 1.4.3, the Crypto_AOS_ProcessSecurity function reads memory without valid bounds checking when parsing AOS frame hashes. This issue has been patched in version 1.4.3.",
+    "nvd_cwe": [
+      "CWE-125"
+    ],
+    "nvd_cvss": 8.2
+  },
+  {
+    "cve": "CVE-2026-21899",
+    "description": "CryptoLib provides a software-only solution using the CCSDS Space Data Link Security Protocol - Extended Procedures (SDLS-EP) to secure communications between a spacecraft running the core Flight System (cFS) and a ground station. Prior to version 1.4.3, in base64urlDecode, padding-stripping dereferences input[inputLen - 1] before checking that inputLen > 0 or that input != NULL. For inputLen == 0, this becomes an OOB read at input[-1], potentially crashing the process. If input == NULL and inputLen == 0, it dereferences NULL - 1. This issue has been patched in version 1.4.3.",
+    "nvd_cwe": [
+      "CWE-125"
+    ],
+    "nvd_cvss": 4.7
+  },
+  {
+    "cve": "CVE-2026-21900",
+    "description": "CryptoLib provides a software-only solution using the CCSDS Space Data Link Security Protocol - Extended Procedures (SDLS-EP) to secure communications between a spacecraft running the core Flight System (cFS) and a ground station. Prior to version 1.4.3, an out-of-bounds heap read vulnerability in cryptography_encrypt() occurs when parsing JSON metadata from KMC server responses. The flawed strtok iteration pattern uses ptr + strlen(ptr) + 1 which reads one byte past allocated buffer boundaries when processing short or malformed metadata strings. This issue has been patched in version 1.4.3.",
+    "nvd_cwe": [
+      "CWE-125"
+    ],
+    "nvd_cvss": 5.9
+  },
+  {
+    "cve": "CVE-2026-22023",
+    "description": "CryptoLib provides a software-only solution using the CCSDS Space Data Link Security Protocol - Extended Procedures (SDLS-EP) to secure communications between a spacecraft running the core Flight System (cFS) and a ground station. Prior to version 1.4.3, there is an out-of-bounds heap read vulnerability in cryptography_aead_encrypt(). This issue has been patched in version 1.4.3.",
+    "nvd_cwe": [
+      "CWE-125"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-22024",
+    "description": "CryptoLib provides a software-only solution using the CCSDS Space Data Link Security Protocol - Extended Procedures (SDLS-EP) to secure communications between a spacecraft running the core Flight System (cFS) and a ground station. Prior to version 1.4.3, the cryptography_encrypt() function allocates multiple buffers for HTTP requests and JSON parsing that are never freed on any code path. Each call leaks approximately 400 bytes of memory. Sustained traffic can gradually exhaust available memory. This issue has been patched in version 1.4.3.",
+    "nvd_cwe": [
+      "CWE-401"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-22025",
+    "description": "CryptoLib provides a software-only solution using the CCSDS Space Data Link Security Protocol - Extended Procedures (SDLS-EP) to secure communications between a spacecraft running the core Flight System (cFS) and a ground station. Prior to version 1.4.3, when the KMC server returns a non-200 HTTP status code, cryptography_encrypt() and cryptography_decrypt() return immediately without freeing previously allocated buffers. Each failed request leaks approximately 467 bytes. Repeated failures (from a malicious server or network issues) can gradually exhaust memory. This issue has been patched in version 1.4.3.",
+    "nvd_cwe": [
+      "CWE-401",
+      "CWE-770"
+    ],
+    "nvd_cvss": 3.7
+  },
+  {
+    "cve": "CVE-2026-22026",
+    "description": "CryptoLib provides a software-only solution using the CCSDS Space Data Link Security Protocol - Extended Procedures (SDLS-EP) to secure communications between a spacecraft running the core Flight System (cFS) and a ground station. Prior to version 1.4.3, the libcurl write_callback function in the KMC crypto service client allows unbounded memory growth by reallocating response buffers without any size limit or overflow check. A malicious KMC server can return arbitrarily large HTTP responses, forcing the client to allocate excessive memory until the process is terminated by the OS. This issue has been patched in version 1.4.3.",
+    "nvd_cwe": [
+      "CWE-789"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-22027",
+    "description": "CryptoLib provides a software-only solution using the CCSDS Space Data Link Security Protocol - Extended Procedures (SDLS-EP) to secure communications between a spacecraft running the core Flight System (cFS) and a ground station. Prior to version 1.4.3, the convert_hexstring_to_byte_array() function in the MariaDB SA interface writes decoded bytes into a caller-provided buffer without any capacity check. When importing SA fields from the database (e.g., IV, ARSN, ABM), a malformed or oversized hex string in the database can overflow the destination buffer, corrupting adjacent heap memory. This issue has been patched in version 1.4.3.",
+    "nvd_cwe": [
+      "CWE-122"
+    ],
+    "nvd_cvss": 6.0
+  },
+  {
+    "cve": "CVE-2026-22697",
+    "description": "CryptoLib provides a software-only solution using the CCSDS Space Data Link Security Protocol - Extended Procedures (SDLS-EP) to secure communications between a spacecraft running the core Flight System (cFS) and a ground station. Prior to version 1.4.3, CryptoLib\u2019s KMC crypto service integration is vulnerable to a heap buffer overflow when decoding Base64-encoded ciphertext/cleartext fields returned by the KMC service. The decode destination buffer is sized using an expected output length (len_data_out), but the Base64 decoder writes output based on the actual Base64 input length and does not enforce any destination size limit. An oversized Base64 string in the KMC JSON response can cause out-of-bounds writes on the heap, resulting in process crash and potentially code execution under certain conditions. This issue has been patched in version 1.4.3.",
+    "nvd_cwe": [
+      "CWE-122"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-22600",
+    "description": "OpenProject is an open-source, web-based project management software. A Local File Read (LFR) vulnerability exists in the work package PDF export functionality of OpenProject prior to version 16.6.4. By uploading a specially crafted SVG file (disguised as a PNG) as a work package attachment, an attacker can exploit the backend image processing engine (ImageMagick). When the work package is exported to PDF, the backend attempts to resize the image, triggering the ImageMagick text: coder. This allows an attacker to read arbitrary local files that the application user has permissions to access (e.g., /etc/passwd, all project configuration files, private project data, etc.). The attack requires permissions to upload attachments to a container that can be exported to PDF, such as a work package. The issue has been patched in version 16.6.4. Those who are unable to upgrade may apply the patch manually.",
+    "nvd_cwe": [
+      "CWE-200"
+    ],
+    "nvd_cvss": 9.1
+  },
+  {
+    "cve": "CVE-2026-22601",
+    "description": "OpenProject is an open-source, web-based project management software. For OpenProject version 16.6.1 and below, a registered administrator can execute arbitrary command by configuring sendmail binary path and sending a test email. This issue has been patched in version 16.6.2.",
+    "nvd_cwe": [
+      "CWE-77"
+    ],
+    "nvd_cvss": 7.2
+  },
+  {
+    "cve": "CVE-2026-22602",
+    "description": "OpenProject is an open-source, web-based project management software. Prior to version 16.6.2, a low\u2011privileged logged-in user can view the full names of other users. Since user IDs are assigned sequentially and predictably (e.g., 1 to 1000), an attacker can extract a complete list of all users\u2019 full names by iterating through these URLs. The same behavior can also be reproduced via the OpenProject API, allowing automated retrieval of full names through the API as well. This issue has been patched in version 16.6.2. Those who are unable to upgrade may apply the patch manually.",
+    "nvd_cwe": [
+      "CWE-200"
+    ],
+    "nvd_cvss": 3.5
+  },
+  {
+    "cve": "CVE-2026-22603",
+    "description": "OpenProject is an open-source, web-based project management software. Prior to version 16.6.2, OpenProject\u2019s unauthenticated password-change endpoint (/account/change_password) was not protected by the same brute-force safeguards that apply to the normal login form. In affected versions, an attacker who can guess or enumerate user IDs can send unlimited password-change requests for a given account without triggering lockout or other rate-limiting controls. This allows automated password-guessing (e.g., with wordlists of common passwords) against valid accounts. Successful guessing results in full account compromise for the targeted user and, depending on that user\u2019s role, can lead to further privilege escalation inside the application. This issue has been patched in version 16.6.2. Those who are unable to upgrade may apply the patch manually.",
+    "nvd_cwe": [
+      "CWE-307"
+    ],
+    "nvd_cvss": 6.5
+  },
+  {
+    "cve": "CVE-2026-22604",
+    "description": "OpenProject is an open-source, web-based project management software. For OpenProject versions from 11.2.1 to before 16.6.2, when sending a POST request to the /account/change_password endpoint with an arbitrary User ID as the password_change_user_id parameter, the resulting error page would show the username for the requested user. Since this endpoint is intended to be called without being authenticated, this allows to enumerate the user names of all accounts registered in an OpenProject instance. This issue has been patched in version 16.6.2.",
+    "nvd_cwe": [
+      "CWE-200"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-22605",
+    "description": "OpenProject is an open-source, web-based project management software. OpenProject versions prior to version 16.6.3, allowed users with the View Meetings permission on any project, to access meeting details of meetings that belonged to projects, the user does not have access to. This issue has been patched in version 16.6.3.",
+    "nvd_cwe": [
+      "CWE-284"
+    ],
+    "nvd_cvss": 4.3
+  },
+  {
+    "cve": "CVE-2026-22606",
+    "description": "Fickling is a Python pickling decompiler and static analyzer. Fickling versions up to and including 0.1.6 do not treat Python\u2019s runpy module as unsafe. Because of this, a malicious pickle that uses runpy.run_path() or runpy.run_module() is classified as SUSPICIOUS instead of OVERTLY_MALICIOUS. If a user relies on Fickling\u2019s output to decide whether a pickle is safe to deserialize, this misclassification can lead them to execute attacker-controlled code on their system. This affects any workflow or product that uses Fickling as a security gate for pickle deserialization. This issue has been patched in version 0.1.7.",
+    "nvd_cwe": [
+      "CWE-184",
+      "CWE-502"
+    ],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-22607",
+    "description": "Fickling is a Python pickling decompiler and static analyzer. Fickling versions up to and including 0.1.6 do not treat Python's cProfile module as unsafe. Because of this, a malicious pickle that uses cProfile.run() is classified as SUSPICIOUS instead of OVERTLY_MALICIOUS. If a user relies on Fickling's output to decide whether a pickle is safe to deserialize, this misclassification can lead them to execute attacker-controlled code on their system. This affects any workflow or product that uses Fickling as a security gate for pickle deserialization. This issue has been patched in version 0.1.7.",
+    "nvd_cwe": [
+      "CWE-184",
+      "CWE-502"
+    ],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-22608",
+    "description": "Fickling is a Python pickling decompiler and static analyzer. Prior to version 0.1.7, both ctypes and pydoc modules aren't explicitly blocked. Even other existing pickle scanning tools (like picklescan) do not block pydoc.locate. Chaining these two together can achieve RCE while the scanner still reports the file as LIKELY_SAFE. This issue has been patched in version 0.1.7.",
+    "nvd_cwe": [
+      "CWE-184",
+      "CWE-502"
+    ],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-22609",
+    "description": "Fickling is a Python pickling decompiler and static analyzer. Prior to version 0.1.7, the unsafe_imports() method in Fickling's static analyzer fails to flag several high-risk Python modules that can be used for arbitrary code execution. Malicious pickles importing these modules will not be detected as unsafe, allowing attackers to bypass Fickling's primary static safety checks. This issue has been patched in version 0.1.7.",
+    "nvd_cwe": [
+      "CWE-184",
+      "CWE-502"
+    ],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-22612",
+    "description": "Fickling is a Python pickling decompiler and static analyzer. Prior to version 0.1.7, Fickling is vulnerable to detection bypass due to \"builtins\" blindness. This issue has been patched in version 0.1.7.",
+    "nvd_cwe": [
+      "CWE-502"
+    ],
+    "nvd_cvss": 7.8
+  },
+  {
+    "cve": "CVE-2026-21884",
+    "description": "React Router is a router for React. In @remix-run/react version prior to 2.17.3. and react-router 7.0.0 through 7.11.0, a XSS vulnerability exists in in React Router's <ScrollRestoration> API in Framework Mode when using the getKey/storageKey props during Server-Side Rendering which could allow arbitrary JavaScript execution during SSR if untrusted content is used to generate the keys. There is no impact if server-side rendering in Framework Mode is disabled, or if Declarative Mode (<BrowserRouter>) or Data Mode (createBrowserRouter/<RouterProvider>) is being used. This issue has been patched in @remix-run/react version 2.17.3 and react-router version 7.12.0.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 8.2
+  },
+  {
+    "cve": "CVE-2026-22029",
+    "description": "React Router is a router for React. In @remix-run/router version prior to 1.23.2 and react-router 7.0.0 through 7.11.0, React Router (and Remix v1/v2) SPA open navigation redirects originating from loaders or actions in Framework Mode, Data Mode, or the unstable RSC modes can result in unsafe URLs causing unintended javascript execution on the client. This is only an issue if you are creating redirect paths from untrusted content or via an open redirect. There is no impact if Declarative Mode (<BrowserRouter>) is being used. This issue has been patched in @remix-run/router version 1.23.2 and react-router version 7.12.0.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 8.0
+  },
+  {
+    "cve": "CVE-2026-22030",
+    "description": "React Router is a router for React. In @remix-run/server-runtime version prior to 2.17.3. and react-router 7.0.0 through 7.11.0, React Router (or Remix v2) is vulnerable to CSRF attacks on document POST requests to UI routes when using server-side route action handlers in Framework Mode, or when using React Server Actions in the new unstable RSC modes. There is no impact if Declarative Mode (<BrowserRouter>) or Data Mode (createBrowserRouter/<RouterProvider>) is being used. This issue has been patched in @remix-run/server-runtime version 2.17.3 and react-router version 7.12.0.",
+    "nvd_cwe": [
+      "CWE-346",
+      "CWE-352"
+    ],
+    "nvd_cvss": 6.5
+  },
+  {
+    "cve": "CVE-2026-22594",
+    "description": "Ghost is a Node.js content management system. In versions 5.105.0 through 5.130.5 and 6.0.0 through 6.10.3, a vulnerability in Ghost's 2FA mechanism allows staff users to skip email 2FA. This issue has been patched in versions 5.130.6 and 6.11.0.",
+    "nvd_cwe": [
+      "CWE-287"
+    ],
+    "nvd_cvss": 8.1
+  },
+  {
+    "cve": "CVE-2026-22595",
+    "description": "Ghost is a Node.js content management system. In versions 5.121.0 through 5.130.5 and 6.0.0 through 6.10.3, a vulnerability in Ghost's handling of Staff Token authentication allowed certain endpoints to be accessed that were only intended to be accessible via Staff Session authentication. External systems that have been authenticated via Staff Tokens for Admin/Owner-role users would have had access to these endpoints. This issue has been patched in versions 5.130.6 and 6.11.0.",
+    "nvd_cwe": [
+      "CWE-863"
+    ],
+    "nvd_cvss": 8.1
+  },
+  {
+    "cve": "CVE-2026-22596",
+    "description": "Ghost is a Node.js content management system. In versions 5.90.0 through 5.130.5 and 6.0.0 through 6.10.3, a vulnerability in Ghost's /ghost/api/admin/members/events endpoint allows users with authentication credentials for the Admin API to execute arbitrary SQL. This issue has been patched in versions 5.130.6 and 6.11.0.",
+    "nvd_cwe": [
+      "CWE-89"
+    ],
+    "nvd_cvss": 6.7
+  },
+  {
+    "cve": "CVE-2026-22597",
+    "description": "Ghost is a Node.js content management system. In versions 5.38.0 through 5.130.5 and 6.0.0 through 6.10.3, a vulnerability in Ghost\u2019s media inliner mechanism allows staff users in possession of a valid authentication token for the Ghost Admin API to exfiltrate data from internal systems via SSRF. This issue has been patched in versions 5.130.6 and 6.11.0.",
+    "nvd_cwe": [
+      "CWE-918"
+    ],
+    "nvd_cvss": 2.7
+  },
+  {
+    "cve": "CVE-2026-22589",
+    "description": "Spree is an open source e-commerce solution built with Ruby on Rails. Prior to versions 4.10.2, 5.0.7, 5.1.9, and 5.2.5, an Unauthenticated Insecure Direct Object Reference (IDOR) vulnerability was identified that allows an unauthenticated attacker to access guest address information without supplying valid credentials or session cookies. This issue has been patched in versions 4.10.2, 5.0.7, 5.1.9, and 5.2.5.",
+    "nvd_cwe": [
+      "CWE-639"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-22610",
+    "description": "Angular is a development platform for building mobile and desktop web applications using TypeScript/JavaScript and other languages. Prior to versions 19.2.18, 20.3.16, 21.0.7, and 21.1.0-rc.0, a cross-site scripting (XSS) vulnerability has been identified in the Angular Template Compiler. The vulnerability exists because Angular\u2019s internal sanitization schema fails to recognize the href and xlink:href attributes of SVG <script> elements as a Resource URL context. This issue has been patched in versions 19.2.18, 20.3.16, 21.0.7, and 21.1.0-rc.0.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 6.1
+  },
+  {
+    "cve": "CVE-2026-22687",
+    "description": "WeKnora is an LLM-powered framework designed for deep document understanding and semantic retrieval. Prior to version 0.2.5, after WeKnora enables the Agent service, it allows users to call the database query tool. Due to insufficient backend validation, an attacker can use prompt\u2011based bypass techniques to evade query restrictions and obtain sensitive information from the target server and database. This issue has been patched in version 0.2.5.",
+    "nvd_cwe": [
+      "CWE-89"
+    ],
+    "nvd_cvss": 5.6
+  },
+  {
+    "cve": "CVE-2026-22688",
+    "description": "WeKnora is an LLM-powered framework designed for deep document understanding and semantic retrieval. Prior to version 0.2.5, there is a command injection vulnerability that allows authenticated users to inject stdio_config.command/args into MCP stdio settings, causing the server to execute subprocesses using these injected values. This issue has been patched in version 0.2.5.",
+    "nvd_cwe": [
+      "CWE-77"
+    ],
+    "nvd_cvss": 9.9
+  },
+  {
+    "cve": "CVE-2026-22690",
+    "description": "pypdf is a free and open-source pure-python PDF library. Prior to version 6.6.0, pypdf has possible long runtimes for missing /Root object with large /Size values. An attacker who uses this vulnerability can craft a PDF which leads to possibly long runtimes for actually invalid files. This can be achieved by omitting the /Root entry in the trailer, while using a rather large /Size value. Only the non-strict reading mode is affected. This issue has been patched in version 6.6.0.",
+    "nvd_cwe": [
+      "CWE-400"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-22691",
+    "description": "pypdf is a free and open-source pure-python PDF library. Prior to version 6.6.0, pypdf has possible long runtimes for malformed startxref. An attacker who uses this vulnerability can craft a PDF which leads to possibly long runtimes for invalid startxref entries. When rebuilding the cross-reference table, PDF files with lots of whitespace characters become problematic. Only the non-strict reading mode is affected. Only the non-strict reading mode is affected. This issue has been patched in version 6.6.0.",
+    "nvd_cwe": [
+      "CWE-400",
+      "CWE-1333"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-22611",
+    "description": "AWS SDK for .NET works with Amazon Web Services to help build scalable solutions with Amazon S3, Amazon DynamoDB, Amazon Glacier, and more. From versions 4.0.0 to before 4.0.3.3, Customer applications could be configured to improperly route AWS API calls to non-existent or non-AWS hosts. This notification is related to the use of specific values for the region input field when calling AWS services. An actor with access to the environment in which the SDK is used could set the region input field to an invalid value. This issue has been patched in version 4.0.3.3.",
+    "nvd_cwe": [
+      "CWE-20"
+    ],
+    "nvd_cvss": 3.7
+  },
+  {
+    "cve": "CVE-2026-22685",
+    "description": "DevToys is a desktop app for developers. In versions from 2.0.0.0 to before 2.0.9.0, a path traversal vulnerability exists in the DevToys extension installation mechanism. When processing extension packages (NUPKG archives), DevToys does not sufficiently validate file paths contained within the archive. A malicious extension package could include crafted file entries such as ../../\u2026/target-file, causing the extraction process to write files outside the intended extensions directory. This flaw enables an attacker to overwrite arbitrary files on the user\u2019s system with the privileges of the DevToys process. Depending on the environment, this may lead to code execution, configuration tampering, or corruption of application or system files. This issue has been patched in version 2.0.9.0.",
+    "nvd_cwe": [
+      "CWE-22"
+    ],
+    "nvd_cvss": 8.8
+  },
+  {
+    "cve": "CVE-2026-22689",
+    "description": "Mailpit is an email testing tool and API for developers. Prior to version 1.28.2, the Mailpit WebSocket server is configured to accept connections from any origin. This lack of Origin header validation introduces a Cross-Site WebSocket Hijacking (CSWSH) vulnerability. An attacker can host a malicious website that, when visited by a developer running Mailpit locally, establishes a WebSocket connection to the victim's Mailpit instance (default ws://localhost:8025). This allows the attacker to intercept sensitive data such as email contents, headers, and server statistics in real-time. This issue has been patched in version 1.28.2.",
+    "nvd_cwe": [
+      "CWE-1385"
+    ],
+    "nvd_cvss": 6.5
+  },
+  {
+    "cve": "CVE-2026-22693",
+    "description": "HarfBuzz is a text shaping engine. Prior to version 12.3.0, a null pointer dereference vulnerability exists in the SubtableUnicodesCache::create function located in src/hb-ot-cmap-table.hh. The function fails to check if hb_malloc returns NULL before using placement new to construct an object at the returned pointer address. When hb_malloc fails to allocate memory (which can occur in low-memory conditions or when using custom allocators that simulate allocation failures), it returns NULL. The code then attempts to call the constructor on this null pointer using placement new syntax, resulting in undefined behavior and a Segmentation Fault. This issue has been patched in version 12.3.0.",
+    "nvd_cwe": [
+      "CWE-476"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-22698",
+    "description": "RustCrypto: Elliptic Curves is general purpose Elliptic Curve Cryptography (ECC) support, including types and traits for representing various elliptic curve forms, scalars, points, and public/secret keys composed thereof. In versions 0.14.0-pre.0 and 0.14.0-rc.0, a  critical vulnerability exists in the SM2 Public Key Encryption (PKE) implementation where the ephemeral nonce k is generated with severely reduced entropy. A unit mismatch error causes the nonce generation function to request only 32 bits of randomness instead of the expected 256 bits. This reduces the security of the encryption from a 128-bit level to a trivial 16-bit level, allowing a practical attack to recover the nonce k and decrypt any ciphertext given only the public key and ciphertext. This issue has been patched via commit e4f7778.",
+    "nvd_cwe": [
+      "CWE-331"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-22699",
+    "description": "RustCrypto: Elliptic Curves is general purpose Elliptic Curve Cryptography (ECC) support, including types and traits for representing various elliptic curve forms, scalars, points, and public/secret keys composed thereof. In versions 0.14.0-pre.0 and 0.14.0-rc.0, a denial-of-service vulnerability exists in the SM2 PKE decryption path where an invalid elliptic-curve point (C1) is decoded and the resulting value is unwrapped without checking. Specifically, AffinePoint::from_encoded_point(&encoded_c1) may return a None/CtOption::None when the supplied coordinates are syntactically valid but do not lie on the SM2 curve. The calling code previously used .unwrap(), causing a panic when presented with such input. This issue has been patched via commit 085b7be.",
+    "nvd_cwe": [
+      "CWE-20"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-22700",
+    "description": "RustCrypto: Elliptic Curves is general purpose Elliptic Curve Cryptography (ECC) support, including types and traits for representing various elliptic curve forms, scalars, points, and public/secret keys composed thereof. In versions 0.14.0-pre.0 and 0.14.0-rc.0, a denial-of-service vulnerability exists in the SM2 public-key encryption (PKE) implementation: the decrypt() path performs unchecked slice::split_at operations on input buffers derived from untrusted ciphertext. An attacker can submit short/undersized ciphertext or carefully-crafted DER-encoded structures to trigger bounds-check panics (Rust unwinding) which crash the calling thread or process. This issue has been patched via commit e60e991.",
+    "nvd_cwe": [
+      "CWE-20"
+    ],
+    "nvd_cvss": 7.5
+  },
+  {
+    "cve": "CVE-2026-22701",
+    "description": "filelock is a platform-independent file lock for Python. Prior to version 3.20.3, a TOCTOU race condition vulnerability exists in the SoftFileLock implementation of the filelock package. An attacker with local filesystem access and permission to create symlinks can exploit a race condition between the permission validation and file creation to cause lock operations to fail or behave unexpectedly. The vulnerability occurs in the _acquire() method between raise_on_not_writable_file() (permission check) and os.open() (file creation). During this race window, an attacker can create a symlink at the lock file path, potentially causing the lock to operate on an unintended target file or leading to denial of service. This issue has been patched in version 3.20.3.",
+    "nvd_cwe": [
+      "CWE-59",
+      "CWE-362",
+      "CWE-367"
+    ],
+    "nvd_cvss": 5.3
+  },
+  {
+    "cve": "CVE-2026-22702",
+    "description": "virtualenv is a tool for creating isolated virtual python environments. Prior to version 20.36.1, TOCTOU (Time-of-Check-Time-of-Use) vulnerabilities in virtualenv allow local attackers to perform symlink-based attacks on directory creation operations. An attacker with local access can exploit a race condition between directory existence checks and creation to redirect virtualenv's app_data and lock file operations to attacker-controlled locations. This issue has been patched in version 20.36.1.",
+    "nvd_cwe": [
+      "CWE-59",
+      "CWE-362"
+    ],
+    "nvd_cvss": 4.5
+  },
+  {
+    "cve": "CVE-2026-22703",
+    "description": "Cosign provides code signing and transparency for containers and binaries. Prior to versions 2.6.2 and 3.0.4, Cosign bundle can be crafted to successfully verify an artifact even if the embedded Rekor entry does not reference the artifact's digest, signature or public key. When verifying a Rekor entry, Cosign verifies the Rekor entry signature, and also compares the artifact's digest, the user's public key from either a Fulcio certificate or provided by the user, and the artifact signature to the Rekor entry contents. Without these comparisons, Cosign would accept any response from Rekor as valid. A malicious actor that has compromised a user's identity or signing key could construct a valid Cosign bundle by including any arbitrary Rekor entry, thus preventing the user from being able to audit the signing event. This issue has been patched in versions 2.6.2 and 3.0.4.",
+    "nvd_cwe": [
+      "CWE-345"
+    ],
+    "nvd_cvss": 5.5
+  },
+  {
+    "cve": "CVE-2026-22704",
+    "description": "HAX CMS helps manage microsite universe with PHP or NodeJs backends. In versions 11.0.6 to before 25.0.0, HAX CMS is vulnerable to stored XSS, which could lead to account takeover. This issue has been patched in version 25.0.0.",
+    "nvd_cwe": [
+      "CWE-79"
+    ],
+    "nvd_cvss": 8.0
+  },
+  {
+    "cve": "CVE-2026-22705",
+    "description": "RustCrypto: Signatures offers support for digital signatures, which provide authentication of data using public-key cryptography. Prior to version 0.1.0-rc.2, a timing side-channel was discovered in the Decompose algorithm which is used during ML-DSA signing to generate hints for the signature. This issue has been patched in version 0.1.0-rc.2.",
+    "nvd_cwe": [
+      "CWE-1240"
+    ],
+    "nvd_cvss": 6.4
+  }
+]

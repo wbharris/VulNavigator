@@ -2,8 +2,15 @@
 
 from __future__ import annotations
 
+import re
 from dataclasses import asdict, dataclass, field
 from typing import Any
+
+_AI_NARRATIVE = re.compile(
+    r"\b(mythos|daybreak|sandbox reproduction|AI found)\b|"
+    r"\bthe model (?:found|traced|identified|discovered)\b",
+    re.I,
+)
 
 
 @dataclass
@@ -112,9 +119,19 @@ class Case:
         return asdict(self)
 
 
-AI_FINDERS = frozenset({"mythos", "daybreak", "narrative"})
+AI_FINDERS = frozenset({"mythos", "daybreak"})
 
 
 def is_ai_zeroday(case: Case) -> bool:
-    """Mythos/Daybreak/narrative 0-days are identified by write-up + PoC, not CVE."""
-    return case.source_kind in AI_FINDERS and not case.cves
+    """Mythos/Daybreak (and AI-style narrative) 0-days are write-up + PoC, not CVE.
+
+    A pasted NVD-style advisory without a CVE id is *not* an AI 0-day.
+    """
+    if case.cves:
+        return False
+    if case.source_kind in AI_FINDERS:
+        return True
+    if case.source_kind == "narrative":
+        blob = f"{case.title}\n{case.description}\n{case.evidence.discovery}"
+        return bool(_AI_NARRATIVE.search(blob))
+    return False

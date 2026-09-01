@@ -26,7 +26,10 @@ def test_rce_typo_cade_and_word_boundary():
 def test_is_ai_zeroday():
     assert is_ai_zeroday(Case(source_kind="mythos", cves=[]))
     assert is_ai_zeroday(Case(source_kind="daybreak", cves=[]))
-    assert is_ai_zeroday(Case(source_kind="narrative", cves=[]))
+    assert not is_ai_zeroday(Case(source_kind="narrative", cves=[]))
+    assert is_ai_zeroday(
+        Case(source_kind="narrative", cves=[], description="the model found a heap overflow")
+    )
     assert not is_ai_zeroday(Case(source_kind="mythos", cves=["CVE-2024-1"]))
     assert not is_ai_zeroday(Case(source_kind="nessus", cves=[]))
 
