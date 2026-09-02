@@ -6,6 +6,8 @@ VulNavigator does **not** replace Mythos or Daybreak. It sits after them.
 
 Repo: https://github.com/wbharris/VulNavigator
 
+Blind-CVE training (separate from this product contract): [`TRAINING.md`](TRAINING.md).
+
 **VulNavigator™** is a trademark of wbharris (common-law ™, not a registered ®). See [`TRADEMARK.md`](../TRADEMARK.md).
 
 ## User journey

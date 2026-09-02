@@ -97,14 +97,14 @@ vuln-nav analyze examples/trivy-report.json
 ```bash
 .venv/bin/python -m pytest -q
 .venv/bin/python tests/simulate_intake.py    # all example intakes → tests/last-results.html
-.venv/bin/python tests/training/weekly.py --used N   # N = SuperGrok Usage percent
+.venv/bin/python tests/training/weekly.py --rescan
 ```
 
-Blind-CVE training: give Grok your **current** Settings → Usage percent. It sizes the batch, runs locally, fixes errors, updates the skill, retests, and reports errors + fixes without waiting. See `tests/training/README.md`.
+Blind-CVE training contract: [`docs/TRAINING.md`](docs/TRAINING.md).
 
 ## Status
 
-v0.1.1 on GitHub `main`. Narrative/blind-CVE training uses the **description only** (CVE id stripped, `analyze --offline`) against a frozen corpus of the first 300 published CVE-2026-* (`tests/data/blind_cve_2026.json`). Score **phrase → CWE** from the prose, not NVD fields the write-up never states. A pasted advisory without a CVE id is not an AI 0-day. Next slice: pinned ATT&CK / D3FEND / ATLAS snapshots and a reasoning model.
+v0.1.1 on GitHub `main`. Next slice: pinned ATT&CK / D3FEND / ATLAS snapshots and a reasoning model.
 
 ## Agent skills
 

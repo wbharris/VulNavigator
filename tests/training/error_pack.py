@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-"""Compact fail report for Grok: issue counts + a few sample descriptions.
+"""Compact fail report: issue counts + a few sample descriptions.
 
-Run locally. Do not dump the full scorecard into a Grok session.
+Run locally. Do not dump the full scorecard.
 """
 
 from __future__ import annotations
@@ -19,20 +19,14 @@ GROW = 150
 SAMPLES = 20
 DESC_CHARS = 480
 
-GROK_RULES = """\
-You are training VulNavigator narrative extractors (description only, --offline).
+PACK_RULES = """\
+When fixing extractors from this pack (description only, --offline):
 
-Do (no confirmation):
-- Add phrase → CWE / product / path / exposure only where the sample text says it.
-- Add 3–8 pytest cases in tests/test_blind_advisory.py for new phrases.
-- Update skill bullets. Keep corpus tests green. Phrase → CWE, not NVD-only labels.
-- pytest -q, then weekly.py --rescan. Repeat up to SUGGESTED rounds. A pasted advisory without a CVE id is not an AI 0-day.
-
-Do not:
-- Ask the operator to continue. Do not open blind-first-N.json or print every fail.
-- Use subagents. Do not treat NVD CWE as a miss when the prose never states that class.
-
-End with: suggested vs executed, CLEAN before→after, errors found, fixes implemented, leftovers.
+- Teach only phrases present in the sample text.
+- Add a `phrase_cwe.py` rule and a `tests/data/phrase_families.json` row.
+- Phrase → CWE, not NVD-only labels. Contract: `docs/TRAINING.md`.
+- `pytest -q`, then `weekly.py --rescan`. A pasted advisory without a CVE id is not an AI 0-day.
+- Do not open `blind-first-N.json` or dump every fail.
 """
 
 
@@ -63,6 +57,18 @@ def _latest_scorecard() -> Path:
     if not rows:
         raise SystemExit("no cases/blind-first-*.json — run weekly.py --grow first")
     return rows[-1]
+
+
+def resolve_scorecard(limit: int = 0) -> Path:
+    """Named scorecard, or newest local file if that limit was never written."""
+    if not limit:
+        return _latest_scorecard()
+    score = CASES / f"blind-first-{limit}.json"
+    if score.is_file():
+        return score
+    latest = _latest_scorecard()
+    print(f"preflight FALLBACK: missing {score.name}; using {latest.name}", flush=True)
+    return latest
 
 
 def _limit_from_name(path: Path) -> int:
@@ -118,7 +124,7 @@ def render(score_path: Path, samples: int = SAMPLES) -> str:
         f"CLEAN {len(rows) - len(fails)}/{len(rows)}  fails={len(fails)}",
         f"Corpus rows: {len(corpus)}  (frozen file `{CORPUS.relative_to(ROOT)}`)",
         "",
-        GROK_RULES,
+        PACK_RULES,
         "## Issue kinds",
         "",
     ]
@@ -141,7 +147,7 @@ def render(score_path: Path, samples: int = SAMPLES) -> str:
         lines.append("")
     next_n = limit + GROW if limit else GROW
     lines += [
-        "## Operator next (local, not Grok)",
+        "## Next",
         "",
         "```bash",
         ".venv/bin/python -m pytest -q",
@@ -160,7 +166,7 @@ def main() -> None:
     parser.add_argument("--samples", type=int, default=SAMPLES)
     parser.add_argument("-o", "--out", type=Path, default=None)
     args = parser.parse_args()
-    score = CASES / f"blind-first-{args.limit}.json" if args.limit else _latest_scorecard()
+    score = resolve_scorecard(args.limit)
     if not score.is_file():
         raise SystemExit(f"missing {score}")
     text = render(score, samples=args.samples)

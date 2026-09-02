@@ -1,0 +1,208 @@
+[
+  {
+    "id": "sqli-remote-public-exploit",
+    "family": "injection",
+    "kind": "positive",
+    "text": "A security flaw has been discovered in itsourcecode School Management System 1.0. This affects an unknown part of the file /student/index.php. The manipulation of the argument ID results in sql injection. It is possible to launch the attack remotely. The exploit has been released to the public and may be used for attacks.",
+    "expect_cwes": ["CWE-89"],
+    "expect_facing": true,
+    "expect_product": "School Management System",
+    "expect_version": "1.0",
+    "expect_path_suffix": "index.php",
+    "expect_public_exploit": true,
+    "not_ai_zeroday": true,
+    "expect_source_kind": "narrative"
+  },
+  {
+    "id": "ssti-not-rce",
+    "family": "injection",
+    "kind": "ambiguity",
+    "text": "Bagisto is an open source laravel eCommerce platform. Versions prior to 2.3.10 are vulnerable to server-side template injection. When a normal customer orders any product, in the add address step they can inject a value.",
+    "expect_cwes": ["CWE-1336"],
+    "forbid_cwes": ["CWE-94"],
+    "expect_product": "Bagisto",
+    "expect_version": "2.3.10"
+  },
+  {
+    "id": "command-injection-not-os-command",
+    "family": "injection",
+    "kind": "ambiguity",
+    "text": "Tenda AC1206 15.03.06.23 formBehaviorManager in /goform/BehaviorManager can lead to command injection. The attack can be launched remotely.",
+    "expect_cwes": ["CWE-77"],
+    "forbid_cwes": ["CWE-78"],
+    "expect_facing": true
+  },
+  {
+    "id": "os-command-not-77",
+    "family": "injection",
+    "kind": "ambiguity",
+    "text": "A helper executed an os command supplied in a config file on the local host.",
+    "expect_cwes": ["CWE-78"],
+    "forbid_cwes": ["CWE-77"]
+  },
+  {
+    "id": "heap-uaf-int",
+    "family": "memory",
+    "kind": "positive",
+    "text": "iccDEV provides libraries for ICC profiles. Versions 2.3.1 and below contain Use After Free, Heap-based Buffer Overflow and Integer Overflow vulnerabilities.",
+    "expect_cwes": ["CWE-416", "CWE-122", "CWE-190"],
+    "expect_product": "iccDEV"
+  },
+  {
+    "id": "path-traversal-wp-remote",
+    "family": "traversal",
+    "kind": "positive",
+    "text": "The FastDup plugin for WordPress is vulnerable to Path Traversal in all versions up to, and including, 2.7 via the dir_path parameter in a REST API endpoint.",
+    "expect_cwes": ["CWE-22"],
+    "expect_facing": true,
+    "expect_product": "FastDup"
+  },
+  {
+    "id": "crlf-and-ssrf",
+    "family": "request",
+    "kind": "positive",
+    "text": "cpp-httplib is a C++11 HTTP library. Prior to version 0.30.0, write_headers does not check for CR & LF characters in user supplied headers. This can be used for server side request forgery (SSRF).",
+    "expect_cwes": ["CWE-93", "CWE-918"],
+    "expect_product": "cpp-httplib",
+    "expect_facing": true
+  },
+  {
+    "id": "from-remote-sqli",
+    "family": "exposure",
+    "kind": "positive",
+    "text": "A vulnerability was detected in code-projects Content Management System 1.0. The file /pages.php argument ID results in sql injection. The attack may be performed from remote.",
+    "expect_cwes": ["CWE-89"],
+    "expect_facing": true
+  },
+  {
+    "id": "model-file-not-ai-zeroday",
+    "family": "dos",
+    "kind": "negative",
+    "text": "MessagePack for Java is a serializer. Versions prior to 0.9.11 allocate unbounded heap when deserializing EXT32 objects. Triggered during model loading. Can be exploited remotely. The model file is loaded from a registry.",
+    "expect_cwes": ["CWE-400"],
+    "expect_facing": true,
+    "not_ai_zeroday": true
+  },
+  {
+    "id": "arbitrary-sql",
+    "family": "injection",
+    "kind": "positive",
+    "text": "Ghost is a Node.js CMS. Users with Admin API credentials can execute arbitrary SQL on /ghost/api/admin/members/events.",
+    "expect_cwes": ["CWE-89"]
+  },
+  {
+    "id": "saved-javascript-xss",
+    "family": "injection",
+    "kind": "positive",
+    "text": "OPEXUS eCASE Audit allows an authenticated attacker to save JavaScript as a comment. The JavaScript is executed whenever another user views the log.",
+    "expect_cwes": ["CWE-79"]
+  },
+  {
+    "id": "libtpms-iv-crypto",
+    "family": "crypto",
+    "kind": "positive",
+    "text": "libtpms, a library that provides software emulation of a Trusted Platform Module, has a flaw in versions 0.10.0 and 0.10.1. The integration with OpenSSL 3.x returned the initial IV, thus weakening the subsequent encryption.",
+    "expect_cwes": ["CWE-327", "CWE-330"],
+    "expect_product": "libtpms",
+    "expect_version_prefix": "0.10"
+  },
+  {
+    "id": "emlog-open-source-csrf",
+    "family": "request",
+    "kind": "positive",
+    "text": "Emlog is an open source website building system. In version 2.5.23, article creation is vulnerable to cross-site request forgery (CSRF).",
+    "expect_cwes": ["CWE-352"],
+    "expect_product": "Emlog",
+    "expect_version": "2.5.23"
+  },
+  {
+    "id": "authn-bypass-openblocks",
+    "family": "auth",
+    "kind": "positive",
+    "text": "Authentication bypass issue exists in OpenBlocks series versions prior to FW5.0.8, which may allow an attacker to bypass administrator authentication and change the password.",
+    "expect_cwes": ["CWE-288"],
+    "expect_product": "OpenBlocks"
+  },
+  {
+    "id": "stack-overflow",
+    "family": "memory",
+    "kind": "positive",
+    "text": "iccDEV provides libraries for ICC profiles. Prior to version 2.3.1.2, iccDEV is vulnerable to stack overflow in the XML calculator macro expansion.",
+    "expect_cwes": ["CWE-121"]
+  },
+  {
+    "id": "heap-buffer-overflow",
+    "family": "memory",
+    "kind": "positive",
+    "text": "iccDEV provides libraries for ICC profiles. Prior to version 2.3.1.2, iccDEV is vulnerable to heap-buffer-overflow in IccTagXml().",
+    "expect_cwes": ["CWE-122"]
+  },
+  {
+    "id": "xml-parse-xxe",
+    "family": "xml",
+    "kind": "positive",
+    "text": "A vulnerability in Cisco ISE is due to improper parsing of XML that is processed by the web-based management interface.",
+    "expect_cwes": ["CWE-611"]
+  },
+  {
+    "id": "info-leak-unauth-remote",
+    "family": "info",
+    "kind": "positive",
+    "text": "An unauthenticated, remote attacker can cause the engine to leak sensitive information.",
+    "expect_cwes": ["CWE-200"]
+  },
+  {
+    "id": "sudoers-priv-esc",
+    "family": "auth",
+    "kind": "positive",
+    "text": "The absence of permissions control for the user XXX allows the current configuration in the sudoers file to escalate privileges without any restrictions.",
+    "expect_cwes": ["CWE-269"]
+  },
+  {
+    "id": "redos-mediawiki-visualdata",
+    "family": "regex",
+    "kind": "positive",
+    "text": "Inefficient Regular Expression Complexity vulnerability in MediaWiki - VisualData Extension allows Regular Expression Exponential Blowup. This issue affects MediaWiki - VisualData Extension: 1.45.",
+    "expect_cwes": ["CWE-1333"],
+    "expect_product": "VisualData"
+  },
+  {
+    "id": "undefined-behavior",
+    "family": "memory",
+    "kind": "positive",
+    "text": "iccDEV provides ICC profile libraries. Versions 2.3.1 and below have Undefined Behavior in CIccCLUT::Init.",
+    "expect_cwes": ["CWE-758"]
+  },
+  {
+    "id": "ev-station-lite-product",
+    "family": "auth",
+    "kind": "positive",
+    "text": "An Improper Access Control could allow a malicious actor in Wi-Fi range to the EV Station Lite (v1.5.2 and earlier) to use WiFi AutoLink.",
+    "expect_cwes": ["CWE-284"],
+    "expect_product": "EV Station Lite",
+    "expect_version": "1.5.2"
+  },
+  {
+    "id": "cleartext-creds",
+    "family": "crypto",
+    "kind": "positive",
+    "text": "An attacker with a network connection could detect credentials in clear text.",
+    "expect_cwes": ["CWE-319"]
+  },
+  {
+    "id": "weak-base64-creds",
+    "family": "crypto",
+    "kind": "positive",
+    "text": "The credentials required to access the device's web server are sent in base64 within the HTTP headers. Since base64 is not considered a strong cipher, an attacker could obtain the credentials.",
+    "expect_cwes": ["CWE-261"]
+  },
+  {
+    "id": "local-destdir-not-web-facing",
+    "family": "exposure",
+    "kind": "negative",
+    "text": "eopkg is a Solus package manager implemented in python3. In versions prior to 4.4.0, a malicious package could escape the directory set by --destdir. This requires the installation of a package from a malicious or compromised source.",
+    "expect_cwes": ["CWE-24"],
+    "expect_facing": false,
+    "not_ai_zeroday": true
+  }
+]

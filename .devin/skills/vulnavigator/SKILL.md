@@ -14,7 +14,7 @@ permissions:
     - Exec(.venv/bin/python -m pytest)
 ---
 
-Run VulNavigator from this repository. Product contract: `docs/PRODUCT.md`.
+Run VulNavigator from this repository. Product: `docs/PRODUCT.md`. Blind-CVE training: `docs/TRAINING.md`. Phrase rules: `src/vulnavigator/data/phrase_cwe.py`.
 
 ## What this skill is
 
@@ -42,58 +42,15 @@ CVE-only (`CVE-YYYY-NNNNN`) is a fallback. Scanner hits are detections, not expl
 
 Bundled examples: `examples/daybreak-findings.json`, `examples/mythos-zeroday.json`, `examples/narrative-rce.txt`, `examples/nessus-report.nessus`, `examples/sarif-report.sarif`, `examples/trivy-report.json`.
 
-## Blind-CVE training (description only)
+## Blind-CVE extractors
 
-To train/test whether VulNavigator infers bug class, product, path, and exposure **without cheating via the CVE id**:
+If asked to improve narrative extractors from a local error pack:
 
-1. Take an NVD English **description only**. Strip every `CVE-YYYY-NNNNN` (and do not pass `--source cve`).
-2. `vuln-nav analyze` that text `--offline` so NVD/KEV/EPSS cannot fill gaps.
-3. Compare the case to the **hidden full CVE** (CWE, CVSS/AV:N, product/CPE, file, public-exploit claim).
-4. Score **conflicts** (wrong CWE, AI 0-day label, truncated product) and **missing** fields.
+1. Read `docs/TRAINING.md` and `cases/error-pack.md` only (not `blind-first-N.json`).
+2. Add a `src/vulnavigator/data/phrase_cwe.py` rule and a `tests/data/phrase_families.json` row from the sample prose. Phrase → CWE; not NVD-only labels.
+3. `.venv/bin/python -m pytest -q` then `.venv/bin/python tests/training/weekly.py --rescan`.
 
-Do **not** paste the CVE id into the Devin/web input for this loop. A lone id takes the CVE-only path and NVD writes the answer.
-
-A pasted advisory without a CVE id is **not** an AI 0-day. Mythos/Daybreak (or narrative that says the model/sandbox found it) still are.
-
-Narrative should pull, when the words are there:
-
-- bug class → CWE (SQLi 89, XSS 79, SSTI 1336 before RCE 94, path traversal 22, upload 434, SSRF 918, CSRF 352, IDOR 639, missing auth 306/862, authentication bypass 288, stack overflow 121, heap-buffer-overflow 122, leak sensitive information 200, improper parsing of XML 611, inefficient regex 1333, undefined behavior 758, sudoers/privilege escalation 269, clear-text credentials 319, weak base64 credentials 261)
-- `remotely` / `from remote` / `launched remotely` / `unauthenticated attacker` → `asset_internet_facing`
-- Web bug-class CWE (SQLi, XSS, CSRF, SSRF, SSTI, upload, IDOR) implies network exposure unless the write-up is a local package-manager issue
-- `CR & LF` / CRLF in headers → CWE-93 (in addition to SSRF if both are stated)
-- `escape the directory` → CWE-24; `not tracked` → CWE-353; weakening IV/encryption → CWE-327/330
-- `X is an open source…` / `The X is a tool` / `X (v1.2.3 and earlier)` / `This issue affects X:` / `MediaWiki - Name Extension` / `In version 1.2.3` / `up to <git hash>` → product (not the word `versions`, not `Insufficient`/`Improper`)
-- file path **without** `:line` (`/student/index.php`, `search.php`)
-- product + version (`in … System 1.0`, `Bagisto … versions prior to 2.3.10`) — not the last word (`System`, `including`, `versions`)
-- “exploit has been released” → evidence **note** (claim, not a replayable PoC)
-
-Frozen corpus: `tests/data/blind_cve_2026.json` (first **300** published CVE-2026-*, ids stripped; grows +150/week). Pytest `tests/test_blind_corpus.py` must stay green. Score **phrase → CWE** from the description, not NVD fields the prose never states (AV:N-only, CWE-20-only).
-
-## Weekly training (autonomous, sized by SuperGrok %)
-
-When the user reports SuperGrok usage from Settings → Usage as a percent (0–100):
-
-1. **Do not ask to confirm.** Do not wait for more input.
-2. Run `.venv/bin/python tests/training/weekly.py --used N` with **that** percent (suggests grow + rounds, then fetch/rescan + `cases/error-pack.md` locally).
-3. Read **only** `cases/error-pack.md` and the `SUGGESTED` line. Do not open `blind-first-N.json`. Do not print every CVE. No subagents.
-4. If mode is `report-only`, or the pack is CLEAN with nothing new: skip code edits and go to the final report.
-5. Else implement phrase extractors (description text only), 3–8 tests in `tests/test_blind_advisory.py`, and skill bullets. Phrase → CWE; not NVD-only labels.
-6. `.venv/bin/python -m pytest -q` then `.venv/bin/python tests/training/weekly.py --rescan`.
-7. Read the **new** error pack. Repeat steps 5–6 up to the printed `rounds`. Stop early on CLEAN.
-8. Do not push unless the user already said push.
-
-**% → grow / fix rounds** (also printed by `weekly.py --used N --suggest-only`):
-
-| % used | remaining | grow | rounds | mode |
-|---|---|---|---|---|
-| 0–25 | 75–100 | +150 | 3 | full |
-| 26–50 | 50–74 | +100 | 3 | full |
-| 51–70 | 30–49 | +50 | 2 | medium |
-| 71–85 | 15–29 | +25 | 2 | small |
-| 86–94 | 6–14 | +0 | 1 | fix-only |
-| 95–100 | 0–5 | +0 | 0 | report-only |
-
-**Final message** (always): suggested vs executed; CLEAN before → after; table of **errors found** and **fixes implemented** (phrase / CWE / product extractor / skill line); leftover fails (NVD-only, not taught). Details: `tests/training/README.md`.
+A pasted advisory without a CVE id is not an AI 0-day.
 
 ## Pipeline (do not skip)
 
@@ -121,5 +78,4 @@ If they want a web form, point them to `vulnavigator-web` and say that UI is loc
 ```bash
 .venv/bin/python -m pytest -q
 .venv/bin/python tests/simulate_intake.py
-.venv/bin/python tests/training/weekly.py          # compact error pack only
 ```

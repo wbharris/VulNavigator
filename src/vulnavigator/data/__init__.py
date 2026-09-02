@@ -1,1 +1,1 @@
-"""Bundled mapping tables (CWE → ATT&CK, D3FEND, CSF)."""
+"""Bundled mapping tables (CWE → ATT&CK, D3FEND, CSF) and phrase → CWE rules."""

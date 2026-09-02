@@ -35,9 +35,9 @@ def _rows() -> list[dict]:
     return json.loads(CORPUS.read_text(encoding="utf-8"))
 
 
-def test_corpus_exists_and_has_fifty():
+def test_corpus_exists_and_has_three_hundred():
     rows = _rows()
-    assert len(rows) >= 50  # grows as refresh_blind_cve.py is rerun
+    assert len(rows) >= 300  # first 300 CVE-2026-*; grows as refresh_blind_cve.py is rerun
     assert all("CVE-" not in (row.get("description") or "") for row in rows)
 
 

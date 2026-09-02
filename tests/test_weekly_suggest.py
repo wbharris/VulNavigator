@@ -1,4 +1,4 @@
-"""SuperGrok % used → suggested grow / rounds."""
+"""weekly.py preflight (corpus present, no usage-percent policy)."""
 
 from __future__ import annotations
 
@@ -15,13 +15,14 @@ def _weekly():
     return mod
 
 
-def test_suggest_table():
+def test_preflight_ok_for_pack_rescan_grow(capsys):
     w = _weekly()
-    assert w.suggest(0)["grow"] == 150 and w.suggest(0)["rounds"] == 3
-    assert w.suggest(20)["grow"] == 150
-    assert w.suggest(40)["grow"] == 100
-    assert w.suggest(60)["grow"] == 50
-    plan = w.suggest(80)
-    assert plan["grow"] == 25 and plan["rounds"] == 2 and plan["mode"] == "small"
-    assert w.suggest(90)["mode"] == "fix-only"
-    assert w.suggest(96)["mode"] == "report-only" and w.suggest(96)["rounds"] == 0
+    w.preflight()
+    w.preflight(rescan=True)
+    w.preflight(grow=True)
+    out = capsys.readouterr().out
+    assert "preflight mode=pack" in out
+    assert "preflight mode=rescan" in out
+    assert "preflight mode=grow" in out
+    assert "preflight FAIL" not in out
+    assert w.corpus_n() >= 300

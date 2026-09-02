@@ -1,0 +1,20 @@
+name: ci
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Install
+        run: python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
+      - name: Pytest
+        run: .venv/bin/python -m pytest -q
+      - name: Training preflight (no NVD)
+        run: .venv/bin/python tests/training/weekly.py --preflight-only

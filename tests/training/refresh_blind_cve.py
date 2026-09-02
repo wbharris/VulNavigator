@@ -168,10 +168,7 @@ def blind_text(desc: str) -> str:
 
 
 def issues_for(cve: dict, case) -> list[str]:
-    cid = cve.get("id")
     desc = en_desc(cve)
-    cwes = gold_cwes(cve)
-    cvss, vec = gold_cvss(cve)
     products = gold_products(cve)
     files = [m.group(1) for m in FILE_RE.finditer(desc)]
     out: list[str] = []
@@ -193,26 +190,10 @@ def issues_for(cve: dict, case) -> list[str]:
         if not any(any(tag in (m.id or "") for tag in exec_ids) for m in case.attack):
             out.append("MISSING: RCE language but no CWE-94 / execution ATT&CK")
 
-    gold_cwe_set = {c for c in cwes if c.startswith("CWE-")}
-    buffer = {"CWE-119", "CWE-120", "CWE-121", "CWE-122", "CWE-125", "CWE-787"}
-    cmd = {"CWE-74", "CWE-77", "CWE-78"}
-    auth = {"CWE-284", "CWE-285", "CWE-287", "CWE-288", "CWE-290", "CWE-306", "CWE-862", "CWE-863"}
-    uaf = {"CWE-415", "CWE-416"}
-    info = {"CWE-200", "CWE-201", "CWE-497"}
-    cleartext = {"CWE-261", "CWE-319", "CWE-497", "CWE-522"}
-    resource = {"CWE-400", "CWE-409", "CWE-674", "CWE-770", "CWE-772", "CWE-789"}
-    got = set(case.cwes)
-    related = any(
-        gold_cwe_set & family and got & family
-        for family in (buffer, cmd, auth, uaf, info, cleartext, resource)
-    )
     taught = set(cwes_from_text(desc))
-    gold_specific = gold_cwe_set - {"CWE-20"}
-    phrase_ok = bool(taught) and taught <= got
+    got = set(case.cwes)
     if taught - got:
         out.append(f"MISSING: phrase CWE {sorted(taught - got)} not on case {case.cwes}")
-    elif gold_specific and not (gold_specific & got) and not related and taught and not phrase_ok:
-        out.append(f"MISSING: NVD CWE {sorted(gold_cwe_set)} not on case {case.cwes}")
 
     if REMOTE_RE.search(desc) and case.asset_internet_facing is not True:
         out.append("MISSING: remote language in description but internet_facing is not True")
@@ -315,6 +296,35 @@ def _configs_from_products(products: list[str]) -> list:
     return [{"nodes": nodes}] if nodes else []
 
 
+def _metrics_from_cvss(score) -> dict:
+    if score is None:
+        return {}
+    return {"cvssMetricV31": [{"cvssData": {"baseScore": float(score), "vectorString": ""}}]}
+
+
+def _gold_from_corpus(item: dict, old: dict) -> tuple[list[str], list[str], float | None, str | None]:
+    """Prefer frozen corpus gold; fall back to a prior scorecard row."""
+    cwes = list(item.get("nvd_cwe") or old.get("nvd_cwe") or [])
+    products = list(item.get("nvd_products") or []) or _products_from_score_row(old)
+    cvss = item.get("nvd_cvss")
+    if cvss is None:
+        cvss = old.get("nvd_cvss")
+    published = item.get("published") or old.get("published")
+    return cwes, products, cvss, published
+
+
+def _synthetic_cve(item: dict, old: dict) -> dict:
+    cwes, products, cvss, published = _gold_from_corpus(item, old)
+    return {
+        "id": item.get("cve"),
+        "published": published,
+        "descriptions": [{"lang": "en", "value": item.get("description") or ""}],
+        "weaknesses": [{"description": [{"value": c} for c in cwes]}],
+        "metrics": _metrics_from_cvss(cvss),
+        "configurations": _configs_from_products(products),
+    }
+
+
 def _products_from_score_row(row: dict) -> list[str]:
     if row.get("nvd_products"):
         return list(row["nvd_products"])
@@ -368,17 +378,8 @@ def rescore(limit: int = 300) -> None:
         cid = item["cve"]
         desc = item["description"]
         old = old_rows.get(cid, {})
-        products = _products_from_score_row(old)
-        cve = {
-            "id": cid,
-            "published": old.get("published"),
-            "descriptions": [{"lang": "en", "value": desc}],
-            "weaknesses": [
-                {"description": [{"value": c} for c in (item.get("nvd_cwe") or old.get("nvd_cwe") or [])]}
-            ],
-            "metrics": {},
-            "configurations": _configs_from_products(products),
-        }
+        cve = _synthetic_cve(item, old)
+        products = gold_products(cve)
         case = analyze_text(desc, offline=True)[0]
         rows.append(_row_for(cve, case, desc, products=products))
     _print_rows(rows, dest)
@@ -409,6 +410,7 @@ def main() -> None:
                 "description": blind,
                 "nvd_cwe": gold_cwes(cve),
                 "nvd_cvss": gold_cvss(cve)[0],
+                "nvd_products": gold_products(cve),
             }
         )
     dest = Path(__file__).resolve().parents[2] / "cases" / f"blind-first-{limit}.json"
