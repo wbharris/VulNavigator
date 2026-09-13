@@ -51,6 +51,18 @@ sed -n '1,12p' tests/data/blind_cve_2026.json
 
 To **fix one sample**: add a rule in `phrase_cwe.py`, a row in `phrase_families.json`, `pytest -q`, then `weekly.py --rescan` (needs a local `cases/blind-first-*.json` or it falls back / tells you to `--grow`).
 
+Optional **NVIDIA NIM** draft (does not analyze, does not write rules):
+
+```bash
+# parse pack only
+.venv/bin/python tests/training/nim_suggest.py --dry-run
+# needs NVIDIA_API_KEY or NGC_API_KEY (env or ~/.discover/api-keys)
+.venv/bin/python tests/training/nim_suggest.py --limit 5 -o cases/nim-suggest.json
+# default model: deepseek-ai/deepseek-v4-flash-0731 (NVIDIA_NIM_MODEL to override)
+```
+
+Review `kept` rows. Discard NVD-only / AI 0-day. Then add the rule + fixture yourself. NIM is not on the `analyze` path.
+
 ## Glossary
 
 | Term | Meaning |

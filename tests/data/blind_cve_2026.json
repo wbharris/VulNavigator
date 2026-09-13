@@ -6,7 +6,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "itsourcecode:school management system"
+    ]
   },
   {
     "cve": "CVE-2026-21428",
@@ -14,7 +17,10 @@
     "nvd_cwe": [
       "CWE-93"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "yhirose:cpp-httplib"
+    ]
   },
   {
     "cve": "CVE-2026-21436",
@@ -22,7 +28,10 @@
     "nvd_cwe": [
       "CWE-24"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "getsol:eopkg"
+    ]
   },
   {
     "cve": "CVE-2026-21437",
@@ -30,7 +39,10 @@
     "nvd_cwe": [
       "CWE-353"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "getsol:eopkg"
+    ]
   },
   {
     "cve": "CVE-2026-0546",
@@ -39,7 +51,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "code-projects:content management system"
+    ]
   },
   {
     "cve": "CVE-2026-0547",
@@ -48,7 +63,10 @@
       "CWE-284",
       "CWE-434"
     ],
-    "nvd_cvss": 6.3
+    "nvd_cvss": 6.3,
+    "nvd_products": [
+      "phpgurukul:online course registration"
+    ]
   },
   {
     "cve": "CVE-2026-0565",
@@ -57,7 +75,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "code-projects:content management system"
+    ]
   },
   {
     "cve": "CVE-2026-0566",
@@ -66,7 +87,10 @@
       "CWE-284",
       "CWE-434"
     ],
-    "nvd_cvss": 4.7
+    "nvd_cvss": 4.7,
+    "nvd_products": [
+      "code-projects:content management system"
+    ]
   },
   {
     "cve": "CVE-2026-0567",
@@ -75,7 +99,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "code-projects:content management system"
+    ]
   },
   {
     "cve": "CVE-2026-0568",
@@ -84,7 +111,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online music site"
+    ]
   },
   {
     "cve": "CVE-2026-21429",
@@ -92,7 +122,10 @@
     "nvd_cwe": [
       "CWE-862"
     ],
-    "nvd_cvss": 4.3
+    "nvd_cvss": 4.3,
+    "nvd_products": [
+      "emlog:emlog"
+    ]
   },
   {
     "cve": "CVE-2026-0569",
@@ -101,7 +134,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online music site"
+    ]
   },
   {
     "cve": "CVE-2026-0570",
@@ -110,7 +146,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online music site"
+    ]
   },
   {
     "cve": "CVE-2026-21430",
@@ -119,7 +158,10 @@
       "CWE-79",
       "CWE-352"
     ],
-    "nvd_cvss": 9.3
+    "nvd_cvss": 9.3,
+    "nvd_products": [
+      "emlog:emlog"
+    ]
   },
   {
     "cve": "CVE-2026-21431",
@@ -127,7 +169,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 5.4
+    "nvd_cvss": 5.4,
+    "nvd_products": [
+      "emlog:emlog"
+    ]
   },
   {
     "cve": "CVE-2026-21432",
@@ -135,7 +180,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 5.4
+    "nvd_cvss": 5.4,
+    "nvd_products": [
+      "emlog:emlog"
+    ]
   },
   {
     "cve": "CVE-2026-21433",
@@ -143,7 +191,10 @@
     "nvd_cwe": [
       "CWE-918"
     ],
-    "nvd_cvss": 7.7
+    "nvd_cvss": 7.7,
+    "nvd_products": [
+      "emlog:emlog"
+    ]
   },
   {
     "cve": "CVE-2026-21440",
@@ -151,7 +202,8 @@
     "nvd_cwe": [
       "CWE-22"
     ],
-    "nvd_cvss": 9.2
+    "nvd_cvss": 9.2,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-21444",
@@ -160,7 +212,10 @@
       "CWE-327",
       "CWE-330"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "libtpms project:libtpms"
+    ]
   },
   {
     "cve": "CVE-2026-0571",
@@ -168,7 +223,10 @@
     "nvd_cwe": [
       "CWE-22"
     ],
-    "nvd_cvss": 4.3
+    "nvd_cvss": 4.3,
+    "nvd_products": [
+      "yeqifu:warehouse"
+    ]
   },
   {
     "cve": "CVE-2026-21445",
@@ -176,7 +234,10 @@
     "nvd_cwe": [
       "CWE-306"
     ],
-    "nvd_cvss": 9.1
+    "nvd_cvss": 9.1,
+    "nvd_products": [
+      "langflow:langflow"
+    ]
   },
   {
     "cve": "CVE-2026-21446",
@@ -184,7 +245,10 @@
     "nvd_cwe": [
       "CWE-306"
     ],
-    "nvd_cvss": 9.8
+    "nvd_cvss": 9.8,
+    "nvd_products": [
+      "webkul:bagisto"
+    ]
   },
   {
     "cve": "CVE-2026-21447",
@@ -193,7 +257,10 @@
       "CWE-284",
       "CWE-639"
     ],
-    "nvd_cvss": 7.1
+    "nvd_cvss": 7.1,
+    "nvd_products": [
+      "webkul:bagisto"
+    ]
   },
   {
     "cve": "CVE-2026-21448",
@@ -201,7 +268,10 @@
     "nvd_cwe": [
       "CWE-1336"
     ],
-    "nvd_cvss": 9.8
+    "nvd_cvss": 9.8,
+    "nvd_products": [
+      "webkul:bagisto"
+    ]
   },
   {
     "cve": "CVE-2026-21449",
@@ -209,7 +279,10 @@
     "nvd_cwe": [
       "CWE-1336"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "webkul:bagisto"
+    ]
   },
   {
     "cve": "CVE-2026-21450",
@@ -217,7 +290,10 @@
     "nvd_cwe": [
       "CWE-1336"
     ],
-    "nvd_cvss": 9.8
+    "nvd_cvss": 9.8,
+    "nvd_products": [
+      "webkul:bagisto"
+    ]
   },
   {
     "cve": "CVE-2026-21451",
@@ -225,7 +301,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 8.4
+    "nvd_cvss": 8.4,
+    "nvd_products": [
+      "webkul:bagisto"
+    ]
   },
   {
     "cve": "CVE-2026-21452",
@@ -234,7 +313,10 @@
       "CWE-400",
       "CWE-789"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "msgpack:messagepack"
+    ]
   },
   {
     "cve": "CVE-2026-21483",
@@ -242,7 +324,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 5.4
+    "nvd_cvss": 5.4,
+    "nvd_products": [
+      "nadh:listmonk"
+    ]
   },
   {
     "cve": "CVE-2026-21484",
@@ -251,7 +336,10 @@
       "CWE-203",
       "CWE-204"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "mintplexlabs:anythingllm"
+    ]
   },
   {
     "cve": "CVE-2026-0574",
@@ -260,7 +348,10 @@
       "CWE-266",
       "CWE-285"
     ],
-    "nvd_cvss": 6.3
+    "nvd_cvss": 6.3,
+    "nvd_products": [
+      "yeqifu:warehouse"
+    ]
   },
   {
     "cve": "CVE-2026-0575",
@@ -269,7 +360,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online product reservation system"
+    ]
   },
   {
     "cve": "CVE-2026-0576",
@@ -278,7 +372,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online product reservation system"
+    ]
   },
   {
     "cve": "CVE-2026-0577",
@@ -287,7 +384,10 @@
       "CWE-284",
       "CWE-434"
     ],
-    "nvd_cvss": 6.3
+    "nvd_cvss": 6.3,
+    "nvd_products": [
+      "fabian:online product reservation system"
+    ]
   },
   {
     "cve": "CVE-2026-0578",
@@ -296,7 +396,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online product reservation system"
+    ]
   },
   {
     "cve": "CVE-2026-0579",
@@ -305,7 +408,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online product reservation system"
+    ]
   },
   {
     "cve": "CVE-2026-0580",
@@ -314,7 +420,10 @@
       "CWE-79",
       "CWE-94"
     ],
-    "nvd_cvss": 3.5
+    "nvd_cvss": 3.5,
+    "nvd_products": [
+      "remyandrade:api key manager app"
+    ]
   },
   {
     "cve": "CVE-2026-0581",
@@ -323,7 +432,11 @@
       "CWE-74",
       "CWE-77"
     ],
-    "nvd_cvss": 6.3
+    "nvd_cvss": 6.3,
+    "nvd_products": [
+      "tenda:ac1206 firmware",
+      "tenda:ac1206"
+    ]
   },
   {
     "cve": "CVE-2026-0582",
@@ -332,7 +445,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 6.3
+    "nvd_cvss": 6.3,
+    "nvd_products": [
+      "angeljudesuarez:society management system"
+    ]
   },
   {
     "cve": "CVE-2026-0583",
@@ -341,7 +457,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online product reservation system"
+    ]
   },
   {
     "cve": "CVE-2026-0584",
@@ -350,7 +469,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 6.3
+    "nvd_cvss": 6.3,
+    "nvd_products": [
+      "fabian:online product reservation system"
+    ]
   },
   {
     "cve": "CVE-2026-0585",
@@ -359,7 +481,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online product reservation system"
+    ]
   },
   {
     "cve": "CVE-2026-0586",
@@ -368,7 +493,10 @@
       "CWE-79",
       "CWE-94"
     ],
-    "nvd_cvss": 4.3
+    "nvd_cvss": 4.3,
+    "nvd_products": [
+      "fabian:online product reservation system"
+    ]
   },
   {
     "cve": "CVE-2026-0587",
@@ -377,7 +505,10 @@
       "CWE-79",
       "CWE-94"
     ],
-    "nvd_cvss": 3.5
+    "nvd_cvss": 3.5,
+    "nvd_products": [
+      "rockoa:rockoa"
+    ]
   },
   {
     "cve": "CVE-2026-0588",
@@ -386,7 +517,10 @@
       "CWE-79",
       "CWE-94"
     ],
-    "nvd_cvss": 3.5
+    "nvd_cvss": 3.5,
+    "nvd_products": [
+      "rockoa:rockoa"
+    ]
   },
   {
     "cve": "CVE-2026-0589",
@@ -394,7 +528,10 @@
     "nvd_cwe": [
       "CWE-287"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online product reservation system"
+    ]
   },
   {
     "cve": "CVE-2026-0590",
@@ -403,7 +540,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 6.3
+    "nvd_cvss": 6.3,
+    "nvd_products": [
+      "fabian:online product reservation system"
+    ]
   },
   {
     "cve": "CVE-2026-0591",
@@ -412,7 +552,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 6.3
+    "nvd_cvss": 6.3,
+    "nvd_products": [
+      "fabian:online product reservation system"
+    ]
   },
   {
     "cve": "CVE-2026-0592",
@@ -421,7 +564,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online product reservation system"
+    ]
   },
   {
     "cve": "CVE-2026-0597",
@@ -430,7 +576,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 6.3
+    "nvd_cvss": 6.3,
+    "nvd_products": [
+      "campcodes:supplier management system"
+    ]
   },
   {
     "cve": "CVE-2026-21633",
@@ -438,7 +587,10 @@
     "nvd_cwe": [
       "CWE-287"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "ui:unifi protect"
+    ]
   },
   {
     "cve": "CVE-2026-21634",
@@ -446,7 +598,10 @@
     "nvd_cwe": [
       "CWE-119"
     ],
-    "nvd_cvss": 6.5
+    "nvd_cvss": 6.5,
+    "nvd_products": [
+      "ui:unifi protect"
+    ]
   },
   {
     "cve": "CVE-2026-21635",
@@ -454,7 +609,11 @@
     "nvd_cwe": [
       "CWE-284"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "ui:unifi connect ev station lite firmware",
+      "ui:unifi connect ev station lite"
+    ]
   },
   {
     "cve": "CVE-2026-0605",
@@ -463,7 +622,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online music site"
+    ]
   },
   {
     "cve": "CVE-2026-0621",
@@ -471,7 +633,10 @@
     "nvd_cwe": [
       "CWE-1333"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "lfprojects:mcp typescript sdk"
+    ]
   },
   {
     "cve": "CVE-2026-0625",
@@ -479,7 +644,8 @@
     "nvd_cwe": [
       "CWE-306"
     ],
-    "nvd_cvss": 9.3
+    "nvd_cvss": 9.3,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-0606",
@@ -488,7 +654,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online music site"
+    ]
   },
   {
     "cve": "CVE-2026-0607",
@@ -497,7 +666,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online music site"
+    ]
   },
   {
     "cve": "CVE-2026-21439",
@@ -505,7 +677,10 @@
     "nvd_cwe": [
       "CWE-150"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "badkeys:badkeys"
+    ]
   },
   {
     "cve": "CVE-2026-21507",
@@ -513,7 +688,10 @@
     "nvd_cwe": [
       "CWE-835"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21673",
@@ -523,7 +701,10 @@
       "CWE-681",
       "CWE-704"
     ],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21674",
@@ -531,7 +712,10 @@
     "nvd_cwe": [
       "CWE-401"
     ],
-    "nvd_cvss": 3.3
+    "nvd_cvss": 3.3,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21675",
@@ -540,7 +724,10 @@
       "CWE-20",
       "CWE-416"
     ],
-    "nvd_cvss": 9.8
+    "nvd_cvss": 9.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-0604",
@@ -548,7 +735,8 @@
     "nvd_cwe": [
       "CWE-22"
     ],
-    "nvd_cvss": 6.5
+    "nvd_cvss": 6.5,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-21485",
@@ -562,7 +750,10 @@
       "CWE-787",
       "CWE-1284"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21486",
@@ -573,7 +764,10 @@
       "CWE-416",
       "CWE-787"
     ],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21487",
@@ -583,7 +777,10 @@
       "CWE-125",
       "CWE-823"
     ],
-    "nvd_cvss": 6.1
+    "nvd_cvss": 6.1,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21676",
@@ -591,7 +788,10 @@
     "nvd_cwe": [
       "CWE-122"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21677",
@@ -600,7 +800,10 @@
       "CWE-20",
       "CWE-758"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21411",
@@ -608,7 +811,8 @@
     "nvd_cwe": [
       "CWE-288"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-21488",
@@ -618,7 +822,10 @@
       "CWE-125",
       "CWE-170"
     ],
-    "nvd_cvss": 6.1
+    "nvd_cvss": 6.1,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21489",
@@ -627,7 +834,10 @@
       "CWE-125",
       "CWE-191"
     ],
-    "nvd_cvss": 6.1
+    "nvd_cvss": 6.1,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21493",
@@ -637,7 +847,10 @@
       "CWE-703",
       "CWE-843"
     ],
-    "nvd_cvss": 6.6
+    "nvd_cvss": 6.6,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-0640",
@@ -646,7 +859,11 @@
       "CWE-119",
       "CWE-120"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "tenda:ac23 firmware",
+      "tenda:ac23"
+    ]
   },
   {
     "cve": "CVE-2026-0641",
@@ -655,7 +872,11 @@
       "CWE-74",
       "CWE-77"
     ],
-    "nvd_cvss": 6.3
+    "nvd_cvss": 6.3,
+    "nvd_products": [
+      "totolink:wa300 firmware",
+      "totolink:wa300"
+    ]
   },
   {
     "cve": "CVE-2026-21490",
@@ -665,7 +886,10 @@
       "CWE-125",
       "CWE-193"
     ],
-    "nvd_cvss": 6.1
+    "nvd_cvss": 6.1,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21491",
@@ -675,7 +899,10 @@
       "CWE-125",
       "CWE-193"
     ],
-    "nvd_cvss": 6.1
+    "nvd_cvss": 6.1,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21494",
@@ -685,7 +912,10 @@
       "CWE-125",
       "CWE-193"
     ],
-    "nvd_cvss": 6.1
+    "nvd_cvss": 6.1,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21492",
@@ -694,7 +924,10 @@
       "CWE-252",
       "CWE-476"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-0628",
@@ -702,7 +935,10 @@
     "nvd_cwe": [
       "CWE-862"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "google:chrome"
+    ]
   },
   {
     "cve": "CVE-2026-0642",
@@ -711,7 +947,10 @@
       "CWE-79",
       "CWE-94"
     ],
-    "nvd_cvss": 2.4
+    "nvd_cvss": 2.4,
+    "nvd_products": [
+      "projectworlds:house rental and property listing project"
+    ]
   },
   {
     "cve": "CVE-2026-0643",
@@ -720,7 +959,10 @@
       "CWE-284",
       "CWE-434"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "projectworlds:house rental and property listing project"
+    ]
   },
   {
     "cve": "CVE-2026-0649",
@@ -728,7 +970,8 @@
     "nvd_cwe": [
       "CWE-918"
     ],
-    "nvd_cvss": 4.7
+    "nvd_cvss": 4.7,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-0650",
@@ -737,7 +980,8 @@
       "CWE-306",
       "CWE-425"
     ],
-    "nvd_cvss": 9.3
+    "nvd_cvss": 9.3,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-0656",
@@ -745,7 +989,8 @@
     "nvd_cwe": [
       "CWE-862"
     ],
-    "nvd_cvss": 8.2
+    "nvd_cvss": 8.2,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-20893",
@@ -753,7 +998,8 @@
     "nvd_cwe": [
       "CWE-346"
     ],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22540",
@@ -761,7 +1007,8 @@
     "nvd_cwe": [
       "CWE-400"
     ],
-    "nvd_cvss": 9.2
+    "nvd_cvss": 9.2,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22541",
@@ -769,7 +1016,8 @@
     "nvd_cwe": [
       "CWE-400"
     ],
-    "nvd_cvss": 8.2
+    "nvd_cvss": 8.2,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22542",
@@ -777,7 +1025,8 @@
     "nvd_cwe": [
       "CWE-400"
     ],
-    "nvd_cvss": 9.2
+    "nvd_cvss": 9.2,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-0618",
@@ -785,7 +1034,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 6.1
+    "nvd_cvss": 6.1,
+    "nvd_products": [
+      "ironmansoftware:powershell universal"
+    ]
   },
   {
     "cve": "CVE-2026-20026",
@@ -793,7 +1045,8 @@
     "nvd_cwe": [
       "CWE-415"
     ],
-    "nvd_cvss": 5.8
+    "nvd_cvss": 5.8,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-20027",
@@ -801,7 +1054,8 @@
     "nvd_cwe": [
       "CWE-200"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-20029",
@@ -809,7 +1063,8 @@
     "nvd_cwe": [
       "CWE-611"
     ],
-    "nvd_cvss": 4.9
+    "nvd_cvss": 4.9,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22535",
@@ -817,7 +1072,8 @@
     "nvd_cwe": [
       "CWE-1366"
     ],
-    "nvd_cvss": 8.9
+    "nvd_cvss": 8.9,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22536",
@@ -825,7 +1081,8 @@
     "nvd_cwe": [
       "CWE-269"
     ],
-    "nvd_cvss": 8.6
+    "nvd_cvss": 8.6,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22537",
@@ -833,7 +1090,8 @@
     "nvd_cwe": [
       "CWE-497"
     ],
-    "nvd_cvss": 6.8
+    "nvd_cvss": 6.8,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22543",
@@ -841,7 +1099,8 @@
     "nvd_cwe": [
       "CWE-261"
     ],
-    "nvd_cvss": 6.9
+    "nvd_cvss": 6.9,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22544",
@@ -849,7 +1108,8 @@
     "nvd_cwe": [
       "CWE-319"
     ],
-    "nvd_cvss": 8.7
+    "nvd_cvss": 8.7,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-0668",
@@ -857,7 +1117,11 @@
     "nvd_cwe": [
       "CWE-1333"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "wikisphere:visualdata",
+      "mediawiki:mediawiki"
+    ]
   },
   {
     "cve": "CVE-2026-0669",
@@ -865,7 +1129,11 @@
     "nvd_cwe": [
       "CWE-22"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "css project:css",
+      "mediawiki:mediawiki"
+    ]
   },
   {
     "cve": "CVE-2026-21495",
@@ -874,7 +1142,10 @@
       "CWE-20",
       "CWE-369"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21496",
@@ -885,7 +1156,10 @@
       "CWE-476",
       "CWE-690"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21497",
@@ -895,7 +1169,10 @@
       "CWE-252",
       "CWE-476"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21498",
@@ -906,7 +1183,10 @@
       "CWE-476",
       "CWE-690"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21499",
@@ -916,7 +1196,10 @@
       "CWE-476",
       "CWE-690"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21500",
@@ -928,7 +1211,10 @@
       "CWE-1119",
       "CWE-787"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21501",
@@ -937,7 +1223,10 @@
       "CWE-20",
       "CWE-787"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21502",
@@ -948,7 +1237,10 @@
       "CWE-476",
       "CWE-690"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21503",
@@ -959,7 +1251,10 @@
       "CWE-476",
       "CWE-628"
     ],
-    "nvd_cvss": 6.1
+    "nvd_cvss": 6.1,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21504",
@@ -969,7 +1264,10 @@
       "CWE-193",
       "CWE-787"
     ],
-    "nvd_cvss": 6.6
+    "nvd_cvss": 6.6,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21505",
@@ -978,7 +1276,10 @@
       "CWE-20",
       "CWE-843"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21506",
@@ -987,7 +1288,10 @@
       "CWE-20",
       "CWE-476"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21678",
@@ -998,7 +1302,10 @@
       "CWE-125",
       "CWE-787"
     ],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21679",
@@ -1007,7 +1314,10 @@
       "CWE-20",
       "CWE-787"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21680",
@@ -1015,7 +1325,10 @@
     "nvd_cwe": [
       "CWE-476"
     ],
-    "nvd_cvss": 6.5
+    "nvd_cvss": 6.5,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-22539",
@@ -1023,7 +1336,8 @@
     "nvd_cwe": [
       "CWE-201"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-0670",
@@ -1031,7 +1345,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 6.1
+    "nvd_cvss": 6.1,
+    "nvd_products": [
+      "wikisource:proofread page"
+    ]
   },
   {
     "cve": "CVE-2026-21854",
@@ -1041,7 +1358,10 @@
       "CWE-843",
       "CWE-1321"
     ],
-    "nvd_cvss": 9.8
+    "nvd_cvss": 9.8,
+    "nvd_products": [
+      "tarkov:tarkov data manager"
+    ]
   },
   {
     "cve": "CVE-2026-21855",
@@ -1049,7 +1369,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 9.3
+    "nvd_cvss": 9.3,
+    "nvd_products": [
+      "tarkov:tarkov data manager"
+    ]
   },
   {
     "cve": "CVE-2026-21856",
@@ -1057,7 +1380,10 @@
     "nvd_cwe": [
       "CWE-89"
     ],
-    "nvd_cvss": 7.2
+    "nvd_cvss": 7.2,
+    "nvd_products": [
+      "tarkov:tarkov data manager"
+    ]
   },
   {
     "cve": "CVE-2026-21681",
@@ -1065,7 +1391,10 @@
     "nvd_cwe": [
       "CWE-20"
     ],
-    "nvd_cvss": 7.1
+    "nvd_cvss": 7.1,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21682",
@@ -1074,7 +1403,10 @@
       "CWE-20",
       "CWE-122"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-22184",
@@ -1083,7 +1415,10 @@
       "CWE-787",
       "CWE-120"
     ],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": [
+      "zlib:zlib"
+    ]
   },
   {
     "cve": "CVE-2026-22185",
@@ -1092,7 +1427,8 @@
       "CWE-125",
       "CWE-191"
     ],
-    "nvd_cvss": 4.6
+    "nvd_cvss": 4.6,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22186",
@@ -1100,7 +1436,10 @@
     "nvd_cwe": [
       "CWE-611"
     ],
-    "nvd_cvss": 7.1
+    "nvd_cvss": 7.1,
+    "nvd_products": [
+      "openmicroscopy:bio-formats"
+    ]
   },
   {
     "cve": "CVE-2026-22187",
@@ -1108,7 +1447,10 @@
     "nvd_cwe": [
       "CWE-502"
     ],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": [
+      "openmicroscopy:bio-formats"
+    ]
   },
   {
     "cve": "CVE-2026-22188",
@@ -1118,7 +1460,10 @@
       "CWE-789",
       "CWE-908"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "cmu:panda3d"
+    ]
   },
   {
     "cve": "CVE-2026-22189",
@@ -1127,7 +1472,10 @@
       "CWE-121",
       "CWE-787"
     ],
-    "nvd_cvss": 9.8
+    "nvd_cvss": 9.8,
+    "nvd_products": [
+      "cmu:panda3d"
+    ]
   },
   {
     "cve": "CVE-2026-22190",
@@ -1135,7 +1483,10 @@
     "nvd_cwe": [
       "CWE-134"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "cmu:panda3d"
+    ]
   },
   {
     "cve": "CVE-2026-21441",
@@ -1143,7 +1494,10 @@
     "nvd_cwe": [
       "CWE-409"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "python:urllib3"
+    ]
   },
   {
     "cve": "CVE-2026-21683",
@@ -1152,7 +1506,10 @@
       "CWE-20",
       "CWE-843"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21684",
@@ -1161,7 +1518,10 @@
       "CWE-20",
       "CWE-758"
     ],
-    "nvd_cvss": 7.1
+    "nvd_cvss": 7.1,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21685",
@@ -1170,7 +1530,10 @@
       "CWE-20",
       "CWE-758"
     ],
-    "nvd_cvss": 7.1
+    "nvd_cvss": 7.1,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21686",
@@ -1179,7 +1542,10 @@
       "CWE-20",
       "CWE-758"
     ],
-    "nvd_cvss": 7.1
+    "nvd_cvss": 7.1,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21687",
@@ -1188,7 +1554,10 @@
       "CWE-20",
       "CWE-758"
     ],
-    "nvd_cvss": 7.1
+    "nvd_cvss": 7.1,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21688",
@@ -1199,7 +1568,10 @@
       "CWE-476",
       "CWE-681"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21689",
@@ -1213,7 +1585,10 @@
       "CWE-754",
       "CWE-843"
     ],
-    "nvd_cvss": 6.5
+    "nvd_cvss": 6.5,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21690",
@@ -1224,7 +1599,10 @@
       "CWE-475",
       "CWE-843"
     ],
-    "nvd_cvss": 6.3
+    "nvd_cvss": 6.3,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21691",
@@ -1237,7 +1615,10 @@
       "CWE-1025",
       "CWE-843"
     ],
-    "nvd_cvss": 5.4
+    "nvd_cvss": 5.4,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21692",
@@ -1248,7 +1629,10 @@
       "CWE-704",
       "CWE-843"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21693",
@@ -1259,7 +1643,10 @@
       "CWE-754",
       "CWE-843"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-22046",
@@ -1271,7 +1658,10 @@
       "CWE-843",
       "CWE-787"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-22047",
@@ -1282,7 +1672,10 @@
       "CWE-252",
       "CWE-787"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-21697",
@@ -1290,7 +1683,10 @@
     "nvd_cwe": [
       "CWE-362"
     ],
-    "nvd_cvss": 8.1
+    "nvd_cvss": 8.1,
+    "nvd_products": [
+      "rezmoss:axios4go"
+    ]
   },
   {
     "cve": "CVE-2026-21851",
@@ -1298,7 +1694,10 @@
     "nvd_cwe": [
       "CWE-22"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "project-monai:monai"
+    ]
   },
   {
     "cve": "CVE-2026-21857",
@@ -1307,7 +1706,10 @@
       "CWE-22",
       "CWE-24"
     ],
-    "nvd_cvss": 6.5
+    "nvd_cvss": 6.5,
+    "nvd_products": [
+      "redaxo:redaxo"
+    ]
   },
   {
     "cve": "CVE-2026-21694",
@@ -1315,7 +1717,10 @@
     "nvd_cwe": [
       "CWE-284"
     ],
-    "nvd_cvss": 6.8
+    "nvd_cvss": 6.8,
+    "nvd_products": [
+      "kromit:titra"
+    ]
   },
   {
     "cve": "CVE-2026-21695",
@@ -1323,7 +1728,10 @@
     "nvd_cwe": [
       "CWE-915"
     ],
-    "nvd_cvss": 4.3
+    "nvd_cvss": 4.3,
+    "nvd_products": [
+      "kromit:titra"
+    ]
   },
   {
     "cve": "CVE-2026-21858",
@@ -1331,7 +1739,10 @@
     "nvd_cwe": [
       "CWE-20"
     ],
-    "nvd_cvss": 10.0
+    "nvd_cvss": 10.0,
+    "nvd_products": [
+      "n8n:n8n"
+    ]
   },
   {
     "cve": "CVE-2026-21859",
@@ -1339,7 +1750,10 @@
     "nvd_cwe": [
       "CWE-918"
     ],
-    "nvd_cvss": 5.8
+    "nvd_cvss": 5.8,
+    "nvd_products": [
+      "axllent:mailpit"
+    ]
   },
   {
     "cve": "CVE-2026-21869",
@@ -1347,7 +1761,10 @@
     "nvd_cwe": [
       "CWE-787"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "ggml:llama.cpp"
+    ]
   },
   {
     "cve": "CVE-2026-21875",
@@ -1355,7 +1772,10 @@
     "nvd_cwe": [
       "CWE-89"
     ],
-    "nvd_cvss": 9.8
+    "nvd_cvss": 9.8,
+    "nvd_products": [
+      "oxygenz:clipbucket"
+    ]
   },
   {
     "cve": "CVE-2026-21868",
@@ -1363,7 +1783,10 @@
     "nvd_cwe": [
       "CWE-1333"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "flagforge:flagforge"
+    ]
   },
   {
     "cve": "CVE-2026-21877",
@@ -1372,7 +1795,10 @@
       "CWE-94",
       "CWE-434"
     ],
-    "nvd_cvss": 9.9
+    "nvd_cvss": 9.9,
+    "nvd_products": [
+      "n8n:n8n"
+    ]
   },
   {
     "cve": "CVE-2026-22035",
@@ -1380,7 +1806,10 @@
     "nvd_cwe": [
       "CWE-78"
     ],
-    "nvd_cvss": 7.7
+    "nvd_cvss": 7.7,
+    "nvd_products": [
+      "getgreenshot:greenshot"
+    ]
   },
   {
     "cve": "CVE-2026-21879",
@@ -1388,7 +1817,10 @@
     "nvd_cwe": [
       "CWE-601"
     ],
-    "nvd_cvss": 4.7
+    "nvd_cvss": 4.7,
+    "nvd_products": [
+      "kanboard:kanboard"
+    ]
   },
   {
     "cve": "CVE-2026-21880",
@@ -1397,7 +1829,10 @@
       "CWE-90",
       "CWE-200"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "kanboard:kanboard"
+    ]
   },
   {
     "cve": "CVE-2026-21881",
@@ -1405,7 +1840,10 @@
     "nvd_cwe": [
       "CWE-287"
     ],
-    "nvd_cvss": 9.1
+    "nvd_cvss": 9.1,
+    "nvd_products": [
+      "kanboard:kanboard"
+    ]
   },
   {
     "cve": "CVE-2026-21883",
@@ -1413,7 +1851,10 @@
     "nvd_cwe": [
       "CWE-1385"
     ],
-    "nvd_cvss": 5.4
+    "nvd_cvss": 5.4,
+    "nvd_products": [
+      "bokeh:bokeh"
+    ]
   },
   {
     "cve": "CVE-2026-0707",
@@ -1421,7 +1862,8 @@
     "nvd_cwe": [
       "CWE-551"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-21427",
@@ -1429,7 +1871,8 @@
     "nvd_cwe": [
       "CWE-427"
     ],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-0697",
@@ -1438,7 +1881,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 4.7
+    "nvd_cvss": 4.7,
+    "nvd_products": [
+      "carmelo:intern membership management system"
+    ]
   },
   {
     "cve": "CVE-2026-0698",
@@ -1447,7 +1893,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 4.7
+    "nvd_cvss": 4.7,
+    "nvd_products": [
+      "carmelo:intern membership management system"
+    ]
   },
   {
     "cve": "CVE-2026-0699",
@@ -1456,7 +1905,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 4.7
+    "nvd_cvss": 4.7,
+    "nvd_products": [
+      "carmelo:intern membership management system"
+    ]
   },
   {
     "cve": "CVE-2026-0700",
@@ -1465,7 +1917,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "carmelo:intern membership management system"
+    ]
   },
   {
     "cve": "CVE-2026-0701",
@@ -1474,7 +1929,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 4.7
+    "nvd_cvss": 4.7,
+    "nvd_products": [
+      "carmelo:intern membership management system"
+    ]
   },
   {
     "cve": "CVE-2026-0674",
@@ -1482,7 +1940,8 @@
     "nvd_cwe": [
       "CWE-862"
     ],
-    "nvd_cvss": 4.3
+    "nvd_cvss": 4.3,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-0676",
@@ -1490,7 +1949,8 @@
     "nvd_cwe": [
       "CWE-862"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-21871",
@@ -1498,7 +1958,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 6.1
+    "nvd_cvss": 6.1,
+    "nvd_products": [
+      "zauberzeug:nicegui"
+    ]
   },
   {
     "cve": "CVE-2026-21872",
@@ -1506,7 +1969,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 6.1
+    "nvd_cvss": 6.1,
+    "nvd_products": [
+      "zauberzeug:nicegui"
+    ]
   },
   {
     "cve": "CVE-2026-21873",
@@ -1514,7 +1980,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 7.2
+    "nvd_cvss": 7.2,
+    "nvd_products": [
+      "zauberzeug:nicegui"
+    ]
   },
   {
     "cve": "CVE-2026-21874",
@@ -1522,7 +1991,10 @@
     "nvd_cwe": [
       "CWE-772"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "zauberzeug:nicegui"
+    ]
   },
   {
     "cve": "CVE-2026-21894",
@@ -1530,7 +2002,10 @@
     "nvd_cwe": [
       "CWE-290"
     ],
-    "nvd_cvss": 6.5
+    "nvd_cvss": 6.5,
+    "nvd_products": [
+      "n8n:n8n"
+    ]
   },
   {
     "cve": "CVE-2026-22242",
@@ -1539,7 +2014,10 @@
       "CWE-564",
       "CWE-89"
     ],
-    "nvd_cvss": 4.9
+    "nvd_cvss": 4.9,
+    "nvd_products": [
+      "coreshop:coreshop"
+    ]
   },
   {
     "cve": "CVE-2026-0719",
@@ -1547,7 +2025,8 @@
     "nvd_cwe": [
       "CWE-121"
     ],
-    "nvd_cvss": 8.6
+    "nvd_cvss": 8.6,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-21876",
@@ -1555,7 +2034,10 @@
     "nvd_cwe": [
       "CWE-794"
     ],
-    "nvd_cvss": 9.3
+    "nvd_cvss": 9.3,
+    "nvd_products": [
+      "owasp:owasp modsecurity core rule set"
+    ]
   },
   {
     "cve": "CVE-2026-21885",
@@ -1563,7 +2045,10 @@
     "nvd_cwe": [
       "CWE-918"
     ],
-    "nvd_cvss": 6.5
+    "nvd_cvss": 6.5,
+    "nvd_products": [
+      "miniflux project:miniflux"
+    ]
   },
   {
     "cve": "CVE-2026-21891",
@@ -1571,7 +2056,10 @@
     "nvd_cwe": [
       "CWE-287"
     ],
-    "nvd_cvss": 9.4
+    "nvd_cvss": 9.4,
+    "nvd_products": [
+      "zimaspace:zimaos"
+    ]
   },
   {
     "cve": "CVE-2026-21892",
@@ -1579,7 +2067,10 @@
     "nvd_cwe": [
       "CWE-89"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "uchicago:parsl"
+    ]
   },
   {
     "cve": "CVE-2026-21895",
@@ -1587,7 +2078,10 @@
     "nvd_cwe": [
       "CWE-703"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "rustcrypto:rsa"
+    ]
   },
   {
     "cve": "CVE-2026-22028",
@@ -1595,7 +2089,10 @@
     "nvd_cwe": [
       "CWE-843"
     ],
-    "nvd_cvss": 6.1
+    "nvd_cvss": 6.1,
+    "nvd_products": [
+      "preactjs:preact"
+    ]
   },
   {
     "cve": "CVE-2026-22032",
@@ -1603,7 +2100,10 @@
     "nvd_cwe": [
       "CWE-601"
     ],
-    "nvd_cvss": 4.3
+    "nvd_cvss": 4.3,
+    "nvd_products": [
+      "monospace:directus"
+    ]
   },
   {
     "cve": "CVE-2026-22034",
@@ -1611,7 +2111,10 @@
     "nvd_cwe": [
       "CWE-636"
     ],
-    "nvd_cvss": 9.8
+    "nvd_cvss": 9.8,
+    "nvd_products": [
+      "jvoisin:snuffleupagus"
+    ]
   },
   {
     "cve": "CVE-2026-22041",
@@ -1619,7 +2122,10 @@
     "nvd_cwe": [
       "CWE-704"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "armurox:logging redactor"
+    ]
   },
   {
     "cve": "CVE-2026-22042",
@@ -1628,7 +2134,10 @@
       "CWE-285",
       "CWE-863"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "rustfs:rustfs"
+    ]
   },
   {
     "cve": "CVE-2026-22043",
@@ -1638,7 +2147,10 @@
       "CWE-284",
       "CWE-522"
     ],
-    "nvd_cvss": 9.8
+    "nvd_cvss": 9.8,
+    "nvd_products": [
+      "rustfs:rustfs"
+    ]
   },
   {
     "cve": "CVE-2026-22241",
@@ -1646,7 +2158,10 @@
     "nvd_cwe": [
       "CWE-434"
     ],
-    "nvd_cvss": 7.2
+    "nvd_cvss": 7.2,
+    "nvd_products": [
+      "openeclass:openeclass"
+    ]
   },
   {
     "cve": "CVE-2026-22244",
@@ -1655,7 +2170,10 @@
       "CWE-1336",
       "CWE-94"
     ],
-    "nvd_cvss": 7.2
+    "nvd_cvss": 7.2,
+    "nvd_products": [
+      "open-metadata:openmetadata"
+    ]
   },
   {
     "cve": "CVE-2026-22245",
@@ -1663,7 +2181,10 @@
     "nvd_cwe": [
       "CWE-918"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "joinmastodon:mastodon"
+    ]
   },
   {
     "cve": "CVE-2026-22246",
@@ -1671,7 +2192,10 @@
     "nvd_cwe": [
       "CWE-201"
     ],
-    "nvd_cvss": 6.5
+    "nvd_cvss": 6.5,
+    "nvd_products": [
+      "joinmastodon:mastodon"
+    ]
   },
   {
     "cve": "CVE-2026-22255",
@@ -1681,7 +2205,10 @@
       "CWE-130",
       "CWE-252"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "color:iccdev"
+    ]
   },
   {
     "cve": "CVE-2026-0671",
@@ -1689,7 +2216,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 6.1
+    "nvd_cvss": 6.1,
+    "nvd_products": [
+      "wikimedia:mediawiki-extensions-uploadwizard"
+    ]
   },
   {
     "cve": "CVE-2026-21638",
@@ -1697,7 +2227,17 @@
     "nvd_cwe": [
       "CWE-77"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "ui:ubb-xg firmware",
+      "ui:ubb-xg",
+      "ui:udb-pro firmware",
+      "ui:udb-pro",
+      "ui:udb-pro-sector firmware",
+      "ui:udb-pro-sector",
+      "ui:ubb firmware",
+      "ui:ubb"
+    ]
   },
   {
     "cve": "CVE-2026-21639",
@@ -1706,7 +2246,17 @@
       "CWE-120",
       "CWE-77"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "ui:airmax ac firmware",
+      "ui:airmax ac",
+      "ui:airmax m firmware",
+      "ui:airmax m",
+      "ui:airfiber af60-xg firmware",
+      "ui:airfiber af60-xg",
+      "ui:airfiber af60 firmware",
+      "ui:airfiber af60"
+    ]
   },
   {
     "cve": "CVE-2026-22486",
@@ -1714,7 +2264,8 @@
     "nvd_cwe": [
       "CWE-862"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22487",
@@ -1722,7 +2273,8 @@
     "nvd_cwe": [
       "CWE-862"
     ],
-    "nvd_cvss": 4.3
+    "nvd_cvss": 4.3,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22488",
@@ -1730,7 +2282,8 @@
     "nvd_cwe": [
       "CWE-862"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22489",
@@ -1738,7 +2291,8 @@
     "nvd_cwe": [
       "CWE-639"
     ],
-    "nvd_cvss": 4.3
+    "nvd_cvss": 4.3,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22490",
@@ -1746,7 +2300,8 @@
     "nvd_cwe": [
       "CWE-862"
     ],
-    "nvd_cvss": 5.4
+    "nvd_cvss": 5.4,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22492",
@@ -1754,7 +2309,8 @@
     "nvd_cwe": [
       "CWE-862"
     ],
-    "nvd_cvss": 4.3
+    "nvd_cvss": 4.3,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22517",
@@ -1762,7 +2318,8 @@
     "nvd_cwe": [
       "CWE-862"
     ],
-    "nvd_cvss": 5.4
+    "nvd_cvss": 5.4,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22518",
@@ -1770,7 +2327,8 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 6.5
+    "nvd_cvss": 6.5,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22519",
@@ -1778,7 +2336,8 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 6.5
+    "nvd_cvss": 6.5,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22521",
@@ -1786,7 +2345,8 @@
     "nvd_cwe": [
       "CWE-98"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22522",
@@ -1794,7 +2354,8 @@
     "nvd_cwe": [
       "CWE-862"
     ],
-    "nvd_cvss": 6.5
+    "nvd_cvss": 6.5,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-21896",
@@ -1802,7 +2363,10 @@
     "nvd_cwe": [
       "CWE-863"
     ],
-    "nvd_cvss": 5.7
+    "nvd_cvss": 5.7,
+    "nvd_products": [
+      "getkirby:kirby"
+    ]
   },
   {
     "cve": "CVE-2026-22230",
@@ -1810,7 +2374,10 @@
     "nvd_cwe": [
       "CWE-863"
     ],
-    "nvd_cvss": 7.6
+    "nvd_cvss": 7.6,
+    "nvd_products": [
+      "opexustech:ecase audit"
+    ]
   },
   {
     "cve": "CVE-2026-22231",
@@ -1818,7 +2385,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "opexustech:ecase audit"
+    ]
   },
   {
     "cve": "CVE-2026-22232",
@@ -1826,7 +2396,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "opexustech:ecase audit"
+    ]
   },
   {
     "cve": "CVE-2026-22233",
@@ -1834,7 +2407,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "opexustech:ecase audit"
+    ]
   },
   {
     "cve": "CVE-2026-22234",
@@ -1842,7 +2418,10 @@
     "nvd_cwe": [
       "CWE-639"
     ],
-    "nvd_cvss": 9.8
+    "nvd_cvss": 9.8,
+    "nvd_products": [
+      "opexustech:ecase portal"
+    ]
   },
   {
     "cve": "CVE-2026-22235",
@@ -1850,7 +2429,10 @@
     "nvd_cwe": [
       "CWE-639"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "opexustech:ecase ecomplaint"
+    ]
   },
   {
     "cve": "CVE-2026-22587",
@@ -1858,7 +2440,8 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-21860",
@@ -1866,7 +2449,11 @@
     "nvd_cwe": [
       "CWE-67"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "palletsprojects:werkzeug",
+      "microsoft:windows"
+    ]
   },
   {
     "cve": "CVE-2026-22253",
@@ -1874,7 +2461,10 @@
     "nvd_cwe": [
       "CWE-863"
     ],
-    "nvd_cvss": 5.4
+    "nvd_cvss": 5.4,
+    "nvd_products": [
+      "charm:soft serve"
+    ]
   },
   {
     "cve": "CVE-2026-22256",
@@ -1882,7 +2472,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "salvo:salvo"
+    ]
   },
   {
     "cve": "CVE-2026-22257",
@@ -1890,7 +2483,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "salvo:salvo"
+    ]
   },
   {
     "cve": "CVE-2026-0747",
@@ -1898,7 +2494,10 @@
     "nvd_cwe": [
       "CWE-200"
     ],
-    "nvd_cvss": 3.3
+    "nvd_cvss": 3.3,
+    "nvd_products": [
+      "devolutions:remote desktop manager"
+    ]
   },
   {
     "cve": "CVE-2026-0728",
@@ -1907,7 +2506,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 4.7
+    "nvd_cvss": 4.7,
+    "nvd_products": [
+      "carmelo:intern membership management system"
+    ]
   },
   {
     "cve": "CVE-2026-22588",
@@ -1915,7 +2517,10 @@
     "nvd_cwe": [
       "CWE-639"
     ],
-    "nvd_cvss": 6.5
+    "nvd_cvss": 6.5,
+    "nvd_products": [
+      "spreecommerce:spree"
+    ]
   },
   {
     "cve": "CVE-2026-0729",
@@ -1924,7 +2529,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 4.7
+    "nvd_cvss": 4.7,
+    "nvd_products": [
+      "carmelo:intern membership management system"
+    ]
   },
   {
     "cve": "CVE-2026-0730",
@@ -1933,7 +2541,10 @@
       "CWE-79",
       "CWE-94"
     ],
-    "nvd_cvss": 2.4
+    "nvd_cvss": 2.4,
+    "nvd_products": [
+      "phpgurukul:staff leave management system"
+    ]
   },
   {
     "cve": "CVE-2026-0731",
@@ -1942,7 +2553,11 @@
       "CWE-404",
       "CWE-476"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "totolink:wa1200-poe",
+      "totolink:wa1200-poe firmware"
+    ]
   },
   {
     "cve": "CVE-2026-0732",
@@ -1951,7 +2566,11 @@
       "CWE-74",
       "CWE-77"
     ],
-    "nvd_cvss": 6.3
+    "nvd_cvss": 6.3,
+    "nvd_products": [
+      "dlink:di-8200g firmware",
+      "dlink:di-8200g"
+    ]
   },
   {
     "cve": "CVE-2026-0733",
@@ -1960,7 +2579,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 6.3
+    "nvd_cvss": 6.3,
+    "nvd_products": [
+      "phpgurukul:online course registration system"
+    ]
   },
   {
     "cve": "CVE-2026-22710",
@@ -1968,7 +2590,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 5.4
+    "nvd_cvss": 5.4,
+    "nvd_products": [
+      "wikimedia:wikibase"
+    ]
   },
   {
     "cve": "CVE-2026-22712",
@@ -1976,7 +2601,10 @@
     "nvd_cwe": [
       "CWE-116"
     ],
-    "nvd_cvss": 4.3
+    "nvd_cvss": 4.3,
+    "nvd_products": [
+      "wikiworks:approved revs"
+    ]
   },
   {
     "cve": "CVE-2026-22713",
@@ -1984,7 +2612,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 5.4
+    "nvd_cvss": 5.4,
+    "nvd_products": [
+      "growth:growthexperiments"
+    ]
   },
   {
     "cve": "CVE-2026-22714",
@@ -1992,7 +2623,8 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 2.3
+    "nvd_cvss": 2.3,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-0563",
@@ -2000,7 +2632,8 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 6.4
+    "nvd_cvss": 6.4,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-20968",
@@ -2008,19 +2641,28 @@
     "nvd_cwe": [
       "CWE-416"
     ],
-    "nvd_cvss": 6.7
+    "nvd_cvss": 6.7,
+    "nvd_products": [
+      "samsung:android"
+    ]
   },
   {
     "cve": "CVE-2026-20969",
     "description": "Improper input validation in SecSettings prior to SMR Jan-2026 Release 1 allows local attacker to access file with system privilege. User interaction is required for triggering this vulnerability.",
     "nvd_cwe": [],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "samsung:android"
+    ]
   },
   {
     "cve": "CVE-2026-20970",
     "description": "Improper access control in SLocation prior to SMR Jan-2026 Release 1 allows local attackers to execute the privileged APIs.",
     "nvd_cwe": [],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": [
+      "samsung:android"
+    ]
   },
   {
     "cve": "CVE-2026-20971",
@@ -2028,13 +2670,19 @@
     "nvd_cwe": [
       "CWE-416"
     ],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": [
+      "samsung:android"
+    ]
   },
   {
     "cve": "CVE-2026-20972",
     "description": "Improper Export of Android Application Components in UwbTest prior to SMR Jan-2026 Release 1 allows local attackers to enable UWB.",
     "nvd_cwe": [],
-    "nvd_cvss": 3.3
+    "nvd_cvss": 3.3,
+    "nvd_products": [
+      "samsung:android"
+    ]
   },
   {
     "cve": "CVE-2026-20973",
@@ -2042,25 +2690,37 @@
     "nvd_cwe": [
       "CWE-125"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "samsung:android"
+    ]
   },
   {
     "cve": "CVE-2026-20974",
     "description": "Improper input validation in data related to network restrictions prior to SMR Jan-2026 Release 1 allows physical attackers to bypass Carrier Relock.",
     "nvd_cwe": [],
-    "nvd_cvss": 4.6
+    "nvd_cvss": 4.6,
+    "nvd_products": [
+      "samsung:android"
+    ]
   },
   {
     "cve": "CVE-2026-20975",
     "description": "Improper handling of insufficient permission in Samsung Cloud prior to version 5.6.11 allows local attackers to access specific files in arbitrary path.",
     "nvd_cwe": [],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "samsung:cloud"
+    ]
   },
   {
     "cve": "CVE-2026-20976",
     "description": "Improper input validation in Galaxy Store prior to version 4.6.02 allows local attacker to execute arbitrary script.",
     "nvd_cwe": [],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": [
+      "samsung:galaxy store"
+    ]
   },
   {
     "cve": "CVE-2026-21409",
@@ -2068,7 +2728,8 @@
     "nvd_cwe": [
       "CWE-639"
     ],
-    "nvd_cvss": 5.9
+    "nvd_cvss": 5.9,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-0627",
@@ -2076,7 +2737,8 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 6.4
+    "nvd_cvss": 6.4,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22079",
@@ -2084,7 +2746,8 @@
     "nvd_cwe": [
       "CWE-319"
     ],
-    "nvd_cvss": 8.7
+    "nvd_cvss": 8.7,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22080",
@@ -2092,7 +2755,8 @@
     "nvd_cwe": [
       "CWE-319"
     ],
-    "nvd_cvss": 8.7
+    "nvd_cvss": 8.7,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22081",
@@ -2100,7 +2764,8 @@
     "nvd_cwe": [
       "CWE-1004"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22082",
@@ -2108,7 +2773,8 @@
     "nvd_cwe": [
       "CWE-384"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-0803",
@@ -2117,7 +2783,10 @@
       "CWE-74",
       "CWE-89"
     ],
-    "nvd_cvss": 6.3
+    "nvd_cvss": 6.3,
+    "nvd_products": [
+      "phpgurukul:online course registration system"
+    ]
   },
   {
     "cve": "CVE-2026-0817",
@@ -2125,7 +2794,10 @@
     "nvd_cwe": [
       "CWE-862"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "wikimedia:campaignevents"
+    ]
   },
   {
     "cve": "CVE-2026-22194",
@@ -2133,7 +2805,10 @@
     "nvd_cwe": [
       "CWE-352"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "gestsup:gestsup"
+    ]
   },
   {
     "cve": "CVE-2026-22195",
@@ -2141,7 +2816,10 @@
     "nvd_cwe": [
       "CWE-89"
     ],
-    "nvd_cvss": 8.1
+    "nvd_cvss": 8.1,
+    "nvd_products": [
+      "gestsup:gestsup"
+    ]
   },
   {
     "cve": "CVE-2026-22196",
@@ -2149,7 +2827,10 @@
     "nvd_cwe": [
       "CWE-89"
     ],
-    "nvd_cvss": 8.1
+    "nvd_cvss": 8.1,
+    "nvd_products": [
+      "gestsup:gestsup"
+    ]
   },
   {
     "cve": "CVE-2026-22197",
@@ -2157,7 +2838,10 @@
     "nvd_cwe": [
       "CWE-89"
     ],
-    "nvd_cvss": 8.1
+    "nvd_cvss": 8.1,
+    "nvd_products": [
+      "gestsup:gestsup"
+    ]
   },
   {
     "cve": "CVE-2026-22198",
@@ -2165,7 +2849,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 6.1
+    "nvd_cvss": 6.1,
+    "nvd_products": [
+      "gestsup:gestsup"
+    ]
   },
   {
     "cve": "CVE-2026-0830",
@@ -2173,7 +2860,10 @@
     "nvd_cwe": [
       "CWE-78"
     ],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": [
+      "amazon:kiro ide"
+    ]
   },
   {
     "cve": "CVE-2026-22584",
@@ -2181,7 +2871,10 @@
     "nvd_cwe": [
       "CWE-94"
     ],
-    "nvd_cvss": 9.8
+    "nvd_cvss": 9.8,
+    "nvd_products": [
+      "salesforce:uni2ts"
+    ]
   },
   {
     "cve": "CVE-2026-21897",
@@ -2189,7 +2882,10 @@
     "nvd_cwe": [
       "CWE-787"
     ],
-    "nvd_cvss": 7.3
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "nasa:cryptolib"
+    ]
   },
   {
     "cve": "CVE-2026-21898",
@@ -2197,7 +2893,10 @@
     "nvd_cwe": [
       "CWE-125"
     ],
-    "nvd_cvss": 8.2
+    "nvd_cvss": 8.2,
+    "nvd_products": [
+      "nasa:cryptolib"
+    ]
   },
   {
     "cve": "CVE-2026-21899",
@@ -2205,7 +2904,10 @@
     "nvd_cwe": [
       "CWE-125"
     ],
-    "nvd_cvss": 4.7
+    "nvd_cvss": 4.7,
+    "nvd_products": [
+      "nasa:cryptolib"
+    ]
   },
   {
     "cve": "CVE-2026-21900",
@@ -2213,7 +2915,10 @@
     "nvd_cwe": [
       "CWE-125"
     ],
-    "nvd_cvss": 5.9
+    "nvd_cvss": 5.9,
+    "nvd_products": [
+      "nasa:cryptolib"
+    ]
   },
   {
     "cve": "CVE-2026-22023",
@@ -2221,7 +2926,10 @@
     "nvd_cwe": [
       "CWE-125"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "nasa:cryptolib"
+    ]
   },
   {
     "cve": "CVE-2026-22024",
@@ -2229,7 +2937,10 @@
     "nvd_cwe": [
       "CWE-401"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "nasa:cryptolib"
+    ]
   },
   {
     "cve": "CVE-2026-22025",
@@ -2238,7 +2949,10 @@
       "CWE-401",
       "CWE-770"
     ],
-    "nvd_cvss": 3.7
+    "nvd_cvss": 3.7,
+    "nvd_products": [
+      "nasa:cryptolib"
+    ]
   },
   {
     "cve": "CVE-2026-22026",
@@ -2246,7 +2960,10 @@
     "nvd_cwe": [
       "CWE-789"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "nasa:cryptolib"
+    ]
   },
   {
     "cve": "CVE-2026-22027",
@@ -2254,7 +2971,10 @@
     "nvd_cwe": [
       "CWE-122"
     ],
-    "nvd_cvss": 6.0
+    "nvd_cvss": 6.0,
+    "nvd_products": [
+      "nasa:cryptolib"
+    ]
   },
   {
     "cve": "CVE-2026-22697",
@@ -2262,7 +2982,10 @@
     "nvd_cwe": [
       "CWE-122"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "nasa:cryptolib"
+    ]
   },
   {
     "cve": "CVE-2026-22600",
@@ -2270,7 +2993,10 @@
     "nvd_cwe": [
       "CWE-200"
     ],
-    "nvd_cvss": 9.1
+    "nvd_cvss": 9.1,
+    "nvd_products": [
+      "openproject:openproject"
+    ]
   },
   {
     "cve": "CVE-2026-22601",
@@ -2278,7 +3004,10 @@
     "nvd_cwe": [
       "CWE-77"
     ],
-    "nvd_cvss": 7.2
+    "nvd_cvss": 7.2,
+    "nvd_products": [
+      "openproject:openproject"
+    ]
   },
   {
     "cve": "CVE-2026-22602",
@@ -2286,7 +3015,10 @@
     "nvd_cwe": [
       "CWE-200"
     ],
-    "nvd_cvss": 3.5
+    "nvd_cvss": 3.5,
+    "nvd_products": [
+      "openproject:openproject"
+    ]
   },
   {
     "cve": "CVE-2026-22603",
@@ -2294,7 +3026,10 @@
     "nvd_cwe": [
       "CWE-307"
     ],
-    "nvd_cvss": 6.5
+    "nvd_cvss": 6.5,
+    "nvd_products": [
+      "openproject:openproject"
+    ]
   },
   {
     "cve": "CVE-2026-22604",
@@ -2302,7 +3037,10 @@
     "nvd_cwe": [
       "CWE-200"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "openproject:openproject"
+    ]
   },
   {
     "cve": "CVE-2026-22605",
@@ -2310,7 +3048,10 @@
     "nvd_cwe": [
       "CWE-284"
     ],
-    "nvd_cvss": 4.3
+    "nvd_cvss": 4.3,
+    "nvd_products": [
+      "openproject:openproject"
+    ]
   },
   {
     "cve": "CVE-2026-22606",
@@ -2319,7 +3060,10 @@
       "CWE-184",
       "CWE-502"
     ],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": [
+      "trailofbits:fickling"
+    ]
   },
   {
     "cve": "CVE-2026-22607",
@@ -2328,7 +3072,10 @@
       "CWE-184",
       "CWE-502"
     ],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": [
+      "trailofbits:fickling"
+    ]
   },
   {
     "cve": "CVE-2026-22608",
@@ -2337,7 +3084,10 @@
       "CWE-184",
       "CWE-502"
     ],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": [
+      "trailofbits:fickling"
+    ]
   },
   {
     "cve": "CVE-2026-22609",
@@ -2346,7 +3096,10 @@
       "CWE-184",
       "CWE-502"
     ],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": [
+      "trailofbits:fickling"
+    ]
   },
   {
     "cve": "CVE-2026-22612",
@@ -2354,7 +3107,10 @@
     "nvd_cwe": [
       "CWE-502"
     ],
-    "nvd_cvss": 7.8
+    "nvd_cvss": 7.8,
+    "nvd_products": [
+      "trailofbits:fickling"
+    ]
   },
   {
     "cve": "CVE-2026-21884",
@@ -2362,7 +3118,11 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 8.2
+    "nvd_cvss": 8.2,
+    "nvd_products": [
+      "shopify:react-router",
+      "shopify:remix-run\\/react"
+    ]
   },
   {
     "cve": "CVE-2026-22029",
@@ -2370,7 +3130,11 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 8.0
+    "nvd_cvss": 8.0,
+    "nvd_products": [
+      "shopify:remix-run\\/react",
+      "shopify:react-router"
+    ]
   },
   {
     "cve": "CVE-2026-22030",
@@ -2379,7 +3143,11 @@
       "CWE-346",
       "CWE-352"
     ],
-    "nvd_cvss": 6.5
+    "nvd_cvss": 6.5,
+    "nvd_products": [
+      "shopify:react-router",
+      "shopify:remix-run\\/react"
+    ]
   },
   {
     "cve": "CVE-2026-22594",
@@ -2387,7 +3155,10 @@
     "nvd_cwe": [
       "CWE-287"
     ],
-    "nvd_cvss": 8.1
+    "nvd_cvss": 8.1,
+    "nvd_products": [
+      "ghost:ghost"
+    ]
   },
   {
     "cve": "CVE-2026-22595",
@@ -2395,7 +3166,10 @@
     "nvd_cwe": [
       "CWE-863"
     ],
-    "nvd_cvss": 8.1
+    "nvd_cvss": 8.1,
+    "nvd_products": [
+      "ghost:ghost"
+    ]
   },
   {
     "cve": "CVE-2026-22596",
@@ -2403,7 +3177,10 @@
     "nvd_cwe": [
       "CWE-89"
     ],
-    "nvd_cvss": 6.7
+    "nvd_cvss": 6.7,
+    "nvd_products": [
+      "ghost:ghost"
+    ]
   },
   {
     "cve": "CVE-2026-22597",
@@ -2411,7 +3188,10 @@
     "nvd_cwe": [
       "CWE-918"
     ],
-    "nvd_cvss": 2.7
+    "nvd_cvss": 2.7,
+    "nvd_products": [
+      "ghost:ghost"
+    ]
   },
   {
     "cve": "CVE-2026-22589",
@@ -2419,7 +3199,10 @@
     "nvd_cwe": [
       "CWE-639"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "spreecommerce:spree"
+    ]
   },
   {
     "cve": "CVE-2026-22610",
@@ -2427,7 +3210,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 6.1
+    "nvd_cvss": 6.1,
+    "nvd_products": [
+      "angular:angular"
+    ]
   },
   {
     "cve": "CVE-2026-22687",
@@ -2435,7 +3221,10 @@
     "nvd_cwe": [
       "CWE-89"
     ],
-    "nvd_cvss": 5.6
+    "nvd_cvss": 5.6,
+    "nvd_products": [
+      "tencent:weknora"
+    ]
   },
   {
     "cve": "CVE-2026-22688",
@@ -2443,7 +3232,10 @@
     "nvd_cwe": [
       "CWE-77"
     ],
-    "nvd_cvss": 9.9
+    "nvd_cvss": 9.9,
+    "nvd_products": [
+      "tencent:weknora"
+    ]
   },
   {
     "cve": "CVE-2026-22690",
@@ -2451,7 +3243,10 @@
     "nvd_cwe": [
       "CWE-400"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "pypdf project:pypdf"
+    ]
   },
   {
     "cve": "CVE-2026-22691",
@@ -2460,7 +3255,10 @@
       "CWE-400",
       "CWE-1333"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "pypdf project:pypdf"
+    ]
   },
   {
     "cve": "CVE-2026-22611",
@@ -2468,7 +3266,8 @@
     "nvd_cwe": [
       "CWE-20"
     ],
-    "nvd_cvss": 3.7
+    "nvd_cvss": 3.7,
+    "nvd_products": []
   },
   {
     "cve": "CVE-2026-22685",
@@ -2476,7 +3275,10 @@
     "nvd_cwe": [
       "CWE-22"
     ],
-    "nvd_cvss": 8.8
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "devtoys:devtoys"
+    ]
   },
   {
     "cve": "CVE-2026-22689",
@@ -2484,7 +3286,10 @@
     "nvd_cwe": [
       "CWE-1385"
     ],
-    "nvd_cvss": 6.5
+    "nvd_cvss": 6.5,
+    "nvd_products": [
+      "axllent:mailpit"
+    ]
   },
   {
     "cve": "CVE-2026-22693",
@@ -2492,7 +3297,10 @@
     "nvd_cwe": [
       "CWE-476"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "harfbuzz project:harfbuzz"
+    ]
   },
   {
     "cve": "CVE-2026-22698",
@@ -2500,7 +3308,10 @@
     "nvd_cwe": [
       "CWE-331"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "rustcrypto:sm2 elliptic curve"
+    ]
   },
   {
     "cve": "CVE-2026-22699",
@@ -2508,7 +3319,10 @@
     "nvd_cwe": [
       "CWE-20"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "rustcrypto:sm2 elliptic curve"
+    ]
   },
   {
     "cve": "CVE-2026-22700",
@@ -2516,7 +3330,10 @@
     "nvd_cwe": [
       "CWE-20"
     ],
-    "nvd_cvss": 7.5
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "rustcrypto:sm2 elliptic curve"
+    ]
   },
   {
     "cve": "CVE-2026-22701",
@@ -2526,7 +3343,10 @@
       "CWE-362",
       "CWE-367"
     ],
-    "nvd_cvss": 5.3
+    "nvd_cvss": 5.3,
+    "nvd_products": [
+      "tox-dev:filelock"
+    ]
   },
   {
     "cve": "CVE-2026-22702",
@@ -2535,7 +3355,10 @@
       "CWE-59",
       "CWE-362"
     ],
-    "nvd_cvss": 4.5
+    "nvd_cvss": 4.5,
+    "nvd_products": [
+      "virtualenv:virtualenv"
+    ]
   },
   {
     "cve": "CVE-2026-22703",
@@ -2543,7 +3366,10 @@
     "nvd_cwe": [
       "CWE-345"
     ],
-    "nvd_cvss": 5.5
+    "nvd_cvss": 5.5,
+    "nvd_products": [
+      "sigstore:cosign"
+    ]
   },
   {
     "cve": "CVE-2026-22704",
@@ -2551,7 +3377,10 @@
     "nvd_cwe": [
       "CWE-79"
     ],
-    "nvd_cvss": 8.0
+    "nvd_cvss": 8.0,
+    "nvd_products": [
+      "psu:haxcms-nodejs"
+    ]
   },
   {
     "cve": "CVE-2026-22705",
@@ -2559,6 +3388,234 @@
     "nvd_cwe": [
       "CWE-1240"
     ],
-    "nvd_cvss": 6.4
+    "nvd_cvss": 6.4,
+    "nvd_products": []
+  },
+  {
+    "cve": "CVE-2026-22773",
+    "description": "vLLM is an inference and serving engine for large language models (LLMs). In versions from 0.6.4 to before 0.12.0, users can crash the vLLM engine serving multimodal models that use the Idefics3 vision model implementation by sending a specially crafted 1x1 pixel image. This causes a tensor dimension mismatch that results in an unhandled runtime error, leading to complete server termination. This issue has been patched in version 0.12.0.",
+    "nvd_cwe": [
+      "CWE-770"
+    ],
+    "nvd_cvss": 6.5,
+    "nvd_products": [
+      "vllm:vllm"
+    ]
+  },
+  {
+    "cve": "CVE-2026-22777",
+    "description": "ComfyUI-Manager is an extension designed to enhance the usability of ComfyUI. Prior to versions 3.39.2 and 4.0.5, an attacker can inject special characters into HTTP query parameters to add arbitrary configuration values to the config.ini file. This can lead to security setting tampering or modification of application behavior. This issue has been patched in versions 3.39.2 and 4.0.5.",
+    "nvd_cwe": [
+      "CWE-93"
+    ],
+    "nvd_cvss": 7.5,
+    "nvd_products": [
+      "comfy:comfyui-manager"
+    ]
+  },
+  {
+    "cve": "CVE-2026-0831",
+    "description": "The Templately plugin for WordPress is vulnerable to Arbitrary File Write in all versions up to, and including, 3.4.8. This is due to inadequate input validation in the `save_template_to_file()` function where user-controlled parameters like `session_id`, `content_id`, and `ai_page_ids` are used to construct file paths without proper sanitization. This makes it possible for unauthenticated attackers to write arbitrary `.ai.json` files to locations within the uploads directory.",
+    "nvd_cwe": [
+      "CWE-863"
+    ],
+    "nvd_cvss": 5.3,
+    "nvd_products": []
+  },
+  {
+    "cve": "CVE-2026-0821",
+    "description": "A vulnerability was determined in quickjs-ng quickjs up to 0.11.0. This vulnerability affects the function js_typed_array_constructor of the file quickjs.c. Executing a manipulation can lead to heap-based buffer overflow. The attack may be launched remotely. The exploit has been publicly disclosed and may be utilized. This patch is called c5d80831e51e48a83eab16ea867be87f091783c5. A patch should be applied to remediate this issue.",
+    "nvd_cwe": [
+      "CWE-119",
+      "CWE-122"
+    ],
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "quickjs-ng:quickjs"
+    ]
+  },
+  {
+    "cve": "CVE-2026-0822",
+    "description": "A vulnerability was identified in quickjs-ng quickjs up to 0.11.0. This issue affects the function js_typed_array_sort of the file quickjs.c. The manipulation leads to heap-based buffer overflow. Remote exploitation of the attack is possible. The exploit is publicly available and might be used. The identifier of the patch is 53eefbcd695165a3bd8c584813b472cb4a69fbf5. To fix this issue, it is recommended to deploy a patch.",
+    "nvd_cwe": [
+      "CWE-119",
+      "CWE-122",
+      "CWE-787"
+    ],
+    "nvd_cvss": 6.3,
+    "nvd_products": [
+      "quickjs-ng:quickjs"
+    ]
+  },
+  {
+    "cve": "CVE-2026-0824",
+    "description": "A security flaw has been discovered in questdb ui up to 1.11.9. Impacted is an unknown function of the component Web Console. The manipulation results in cross site scripting. The attack can be executed remotely. The exploit has been released to the public and may be used for attacks. Upgrading to version 1.1.10 is recommended to address this issue. The patch is identified as b42fd9f18476d844ae181a10a249e003dafb823d. You should upgrade the affected component. The vendor confirmed early that the fix \"is going to be released as a part of QuestDB 9.3.0\" as well.",
+    "nvd_cwe": [
+      "CWE-79",
+      "CWE-94"
+    ],
+    "nvd_cvss": 3.5,
+    "nvd_products": []
+  },
+  {
+    "cve": "CVE-2026-0836",
+    "description": "A vulnerability was determined in UTT \u8fdb\u53d6 520W 1.7.7-180627. The impacted element is the function strcpy of the file /goform/formConfigFastDirectionW. This manipulation of the argument ssid causes buffer overflow. Remote exploitation of the attack is possible. The exploit has been publicly disclosed and may be utilized. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "nvd_cwe": [
+      "CWE-119",
+      "CWE-120"
+    ],
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "utt:520w firmware",
+      "utt:520w"
+    ]
+  },
+  {
+    "cve": "CVE-2026-0837",
+    "description": "A vulnerability was identified in UTT \u8fdb\u53d6 520W 1.7.7-180627. This affects the function strcpy of the file /goform/formFireWall. Such manipulation of the argument GroupName leads to buffer overflow. The attack can be executed remotely. The exploit is publicly available and might be used. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "nvd_cwe": [
+      "CWE-119",
+      "CWE-120"
+    ],
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "utt:520w firmware",
+      "utt:520w"
+    ]
+  },
+  {
+    "cve": "CVE-2026-0838",
+    "description": "A security flaw has been discovered in UTT \u8fdb\u53d6 520W 1.7.7-180627. This impacts the function strcpy of the file /goform/ConfigWirelessBase. Performing a manipulation of the argument ssid results in buffer overflow. The attack is possible to be carried out remotely. The exploit has been released to the public and may be used for attacks. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "nvd_cwe": [
+      "CWE-119",
+      "CWE-120"
+    ],
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "utt:520w firmware",
+      "utt:520w"
+    ]
+  },
+  {
+    "cve": "CVE-2026-0839",
+    "description": "A weakness has been identified in UTT \u8fdb\u53d6 520W 1.7.7-180627. Affected is the function strcpy of the file /goform/APSecurity. Executing a manipulation of the argument wepkey1 can lead to buffer overflow. The attack may be performed from remote. The exploit has been made available to the public and could be used for attacks. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "nvd_cwe": [
+      "CWE-119",
+      "CWE-120"
+    ],
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "utt:520w firmware",
+      "utt:520w"
+    ]
+  },
+  {
+    "cve": "CVE-2026-0840",
+    "description": "A security vulnerability has been detected in UTT \u8fdb\u53d6 520W 1.7.7-180627. Affected by this vulnerability is the function strcpy of the file /goform/formConfigNoticeConfig. The manipulation of the argument timestart leads to buffer overflow. It is possible to initiate the attack remotely. The exploit has been disclosed publicly and may be used. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "nvd_cwe": [
+      "CWE-119",
+      "CWE-120"
+    ],
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "utt:520w firmware",
+      "utt:520w"
+    ]
+  },
+  {
+    "cve": "CVE-2026-0841",
+    "description": "A vulnerability was detected in UTT \u8fdb\u53d6 520W 1.7.7-180627. Affected by this issue is the function strcpy of the file /goform/formPictureUrl. The manipulation of the argument importpictureurl results in buffer overflow. It is possible to launch the attack remotely. The exploit is now public and may be used. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "nvd_cwe": [
+      "CWE-119",
+      "CWE-120"
+    ],
+    "nvd_cvss": 8.8,
+    "nvd_products": [
+      "utt:520w firmware",
+      "utt:520w"
+    ]
+  },
+  {
+    "cve": "CVE-2026-0842",
+    "description": "A flaw has been found in Flycatcher Toys smART Sketcher up to 2.0. This affects an unknown part of the component Bluetooth Low Energy Interface. This manipulation causes missing authentication. The attack can only be done within the local network. The exploit has been published and may be used. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "nvd_cwe": [
+      "CWE-287",
+      "CWE-306"
+    ],
+    "nvd_cvss": 6.3,
+    "nvd_products": []
+  },
+  {
+    "cve": "CVE-2026-0843",
+    "description": "A vulnerability has been found in jiujiujia/victor123/wxw850227 jjjfood and jjjshop_food up to 20260103. This vulnerability affects unknown code of the file /index.php/api/product.category/index. Such manipulation of the argument latitude leads to sql injection. The attack can be launched remotely. The exploit has been disclosed to the public and may be used. This product is distributed under multiple different names. The vendor was contacted early about this disclosure but did not respond in any way.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 6.3,
+    "nvd_products": []
+  },
+  {
+    "cve": "CVE-2026-0850",
+    "description": "A vulnerability was determined in code-projects Intern Membership Management System 1.0. Impacted is an unknown function of the file /admin/delete_activity.php. Executing a manipulation of the argument activity_id can lead to sql injection. The attack may be launched remotely. The exploit has been publicly disclosed and may be utilized.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 4.7,
+    "nvd_products": [
+      "carmelo:intern membership management system"
+    ]
+  },
+  {
+    "cve": "CVE-2026-0851",
+    "description": "A vulnerability was identified in code-projects Online Music Site 1.0. The affected element is an unknown function of the file /Administrator/PHP/AdminAddUser.php. The manipulation of the argument txtusername leads to sql injection. Remote exploitation of the attack is possible. The exploit is publicly available and might be used.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online music site"
+    ]
+  },
+  {
+    "cve": "CVE-2026-0852",
+    "description": "A security flaw has been discovered in code-projects Online Music Site 1.0. The impacted element is an unknown function of the file /Administrator/PHP/AdminUpdateUser.php. The manipulation of the argument ID results in sql injection. The attack can be executed remotely. The exploit has been released to the public and may be used for attacks.",
+    "nvd_cwe": [
+      "CWE-74",
+      "CWE-89"
+    ],
+    "nvd_cvss": 7.3,
+    "nvd_products": [
+      "fabian:online music site"
+    ]
+  },
+  {
+    "cve": "CVE-2026-0853",
+    "description": "Certain NVR models developed by A-Plus Video Technologies has a Sensitive Data Exposure vulnerability, allowing unauthenticated remote attackers to access the debug page and obtain device status information.",
+    "nvd_cwe": [
+      "CWE-497"
+    ],
+    "nvd_cvss": 5.3,
+    "nvd_products": []
+  },
+  {
+    "cve": "CVE-2026-0854",
+    "description": "Certain DVR/NVR models developed by Merit LILIN has a OS Command Injection vulnerability, allowing authenticated remote attackers to inject arbitrary OS commands and execute them on the device.",
+    "nvd_cwe": [
+      "CWE-78"
+    ],
+    "nvd_cvss": 8.8,
+    "nvd_products": []
+  },
+  {
+    "cve": "CVE-2026-0855",
+    "description": "Certain IP Camera models developed by Merit LILIN has a OS Command Injection vulnerability, allowing authenticated remote attackers to inject arbitrary OS commands and execute them on the device.",
+    "nvd_cwe": [
+      "CWE-78"
+    ],
+    "nvd_cvss": 8.8,
+    "nvd_products": []
   }
 ]
