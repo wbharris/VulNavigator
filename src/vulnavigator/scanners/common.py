@@ -10,6 +10,22 @@ from typing import Any
 
 from vulnavigator.models import Case, Evidence, Location
 
+
+def optional_int(value: Any) -> int | None:
+    """Line numbers from SARIF/scanner JSON; invalid values become None."""
+    if value in (None, ""):
+        return None
+    try:
+        number = int(value)
+    except (TypeError, ValueError):
+        try:
+            number = int(float(str(value).strip()))
+        except (TypeError, ValueError):
+            return None
+    if number < 0:
+        return None
+    return number
+
 CVE_RE = re.compile(r"CVE-\d{4}-\d{4,}", re.I)
 CWE_RE = re.compile(r"CWE-\d+", re.I)
 # Bare year-id fragments (Nexpose, some CSV exports). Not a CVE by itself.

@@ -6,8 +6,9 @@ Order is fixed (do not call the steps out of sequence):
     → prioritize → score_data_quality → plan_actions
 
 Derived lists (mappings, assumptions, next actions, generated remediations)
-are cleared at the start of each run so re-processing a Case is idempotent.
-Finder-supplied remediations live on ``Case.source_remediation``.
+and live enrichment (NVD/KEV/EPSS/CVSS) are cleared at the start of each run
+so re-processing a Case is idempotent. Finder-supplied remediations live on
+``Case.source_remediation``.
 """
 
 from __future__ import annotations
@@ -60,6 +61,10 @@ def reset_derived(case: Case) -> None:
     case.validation_notes = []
     case.missing_evidence = []
     case.remediation = list(case.source_remediation)
+    case.nvd_description = ""
+    case.cvss = None
+    case.kev = False
+    case.epss = None
 
 
 def _workers(explicit: int | None, n: int) -> int:

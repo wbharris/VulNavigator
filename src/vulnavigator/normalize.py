@@ -28,6 +28,7 @@ from vulnavigator.scanners import (
     parse_scanner_csv,
     parse_scanner_xml,
 )
+from vulnavigator.scanners.common import optional_int
 from vulnavigator.scanners.extended import parse_sarif
 
 CVE_RE = re.compile(r"CVE-\d{4}-\d{4,}", re.I)
@@ -148,7 +149,7 @@ def _locations_from(items: Any) -> list[Location]:
             out.append(
                 Location(
                     path=str(item.get("path") or item.get("file") or item.get("uri") or ""),
-                    line=int(line) if line not in (None, "") else None,
+                    line=optional_int(line),
                     snippet=snippet,
                 )
             )

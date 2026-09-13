@@ -13,6 +13,7 @@ from vulnavigator.scanners.common import (
     flatten_rows,
     local_tag,
     make_case,
+    optional_int,
     skip_info,
     xml_find,
     xml_findall,
@@ -41,9 +42,7 @@ def parse_sarif(data: dict[str, Any]) -> list[Case]:
                 uri = str(((phys.get("artifactLocation") or {}).get("uri")) or "")
                 line = (phys.get("region") or {}).get("startLine")
                 if uri or line:
-                    loc_objs.append(
-                        Location(path=uri, line=int(line) if line not in (None, "") else None)
-                    )
+                    loc_objs.append(Location(path=uri, line=optional_int(line)))
             primary = loc_objs[0] if loc_objs else None
             props = result.get("properties") or rule.get("properties") or {}
             tags = props.get("tags") or []

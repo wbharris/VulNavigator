@@ -14,7 +14,8 @@ from __future__ import annotations
 import json
 import logging
 import os
-from concurrent.futures import ThreadPoolExecutor
+import threading
+import time
 from typing import Any
 from urllib.error import URLError
 from urllib.request import Request, urlopen
@@ -27,6 +28,10 @@ UA = "VulNavigator/0.1 (+https://github.com/wbharris/VulNavigator)"
 DEFAULT_TIMEOUT = 12.0
 MAX_CVES = 8
 KEV_URL = "https://www.cisa.gov/sites/default/files/feeds/known_exploited_vulnerabilities.json"
+DEFAULT_KEV_TTL = 3600.0
+
+_kev_lock = threading.Lock()
+_kev_cache: tuple[float, set[Any]] | None = None
 
 
 def http_timeout(explicit: float | None = None) -> float:
@@ -64,8 +69,12 @@ def _nvd_fields(nvd: dict[str, Any] | None) -> tuple[str, float | None, list[str
             data = rows[0].get("cvssData") or {}
             score = data.get("baseScore")
             if score is not None:
-                cvss = float(score)
-                break
+                try:
+                    cvss = float(score)
+                except (TypeError, ValueError):
+                    cvss = None
+                if cvss is not None:
+                    break
     cwes: list[str] = []
     for weak in cve_item.get("weaknesses") or []:
         for desc in weak.get("description") or []:
@@ -73,6 +82,43 @@ def _nvd_fields(nvd: dict[str, Any] | None) -> tuple[str, float | None, list[str
             if val.startswith("CWE-") and val not in cwes:
                 cwes.append(val)
     return en, cvss, cwes
+
+
+def kev_ttl() -> float:
+    raw = (os.environ.get("VULN_NAV_KEV_TTL") or "").strip()
+    if not raw:
+        return DEFAULT_KEV_TTL
+    try:
+        return max(0.0, float(raw))
+    except ValueError:
+        return DEFAULT_KEV_TTL
+
+
+def clear_kev_cache() -> None:
+    global _kev_cache
+    with _kev_lock:
+        _kev_cache = None
+
+
+def _kev_ids(timeout: float) -> set[Any]:
+    """One KEV download per process, refreshed on TTL. Failed fetches keep stale ids."""
+    global _kev_cache
+    now = time.monotonic()
+    ttl = kev_ttl()
+    with _kev_lock:
+        if _kev_cache and ttl > 0 and now - _kev_cache[0] < ttl:
+            return set(_kev_cache[1])
+    payload = _get_json(KEV_URL, timeout)
+    if payload is None:
+        with _kev_lock:
+            if _kev_cache:
+                log.debug("KEV fetch failed; using cached catalog")
+                return set(_kev_cache[1])
+        return set()
+    ids = {row.get("cveID") for row in payload.get("vulnerabilities") or []}
+    with _kev_lock:
+        _kev_cache = (time.monotonic(), ids)
+    return ids
 
 
 def _epss_score(payload: dict[str, Any] | None) -> float | None:
@@ -93,21 +139,17 @@ def enrich(case: Case, offline: bool = False, timeout: float | None = None) -> C
         return case
     seconds = http_timeout(timeout)
     cves = case.cves[:MAX_CVES]
-    kev = _get_json(KEV_URL, seconds)
-    kev_ids = {row.get("cveID") for row in (kev or {}).get("vulnerabilities") or []}
+    kev_ids = _kev_ids(seconds)
     case.kev = any(cve in kev_ids for cve in cves)
 
-    def _one(cve: str) -> tuple[str, dict[str, Any] | None, dict[str, Any] | None]:
-        nvd = _get_json(f"https://services.nvd.nist.gov/rest/json/cves/2.0?cveId={cve}", seconds)
-        epss = _get_json(f"https://api.first.org/data/v1/epss?cve={cve}", seconds)
-        return cve, nvd, epss
-
-    if len(cves) == 1:
-        rows = [_one(cves[0])]
-    else:
-        workers = min(4, len(cves))
-        with ThreadPoolExecutor(max_workers=workers) as pool:
-            rows = list(pool.map(_one, cves))
+    rows = [
+        (
+            cve,
+            _get_json(f"https://services.nvd.nist.gov/rest/json/cves/2.0?cveId={cve}", seconds),
+            _get_json(f"https://api.first.org/data/v1/epss?cve={cve}", seconds),
+        )
+        for cve in cves
+    ]
 
     best_cvss: float | None = None
     best_epss: float | None = None

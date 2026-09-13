@@ -4,8 +4,9 @@ from __future__ import annotations
 
 from unittest.mock import patch
 
-from vulnavigator.enrich import MAX_CVES, enrich, http_timeout
+from vulnavigator.enrich import MAX_CVES, clear_kev_cache, enrich, http_timeout
 from vulnavigator.models import Case
+from vulnavigator.pipeline import analyze_case
 
 
 def _nvd(cve: str, score: float, cwe: str, desc: str) -> dict:
@@ -87,3 +88,72 @@ def test_enrich_caps_cve_count():
         enrich(case, timeout=2)
     nvd_calls = [u for u in seen if "cveId=" in u]
     assert len(nvd_calls) == MAX_CVES
+
+
+def test_nvd_malformed_basescore_does_not_abort():
+    case = Case(cves=["CVE-BAD"])
+
+    def fake_get(url: str, timeout: float) -> dict | None:
+        if "known_exploited" in url:
+            return {"vulnerabilities": []}
+        if "cveId=" in url:
+            return _nvd("CVE-BAD", "unknown", "CWE-20", "weird")  # type: ignore[arg-type]
+        return {"data": [{"epss": "0.1"}]}
+
+    clear_kev_cache()
+    with patch("vulnavigator.enrich._get_json", side_effect=fake_get):
+        enrich(case, timeout=2)
+    assert case.cvss is None
+    assert case.nvd_description == "weird"
+    assert case.epss == 0.1
+
+
+def test_kev_catalog_fetched_once_per_process():
+    clear_kev_cache()
+    seen: list[str] = []
+
+    def fake_get(url: str, timeout: float) -> dict | None:
+        seen.append(url)
+        if "known_exploited" in url:
+            return {"vulnerabilities": [{"cveID": "CVE-A"}]}
+        return None
+
+    with patch("vulnavigator.enrich._get_json", side_effect=fake_get):
+        enrich(Case(cves=["CVE-A"]), timeout=2)
+        enrich(Case(cves=["CVE-B"]), timeout=2)
+    kev_hits = [u for u in seen if "known_exploited" in u]
+    assert len(kev_hits) == 1
+
+
+def test_reanalyze_offline_clears_live_enrichment():
+    case = Case(
+        title="component rce",
+        description="sql injection in login form",
+        cves=["CVE-KEV"],
+        cwes=["CWE-89"],
+    )
+
+    def fake_get(url: str, timeout: float) -> dict | None:
+        if "known_exploited" in url:
+            return {"vulnerabilities": [{"cveID": "CVE-KEV"}]}
+        if "cveId=" in url:
+            return _nvd("CVE-KEV", 9.8, "CWE-89", "rce")
+        if "epss" in url:
+            return {"data": [{"epss": "0.9"}]}
+        return None
+
+    clear_kev_cache()
+    with patch("vulnavigator.enrich._get_json", side_effect=fake_get):
+        analyze_case(case, offline=False, timeout=2)
+    assert case.kev is True
+    assert case.cvss == 9.8
+    assert case.epss == 0.9
+    assert case.nvd_description == "rce"
+    assert any("KEV" in r for r in case.priority_reasons)
+
+    analyze_case(case, offline=True)
+    assert case.kev is False
+    assert case.cvss is None
+    assert case.epss is None
+    assert case.nvd_description == ""
+    assert not any("KEV" in r for r in case.priority_reasons)

@@ -1,6 +1,7 @@
 from pathlib import Path
 
 from vulnavigator.pipeline import analyze_path
+from vulnavigator.scanners.extended import parse_sarif
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -15,6 +16,37 @@ def test_sarif_codeql():
     case = _one("sarif-report.sarif")
     assert case.source_kind == "sarif"
     assert "CWE-89" in case.cwes
+
+
+def test_sarif_invalid_line_does_not_drop_finding():
+    cases = parse_sarif(
+        {
+            "runs": [
+                {
+                    "tool": {"driver": {"name": "codeql"}},
+                    "results": [
+                        {
+                            "ruleId": "js/sql",
+                            "guid": "bad-line",
+                            "message": {"text": "sql injection"},
+                            "locations": [
+                                {
+                                    "physicalLocation": {
+                                        "artifactLocation": {"uri": "app.js"},
+                                        "region": {"startLine": "12.7-ish"},
+                                    }
+                                }
+                            ],
+                        }
+                    ],
+                }
+            ]
+        }
+    )
+    assert len(cases) == 1
+    assert cases[0].finding_id == "bad-line"
+    assert cases[0].locations[0].path == "app.js"
+    assert cases[0].locations[0].line is None
 
 
 def test_trivy():

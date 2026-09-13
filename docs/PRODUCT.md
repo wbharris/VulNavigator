@@ -135,7 +135,7 @@ Priority is not CVSS. Internet exposure, a replayable PoC, and whether the mappi
 
 **`--offline`:** skips NVD / KEV / EPSS only. `case.kev`, `case.epss`, and `case.cvss` stay unset. Mapping tables are local (`src/vulnavigator/data/mappings.json`). Confidence values there (`confidence.cwe`, `narrative`, `overlay`, `default`) are ordinal, not calibrated probabilities. `map.py` reads those keys; it does not hardcode the scale.
 
-**Live enrichment:** every CVE on the case is queried (cap 8). The case keeps **any KEV hit**, **max CVSS**, **max EPSS**, and the **union of NVD CWEs**. HTTP timeout is `--timeout` / `VULN_NAV_TIMEOUT` (default 12s). A batch of findings runs in parallel (`--workers` / `VULN_NAV_WORKERS`, default 4). Logging is stdlib (`VULN_NAV_LOG=json`, `--log-level`).
+**Live enrichment:** every CVE on the case is queried (cap 8). The case keeps **any KEV hit**, **max CVSS**, **max EPSS**, and the **union of NVD CWEs**. HTTP timeout is `--timeout` / `VULN_NAV_TIMEOUT` (default 12s). A batch of findings runs in parallel (`--workers` / `VULN_NAV_WORKERS`, default 4). Per-case CVE lookups stay sequential so batches do not nest thread pools. CISA KEV is cached in-process (`VULN_NAV_KEV_TTL` seconds, default 3600). Re-running `analyze_case` clears prior KEV/EPSS/CVSS/NVD text before enrich. Logging is stdlib (`VULN_NAV_LOG=json`, `--log-level`).
 
 **SARIF:** parsed as SARIF. A SARIF-shaped result is not rewritten as a Daybreak finding even if `--source daybreak` was passed.
 
