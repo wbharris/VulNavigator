@@ -101,24 +101,25 @@ def clear_kev_cache() -> None:
 
 
 def _kev_ids(timeout: float) -> set[Any]:
-    """One KEV download per process, refreshed on TTL. Failed fetches keep stale ids."""
+    """One in-flight KEV download per process; TTL cache. Failed fetches keep stale ids.
+
+    The lock is held across the HTTP GET so batch workers cannot stampede CISA.
+    """
     global _kev_cache
-    now = time.monotonic()
     ttl = kev_ttl()
     with _kev_lock:
+        now = time.monotonic()
         if _kev_cache and ttl > 0 and now - _kev_cache[0] < ttl:
             return set(_kev_cache[1])
-    payload = _get_json(KEV_URL, timeout)
-    if payload is None:
-        with _kev_lock:
+        payload = _get_json(KEV_URL, timeout)
+        if payload is None:
             if _kev_cache:
                 log.debug("KEV fetch failed; using cached catalog")
                 return set(_kev_cache[1])
-        return set()
-    ids = {row.get("cveID") for row in payload.get("vulnerabilities") or []}
-    with _kev_lock:
+            return set()
+        ids = {row.get("cveID") for row in payload.get("vulnerabilities") or []}
         _kev_cache = (time.monotonic(), ids)
-    return ids
+        return ids
 
 
 def _epss_score(payload: dict[str, Any] | None) -> float | None:

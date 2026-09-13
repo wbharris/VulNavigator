@@ -2,6 +2,8 @@
 
 from __future__ import annotations
 
+import threading
+import time
 from unittest.mock import patch
 
 from vulnavigator.enrich import MAX_CVES, clear_kev_cache, enrich, http_timeout
@@ -123,6 +125,33 @@ def test_kev_catalog_fetched_once_per_process():
         enrich(Case(cves=["CVE-B"]), timeout=2)
     kev_hits = [u for u in seen if "known_exploited" in u]
     assert len(kev_hits) == 1
+
+
+def test_kev_single_fetch_under_concurrent_workers():
+    clear_kev_cache()
+    barrier = threading.Barrier(8)
+    hits: list[str] = []
+    guard = threading.Lock()
+
+    def fake_get(url: str, timeout: float) -> dict | None:
+        if "known_exploited" in url:
+            time.sleep(0.05)
+            with guard:
+                hits.append(url)
+            return {"vulnerabilities": [{"cveID": "CVE-A"}]}
+        return None
+
+    def worker() -> None:
+        barrier.wait()
+        enrich(Case(cves=["CVE-A"]), timeout=2)
+
+    with patch("vulnavigator.enrich._get_json", side_effect=fake_get):
+        threads = [threading.Thread(target=worker) for _ in range(8)]
+        for thread in threads:
+            thread.start()
+        for thread in threads:
+            thread.join()
+    assert len(hits) == 1
 
 
 def test_reanalyze_offline_clears_live_enrichment():

@@ -9,8 +9,22 @@ from vulnavigator.scanners.common import (
     flatten_rows,
     make_case,
     norm_sev,
+    optional_int,
 )
 from vulnavigator.scanners.extended import parse_sarif
+
+
+def test_optional_int_rejects_fractional_and_junk():
+    assert optional_int(12) == 12
+    assert optional_int("12") == 12
+    assert optional_int(12.0) == 12
+    assert optional_int("12.0") == 12
+    assert optional_int(12.7) is None
+    assert optional_int("12.7") is None
+    assert optional_int("12.7-ish") is None
+    assert optional_int(-1) is None
+    assert optional_int(True) is None
+    assert optional_int(None) is None
 
 
 def test_cves_of_prefixed_and_deduped():

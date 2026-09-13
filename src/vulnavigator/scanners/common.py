@@ -12,19 +12,30 @@ from vulnavigator.models import Case, Evidence, Location
 
 
 def optional_int(value: Any) -> int | None:
-    """Line numbers from SARIF/scanner JSON; invalid values become None."""
+    """Whole line numbers from SARIF/scanner JSON. Fractional or junk → None."""
     if value in (None, ""):
         return None
-    try:
-        number = int(value)
-    except (TypeError, ValueError):
-        try:
-            number = int(float(str(value).strip()))
-        except (TypeError, ValueError):
-            return None
-    if number < 0:
+    if isinstance(value, bool):
         return None
-    return number
+    if isinstance(value, int):
+        return value if value >= 0 else None
+    if isinstance(value, float):
+        if value < 0 or value != int(value):
+            return None
+        return int(value)
+    text = str(value).strip()
+    if not text:
+        return None
+    try:
+        if any(ch in text.lower() for ch in (".", "e")):
+            number = float(text)
+            if number < 0 or number != int(number):
+                return None
+            return int(number)
+        number = int(text, 10)
+    except (TypeError, ValueError):
+        return None
+    return number if number >= 0 else None
 
 CVE_RE = re.compile(r"CVE-\d{4}-\d{4,}", re.I)
 CWE_RE = re.compile(r"CWE-\d+", re.I)

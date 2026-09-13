@@ -33,7 +33,7 @@ def test_sarif_invalid_line_does_not_drop_finding():
                                 {
                                     "physicalLocation": {
                                         "artifactLocation": {"uri": "app.js"},
-                                        "region": {"startLine": "12.7-ish"},
+                                        "region": {"startLine": "12.7"},
                                     }
                                 }
                             ],
