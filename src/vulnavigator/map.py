@@ -1,5 +1,7 @@
 """Map a validated case onto ATT&CK, D3FEND, CSF, and optional overlays.
 
+CI Fortify and NIST SSDF 1.2 are gated overlays (see vulnavigator.overlays).
+
 Confidence (see data/mappings.json → confidence):
   0.62  CWE-heuristic — CWE commonly enables the technique
   0.55  narrative RCE claim
@@ -18,6 +20,7 @@ from importlib.resources import files
 
 from vulnavigator.heuristics import mentions_rce
 from vulnavigator.models import Case, Mapping
+from vulnavigator.overlays import map_overlays
 
 log = logging.getLogger("vulnavigator.map")
 
@@ -207,4 +210,5 @@ def map_case(case: Case) -> Case:
                         rationale=f"Fraud overlay of {tech.id} (asset marked fraud-relevant)",
                     ),
                 )
+    map_overlays(case)
     return case

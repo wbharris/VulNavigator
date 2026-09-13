@@ -9,7 +9,7 @@
     "location": 0.4,
     "location_note": "Only a file/host location; public-app placeholder.",
     "overlay": 0.5,
-    "overlay_note": "ATLAS/AI RMF/F3 when the asset is tagged in-scope."
+    "overlay_note": "ATLAS/AI RMF/F3 when tagged. CI Fortify and SSDF 1.2 are canned overlays in vulnavigator.overlays, not CWE tables."
   },
   "cwe_attack": {
     "CWE-77": [["T1190", "Exploit Public-Facing Application"], ["T1059", "Command and Scripting Interpreter"]],

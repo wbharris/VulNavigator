@@ -27,7 +27,7 @@ Do not start a web UI from this skill. That is `vulnavigator-web`, and the Flask
 From the repo root (after `python3 -m venv .venv && .venv/bin/pip install -e .`):
 
 ```bash
-.venv/bin/vuln-nav analyze <finding_file> [--source NAME] [--id ID] [--offline] [--json] [-o report.md]
+.venv/bin/vuln-nav analyze <finding_file> [--source NAME] [--id ID] [--offline] [--json] [-o report.md] [--sector ics] [--overlay fortify|ssdf|no-ssdf|none]
 ```
 
 If `vuln-nav` is already on PATH, that name is fine.
@@ -56,8 +56,8 @@ A pasted advisory without a CVE id is not an AI 0-day.
 
 1. Normalize to one case file
 2. Validate evidence / PoC / identity
-3. Map ATT&CK, D3FEND, NIST CSF from local tables
-4. Prioritize: exposure, replayable PoC, and whether mapping unlocks RCE/credentials. KEV/EPSS/CVSS only when a CVE exists and `--offline` was not used. Priority is not CVSS.
+3. Map ATT&CK, D3FEND, NIST CSF from local tables. Optional overlays (not extra sections): ATLAS/F3 if tagged; **CI Fortify** only if `--sector` / `--overlay fortify` / JSON `ot_in_scope` (default off); **NIST SSDF 1.2** inferred on Mythos/Daybreak/SARIF/Trivy/Snyk/Dependabot. Fortify prints in §9–10. SSDF does not replace CSF.
+4. Prioritize: exposure, replayable PoC, and whether mapping unlocks RCE/credentials. KEV/EPSS/CVSS only when a CVE exists and `--offline` was not used. Priority is not CVSS. Overlay tags do not bump P1 by themselves.
 5. 11-section markdown or `--json`
 
 AI 0-days (Mythos/Daybreak) usually have no CVE. Judge PoC + discovery write-up. Do not wait for NVD. Do not label a vendor advisory as an AI 0-day just because the id was stripped.

@@ -72,7 +72,7 @@ An 11-section markdown report (or `--json` case file):
 1. Vulnerability summary  
 2. Evidence (facts, **how it was found**, **PoC/exploit**, missing evidence)  
 3. Validation notes  
-4. Attacker behaviors / ATT&CK (ATLAS / AI RMF / F3 only if in scope)  
+4. Attacker behaviors / ATT&CK (ATLAS / AI RMF / F3 / CI Fortify / SSDF 1.2 only if in scope)  
 5. Defensive countermeasures (D3FEND)  
 6. NIST CSF alignment  
 7. Priority and urgency  
@@ -80,6 +80,17 @@ An 11-section markdown report (or `--json` case file):
 9. Compensating controls  
 10. Next actions (owner + done-when)  
 11. Confidence, assumptions, and what would improve the report  
+
+**Overlays (not extra sections).** ATT&CK / D3FEND / CSF always run. Optional overlays:
+
+| Overlay | Default | Where it prints |
+|---------|---------|-----------------|
+| ATLAS + AI RMF | Off until `ai_in_scope` | §4 |
+| F3 | Off until fraud/payments tagged | §4 |
+| **CI Fortify** (CISA isolation/recovery) | **Off.** `--sector ics\|ot\|water\|energy\|…` or `--overlay fortify` or JSON `ot_in_scope` | §4 line + **§9–10** isolation, not patch |
+| **NIST SSDF 1.2** | **On** for Mythos, Daybreak, SARIF, Trivy, Snyk, Dependabot. Off otherwise. `--overlay no-ssdf` to disable | §4 line + §8 / §10 (`RV.1`, `RV.2`, `PS.4`; `PW.8` on 0-days). Does not replace CSF |
+
+Fortify and SSDF are canned overlays (`src/vulnavigator/overlays.py`). They are not CWE mapping tables and they do not call CISA or NIST live. Overlay presence does not by itself raise priority.  
 
 Pipeline: **normalize → validate → map → prioritize → report**.
 
@@ -92,6 +103,8 @@ vuln-nav analyze examples/narrative-rce.txt
 vuln-nav analyze examples/nessus-report.nessus
 vuln-nav analyze examples/sarif-report.sarif
 vuln-nav analyze examples/trivy-report.json
+vuln-nav analyze examples/nessus-report.nessus --sector ics   # CI Fortify overlay
+vuln-nav analyze examples/trivy-report.json --overlay no-ssdf
 ```
 
 ```bash
@@ -115,7 +128,7 @@ Optional skill files live in [`.grok/skills/`](.grok/skills/) and [`.devin/skill
 | `vulnavigator` | Run `vuln-nav analyze` and summarize the 11-section case |
 | `vulnavigator-web` | Start a **local** Flask UI **if you keep one out of tree** |
 
-`vuln-nav` maps ATT&CK / D3FEND / CSF from [`src/vulnavigator/data/mappings.json`](src/vulnavigator/data/mappings.json). It does not call MITRE MCP, OSV, Shodan, or Nuclei.
+`vuln-nav` maps ATT&CK / D3FEND / CSF from [`src/vulnavigator/data/mappings.json`](src/vulnavigator/data/mappings.json). CI Fortify and NIST SSDF 1.2 are canned overlays in [`src/vulnavigator/overlays.py`](src/vulnavigator/overlays.py) (see Overlays above). It does not call MITRE MCP, OSV, Shodan, Nuclei, or live CISA/NIST feeds.
 
 A separate local `vulnavigator_web.py` (not in this package) can optionally look up CVEs on OSV.dev and host exposure on Shodan InternetDB via `voraxx-mcp-server`. ATT&CK/D3FEND IDs in that UI are still the ones `vuln-nav` already printed. Extra “threat actor / prevalence / live MITRE v15.0” prose in that UI is heuristic copy, not a live MITRE query.
 

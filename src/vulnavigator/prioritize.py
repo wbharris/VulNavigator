@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 from vulnavigator.models import Action, Assumption, Case, InfoNeed, is_ai_zeroday
+from vulnavigator.overlays import apply_overlay_actions, overlay_priority_reasons
 from vulnavigator.scanners import SCANNER_KINDS
 
 
@@ -44,6 +45,22 @@ def record_assumptions(case: Case) -> Case:
             "Does this sit on a payment, identity, or account-takeover path?",
             "F3 stays off until this is tagged; we do not assume no",
             "F3 overlay and next-action owners",
+        )
+    if case.overlay_ssdf_inferred and case.asset_software_ssdf:
+        _assume(
+            case,
+            "software_ssdf",
+            "yes",
+            f"Source kind {case.source_kind} infers NIST SSDF 1.2 (software finding); pass --overlay no-ssdf to turn off",
+            "SSDF RV/PS.4 (and PW.8 on Mythos/Daybreak) appear in remediation and next actions",
+        )
+    if case.overlay_fortify_inferred and case.asset_ot_ci:
+        _assume(
+            case,
+            "ot_ci",
+            "yes",
+            "Sector or JSON tagged this as CI/OT; isolation language is CI Fortify, not a patch",
+            "Fortify compensating controls and ot-ops next actions appear; ignore if this is not vital OT",
         )
     if not case.product:
         _assume(
@@ -183,6 +200,7 @@ def prioritize(case: Case) -> Case:
         case.priority, case.urgency = "P3", "30_days"
         reasons.append("Internet-facing floor (applied after deductions)")
 
+    reasons.extend(overlay_priority_reasons(case))
     case.priority_reasons = reasons or ["Default: limited signal"]
     if case.validation_status == "confirmed":
         case.confidence = "high"
@@ -295,4 +313,5 @@ def plan_actions(case: Case) -> Case:
             )
         )
     case.next_actions = actions
+    apply_overlay_actions(case)
     return case

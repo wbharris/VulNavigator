@@ -103,6 +103,14 @@ def to_markdown(case: Case) -> str:
         overlay.append("AI RMF: " + ", ".join(f"`{m.id}`" for m in case.airmf))
     if case.f3:
         overlay.append("F3: " + ", ".join(f"`{m.id}` {m.name}" for m in case.f3))
+    if case.fortify:
+        overlay.append(
+            "CI Fortify: " + ", ".join(f"`{m.id}` {m.name}" for m in case.fortify)
+        )
+    if case.ssdf:
+        overlay.append(
+            "NIST SSDF 1.2: " + ", ".join(f"`{m.id}` {m.name}" for m in case.ssdf)
+        )
 
     prio_label = {
         "P1": "Critical / highest priority to remediate",
@@ -215,7 +223,10 @@ def to_markdown(case: Case) -> str:
         lines += ["", "**Overlays:**"]
         lines.extend(_bullets(overlay))
     else:
-        lines += ["", "ATLAS / AI RMF / F3: not tagged on this finding."]
+        lines += [
+            "",
+            "ATLAS / AI RMF / F3 / CI Fortify / SSDF: not tagged on this finding.",
+        ]
     lines += [
         "",
         "## 5. Defensive Countermeasures",
@@ -252,6 +263,12 @@ def to_markdown(case: Case) -> str:
     if csf:
         lines += ["", "Mapped categories from this case:"]
         lines.extend(_bullets(csf))
+    if case.ssdf:
+        lines += [
+            "",
+            "NIST SSDF 1.2 (this finding, not org maturity — does not replace CSF):",
+        ]
+        lines.extend(_bullets([f"`{m.id}` {m.name}" for m in case.ssdf]))
     lines += [
         "",
         "## 7. Priority Assessment",

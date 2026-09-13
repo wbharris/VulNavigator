@@ -83,6 +83,10 @@ class Case:
     asset_internet_facing: bool | None = None
     asset_ai_system: bool | None = None
     asset_fraud_relevant: bool | None = None
+    asset_ot_ci: bool | None = None
+    asset_software_ssdf: bool | None = None
+    overlay_ssdf_inferred: bool = False
+    overlay_fortify_inferred: bool = False
     data_class: str = ""
     detected_tool: str = ""
     host: str = ""
@@ -102,6 +106,8 @@ class Case:
     atlas: list[Mapping] = field(default_factory=list)
     airmf: list[Mapping] = field(default_factory=list)
     f3: list[Mapping] = field(default_factory=list)
+    fortify: list[Mapping] = field(default_factory=list)
+    ssdf: list[Mapping] = field(default_factory=list)
     priority: str = "P3"
     urgency: str = "30_days"
     priority_reasons: list[str] = field(default_factory=list)

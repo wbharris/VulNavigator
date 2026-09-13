@@ -20,6 +20,7 @@ from vulnavigator.map import map_case
 from vulnavigator.models import Case
 from vulnavigator.narrative import apply_narrative
 from vulnavigator.normalize import findings_from_path, findings_from_text, normalize_path, normalize_text
+from vulnavigator.overlays import apply_overlay_tags
 from vulnavigator.prioritize import plan_actions, prioritize, record_assumptions, score_data_quality
 from vulnavigator.validate import validate
 
@@ -47,6 +48,8 @@ def reset_derived(case: Case) -> None:
     case.atlas = []
     case.airmf = []
     case.f3 = []
+    case.fortify = []
+    case.ssdf = []
     case.assumptions = []
     case.improve = []
     case.next_actions = []
@@ -79,8 +82,17 @@ def analyze_case(case: Case, offline: bool = False) -> Case:
     return case
 
 
-def analyze_many(cases: list[Case], offline: bool = False) -> list[Case]:
-    return [analyze_case(c, offline=offline) for c in cases]
+def analyze_many(
+    cases: list[Case],
+    offline: bool = False,
+    sector: str = "",
+    overlay: str = "",
+) -> list[Case]:
+    out: list[Case] = []
+    for case in cases:
+        apply_overlay_tags(case, sector=sector, overlay=overlay)
+        out.append(analyze_case(case, offline=offline))
+    return out
 
 
 def analyze_path(
@@ -88,8 +100,15 @@ def analyze_path(
     offline: bool = False,
     source: str = "",
     finding_id: str = "",
+    sector: str = "",
+    overlay: str = "",
 ) -> list[Case]:
-    return analyze_many(findings_from_path(path, source=source, finding_id=finding_id), offline=offline)
+    return analyze_many(
+        findings_from_path(path, source=source, finding_id=finding_id),
+        offline=offline,
+        sector=sector,
+        overlay=overlay,
+    )
 
 
 def analyze_text(
@@ -98,16 +117,20 @@ def analyze_text(
     source_hint: str = "",
     source: str = "",
     finding_id: str = "",
+    sector: str = "",
+    overlay: str = "",
 ) -> list[Case]:
     return analyze_many(
         findings_from_text(text, source=source or source_hint, finding_id=finding_id, hint=source_hint),
         offline=offline,
+        sector=sector,
+        overlay=overlay,
     )
 
 
 def analyze_one_path(path: str | Path, offline: bool = False) -> Case:
-    return analyze_case(normalize_path(path), offline=offline)
+    return analyze_many([normalize_path(path)], offline=offline)[0]
 
 
 def analyze_one_text(text: str, offline: bool = False, source_hint: str = "") -> Case:
-    return analyze_case(normalize_text(text, source_hint), offline=offline)
+    return analyze_many([normalize_text(text, source_hint)], offline=offline)[0]

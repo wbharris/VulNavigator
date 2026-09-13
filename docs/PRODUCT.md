@@ -101,8 +101,19 @@ Only after validation. Official catalogs first; the agent may only pick IDs that
 | NIST CSF 2.0 | Always (leadership rollup) |
 | ATLAS + AI RMF | Only if the asset is AI-in-scope |
 | F3 (Fight Fraud Framework) | Only if payment / identity / ATO / mule risk is in play |
+| CI Fortify | Only if tagged CI/OT (`--sector ics\|ot\|ci\|water\|energy\|…`, JSON `ot_in_scope`, or `--overlay fortify`). **Default off.** Isolation / recovery compensating controls — not a 12th section, not a CWE table. |
+| NIST SSDF 1.2 | Software findings only. **Inferred on** for Mythos, Daybreak, SARIF, Trivy, Snyk, Dependabot. **Off** for host VM / OT / narrative unless `--overlay ssdf`. Practices used: `RV.1`, `RV.2`, `PS.4`, and `PW.8` on AI 0-days. Does **not** replace CSF. Force off with `--overlay no-ssdf` or `none`. |
 
-Every mapped ID carries `provenance` and `confidence`.
+Every mapped ID carries `provenance` and `confidence`. CI Fortify and SSDF IDs are canned overlays in `src/vulnavigator/overlays.py`, not rows in `mappings.json`. Overlay presence does **not** raise priority by itself (same rule as KEV: only when the path is real). Isolation is never a validation status.
+
+CLI:
+
+```bash
+vuln-nav analyze scan.nessus --sector ics --offline
+vuln-nav analyze examples/trivy-report.json --offline          # SSDF inferred
+vuln-nav analyze examples/trivy-report.json --overlay no-ssdf  # SSDF off
+vuln-nav analyze writeup.json --overlay fortify,ssdf
+```
 
 ### 4. Report
 
@@ -111,14 +122,14 @@ Eleven sections (markdown) or `--json`:
 1. Vulnerability summary  
 2. Evidence — facts, **how the finder found it**, **PoC/exploit**, missing evidence  
 3. Validation notes  
-4. Likely attacker behaviors / ATT&CK (ATLAS / F3 only if tagged)  
+4. Likely attacker behaviors / ATT&CK (ATLAS / F3 / **CI Fortify** / **SSDF 1.2** only if tagged — still 11 sections)  
 5. Defensive countermeasures (D3FEND)  
-6. NIST CSF alignment  
+6. NIST CSF alignment (SSDF, if tagged, is a one-liner under CSF, not a replacement)  
 7. Priority (`P1`–`P4`) and urgency (`immediate` / `this_week` / `30_days` / `backlog`)  
-8. Recommended remediation (for 0-days: replay PoC, patch the described root cause — do not wait for a CVE)  
-9. Compensating controls until the fix lands  
-10. Next actions — owner and done-when  
-11. Confidence, assumptions, uncertainty, what would improve the report  
+8. Recommended remediation (for 0-days: replay PoC, patch the described root cause — do not wait for a CVE; SSDF `RV`/`PS.4` when tagged)  
+9. Compensating controls until the fix lands (**CI Fortify isolation/recovery** when OT-tagged)  
+10. Next actions — owner and done-when (`ot-ops` when Fortify fires)  
+11. Confidence, assumptions, uncertainty, what would improve the report (inferred overlay tags are called out here)  
 
 Priority is not CVSS. Internet exposure, a replayable PoC, and whether the mapping unlocks RCE / credentials outweigh a naked 9.8 on an isolated lab box.
 

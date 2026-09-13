@@ -280,6 +280,10 @@ def case_from_daybreak(finding: dict[str, Any], scan: dict[str, Any] | None = No
         asset_internet_facing=_daybreak_exposure(finding, attack),
         asset_ai_system=_optional_bool(finding, "ai_system", "ai_in_scope"),
         asset_fraud_relevant=_optional_bool(finding, "fraud_relevant", "payments"),
+        asset_ot_ci=_optional_bool(finding, "ot_in_scope", "ci_in_scope", "asset_ot_ci"),
+        asset_software_ssdf=_optional_bool(
+            finding, "ssdf_in_scope", "software_ssdf", "asset_software_ssdf"
+        ),
         data_class=str(finding.get("data_class") or ""),
         raw=finding,
     )
@@ -361,6 +365,10 @@ def case_from_mythos(finding: dict[str, Any]) -> Case:
         asset_internet_facing=_optional_bool(finding, "internet_facing", "exposed"),
         asset_ai_system=_optional_bool(finding, "ai_system", "ai_in_scope"),
         asset_fraud_relevant=_optional_bool(finding, "fraud_relevant", "payments"),
+        asset_ot_ci=_optional_bool(finding, "ot_in_scope", "ci_in_scope", "asset_ot_ci"),
+        asset_software_ssdf=_optional_bool(
+            finding, "ssdf_in_scope", "software_ssdf", "asset_software_ssdf"
+        ),
         data_class=str(finding.get("data_class") or ""),
         raw=finding,
     )

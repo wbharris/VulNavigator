@@ -99,6 +99,24 @@ def main(argv: list[str] | None = None) -> int:
         type=_finding_id_arg,
         help="Analyze only this finding id (Daybreak id, QID, plugin ID, NVT OID, Mythos id)",
     )
+    an.add_argument(
+        "--sector",
+        default="",
+        help=(
+            "CI/OT sector tag for the CI Fortify overlay "
+            "(ics, ot, ci, water, energy, power, transport, wastewater). "
+            "Default off. Isolation language goes in compensating controls, not a new section."
+        ),
+    )
+    an.add_argument(
+        "--overlay",
+        default="",
+        help=(
+            "Force overlays: fortify, ssdf, no-ssdf, none (comma-separated). "
+            "SSDF infers on for Mythos/Daybreak/SARIF/Trivy/Snyk/Dependabot. "
+            "Fortify never infers from scanner kind — use --sector or fortify."
+        ),
+    )
 
     args = parser.parse_args(argv)
     raw = args.input
@@ -110,6 +128,8 @@ def main(argv: list[str] | None = None) -> int:
                 offline=args.offline,
                 source=args.source or "",
                 finding_id=args.finding_id,
+                sector=args.sector,
+                overlay=args.overlay,
             )
         else:
             cases = analyze_text(
@@ -117,6 +137,8 @@ def main(argv: list[str] | None = None) -> int:
                 offline=args.offline,
                 source=args.source or "",
                 finding_id=args.finding_id,
+                sector=args.sector,
+                overlay=args.overlay,
             )
     except (OSError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)
