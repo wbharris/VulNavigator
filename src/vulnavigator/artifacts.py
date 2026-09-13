@@ -396,15 +396,15 @@ def extract_artifacts(case: Case) -> Case:
             if inbound:
                 _set_product(case, inbound.group(1), inbound.group(2))
         if not case.product or not case.version:
-            for match in COMPONENT_VER_RE.finditer(blob):
-                name, ver = match.group(1), match.group(2)
+            for hit in COMPONENT_VER_RE.finditer(blob):
+                name, cver = hit.group(1), hit.group(2)
                 if name.lower() in _SKIP_COMPONENT or name.upper().startswith("CVE"):
                     continue
                 if not _ok_product(name):
                     continue
-                if ver.count(".") >= 3:
+                if cver.count(".") >= 3:
                     continue
-                _set_product(case, name, ver)
+                _set_product(case, name, cver)
                 break
 
     existing_paths = {loc.path for loc in case.locations}

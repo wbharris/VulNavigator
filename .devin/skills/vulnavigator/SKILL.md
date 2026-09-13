@@ -27,7 +27,7 @@ Do not start a web UI from this skill. That is `vulnavigator-web`, and the Flask
 From the repo root (after `python3 -m venv .venv && .venv/bin/pip install -e .`):
 
 ```bash
-.venv/bin/vuln-nav analyze <finding_file> [--source NAME] [--id ID] [--offline] [--json] [-o report.md] [--sector ics] [--overlay fortify|ssdf|no-ssdf|none]
+.venv/bin/vuln-nav analyze <finding_file> [--source NAME] [--id ID] [--offline] [--json] [-o report.md] [--sector ics] [--overlay fortify|ssdf|no-ssdf|none] [--timeout 12] [--workers 4]
 ```
 
 If `vuln-nav` is already on PATH, that name is fine.

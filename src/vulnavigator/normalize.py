@@ -28,6 +28,7 @@ from vulnavigator.scanners import (
     parse_scanner_csv,
     parse_scanner_xml,
 )
+from vulnavigator.scanners.extended import parse_sarif
 
 CVE_RE = re.compile(r"CVE-\d{4}-\d{4,}", re.I)
 CWE_RE = re.compile(r"CWE-\d+", re.I)
@@ -179,7 +180,8 @@ def case_from_daybreak(finding: dict[str, Any], scan: dict[str, Any] | None = No
     tax = finding.get("taxonomy") if isinstance(finding.get("taxonomy"), dict) else {}
     conf = finding.get("confidence") if isinstance(finding.get("confidence"), dict) else {}
     val = finding.get("validation") if isinstance(finding.get("validation"), dict) else {}
-    attack = finding.get("attackPath") if isinstance(finding.get("attackPath"), dict) else {}
+    attack_raw = finding.get("attackPath")
+    attack: dict[str, Any] = attack_raw if isinstance(attack_raw, dict) else {}
     root = finding.get("rootCause")
     if isinstance(root, dict):
         root_text = str(root.get("summary") or "")
@@ -428,28 +430,6 @@ def _looks_like_sarif_result(row: dict[str, Any]) -> bool:
     return False
 
 
-def _sarif_to_daybreakish(result: dict[str, Any]) -> dict[str, Any]:
-    locs = []
-    for loc in result.get("locations") or []:
-        phys = (loc or {}).get("physicalLocation") or {}
-        art = phys.get("artifactLocation") or {}
-        region = phys.get("region") or {}
-        locs.append({"path": art.get("uri"), "startLine": region.get("startLine")})
-    msg = result.get("message") or {}
-    return {
-        "findingId": str(result.get("guid") or result.get("fingerprint") or ""),
-        "ruleId": str(result.get("ruleId") or ""),
-        "title": str(msg.get("text") or result.get("ruleId") or "SARIF finding"),
-        "summary": str(msg.get("text") or ""),
-        "severity": {"level": str(result.get("level") or "medium")},
-        "taxonomy": {"cwe": [], "category": ""},
-        "locations": locs,
-        "remediation": "",
-        "validation": {},
-        "provenance": {"source": "sarif"},
-    }
-
-
 def normalize_dict(data: dict[str, Any], source_hint: str = "", source: str = "") -> Case:
     kind = detect_kind(data, source_hint, source)
     cases = findings_from_document(data, source=kind)
@@ -474,7 +454,14 @@ def findings_from_document(
     raw, embedded_scan = _extract_raw_findings(data, kind)
     scan = scan or embedded_scan
     if kind == "daybreak" and raw and _looks_like_sarif_result(raw[0]):
-        raw = [_sarif_to_daybreakish(r) for r in raw]
+        wrapped = {
+            "version": "2.1.0",
+            "runs": [{"tool": {"driver": {"name": "sarif"}}, "results": raw}],
+        }
+        sarif_cases = parse_sarif(wrapped)
+        if finding_id:
+            sarif_cases = [c for c in sarif_cases if c.finding_id == finding_id]
+        return sarif_cases
     cases: list[Case] = []
     for item in raw:
         item_kind = detect_kind(item, hint, kind if kind != "generic" else "")

@@ -13,6 +13,8 @@ Finder-supplied remediations live on ``Case.source_remediation``.
 from __future__ import annotations
 
 import logging
+import os
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from vulnavigator.enrich import enrich
@@ -60,10 +62,24 @@ def reset_derived(case: Case) -> None:
     case.remediation = list(case.source_remediation)
 
 
-def analyze_case(case: Case, offline: bool = False) -> Case:
+def _workers(explicit: int | None, n: int) -> int:
+    if n <= 1:
+        return 1
+    if explicit is not None:
+        return max(1, min(int(explicit), n, 32))
+    raw = (os.environ.get("VULN_NAV_WORKERS") or "").strip()
+    if raw:
+        try:
+            return max(1, min(int(raw), n, 32))
+        except ValueError:
+            pass
+    return max(1, min(4, n))
+
+
+def analyze_case(case: Case, offline: bool = False, timeout: float | None = None) -> Case:
     reset_derived(case)
     apply_narrative(case)
-    enrich(case, offline=offline)
+    enrich(case, offline=offline, timeout=timeout)
     validate(case)
     map_case(case)
     record_assumptions(case)
@@ -87,12 +103,23 @@ def analyze_many(
     offline: bool = False,
     sector: str = "",
     overlay: str = "",
+    timeout: float | None = None,
+    workers: int | None = None,
 ) -> list[Case]:
-    out: list[Case] = []
     for case in cases:
         apply_overlay_tags(case, sector=sector, overlay=overlay)
-        out.append(analyze_case(case, offline=offline))
-    return out
+    n = _workers(workers, len(cases))
+    if n <= 1 or len(cases) <= 1:
+        return [analyze_case(c, offline=offline, timeout=timeout) for c in cases]
+    out: list[Case | None] = [None] * len(cases)
+    with ThreadPoolExecutor(max_workers=n) as pool:
+        futs = {
+            pool.submit(analyze_case, case, offline, timeout): i
+            for i, case in enumerate(cases)
+        }
+        for fut in as_completed(futs):
+            out[futs[fut]] = fut.result()
+    return [c for c in out if c is not None]
 
 
 def analyze_path(
@@ -102,12 +129,16 @@ def analyze_path(
     finding_id: str = "",
     sector: str = "",
     overlay: str = "",
+    timeout: float | None = None,
+    workers: int | None = None,
 ) -> list[Case]:
     return analyze_many(
         findings_from_path(path, source=source, finding_id=finding_id),
         offline=offline,
         sector=sector,
         overlay=overlay,
+        timeout=timeout,
+        workers=workers,
     )
 
 
@@ -119,12 +150,16 @@ def analyze_text(
     finding_id: str = "",
     sector: str = "",
     overlay: str = "",
+    timeout: float | None = None,
+    workers: int | None = None,
 ) -> list[Case]:
     return analyze_many(
         findings_from_text(text, source=source or source_hint, finding_id=finding_id, hint=source_hint),
         offline=offline,
         sector=sector,
         overlay=overlay,
+        timeout=timeout,
+        workers=workers,
     )
 
 

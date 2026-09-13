@@ -15,7 +15,7 @@ Repository = "https://github.com/wbharris/VulNavigator"
 Trademark = "https://github.com/wbharris/VulNavigator/blob/main/TRADEMARK.md"
 
 [project.optional-dependencies]
-dev = ["pytest>=8.0"]
+dev = ["pytest>=8.0", "mypy>=1.8"]
 
 [project.scripts]
 vuln-nav = "vulnavigator.cli:main"
@@ -32,3 +32,14 @@ vulnavigator = ["data/*.json"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.mypy]
+python_version = "3.11"
+mypy_path = "src"
+packages = ["vulnavigator"]
+explicit_package_bases = true
+ignore_missing_imports = true
+check_untyped_defs = true
+warn_unused_ignores = true
+# Scanner/Daybreak JSON is untyped dict.get; do not fail CI on that shape.
+disable_error_code = ["union-attr", "var-annotated"]

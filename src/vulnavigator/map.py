@@ -37,7 +37,10 @@ def _pairs(table: str, key: str) -> list[tuple[str, str]]:
 
 
 def _conf(name: str) -> float:
-    return float(_tables().get("confidence", {}).get(name, 0.5))
+    conf = _tables().get("confidence") or {}
+    if name in conf:
+        return float(conf[name])
+    return float(conf.get("default", 0.5))
 
 
 def _add_unique(dest: list[Mapping], item: Mapping) -> None:

@@ -21,7 +21,7 @@ python3 -m venv .venv && .venv/bin/pip install -e .
 ## Use
 
 ```bash
-vuln-nav analyze FINDING [--source NAME] [--id ID] [--offline] [--json] [-o report.md]
+vuln-nav analyze FINDING [--source NAME] [--id ID] [--offline] [--json] [-o report.md] [--timeout SEC] [--workers N]
 ```
 
 | Input | Command |
@@ -34,7 +34,9 @@ vuln-nav analyze FINDING [--source NAME] [--id ID] [--offline] [--json] [-o repo
 
 `--offline` skips **only** live NVD, CISA KEV, and FIRST EPSS. Normalize, validate, ATT&CK/D3FEND/CSF mapping, and the 11-section report still run. Priority will not use KEV/EPSS/CVSS from the network. Output stays actionable.
 
-`--source` forces `mythos`, `daybreak`, `nessus`, `qualys`, `sarif`, `trivy`, and the other adapters. `--id` must be a short token (letters, digits, `_.:/=@+-`).
+`--source` forces `mythos`, `daybreak`, `nessus`, `qualys`, `sarif`, `trivy`, and the other adapters. `--id` must be a short token (letters, digits, `_.:/=@+-`). `--timeout` is NVD/KEV/EPSS HTTP seconds (default 12, or `VULN_NAV_TIMEOUT`). `--workers` parallelizes a batch (default 4, or `VULN_NAV_WORKERS`). `VULN_NAV_LOG=json` and `--log-level INFO` for structured logs.
+
+CI: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs pytest, mypy, and training preflight. Dev extras: `pip install -e ".[dev]"`.
 
 ## What you drop in
 

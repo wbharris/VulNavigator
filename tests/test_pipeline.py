@@ -1,3 +1,4 @@
+import json
 from pathlib import Path
 
 from vulnavigator.pipeline import analyze_path, analyze_text
@@ -58,3 +59,22 @@ def test_rejected_empty():
     cases = analyze_text("todo", offline=True)
     assert cases[0].validation_status == "rejected"
     assert cases[0].priority == "P4"
+
+
+def test_sarif_result_not_relabeled_daybreak():
+    payload = {
+        "message": {"text": "sql injection in query builder"},
+        "ruleId": "js/sql-injection",
+        "guid": "sarif-keep",
+        "locations": [
+            {
+                "physicalLocation": {
+                    "artifactLocation": {"uri": "app.js"},
+                    "region": {"startLine": 12},
+                }
+            }
+        ],
+    }
+    case = analyze_text(json.dumps(payload), offline=True, source="daybreak")[0]
+    assert case.source_kind == "sarif"
+    assert case.finding_id == "sarif-keep"

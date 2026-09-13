@@ -320,8 +320,10 @@ def to_markdown(case: Case) -> str:
         "**Assumptions:**",
     ]
     if case.assumptions:
-        for a in case.assumptions:
-            lines.append(f"- **{a.field}** = `{a.assumed}` because {a.because}. Impact: {a.impact}")
+        for assume in case.assumptions:
+            lines.append(
+                f"- **{assume.field}** = `{assume.assumed}` because {assume.because}. Impact: {assume.impact}"
+            )
     else:
         lines.append("- The scanner critical rating reflects a real issue in a reachable component.")
         lines.append("- The component may be exploitable in the deployed configuration (not yet proven).")

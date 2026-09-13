@@ -1,5 +1,6 @@
 {
   "confidence": {
+    "default": 0.5,
     "cwe": 0.62,
     "cwe_note": "CWE commonly enables this ATT&CK technique (curated, not CTID KEV).",
     "narrative": 0.55,
@@ -107,7 +108,13 @@
     "T1499": [["D3-ITF", "Inbound Traffic Filtering"], ["D3-NTA", "Network Traffic Analysis"]],
     "T1203": [["D3-SAOR", "Segment Address Offset Randomization"], ["D3-AH", "Application Hardening"]],
     "T1505": [["D3-ITF", "Inbound Traffic Filtering"], ["D3-NTA", "Network Traffic Analysis"]],
-    "T1552": [["D3-CRO", "Credential Rotation"], ["D3-MFA", "Multi-factor Authentication"]]
+    "T1552": [["D3-CRO", "Credential Rotation"], ["D3-MFA", "Multi-factor Authentication"]],
+    "T1040": [["D3-NTA", "Network Traffic Analysis"], ["D3-ITF", "Inbound Traffic Filtering"]],
+    "T1087": [["D3-UAP", "User Account Permissions"], ["D3-MFA", "Multi-factor Authentication"]],
+    "T1110": [["D3-MFA", "Multi-factor Authentication"], ["D3-UAP", "User Account Permissions"]],
+    "T1539": [["D3-CRO", "Credential Rotation"], ["D3-MFA", "Multi-factor Authentication"]],
+    "T1574": [["D3-EAL", "Executable Allowlisting"], ["D3-PSA", "Process Spawn Analysis"]],
+    "T1600": [["D3-AH", "Application Hardening"], ["D3-ITF", "Inbound Traffic Filtering"]]
   },
   "attack_csf": {
     "T1005": [["PR.DS", "Data Security"], ["DE.CM", "Continuous Monitoring"]],
@@ -121,7 +128,13 @@
     "T1499": [["PR.IR", "Technology Infrastructure Resilience"], ["RS.MI", "Incident Mitigation"]],
     "T1203": [["PR.PS", "Platform Security"], ["RS.MI", "Incident Mitigation"]],
     "T1505": [["PR.PS", "Platform Security"], ["DE.CM", "Continuous Monitoring"]],
-    "T1552": [["PR.AA", "Identity Management and Access Control"], ["PR.DS", "Data Security"]]
+    "T1552": [["PR.AA", "Identity Management and Access Control"], ["PR.DS", "Data Security"]],
+    "T1040": [["PR.IR", "Technology Infrastructure Resilience"], ["DE.CM", "Continuous Monitoring"]],
+    "T1087": [["PR.AA", "Identity Management and Access Control"], ["DE.CM", "Continuous Monitoring"]],
+    "T1110": [["PR.AA", "Identity Management and Access Control"], ["DE.CM", "Continuous Monitoring"]],
+    "T1539": [["PR.AA", "Identity Management and Access Control"], ["PR.DS", "Data Security"]],
+    "T1574": [["PR.PS", "Platform Security"], ["DE.CM", "Continuous Monitoring"]],
+    "T1600": [["PR.DS", "Data Security"], ["PR.PS", "Platform Security"]]
   },
   "ai_cwe_atlas": {
     "CWE-94": [["AML.T0051", "LLM Prompt Injection"]],

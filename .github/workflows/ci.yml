@@ -16,5 +16,7 @@ jobs:
         run: python3 -m venv .venv && .venv/bin/pip install -e ".[dev]"
       - name: Pytest
         run: .venv/bin/python -m pytest -q
+      - name: Typecheck
+        run: .venv/bin/python -m mypy src/vulnavigator
       - name: Training preflight (no NVD)
         run: .venv/bin/python tests/training/weekly.py --preflight-only

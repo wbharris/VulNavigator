@@ -14,6 +14,7 @@ from pathlib import Path
 FINDING_ID_RE = re.compile(r"^[\w.:/=@+-]{1,256}$")
 
 from vulnavigator import __version__
+from vulnavigator.logconfig import configure_logging
 from vulnavigator.pipeline import analyze_path, analyze_text
 from vulnavigator.report import to_json, to_markdown
 from vulnavigator.scanners import SCANNER_KINDS, alias_source
@@ -117,8 +118,26 @@ def main(argv: list[str] | None = None) -> int:
             "Fortify never infers from scanner kind — use --sector or fortify."
         ),
     )
+    an.add_argument(
+        "--timeout",
+        type=float,
+        default=None,
+        help="HTTP timeout in seconds for NVD/KEV/EPSS (default 12, or VULN_NAV_TIMEOUT).",
+    )
+    an.add_argument(
+        "--workers",
+        type=int,
+        default=None,
+        help="Parallel cases in a batch (default 4, or VULN_NAV_WORKERS). 1 = sequential.",
+    )
+    an.add_argument(
+        "--log-level",
+        default="",
+        help="Logging level (DEBUG, INFO, WARNING). Default WARNING. VULN_NAV_LOG=json for JSON lines.",
+    )
 
     args = parser.parse_args(argv)
+    configure_logging(level=args.log_level)
     raw = args.input
     path = Path(raw)
     try:
@@ -130,6 +149,8 @@ def main(argv: list[str] | None = None) -> int:
                 finding_id=args.finding_id,
                 sector=args.sector,
                 overlay=args.overlay,
+                timeout=args.timeout,
+                workers=args.workers,
             )
         else:
             cases = analyze_text(
@@ -139,6 +160,8 @@ def main(argv: list[str] | None = None) -> int:
                 finding_id=args.finding_id,
                 sector=args.sector,
                 overlay=args.overlay,
+                timeout=args.timeout,
+                workers=args.workers,
             )
     except (OSError, ValueError) as exc:
         print(f"error: {exc}", file=sys.stderr)
